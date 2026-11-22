@@ -228,8 +228,9 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 .t-tap { position: absolute; left: 0; right: 0; top: 10px; margin: 0; font-family: var(--f-display); font-size: 22px; color: var(--ink); text-shadow: 2px 2px 0 var(--paper-ink); animation: ttap 1.6s ease-in-out infinite; }
 @keyframes ttap { 50% { opacity: .35; } }
 .t-btns.in { animation: ptUp .45s ease both; }
-@media (max-height: 780px) { .t-stage { zoom: .82; } .t-name { font-size: clamp(40px, 12vw, 56px); } .t-foot { margin-top: 18px; } }
-@media (max-height: 690px) { .t-stage { zoom: .68; margin-top: 26px; } .t-name { margin-top: 4px; } .t-foot { margin-top: 14px; } }
+/* the size of the album on short screens is set by fitHome() (memory.js): here only the title and the gaps */
+@media (max-height: 780px) { .t-name { font-size: clamp(40px, 12vw, 56px); } .t-foot { margin-top: 18px; } }
+@media (max-height: 690px) { .t-stage { margin-top: 26px; } .t-name { margin-top: 4px; } .t-foot { margin-top: 14px; } }
 @media (prefers-reduced-motion: reduce) { .t-book, .t-pol.p2, .t-tag, .t-hero, .t-tap { animation: none; } }
 .pt-foot.inline { position: static; margin: 16px -8px 2px; font-size: 12.5px; white-space: nowrap; gap: 6px; }
 .pt-foot.inline img { width: 18px; }
@@ -4699,7 +4700,22 @@ const GUASTAFESTE = (() => {
     byId('t-cont').hidden = !prog;
     byId('t-new').classList.toggle('primary', !prog);
     Audio.play('hub');
+    fitHome(); requestAnimationFrame(fitHome);
   }
+  // the home on a short screen (the game opened from a link, with the browser's bars): the album and the two of them
+  // stay as big as the free height allows, instead of jumping to fixed smaller sizes
+  function fitHome() {
+    const t = byId('title'), stage = byId('t-stage'); if (!t || t.hidden || !stage) return;
+    stage.style.zoom = 1;
+    const cs = getComputedStyle(t), room = t.clientHeight - 2 * Math.max(52, parseFloat(cs.paddingTop), parseFloat(cs.paddingBottom)); // the content is centred: 52 px free above it for the Audio button
+    const kids = [...t.children].filter(e => e.offsetParent), used = () => kids[kids.length - 1].getBoundingClientRect().bottom - kids[0].getBoundingClientRect().top;
+    for (let i = 0; i < 3; i++) {
+      const z = parseFloat(stage.style.zoom), over = used() - room; if (over <= 0) break;
+      const h = stage.offsetHeight + parseFloat(getComputedStyle(stage).marginTop);
+      stage.style.zoom = Math.max(0.55, z * (h * z - over) / (h * z)).toFixed(3);
+    }
+  }
+  addEventListener('resize', fitHome);
   function paintTitle() {
     document.querySelector('.t-eyebrow').textContent = `${A.nome} & ${B.nome}`;
     document.querySelectorAll('.t-pol canvas').forEach((cv, i) => paint(cv, CHAPTERS[[1, 0, 3][i]].place));
@@ -4756,7 +4772,7 @@ const GUASTAFESTE = (() => {
     if (!byId('memo').hidden) { closeMemo(); return; }
     if (G.playing) { if (byId('menu').hidden) showPause(); else resume(); }
   });
-  paintTitle(); VG.fontsReady.then(paintTitle);
+  paintTitle(); VG.fontsReady.then(() => { paintTitle(); fitHome(); });
   showTitle();
   requestAnimationFrame(frame);
   // hooks for automated runs / video recording
