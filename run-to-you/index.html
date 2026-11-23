@@ -1058,7 +1058,85 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 </div>
 <script>
 /* ordine: viaggettino */
-window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"disegno":"crocco"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia"},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor"},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer"}],"collezionabile":{"nome":"salamino al tartufo","plurale":"salamini al tartufo","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","aspetto":"vaBoss"},"scagnozzi":{"nome":"Consulenti Grigi","divisa":"grigio"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
+window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"disegno":"crocco"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia"},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane"},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"grigio","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
+</script>
+<script>
+/* motore/testi.js */
+/* Run to You — i testi su misura: legge l'ordine (window.ORDINE) e riempie i segnaposto delle battute del motore.
+   Caricato subito dopo l'ordine, prima di tutto il resto.
+
+   Chi corre è sempre chi riceve il regalo: se il regalo è per il coprotagonista, i due si scambiano qui
+   (come in Memory Lane), così tutto il motore parla sempre di «a» (chi corre) e «b» (chi aspetta).
+
+   Segnaposto (TXT.t):
+     {A} {B}            nome di chi corre / dell'altro
+     {a} {b}            soprannome (o il nome, se non c'è)
+     {dest}             a chi è dedicata la festa e la lettera: «{a}» oppure «{a} e {b}» (regalo per tutti e due)
+     {luogo1}…{luogo4}  i titoli delle tappe
+     {boss}             il nome dell'antagonista, con il suo articolo se ce l'ha («La Scuola»)
+     {scagnozzi}        il nome degli scagnozzi con l'articolo («i Compitini», «le Sveglie»)
+     {cibo} {cibi}      il cibo preferito, singolare e plurale; {i cibi} con l'articolo
+     {di boss} {a scagnozzi} {da …} {su …} {con …}   preposizione + articolo giusti («della Scuola», «alle Sveglie»)
+     Con l'iniziale maiuscola ({Boss}, {Scagnozzi}, {Cibo}, {Cibi}) la prima lettera diventa maiuscola.
+     [sottotitolo] [ingresso] [sconfitta] [grido1] [grido2] [grido3] [festa]   i pezzi su misura scritti da Claude */
+'use strict';
+const TXT = (() => {
+  const O = window.ORDINE;
+  // who runs is who receives the gift
+  if (O.regalo && O.regalo.per === 'b') {
+    const p = O.protagonisti; O.protagonisti = { a: p.b, b: p.a };
+    if (O.regalo.da === 'a') O.regalo.da = 'b'; else if (O.regalo.da === 'b') O.regalo.da = 'a';
+    O.regalo.per = 'a'; O.regalo.scambiati = true;
+  }
+  const P = O.protagonisti, sop = p => (p.soprannome || '').trim() || p.nome;
+  const entrambi = !!(O.regalo && O.regalo.per === 'entrambi');
+  const ant = O.antagonista || {}, sc = O.scagnozzi || {}, ci = O.cibo || {};
+  // the article of a name: «i Compitini» → { art: 'i', rest: 'Compitini' }; «Il Dott. Valore Aggiunto» → { art: 'il', … }
+  function split(s) {
+    const m = String(s || '').match(/^(il|lo|la|i|gli|le|l')\s*(.*)$/i);
+    return m ? { art: m[1].toLowerCase(), rest: m[2] } : { art: '', rest: String(s || '') };
+  }
+  const PREP = {
+    a: { il: 'al', lo: 'allo', la: 'alla', i: 'ai', gli: 'agli', le: 'alle', "l'": "all'" },
+    di: { il: 'del', lo: 'dello', la: 'della', i: 'dei', gli: 'degli', le: 'delle', "l'": "dell'" },
+    da: { il: 'dal', lo: 'dallo', la: 'dalla', i: 'dai', gli: 'dagli', le: 'dalle', "l'": "dall'" },
+    su: { il: 'sul', lo: 'sullo', la: 'sulla', i: 'sui', gli: 'sugli', le: 'sulle', "l'": "sull'" },
+    con: { il: 'con il', lo: 'con lo', la: 'con la', i: 'con i', gli: 'con gli', le: 'con le', "l'": "con l'" }
+  };
+  const glue = (a, rest) => a.endsWith("'") ? a + rest : a + ' ' + rest;
+  function withPrep(prep, name) {
+    const { art, rest } = split(name);
+    if (!art) return prep + ' ' + rest;
+    return glue(PREP[prep][art], rest);
+  }
+  const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+  const luoghi = (O.tappe || []).map(t => (t.luogo && t.luogo.titolo) || '');
+  const V = {
+    A: P.a.nome, B: P.b.nome, a: sop(P.a), b: sop(P.b),
+    dest: entrambi ? sop(P.a) + ' e ' + sop(P.b) : sop(P.a),
+    boss: ant.nome || '', scagnozzi: sc.nome || '',
+    cibo: ci.singolare || '', cibi: ci.plurale || '', 'i cibi': glue(ci.articolo || 'i', ci.plurale || ''),
+    luogo1: luoghi[0], luogo2: luoghi[1], luogo3: luoghi[2], luogo4: luoghi[3]
+  };
+  const PEZZI = {
+    sottotitolo: ant.presentazione || '', ingresso: ant.ingresso || '', sconfitta: ant.sconfitta || '',
+    grido1: (sc.grida || [])[0] || '', grido2: (sc.grida || [])[1] || '', grido3: (sc.grida || [])[2] || '',
+    festa: O.festa || ''
+  };
+  function t(s) {
+    if (typeof s !== 'string') return s;
+    return s
+      .replace(/\{(a|di|da|su|con) (boss|scagnozzi|cibi)\}/g, (m, p, k) => withPrep(p, k === 'cibi' ? V['i cibi'] : V[k]))
+      .replace(/\{([A-Za-z]+[0-9]?|i cibi)\}/g, (m, k) => {
+        if (k in V) return V[k];
+        const low = k.charAt(0).toLowerCase() + k.slice(1);
+        if (low in V && k !== low) return cap(V[low]);
+        return m;
+      })
+      .replace(/\[([a-z]+[0-9]?)\]/g, (m, k) => k in PEZZI ? PEZZI[k] : m);
+  }
+  return { t, V, PEZZI, entrambi, withPrep, cap };
+})();
 </script>
 <script>
 /* motore/sprites.js */
@@ -2036,12 +2114,13 @@ const VG = (() => {
 
   // ---------- speakers ----------
   // Only the voices that actually speak in the three games (add more here when a new line needs them)
+  // who speaks: the two protagonists (A runs, B waits), the boss and his henchmen (from the order), the narrator
   const SPEAKERS = {
     falcon: { name: window.ORDINE.protagonisti.a.nome, col: '#ffd84a', img: () => falcon('down') },
     crocco: { name: window.ORDINE.protagonisti.b.nome, col: '#7cc6e8', img: () => crocco('down') },
-    narr: { name: '', col: '#c9bfe0' },
-    custode: { name: 'Custode dell\'anfiteatro', col: '#7cc6e8', look: 'custode' },
-    spa: { name: 'Proprietaria della spa', col: '#fff6e0', look: 'spa' }
+    boss: { name: (window.ORDINE.antagonista || {}).nome || '', col: '#ff6b57', look: (window.ORDINE.antagonista || {}).aspetto },
+    scag: { name: (window.ORDINE.scagnozzi || {}).singolare || '', col: '#c9bfe0', look: (window.ORDINE.scagnozzi || {}).divisa },
+    narr: { name: '', col: '#c9bfe0' }
   };
   function speakerImg(sp) { if (sp.img) return sp.img(); if (sp.look) return npc(sp.look); return null; }
   function portrait(cv, img) {
@@ -2095,7 +2174,7 @@ const VG = (() => {
     return {
       get open() { return open; },
       say(lines) {
-        build(); queue = lines.slice(); if (!queue.length) return Promise.resolve();
+        build(); queue = lines.map(l => [l[0], TXT.t(l[1])]); if (!queue.length) return Promise.resolve(); // the order fills the placeholders
         open = true; box.hidden = false; show();
         return new Promise(r => { resolveFn = r; });
       },
@@ -2206,7 +2285,7 @@ const VG = (() => {
 
   // ---------- the ending: envelope, cake with salamini, card with the dedication ----------
   // the letter: text and signature from the order, the title from the occasion (as in Memory Lane)
-  const TITOLI = { birthday: 'Buon compleanno!', anniversary: 'Buon anniversario!', love: 'Buon San Valentino!', christmas: 'Buon Natale!', graduation: 'Congratulazioni!', other: 'Un pensiero per te' };
+  const TITOLI = { birthday: 'Buon compleanno!', anniversary: 'Buon anniversario!', love: 'Buon San Valentino!', christmas: 'Buon Natale!', graduation: 'Congratulazioni!', other: TXT.entrambi ? 'Un pensiero per voi' : 'Un pensiero per te' };
   const DEDICA = { title: TITOLI[window.ORDINE.occasione] || TITOLI.other, text: window.ORDINE.lettera.testo, sign: window.ORDINE.lettera.firma };
   // the letter: same opening as in Memory Lane (the envelope arrives, opens, the paper unfolds, lines written by hand)
   function ending(opts) {
@@ -2221,7 +2300,7 @@ const VG = (() => {
           <svg class="env-front" viewBox="0 0 120 80" preserveAspectRatio="none"><polygon points="2,2 60,46 118,2 118,78 2,78" /></svg>
           <div class="env-flap"><svg viewBox="0 0 120 50" preserveAspectRatio="none"><polygon points="2,2 118,2 60,48" /></svg><span class="env-seal"></span></div>
         </div>
-        <p class="env-hint">Per El Falcon · tocca per aprire</p>
+        <p class="env-hint">Per ${TXT.V.dest} · tocca per aprire</p>
       </div>
       <canvas id="end-cake" width="260" height="140"></canvas>
       <div class="end-card"><h2>${DEDICA.title}</h2><p>${DEDICA.text}</p><div class="sign">${DEDICA.sign}</div></div>
@@ -2277,7 +2356,7 @@ const VG = (() => {
       // the seal breaks, the flap opens, the letter rises out; then the envelope drops away and the letter unfolds
       if (!env.classList.contains('open')) { env.classList.add('open'); Audio.sfx('pick'); timers.push(setTimeout(() => Audio.sfx('door'), 280)); timers.push(setTimeout(() => { startMorph(); env.classList.add('out'); }, 1750)); timers.push(setTimeout(reveal, 2250)); } else reveal();
     };
-    env.tabIndex = 0; env.setAttribute('role', 'button'); env.setAttribute('aria-label', 'Apri la lettera per El Falcon');
+    env.tabIndex = 0; env.setAttribute('role', 'button'); env.setAttribute('aria-label', 'Apri la lettera per ${TXT.V.dest}');
     env.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); env.onclick(); } };
     if (opts.reread) reveal();
     else if (opts.from && !REDUCED) {
@@ -2631,7 +2710,7 @@ const AMBIENTI = (() => {
       R(c, x, g - 50, 84, 8, '#d8c49a'); R(c, x + 4, g - 54, 76, 4, '#c8b48a'); for (let i = 0; i < 6; i++) R(c, x + 4 + i * 15, g - 42, 6, 42, '#e8d4aa');
       R(c, x + 34, g - 66, 16, 12, '#4a8a6a'); R(c, x + 38, g - 70, 8, 4, '#4a8a6a');
     },
-    signs: ['Alexanderplatz 6 km', 'Alexanderplatz 4,1 km', 'Alexanderplatz 2 km', 'Alexanderplatz 500 m'],
+    signs: [], // the signs say the place of the order («{luogo} 6 km»): see run.js
     low: ['#d64545', '#f4f4f4'], // colours of the low banner you slide under
   };
   T.praga = {
@@ -3315,21 +3394,25 @@ const HR_DATA = (() => {
   };
 
   const T = AMBIENTI;
+  // the boss: one for the whole story, the antagonist of the order (its look, its name); it comes back at the end of every
+  // stage, harder each time, and only in the last one it is beaten for good. Its projectiles are notebooks for now
+  // (the one made to measure comes with phase 4).
+  const BOSS = { look: (window.ORDINE.antagonista || {}).aspetto, name: (window.ORDINE.antagonista || {}).nome, throw: 'receipt' };
 
   // ---------------------------------------------------------------- the four levels (Skiathos, Malta and Praga stay defined in T, unused)
   const LEVELS = [
-    { id: 't1', story: { speed: 100, cpLine: ['falcon', 'Un aperitivo al tramonto e si riparte. Le cupole blu ci aspettano.'], boss: { look: 'senior', name: 'Il Consulente Senior', throw: 'receipt' } }, seq: ['start', 'arc', 'gap3', 'powerM', 'enemy1', 'valigie', 'hop1', 'tk_high', 'low1', 'flyer', 'powerH', 'cp', 'powerG', 'shoes_run', 'gap4', 'egroup', 'tk_pit', 'swoop1', 'hazard', 'tk_enemy', 'arc2', 'egroup', 'boss', 'fin'],
-      intro: [['falcon', 'Tocco lo schermo per saltare, e tocco ancora in aria per il doppio salto. Facile.'], ['falcon', 'I Consulenti Grigi mi stanno dietro: gli salto in testa. E cerco i tre salamini al tartufo, nascosti nei posti più scomodi.']],
-      outro: [['falcon', 'Arrivata!'], ['crocco', 'In perfetto orario per il tramonto.'], ['crocco', 'Domani Ios. Questa la facciamo insieme: in quad.']] },
-    { id: 't2', story: { speed: 138, quad: true, cpLine: ['crocco', 'Tieniti forte, Falcotto! Ah no, sono io che mi tengo forte.'], boss: { look: 'grigio', name: 'Il Capo dei Consulenti Grigi', throw: 'kpibar' } }, seq: ['start', 'q_rocks', 'q_ramp', 'q_gap', 'powerM', 'q_run', 'q_tk_ramp', 'q_rocks2', 'q_gap', 'hazard', 'q_rampgap', 'powerH', 'cp', 'q_chase', 'powerG', 'shoes_run', 'q_run', 'q_tk_pit', 'swoop1', 'q_ramp', 'q_rocks2', 'q_tk_rock', 'q_run', 'q_rampgap', 'q_rocks2', 'boss', 'fin'],
-      intro: [['falcon', 'Ios, sul quad nero! Guido io.'], ['crocco', 'Io sto dietro e mi tengo forte. Attenta alle rocce, e ai Consulenti: anche sul quad bisogna saltargli in testa.'], ['falcon', 'Ci sono le rampe, però. Tieniti, Crocco.']],
-      outro: [['grigio', 'Il Crocco è convocato d\'urgenza. A Berlino.'], ['crocco', 'Falcotto, l\'Album! Continua a riempirlo!'], ['falcon', 'Crocco!']] },
-    { id: 't3', story: { speed: 112, cpLine: ['falcon', 'Il Tresor! Un sorso e riparto: il Crocco mi aspetta.'], boss: { look: 'scontrinista', name: 'Lo Scontrinista capo', throw: 'receipt' } }, seq: ['start', 'sign', 'egroup', 'tough', 'valigie', 'tk_high', 'pioggia', 'sign', 'gap4', 'low2', 'powerM', 'cp', 'powerG', 'shoes_run', 'tough', 'pitplats', 'sign', 'tk_enemy', 'chase', 'flyers', 'gap6', 'sign', 'tk_pad', 'pioggia', 'boss', 'fin'],
-      intro: [['falcon', 'Tieni duro, Crocco. Arrivo.'], ['falcon', 'Berlino è grande, ma il Crocco lo trovo.']],
-      outro: [['va', 'Buonasera. Qui il Dott. Valore Aggiunto.'], ['va', 'Il Crocco crea valore per noi, adesso. Se lo rivuoi, vieni a prenderlo: Vienna, 31 dicembre.'], ['falcon', 'A mezzanotte sarà libero.']] },
-    { id: 't4', story: { speed: 116, cpLine: ['falcon', 'Mancano pochi minuti a mezzanotte! Una cioccolata e via.'], boss: { look: 'vaBoss', name: 'Il Dott. Valore Aggiunto', throw: 'snowball' } }, seq: ['start', 'enemy1', 'tough', 'low1', 'blocks', 'tk_pad', 'swoop1', 'gap4', 'egroup', 'powerH', 'cp', 'powerG', 'shoes_run', 'tough', 'fallers', 'low2', 'tk_high', 'pitplats', 'chase_long', 'gap6', 'powerM', 'valigie2', 'tk_enemy', 'hop2', 'pioggia', 'boss', 'fin'],
-      intro: [['narr', 'Vienna, 31 dicembre. Mancano pochi minuti a mezzanotte.'], ['falcon', 'Il Crocco è laggiù, sotto il Duomo.'], ['falcon', 'Prima di mezzanotte è libero. Arrivo, Crocco.']],
-      outro: [['crocco', 'Lo sapevo che arrivavi.'], ['falcon', 'Buon anno, Crocco.']] } // (the end of Vienna is written out in finishLevel: freeing him, midnight, the Album)
+    { id: 't1', story: { speed: 100, boss: BOSS }, seq: ['start', 'arc', 'gap3', 'powerM', 'enemy1', 'valigie', 'hop1', 'tk_high', 'low1', 'flyer', 'powerH', 'cp', 'powerG', 'shoes_run', 'gap4', 'egroup', 'tk_pit', 'swoop1', 'hazard', 'tk_enemy', 'arc2', 'egroup', 'boss', 'fin'],
+      intro: [['narr', 'Tocca lo schermo per saltare, tocca ancora in aria per il doppio salto. Scorri verso il basso per scivolare.'], ['falcon', 'Ho {scagnozzi} alle calcagna. Devo seminarli tutti.']],
+      outro: [['falcon', 'Eccomi, {b}!'], ['crocco', 'Giusto in tempo, {a}.'], ['crocco', 'La prossima la facciamo insieme: si va a {luogo2}!']] },
+    { id: 't2', story: { speed: 138, quad: true, boss: BOSS }, seq: ['start', 'q_rocks', 'q_ramp', 'q_gap', 'powerM', 'q_run', 'q_tk_ramp', 'q_rocks2', 'q_gap', 'hazard', 'q_rampgap', 'powerH', 'cp', 'q_chase', 'powerG', 'shoes_run', 'q_run', 'q_tk_pit', 'swoop1', 'q_ramp', 'q_rocks2', 'q_tk_rock', 'q_run', 'q_rampgap', 'q_rocks2', 'boss', 'fin'],
+      intro: [['falcon', '{luogo2}! …E questo quad da dove arriva?'], ['crocco', 'Boh. Ma è figo.'], ['falcon', 'Guido io.'], ['crocco', 'E io mi tengo forte.'], ['crocco', 'Occhio alle rampe!']],
+      outro: [['boss', 'Vediamo se corri ancora, senza {b}. Ci vediamo a {luogo3}… se ci arrivi.']] }, // (B's shout and A's come while the van drives off: finishLevel)
+    { id: 't3', story: { speed: 112, boss: BOSS }, seq: ['start', 'sign', 'egroup', 'tough', 'valigie', 'tk_high', 'pioggia', 'sign', 'gap4', 'low2', 'powerM', 'cp', 'powerG', 'shoes_run', 'tough', 'pitplats', 'sign', 'tk_enemy', 'chase', 'flyers', 'gap6', 'sign', 'tk_pad', 'pioggia', 'boss', 'fin'],
+      intro: [['falcon', '{luogo3}. {B} è qui, da qualche parte.'], ['falcon', 'Tieni duro, {b}. Arrivo.']],
+      outro: [['boss', 'Ah, pensavi di trovare {b} qui? Che tenerezza. Se ci tieni tanto, vieni a {luogo4}. Ti aspetto lì.'], ['falcon', 'Arrivo, {b}.']] },
+    { id: 't4', story: { speed: 116, boss: BOSS }, seq: ['start', 'enemy1', 'tough', 'low1', 'blocks', 'tk_pad', 'swoop1', 'gap4', 'egroup', 'powerH', 'cp', 'powerG', 'shoes_run', 'tough', 'fallers', 'low2', 'tk_high', 'pitplats', 'chase_long', 'gap6', 'powerM', 'valigie2', 'tk_enemy', 'hop2', 'pioggia', 'boss', 'fin'],
+      intro: [['falcon', '{luogo4}. Ultima tappa.'], ['falcon', 'Laggiù c\'è {B}. Resisti: stavolta vengo a salvarti!']],
+      outro: [['crocco', 'Lo sapevo che arrivavi.']] } // (the end of the last stage is written out in finishLevel: freeing B, the party, the Album)
   ];
   // the place of each stage comes from the order: the environment from the catalogue, the name and the postcard from the order
   LEVELS.forEach((L, i) => {
@@ -3363,6 +3446,7 @@ const HR_DATA = (() => {
 
   // ---------------------------------------------------------------- save
   const O = window.ORDINE, SAVE_KEY = 'runtoyou-' + O.codice; // one save per order
+  const BOSS = { look: (O.antagonista || {}).aspetto, name: (O.antagonista || {}).nome };
   const save = VG.store.get(SAVE_KEY, { done: {}, tickets: {}, coins: {}, time: {}, introSeen: false, ending: false });
   save.nohit = save.nohit || {}; save.tips = save.tips || {};
   // the memories (cards) now come from the bosses, the three salamini al tartufo are what you find along the way
@@ -3671,7 +3755,7 @@ const HR_DATA = (() => {
         case 'cp': G.cp = { x: d.x, y: d.y }; break;
         case 'finish': G.finish = d.x; break;
         case 'crocco': G.croccoX = d.x; G.croccoY = d.y; break;
-        case 'sign': G.signs.push({ x: d.x, y: d.y, txt: G.th.signs[d.k] || '' }); break;
+        case 'sign': G.signs.push({ x: d.x, y: d.y, txt: [G.th.name + ' 6 km', G.th.name + ' 4 km', G.th.name + ' 2 km', G.th.name + ' 500 m'][d.k] || '' }); break;
       }
     }
   }
@@ -3812,6 +3896,7 @@ const HR_DATA = (() => {
     Object.assign(P, { x: sx, y: surfaceBelow(sx, 0) || 160, vx: 0, vy: 0, ground: true, jumps: 0, coyote: 0, buffer: 0, cut: false, inv: fromCp ? 1.2 : 0, hp: 3, speedG: 0, shoes: 0, magnet: 0, shield: false, safeX: sx, finished: false, anim: 0, combo: 0, slide: 0, pound: false, bump: null, chain: 0, chainT: 0 });
     for (const tr of G.trigs) if (tr.x < sx) tr.t = -2; // already behind us
     if (!fromCp) { G.runHurt = false; G.hurtLog = []; }
+    G.lamps = null; G.party = null; G.partyX = 0; G.lastMeters = null; G.vanFlee = null; G.happy = null;
     G.proj = []; G.cardFly = []; P.glow = 0; G.tug = 0; G.freeing = false; G.clockTxt = null; G.whiteT = 0; G.parts = []; G.floats = []; G.rain = []; G.coinFly = []; G.bubble = null; G.celebrate = 0; G.shake = 0; G.camY = 0; G.cpAnim = 0; G.finShift = false; G.kidnap = null; G.phoneUp = false; G.freed = false; G.monocle = null; G.vaLine = null; G.cheer = null; G.happy = null; G.countT = 0; G.t = 0; G.hitstop = 0; G.coinPop = 0; G.lastCoins = P.coins;
     G.waitTap = false; G.startRun = null;
     G.flashT = 0; G.warnL = 0; G.banner = null; G.bossCardT = 0; G.bossPop = 0; { const bc = byId('boss-card'); if (bc) bc.remove(); } G.bossDone = false; G.bossMode = false; G.swipeHint = null; G.lastHint = null; G.hpPop = 0; G.tkPop = 0;
@@ -3883,7 +3968,7 @@ const HR_DATA = (() => {
     // checkpoint
     if (G.cp && !G.cpReached && p.x > G.cp.x && G.mode === 'run') reachCp();
     // finish
-    if (G.mode === 'run' && !p.finished && p.x >= G.finish) finishLevel();
+    if (G.mode === 'run' && !p.finished && p.x >= G.finish) { if (G.lastMeters) { const done = G.lastMeters; G.lastMeters = null; p.finished = true; G.mode = 'done'; done(); } else finishLevel(); }
     if (G.endless) endlessStep(dt); else if (G.buddy) buddyStep(G.buddy, dt);
     // camera
     const target = clamp(p.finished ? (G.finShift ? p.x - st.VW * 0.16 : p.x + 8 - st.VW / 2) : camX(p.x), 0, G.W * TILE - st.VW);
@@ -3937,7 +4022,7 @@ const HR_DATA = (() => {
     if (e.t === 'coin') coinPick(1, e.x, e.y);
     else if (e.t === 'special') { P.coins += 5; Audio.sfx('pick'); float(e.x, e.y - 10, '+5', '#ffd84a', true); sparkle(e.x, e.y, '#ff8a3d', 12); }
     else if (e.t === 'ticket' && hadTicket(e.k)) { P.coins += 5; Audio.sfx('pick'); float(e.x, e.y - 12, '+5', '#ffd84a', true); sparkle(e.x, e.y, '#fff0a8', 8); }
-    else if (e.t === 'ticket') { P.tickets[e.k] = true; Audio.sfx('ticket'); float(e.x, e.y - 12, 'Salamino!', '#ffd84a', true); sparkle(e.x, e.y, '#ffd84a', 20); G.tkPop = 0.6; }
+    else if (e.t === 'ticket') { P.tickets[e.k] = true; Audio.sfx('ticket'); float(e.x, e.y - 12, TXT.t('{Cibo}!'), '#ffd84a', true); sparkle(e.x, e.y, '#ffd84a', 20); G.tkPop = 0.6; }
     else if (e.t === 'gold') { P.gold = true; Audio.sfx('solve'); float(e.x, e.y - 12, 'Salamino d\'oro!', '#ffd84a', true); sparkle(e.x, e.y, '#ffd84a', 30); sparkle(e.x, e.y, '#fff0a8', 16); G.tkPop = 0.8; }
     else if (e.t === 'power') {
       Audio.sfx('save');
@@ -3991,7 +4076,7 @@ const HR_DATA = (() => {
   // The more you miss, the sooner it stumbles again, and at the end of the stretch it gives up anyway.
   function spawnBoss() {
     const B = G.th.boss; if (!B) return;
-    const e = { id: 'boss', kind: 'boss', boss: true, look: B.look, name: B.name, x: P.x + 130, y: 0, x0: 0, y0: 0, vx: G.th.speed, vy: 0, hp: 3, t: 0, dead: false, dying: 0, cd: 99, w: 20, h: 30, flash: 0, state: 'enter', st: 0, ghost: true, misses: 0 };
+    const e = { id: 'boss', kind: 'boss', boss: true, look: B.look, name: B.name, tier: G.L.n, final: G.L.n === LEVELS.length, x: P.x + 130, y: 0, x0: 0, y0: 0, vx: G.th.speed, vy: 0, hp: 3, t: 0, dead: false, dying: 0, cd: 99, w: 20, h: 30, flash: 0, state: 'enter', st: 0, ghost: true, misses: 0 };
     G.enemies.push(e); G.boss = e; G.bossMode = true;
     G.arenaEnd = G.finish - 6 * TILE;
     G.bossPop = 0;
@@ -4005,7 +4090,7 @@ const HR_DATA = (() => {
     const hold = VG.REDUCED ? 1.1 : 1.5;
     G.bossCardT = hold; // the run goes on: the tag only hides the HUD hearts while it is on screen
     const card = el('div', 'boss-card'); card.id = 'boss-card'; card.setAttribute('role', 'status');
-    card.innerHTML = `<div class="bc-tag"><span class="bc-por"></span><span class="bc-txt"><b>${B.name}</b><span class="bc-pips"></span><span class="bc-hint">Colpiscilo in testa</span></span><span class="bc-stamp">×3</span></div>`;
+    card.innerHTML = `<div class="bc-tag"><span class="bc-por"></span><span class="bc-txt"><b>${B.name}</b><span class="bc-pips"></span><span class="bc-hint">Saltagli addosso!</span></span><span class="bc-stamp">×3</span></div>`;
     const cv = document.createElement('canvas'); cv.className = 'px'; VG.portrait(cv, humanoidSprite(B.look, LOOKS[B.look]).left); card.querySelector('.bc-por').appendChild(cv);
     for (let i = 0; i < 3; i++) card.querySelector('.bc-pips').appendChild(pxCanvas(9, 8, c => c.drawImage(S.heart(), 0, 0)));
     app.appendChild(card);
@@ -4033,7 +4118,7 @@ const HR_DATA = (() => {
   }
   const VA_NOTE = 35; // the notebooks fly back towards her at 35 px/s: about 150 px/s against her run (before: 175, in an arc)
   // its rhythm: runs for a while, then stumbles and stands still for a moment (seconds)
-  const bossT = e => ({ run: Math.max(0.5, 1.5 - e.misses * 0.35 - (3 - e.hp) * 0.15), stop: 1.4 + e.misses * 0.2 });
+  const bossT = e => ({ run: Math.max(0.5, 1.5 + ((e.tier || 1) - 1) * 0.12 - e.misses * 0.35 - (3 - e.hp) * 0.15), stop: Math.max(0.9, 1.4 - ((e.tier || 1) - 1) * 0.1) + e.misses * 0.2 });
   // where it will be in dt seconds (the autopilot plans with this); null when it cannot be touched
   function bossAt(e, dt) {
     const T = bossT(e);
@@ -4049,7 +4134,7 @@ const HR_DATA = (() => {
     if (p.x > G.arenaEnd - 30 * TILE) longerArena(); // no finish line until the third stomp: the road goes on
     // the Dott. Valore Aggiunto throws his notebooks: they float straight at her, flapping, low (jump them) or at head
     // height (slide under them): one, then low+high, then low+high+low (1 s apart) as he loses hearts
-    if (e.look === 'vaBoss' && (e.state === 'run' || e.state === 'stop')) {
+    if (e.tier >= 3 && (e.state === 'run' || e.state === 'stop')) {
       e.cdT = (e.cdT === undefined ? 1.6 : e.cdT) - dt;
       const ahead = e.x - p.x;
       if (e.vq && e.vq.length) {
@@ -4060,7 +4145,7 @@ const HR_DATA = (() => {
           Audio.sfx('swing'); e.volT = 1.0;
         }
       } else if (e.cdT <= 0 && ahead > 70 && ahead < 240) {
-        const lvl = 3 - e.hp; e.vq = [['low'], ['low', 'high'], ['low', 'high', 'low']][lvl] || ['low', 'high', 'low']; e.volT = 0; e.cdT = [2.4, 3.2, 4.0][lvl] || 4.0;
+        const lvl = 3 - e.hp; e.vq = (e.final ? [['low'], ['low', 'high'], ['low', 'high', 'low']] : [['low'], ['low'], ['low', 'high']])[lvl] || ['low', 'high', 'low']; e.volT = 0; e.cdT = (e.final ? [2.4, 3.2, 4.0] : [3.0, 3.4, 3.8])[lvl] || 4.0;
       }
     }
     if (e.state === 'enter') {
@@ -4089,7 +4174,7 @@ const HR_DATA = (() => {
   }
   function bossDefeated(e, gaveUp) {
     for (let k = 0; k < 3; k++) bossCard(e, k); // (beaten some other way, by the cheats: the memories all the same)
-    if (e.look === 'vaBoss') {
+    if (e.final) {
       // the last boss goes out with a bang: white flash, he flies up spinning in a storm of papers, the monocle goes,
       // he lands head first in a heap of snow with his legs in the air, and the first fireworks go up
       e.ko = { t: 0, spin: 0, landed: false }; e.sq = 0; e.dazed = false; e.vy = -330; e.vx = 75;
@@ -4101,10 +4186,17 @@ const HR_DATA = (() => {
     }
     G.bossDone = true; G.bossMode = false; P.coins += 15;
     float(e.x, e.y - e.h - 10, '+15', '#ffd84a', true);
-    G.banner = e.look === 'vaBoss' ? null /* his KO has its own scene (vaKo) */ : { title: gaveUp ? 'Si arrende!' : 'Vittoria!', sub: '', t: 1.6, col: '#ffd84a' };
+    G.banner = e.final ? null /* the last KO has its own scene (vaKo) */ : { title: gaveUp ? 'Si arrende!' : 'Vittoria!', sub: '', t: 1.6, col: '#ffd84a' };
+    if (!e.final) bossFlees(e);
     finishComesCloser();
     conf = VG.confetti(60, st.VW, st.VH); Audio.sfx('solve'); Audio.play(G.th.music);
     for (let i = 0; i < 8; i++) G.rain.push({ x: e.x, y: e.y - 20, vx: G.th.speed * 0.7 + i * 12, vy: -220 - i * 15, g: 520, vmax: 320, life: 5, v: 1, img: 'coin' });
+  }
+  // stages 1–3: the boss is not beaten for good: it gets up and runs off ahead (limping in the first stage), with a line
+  function bossFlees(e) {
+    const line = { 1: 'Non finisce qui!', 3: 'Non mi prendi!' }[e.tier];
+    e.dead = true; e.dying = 3; e.vy = -150; e.vx = G.th.speed * 1.9; e.flee = true;
+    if (line) G.floats.push({ x: e.x, y: e.y - e.h - 14, txt: line, col: '#fff6e0', life: 2.4, big: true });
   }
   // The last boss's KO: everything stops for a moment, then she stays still and the camera on him while he flies up and
   // lands head first in the snow; his tag comes back with three empty hearts and a SCONFITTO stamp; his last words in
@@ -4116,7 +4208,7 @@ const HR_DATA = (() => {
     await wait(500); if (runId !== G.runId) return;
     const old = byId('boss-card'); if (old) old.remove();
     const card = el('div', 'boss-card ko'); card.id = 'boss-card'; card.setAttribute('role', 'status');
-    card.innerHTML = `<div class="bc-tag"><span class="bc-por"></span><span class="bc-txt"><b>${B.name}</b><span class="bc-pips"></span><span class="bc-hint">Tre colpi in testa</span></span><span class="bc-stamp">SCONFITTO</span></div>`;
+    card.innerHTML = `<div class="bc-tag"><span class="bc-por"></span><span class="bc-txt"><b>${B.name}</b><span class="bc-pips"></span><span class="bc-hint">Saltagli addosso!</span></span><span class="bc-stamp">SCONFITTO</span></div>`;
     const cv = document.createElement('canvas'); cv.className = 'px'; VG.portrait(cv, humanoidSprite(B.look, LOOKS[B.look]).left); card.querySelector('.bc-por').appendChild(cv);
     for (let i = 0; i < 3; i++) card.querySelector('.bc-pips').appendChild(pxCanvas(9, 8, c => c.drawImage(S.heartE(), 0, 0)));
     app.appendChild(card);
@@ -4124,7 +4216,9 @@ const HR_DATA = (() => {
     await wait(VG.REDUCED ? 1400 : 2300); if (runId !== G.runId) { card.remove(); return; }
     card.classList.add('out'); setTimeout(() => card.remove(), 450);
     await wait(350); if (runId !== G.runId) return;
-    await VG.say(together() ? [['va', 'Il valore… il valore era… nei weekend…'], ['falcon', 'Te l\'avevo detto.']] : [['va', 'Il valore… il valore era… nei weekend…'], ['falcon', 'Te l\'avevo detto. Crocco, arrivo!']]); if (runId !== G.runId) return;
+    await VG.say([['boss', 'No… non è possibile… [sconfitta]'], ['falcon', 'Le mie giornate le decido io.']]); if (runId !== G.runId) return;
+    G.vanFlee = { t: 0 }; Audio.sfx('dash'); await wait(1100); if (runId !== G.runId) return;
+    await VG.say([['boss', 'Ehi! Aspettatemi!']]); if (runId !== G.runId) return;
     G.mode = 'run'; byId('b-pause').hidden = false;
     G.count = 'Via!'; Audio.sfx('pick'); setTimeout(() => { if (G.count === 'Via!') G.count = null; }, 500);
   }
@@ -4287,7 +4381,7 @@ const HR_DATA = (() => {
   function fallInPit() {
     const p = P;
     // TEMPORARY cheat: immortal, she is put back on the last safe ground before the hole
-    if (cheatImmortal) { Object.assign(p, { x: p.safeX, y: surfaceBelow(p.safeX, 0) || 160, vx: 0, vy: 0, ground: true, jumps: 0, inv: 1 }); G.runHurt = true; float(p.x, p.y - 26, 'Salvata!', '#7cc6e8', true); return; }
+    if (cheatImmortal) { Object.assign(p, { x: p.safeX, y: surfaceBelow(p.safeX, 0) || 160, vx: 0, vy: 0, ground: true, jumps: 0, inv: 1 }); G.runHurt = true; float(p.x, p.y - 26, 'Per un pelo!', '#7cc6e8', true); return; }
     if (G.th.water) { Audio.sfx('splash'); for (let i = 0; i < 12; i++) G.parts.push({ x: p.x + rnd(-6, 6), y: MAP_H - 24, vx: rnd(-40, 40), vy: rnd(-160, -60), life: 0.7, c: G.th.water.top, s: 2 }); }
     // a fall is not a lost heart: it ends the attempt, and you start again from the aperitivo (or the start)
     (G.hurtLog = G.hurtLog || []).push({ why: 'pit', x: Math.round(p.x / 16), kind: '' });
@@ -4298,12 +4392,12 @@ const HR_DATA = (() => {
     G.cpReached = true; Audio.sfx('save');
     G.cpSnap = { taken: new Set(G.taken), coins: P.coins, tickets: P.tickets.slice(), cards: (P.cards || [false, false, false]).slice(), gold: !!P.gold, time: G.time };
 
-    // a fountain of good things from the table: thrown forwards, faster than you run, so it lands ahead of you
+    // a fountain of good things from the lamp: thrown forwards, faster than you run, so it lands ahead of you
     const sp = G.th.speed;
     for (let i = 0; i < 18; i++) G.rain.push({ x: G.cp.x, y: G.cp.y - 22, vx: sp + 25 + (i % 6) * 18 + rnd(-5, 5), vy: -230 - (i % 3) * 40 - rnd(0, 30), g: 380, vmax: 300, life: 7, v: i % 4 === 0 ? 3 : 1, img: i % 4 === 0 ? G.th.special : 'coin' });
     P.magnet = Math.max(P.magnet, 2.5);
-    float(G.cp.x, G.cp.y - 44, 'Aperitivo!', '#ffd84a', true);
-    // the moment: the two glasses clink, a little heart goes up, confetti from the table, the flag goes up green
+    float(G.cp.x, G.cp.y - 44, 'Checkpoint!', '#ffd84a', true);
+    // the moment: the lamp lights up, the flag goes up, a little confetti
     G.cpAnim = 0.001; setTimeout(() => Audio.sfx('pick'), 220);
     const cols = ['#ff6b57', '#ffd84a', '#7fd18a', '#7cc6e8', '#fff6e0'];
     for (let i = 0; i < 22; i++) G.parts.push({ x: G.cp.x + rnd(-8, 8), y: G.cp.y - 20, vx: rnd(-70, 70), vy: rnd(-170, -80), life: rnd(0.6, 1), c: cols[i % cols.length], s: 2 });
@@ -4471,7 +4565,8 @@ const HR_DATA = (() => {
     // checkpoint: the yellow table
     if (G.cp) drawCp(c, sx(G.cp.x), oy + G.cp.y);
     // finish arch
-    drawFinish(c, sx(G.finish), oy + 160);
+    if (!G.partyX) drawFinish(c, sx(G.finish), oy + 160);
+    if (G.lamps) drawLamps(c, oy);
     // collectibles
     for (const e of G.ents) { if (e.taken) continue; const X = sx(e.x), Y = oy + e.y; if (X < -20 || X > st.VW + 20) continue; drawEnt(c, e, X, Y); }
     for (const r of G.rain) { const X = sx(r.x), Y = oy + r.y; const img = r.img === 'coin' ? S.coin() : VG.item(r.img); c.drawImage(img, X - (img.width >> 1), Y - (img.height >> 1)); }
@@ -4551,8 +4646,10 @@ const HR_DATA = (() => {
     // Il Crocco waiting at the finish
     drawCrocco(c, sx(G.croccoX), oy + G.croccoY);
     drawKidnap(c, oy);
+    if (G.party) drawParty(c, oy);
+    if (G.vanFlee) { const v = G.vanFlee; v.t += 1 / 60; const x = G.cam - 90 + v.t * 320; if (x < G.cam + st.VW + 90) drawVan(c, sx(x), oy + 160, 0, v.t * 20); else G.vanFlee = null; }
     if (G.monocle) { const m = G.monocle, X = sx(m.x), Y = oy + Math.round(m.y); c.strokeStyle = '#ffd84a'; c.lineWidth = 1; c.beginPath(); c.arc(X, Y - 2, 2.5, 0, 7); c.stroke(); R(c, X + 2, Y - 1, 3, 1, '#c8a24a'); }
-    if (G.vaLine) { const v = G.vaLine, a = clamp(v.t * 2, 0, 1), y = Math.round(st.VH * 0.5); c.globalAlpha = 0.75 * a; R(c, 0, y - 14, st.VW, 28, '#1a1024'); c.globalAlpha = 1; st.text('Dott. Valore Aggiunto', st.VW / 2, y - 6, { size: Math.max(12, 4.6 * st.SCALE), col: '#ff6b57', align: 'center', shadow: false, alpha: a }); st.text('«Il valore… il valore era… nei weekend…»', st.VW / 2, y + 6, { size: Math.max(17, 7 * st.SCALE), col: '#fff6e0', align: 'center', font: 'body', shadow: false, alpha: a }); }
+    if (G.vaLine) { const v = G.vaLine, a = clamp(v.t * 2, 0, 1), y = Math.round(st.VH * 0.5); c.globalAlpha = 0.75 * a; R(c, 0, y - 14, st.VW, 28, '#1a1024'); c.globalAlpha = 1; st.text(TXT.V.boss, st.VW / 2, y - 6, { size: Math.max(12, 4.6 * st.SCALE), col: '#ff6b57', align: 'center', shadow: false, alpha: a }); st.text('«Il valore… il valore era… nei weekend…»', st.VW / 2, y + 6, { size: Math.max(17, 7 * st.SCALE), col: '#fff6e0', align: 'center', font: 'body', shadow: false, alpha: a }); }
     // player (in the endless run Il Crocco runs behind her)
     if (G.endless || G.buddy) drawBuddy(c, oy);
     drawPlayer(c, sx(P.x), oy + P.y);
@@ -4614,16 +4711,22 @@ const HR_DATA = (() => {
     R(c, X - 10, mat - 1, 20, 1, '#2a1a2e'); for (let i = 0; i < 20; i++) R(c, X - 10 + i, mat, 1, 2, (i >> 2) % 2 ? '#ffd84a' : '#4fb3e8');
     if (!sq && Math.floor(G.t * 2.5) % 2) { const ay = mat - 6; R(c, X - 1, ay - 6, 2, 1, '#ffd84a'); R(c, X - 2, ay - 5, 4, 1, '#ffd84a'); R(c, X - 3, ay - 4, 6, 1, '#ffd84a'); R(c, X - 4, ay - 3, 8, 1, '#ffd84a'); R(c, X - 1, ay - 2, 2, 3, '#ffd84a'); }
   }
-  function drawCp(c, X, Y) {
+  function drawCp(c, X, Y) { drawLamp(c, X, Y, G.cpReached, G.cpAnim || 0); }
+  function drawLamp(c, X, Y, on, a) {
     if (X < -40 || X > st.VW + 40) return;
-    R(c, X - 1, Y - 34, 2, 34, '#8a6a44');
-    for (let i = 0; i < 6; i++) R(c, X - 14 + i * 5, Y - 36 + Math.abs(i - 2.5) * 0.8, 5, 4, i % 2 ? '#fff6e0' : '#ff6b57');
-    R(c, X - 12, Y - 12, 24, 3, '#ffd84a'); R(c, X - 12, Y - 9, 24, 1, '#d9b21f'); R(c, X - 9, Y - 9, 2, 9, '#d9b21f'); R(c, X + 7, Y - 9, 2, 9, '#d9b21f');
-    // the clink: for a moment the glasses lean together and jump
-    const a = G.cpAnim || 0, clink = a > 0 && a < 0.5 ? Math.sin(a / 0.5 * Math.PI) : 0, j = Math.round(clink * 3);
-    c.drawImage(VG.item('cocktail'), X - 10 + j, Y - 22 - j); c.drawImage(VG.item('cocktail'), X + 1 - j, Y - 22 - j);
-    if (a > 0.2 && a < 1.4) { const k = (a - 0.2) / 1.2, hy = Math.round(Y - 26 - k * 22); c.globalAlpha = 1 - k; const h = S.heart(); c.drawImage(h, X - (h.width >> 1), hy); c.globalAlpha = 1; }
-    if (G.cpReached) { const up = Math.min(1, a / 0.6 || 1), fy = Math.round(Y - 14 - 16 * up); R(c, X + 13, Y - 30, 1, 30, '#5d6270'); R(c, X + 14, fy, 8, 5, '#7fd18a'); R(c, X + 14, fy, 8, 1, '#b8f0bf'); }
+    const k = '#1a1024';
+    // the glow on the ground and around the lamp, when it is on (it breathes a little)
+    if (on) { const g = 0.18 + 0.06 * Math.sin(G.t * 3); c.globalAlpha = g; c.fillStyle = '#ffd84a'; c.beginPath(); c.ellipse(X, Y, 18, 3, 0, 0, 7); c.fill(); c.beginPath(); c.arc(X + 6, Y - 40, 11, 0, 7); c.fill(); c.globalAlpha = 1; }
+    // the post with its base, the arm and the lamp hanging from it
+    R(c, X - 4, Y - 3, 8, 3, k); R(c, X - 3, Y - 2, 6, 2, '#4a4f5c');
+    R(c, X - 2, Y - 46, 4, 44, k); R(c, X - 1, Y - 45, 2, 43, '#5d6270'); R(c, X - 1, Y - 45, 1, 43, '#7e8492');
+    R(c, X - 1, Y - 48, 10, 3, k); R(c, X, Y - 47, 8, 1, '#7e8492');
+    R(c, X + 3, Y - 45, 7, 2, k); R(c, X + 2, Y - 43, 9, 5, k); R(c, X + 3, Y - 42, 7, 3, on ? '#ffe38a' : '#8a8f9c'); R(c, X + 4, Y - 42, 2, 1, on ? '#fffbe0' : '#a3a8b4');
+    // the light switching on: a short flash of rays
+    if (on && a > 0 && a < 0.6) { const u = a / 0.6; c.globalAlpha = 1 - u; for (let i = 0; i < 6; i++) { const an = Math.PI * (0.15 + i * 0.14), rr = 8 + u * 10; R(c, Math.round(X + 6 + Math.cos(an) * rr), Math.round(Y - 40 + Math.sin(an) * rr), 2, 2, '#ffd84a'); } c.globalAlpha = 1; }
+    // the little flag on the post: down when off, it goes up when it lights
+    const up = on ? Math.min(1, (a / 0.6) || 1) : 0, fy = Math.round(Y - 14 - 22 * up);
+    R(c, X - 9, fy, 7, 5, k); R(c, X - 8, fy + 1, 5, 3, on ? '#ffd84a' : '#9aa0ad');
   }
   // a colour a bit darker (or lighter, with k > 1), for the shading of the themed pieces
   function shadeC(hex, k) { const n = parseInt(hex.slice(1), 16), f = v => Math.max(0, Math.min(255, Math.round(v * k))).toString(16).padStart(2, '0'); return '#' + f(n >> 16) + f((n >> 8) & 255) + f(n & 255); }
@@ -4790,7 +4893,7 @@ const HR_DATA = (() => {
   function drawKidnap(c, oy) {
     const K = G.kidnap; if (!K) return;
     if (K.ph === 'in' && K.t < 1) K.x = P.x; // the quad rolls on a little after the line: the van stops where it stops
-    const gl = humanoidSprite('grigio', LOOKS.grigio), gy = oy + P.y, stop = K.x + 112;
+    const SCL = (O.scagnozzi || {}).divisa || 'grigio', gl = humanoidSprite(SCL, LOOKS[SCL]), bl = humanoidSprite(BOSS.look, LOOKS[BOSS.look]), gy = oy + P.y, stop = K.x + 112;
     const ease = u => 1 - Math.pow(1 - clamp(u, 0, 1), 3);
     const slots = [K.x + 24, K.x + 42, K.x + 60], doorX = stop - 5;
     let vx = stop, door = 0, wheel = 0;
@@ -4799,6 +4902,7 @@ const HR_DATA = (() => {
       if (u > 0.55 && u < 1 && Math.random() < 0.5) G.parts.push({ x: vx - 24 + rnd(-4, 4), y: P.y - 1, vx: rnd(-50, -10), vy: rnd(-40, -10), life: 0.4, c: '#e9dfc8', s: 2 });
       door = clamp((K.t - 1.25) / 0.25, 0, 1);
       drawVan(c, sx(vx), gy, door, wheel);
+      if (K.t > 1.5) VG.draw(c, bl.left, sx(stop + 44), gy + 1); // the boss, in front of the van
       slots.forEach((tx, i) => {
         const t0 = 1.5 + i * 0.3; if (K.t < t0) return;
         const x = Math.max(tx, doorX - (K.t - t0) * 60), walking = x > tx, fr = Math.floor(K.t * 8) % 2;
@@ -4811,6 +4915,7 @@ const HR_DATA = (() => {
       const go = Math.max(0, t - 1.6); vx = stop + 160 * go * go; wheel = (vx - stop) / 6;
       if (go > 0 && Math.random() < 0.6) G.parts.push({ x: vx - 34, y: P.y - 6, vx: rnd(-60, -20), vy: rnd(-30, -5), life: 0.5, c: '#8a8f9c', s: 2 });
       drawVan(c, sx(vx), gy, door, wheel);
+      if (t < 1.3) VG.draw(c, bl.left, sx(stop + 44 - Math.max(0, t - 0.8) * 60), gy + 1); // then he jumps in
       if (t < 1.3) {
         const walk = x0 => Math.min(doorX, x0 + Math.max(0, t - 0.35) * 95);
         // Il Crocco: lifted from the seat behind her, then carried, kicking
@@ -5026,11 +5131,6 @@ const HR_DATA = (() => {
       if (G.L && G.L.n === 2) { R(c, bx1 - 1, by - 6, 1, 10, '#2a1a2e'); for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) R(c, bx1 + i * 2, by - 6 + j * 2, 2, 2, (i + j) % 2 ? '#2a1a2e' : '#fff6e0'); }
       else if (G.L && G.L.n === 3) { R(c, bx1 - 5, by - 3, 10, 6, '#2a1a2e'); R(c, bx1 - 4, by - 2, 8, 4, '#d64545'); R(c, bx1 - 5, by - 5, 10, 2, '#2a1a2e'); }
       else { const kh = VG.crocco('down'); c.drawImage(kh, 0, 0, kh.width, 11, bx1 - kh.width / 2, by - 4, kh.width, 11); }
-      if (G.L && G.L.n === 4) {
-        const secs = Math.round(prog * 175), m = 57 + Math.floor(secs / 60), s = secs % 60;
-        const txt = G.clockTxt || (P.finished ? '00:00' : `23:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`);
-        st.text(txt, (bx0 + bx1) / 2, by + 14, { size: Math.max(11, 4.4 * st.SCALE), col: P.finished ? '#ffd84a' : '#fff6e0', align: 'center', font: 'num' });
-      }
     }
     // power ups
     let py = cy + 9 * k + 6;
@@ -5224,12 +5324,12 @@ const HR_DATA = (() => {
   const gotCount = () => COLLECTION.filter(gotCard).length;
   const unlockedI = i => i === 0 || !!save.done[LEVELS[i - 1].id] || !!save.unlockAll;
   // the guastafeste and the last photo: the same as in Memory Lane
-  const PEST = { look: 'grigio', name: 'Il Consulente Grigio', of: 'del Consulente Grigio', note: 'Questa la tengo io.',
-    steal: ['Cercate questa? L\'ultima foto dell\'Album ce l\'ho io.', 'Mi avete battuto una volta… ma non finisce qui.', 'Ho nascosto quattro salamini d\'oro, uno per tappa. Trovateli tutti e forse ve la ridò.'],
-    defeat: ['Va bene, va bene… avete vinto voi.', 'Tenetevela, la vostra foto. Ma non finisce qui!'] };
-  const FINAL = { name: 'Noi due', note: 'L\'ultima foto dell\'Album è la mia preferita. La prossima la scattiamo insieme, in un posto nuovo.' };
+  const PEST = { look: BOSS.look, name: BOSS.name, of: TXT.t('{di boss}'), note: 'Questa la tengo io.',
+    steal: ['Credevi fosse finita? L\'ultima foto dell\'Album ce l\'ho io.', 'Ho nascosto quattro {cibi} d\'oro, uno per tappa. Trovali tutti e forse te la ridò.'],
+    defeat: ['Va bene, va bene… hai vinto tu.', 'Tieniti la tua foto. Non voglio più vederti!'] };
+  const FINAL = { name: 'Noi due', note: O.regalo && O.regalo.da === 'altro' ? 'L\'ultima foto dell\'Album è la più bella. La prossima scattatela insieme, in un posto nuovo.' : 'L\'ultima foto dell\'Album è la mia preferita. La prossima la scattiamo insieme, in un posto nuovo.' };
   // one challenge: the golden salamini the Consulente Grigio hides when he takes the photo, one per stage (each counts once you reach the finish with it)
-  const MISSIONS = [{ k: 'gold', t: `Trova i ${LEVELS.length} salamini d'oro, uno per tappa`, ok: () => LEVELS.every(L => save.gold[L.id]), prog: () => `${LEVELS.filter(L => save.gold[L.id]).length}/${LEVELS.length}` }];
+  const MISSIONS = [{ k: 'gold', t: TXT.t(`Trova {i cibi} d'oro, uno per tappa`), ok: () => LEVELS.every(L => save.gold[L.id]), prog: () => `${LEVELS.filter(L => save.gold[L.id]).length}/${LEVELS.length}` }];
   const missionsDone = () => MISSIONS.filter(m => m.ok()).length;
   function checkMissions() {
     let delay = 0;
@@ -5275,7 +5375,7 @@ const HR_DATA = (() => {
   }
   // the end of a stage: first the three stars, big, one at a time, each with what it is for (the missing ones stay
   // empty, with their reason in grey); then they shrink and fly to the top right of the summary, which fits one screen
-  const STAR_WHY = ['Arrivata', '3 salamini', 'Senza colpi'];
+  const STAR_WHY = ['Traguardo', TXT.t('3 {cibi}'), 'Senza colpi'];
   // a fat pixel check, yellow with a dark outline
   function checkIcon() {
     const rows = ['..........kk', '.........kYk', '........kYYk', '.kk....kYYk.', 'kYYk..kYYk..', 'kYYYkkYYk...', '.kYYYYYk....', '..kYYYk.....', '...kkk......'];
@@ -5439,7 +5539,7 @@ const HR_DATA = (() => {
     conf = VG.confetti(90, st.VW, st.VH);
     await wait(1300); if (sess !== A.sess) return;
     // the little exchange only the first time; after that the Album speaks for itself
-    if (firstTime) { await VG.say([['crocco', 'Album completo, Falcotto! Dodici ricordi, tutti attaccati.'], ['falcon', 'Lo sfogliamo insieme dall\'inizio?']]); if (sess !== A.sess) return; }
+    if (firstTime) { await VG.say([['crocco', 'Album completo, {A}! Finalmente abbiamo recuperato tutti i ricordi.'], ['crocco', 'Lo sfogliamo insieme dall\'inizio?']]); if (sess !== A.sess) return; }
     const row = ov2.querySelector('.ab-btns');
     ov2.classList.add('ready'); await wait(VG.REDUCED ? 0 : 450); if (sess !== A.sess) return;
     const b = el('button', 'btn primary letter', 'Sfoglia l\'Album'); b.type = 'button'; b.prepend(el('span', 'seal', '♥')); b.onclick = () => flipAlbum({ keep: opt.midnight }); row.appendChild(b);
@@ -5621,12 +5721,7 @@ const HR_DATA = (() => {
     }, VG.REDUCED ? 0 : 650 + k * 350));
     // every challenge done: he comes back beaten and the photo develops in its frame (once)
     if (save.ending && save.villainMet && missionsDone() === MISSIONS.length && !save.photo) { setTimeout(() => { if (sess === A.sess) finale(); }, 500); return; }
-    // the very first time: Il Crocco explains the four stages
-    if (!save.introSeen) {
-      save.introSeen = true; persist();
-      await wait(500); if (sess !== A.sess) return;
-      await VG.say([['crocco', 'Si parte da Santorini: ti aspetto lì, al tramonto. Da lì ci facciamo i nostri viaggettini, insieme.'], ['falcon', 'E i ricordi?'], ['crocco', 'Te li ridà chi prova a fermarti: tre salti in testa. E per strada ci sono i salamini al tartufo, nei posti più scomodi.']]);
-    }
+    if (!save.introSeen) { save.introSeen = true; persist(); } // (no explanations here: the intro says what is needed)
     // the first time after the letter: the Album shakes, a new page appears, the two notice it
     if (introNew && extra) {
       save.afterIntro = true; persist();
@@ -5635,7 +5730,7 @@ const HR_DATA = (() => {
         extra.scrollIntoView({ behavior: VG.REDUCED ? 'auto' : 'smooth', block: 'center' });
         panel.classList.add('shake'); Audio.sfx('door');
         await wait(900); if (sess !== A.sess) return;
-        await VG.say([['crocco', 'Aspetta… in fondo è spuntata una pagina nuova.'], ['falcon', 'Manca una foto! E al suo posto c\'è un biglietto…'], ['crocco', 'Toccalo. Vediamo chi è stato.']]);
+        await VG.say([['crocco', 'Aspetta… in fondo è spuntata una pagina nuova.'], ['crocco', 'Manca una foto! E al suo posto c\'è un biglietto…'], ['crocco', 'Toccalo. Vediamo chi è stato.']]);
         const fr2 = extra.querySelector('.ex-frame');
         if (sess === A.sess && fr2 && fr2.isConnected && !save.villainMet) { fr2.scrollIntoView({ block: 'center' }); await spotlightTap(fr2, 'Tocca il biglietto'); fr2.onclick(); }
       }, 350);
@@ -5677,7 +5772,7 @@ const HR_DATA = (() => {
     guy.classList.add('in'); await wait(VG.REDUCED ? 50 : 700);
     walking = false; drawGuy();
     // his lines go in the normal dialog box at the top (portrait and name), still and easy to read; he stays on stage
-    VG.SPEAKERS.pest = VG.SPEAKERS.pest || { name: PEST.name, col: '#c9bfe0', look: PEST.look };
+    VG.SPEAKERS.pest = VG.SPEAKERS.pest || { name: PEST.name, col: '#ff6b57', look: PEST.look };
     byId('pest-sr').textContent = '';
     stage.onpointerdown = e => { if (e.target.closest('#dialog')) return; e.preventDefault(); VG.Dialog.advance(); }; // a tap anywhere goes on, as before
     await VG.say(lines.map(l => ['pest', l]));
@@ -5706,7 +5801,7 @@ const HR_DATA = (() => {
   async function meetVillain() {
     hideOv(); G.mode = 'board';
     await villainSays(PEST.steal);
-    await VG.say([['falcon', 'Ridacci la nostra foto!'], ['crocco', 'Sfida accettata.']]);
+    await VG.say([['crocco', 'Ridacci la nostra foto!'], ['pest', 'Sfida accettata.']]);
     save.villainMet = true; persist(); checkMissions();
     showChallenges();
   }
@@ -5719,7 +5814,7 @@ const HR_DATA = (() => {
   // the four golden salamini, top right: grey until found, gold once found (with a shine the first time it is seen gold)
   function salamiRow() {
     const box = el('span', 'sal-row'); box.setAttribute('role', 'img');
-    const n = LEVELS.filter(L => save.gold[L.id]).length; box.setAttribute('aria-label', `Salamini d'oro: ${n} su ${LEVELS.length}`);
+    const n = LEVELS.filter(L => save.gold[L.id]).length; box.setAttribute('aria-label', TXT.t(`{Cibi} d'oro: ${n} su ${LEVELS.length}`));
     save.goldSeen = save.goldSeen || {}; let fresh = false;
     LEVELS.forEach(L => {
       const got = !!save.gold[L.id], cv = pxCanvas(12, 5, c => c.drawImage(salamiIcon(got ? 'gold' : 'grey'), 0, 0));
@@ -5926,6 +6021,7 @@ const HR_DATA = (() => {
     const sx0 = 3 * TILE;
     Object.assign(P, { x: sx0, y: surfaceBelow(sx0, 0) || 160, vx: 0, vy: 0, ground: true, jumps: 0, coyote: 0, buffer: 0, cut: false, inv: 0, hp: 3, speedG: 0, shoes: 0, magnet: 0, shield: false, safeX: sx0, finished: false, anim: 0, combo: 0, slide: 0, pound: false, bump: null });
     G.runHurt = false; G.hurtLog = [];
+    G.lamps = null; G.party = null; G.partyX = 0; G.lastMeters = null; G.vanFlee = null; G.happy = null;
     G.proj = []; G.cardFly = []; P.glow = 0; G.tug = 0; G.freeing = false; G.clockTxt = null; G.whiteT = 0; G.parts = []; G.floats = []; G.rain = []; G.coinFly = []; G.bubble = null; G.celebrate = 0; G.shake = 0; G.camY = 0; G.cpAnim = 0; G.finShift = false; G.kidnap = null; G.phoneUp = false; G.freed = false; G.monocle = null; G.vaLine = null; G.cheer = null; G.happy = null; G.countT = 0; G.t = 0; G.hitstop = 0; G.coinPop = 0; G.lastCoins = 0;
     G.flashT = 0; G.warnL = 0; G.banner = null; G.bossCardT = 0; G.bossPop = 0; G.bossDone = false; G.bossMode = false; G.swipeHint = null; G.lastHint = null; G.hpPop = 0; G.tkPop = 0;
     G.cam = Math.max(0, camX(P.x));
@@ -6311,7 +6407,7 @@ const HR_DATA = (() => {
     train: ['..kkkkkkkkkkkkkkkkkkkk..', '.kRRRRRRRRRRRRRRRRRRRRk.', '.kRbbRbbRbbRbbRbbRRbbRk.', '.kRbbRbbRbbRbbRbbRRbbRk.', '.kwwwwwwwwwwwwwwwwwwwwk.', '.kRRRRRRRRRRRRRRRRRRRRk.', '..kkkkkkkkkkkkkkkkkkkk..', '...kgk..kgk....kgk..kgk.', '....k....k......k....k..']
   };
   const VEH_COL = { k: '#2a1a2e', w: '#fff6e0', b: '#5b8fd6', B: '#3a6fc0', R: '#e8433a', g: '#7a7f8c' };
-  const TRIP = [null, 'boat', 'plane', 'train']; // Santorini → Ios by ferry, Ios → Berlino by plane, Berlino → Vienna by train
+  const TRIP = LEVELS.map((L, i) => i ? ((O.tappe[i] || {}).viaggio || [null, 'boat', 'plane', 'train'][i]) : null); // how you get to each stage: from the order (Claude chooses it from the places)
   function vehicleCanvas(kind) { const rows = VEH[kind]; return pxCanvas(rows[0].length, rows.length, c => rows.forEach((r, y) => [...r].forEach((ch, x) => { if (VEH_COL[ch]) R(c, x, y, 1, 1, VEH_COL[ch]); }))); }
   function travelStrip(i) {
     const from = LEVELS[i - 1], to = LEVELS[i], kind = TRIP[i] || 'train';
@@ -6350,7 +6446,7 @@ const HR_DATA = (() => {
         await new Promise(r => { let last = performance.now(); const tick = now => { const dt = Math.min(0.05, (now - last) / 1000); last = now; P.x = Math.min(x0, P.x + 120 * dt); P.anim += dt * 10; if (P.x < x0 && myRun === G.runId) requestAnimationFrame(tick); else r(); }; requestAnimationFrame(tick); });
         P.vx = 0;
         if (myRun !== G.runId) return;
-        await VG.say([['falcon', 'Eccomi a Santorini… ma quanto ho corso?']]);
+        await VG.say([['falcon', 'Eccomi a {luogo1}… ma quanto ho corso?']]);
       }
       await VG.say(L.intro);
       save.seenIntro = save.seenIntro || {}; save.seenIntro[L.id] = true; persist();
@@ -6404,12 +6500,12 @@ const HR_DATA = (() => {
       if (runId !== G.runId || G.mode !== 'over') return;
       // always the same window: El Falcon knocked about, a title that changes, one line, the same buttons
       const p = el('div', 'panel lose');
-      const title = kind === 'fell' ? (G.th.water ? 'Splash!' : 'Che volo!') : 'Bloccata in ufficio';
-      const why = kind === 'fell' ? 'Sei caduta.' : 'I Consulenti Grigi ti hanno riportata alla scrivania.';
+      const title = kind === 'fell' ? (G.th.water ? 'Splash!' : 'Che volo!') : 'Che peccato!';
+      const why = kind === 'fell' ? 'Occhio ai buchi.' : TXT.t('Stavolta hanno vinto {scagnozzi}.');
       p.innerHTML = `<div class="lose-top"><span class="lose-pic"></span><div><h2>${title}</h2><p class="sub">${why}</p></div></div>`;
       const pic = falconPose('hurt'), pc = pxCanvas(pic.width, pic.height, c2 => c2.drawImage(pic, 0, 0)); p.querySelector('.lose-pic').appendChild(pc);
       const r = el('div', 'row lose-row');
-      r.appendChild(mkBtn(G.cpReached ? 'Riparti dall\'aperitivo ›' : 'Riparti ›', 'primary', () => go(G.li, G.cpReached)));
+      r.appendChild(mkBtn(G.cpReached ? 'Riparti dal checkpoint ›' : 'Riparti ›', 'primary', () => go(G.li, G.cpReached)));
       if (G.cpReached) r.appendChild(mkBtn('Ricomincia la tappa', '', () => go(G.li)));
       r.appendChild(mkBtn('Tappe', 'ghost', openTappe));
       p.appendChild(r); showOv(p);
@@ -6417,6 +6513,65 @@ const HR_DATA = (() => {
       const first = p.querySelector('.btn.primary'); if (first) first.focus({ preventScroll: true });
     }, 750);
   }
+  // ---- the last meters together: a stretch of flat road with street lamps, B behind her; at its end the party
+  function lastMeters() {
+    return new Promise(res => {
+      const n = 46, gy = G.grid.length;
+      for (let r = 0; r < gy; r++) for (let i = 0; i < n; i++) G.grid[r].push(r >= gy - 2 ? '#' : '.');
+      G.W += n;
+      G.enemies = []; G.proj = []; G.boss = null;
+      G.buddy = { trail: [], cj: { y: 0, vy: 0 }, d: BUDDY_D };
+      G.lamps = []; for (let i = 1; i <= 5; i++) G.lamps.push({ x: P.x + 40 + i * 6 * TILE, t: 0 });
+      G.partyX = P.x + 38 * TILE; G.finish = G.partyX; G.lastMeters = res;
+      P.finished = false; G.mode = 'run';
+      G.banner = { title: 'Ultimi metri: insieme!', sub: '', t: 2.4, col: '#ffd84a' }; Audio.play('adventure');
+    });
+  }
+  // the party: the big words of the occasion, its things, confetti and fireworks
+  const FESTA = { birthday: 'Buon compleanno, {dest}!', anniversary: 'Buon anniversario, {dest}!', love: 'Buon San Valentino, {dest}!', christmas: 'Buon Natale, {dest}!', graduation: 'Congratulazioni, {dest}!' };
+  async function party() {
+    const occ = O.occasione, runId = G.runId;
+    const txt = TXT.t(FESTA[occ] || (O.festa ? O.festa : (TXT.entrambi ? 'Questa è per voi, {dest}!' : 'Questa è per te, {dest}!')));
+    G.party = { t: 0, occ, x: P.x + 52 }; G.celebrate = 0.01; Audio.sfx('ticket');
+    Audio.play(occ === 'birthday' ? 'auguri' : 'festa');
+    conf = VG.confetti(110, st.VW, st.VH); fireworks = 1; G.shake = 0.15;
+    for (let i = 0; i < 3; i++) setTimeout(() => fwBurst(rnd(st.VW * 0.2, st.VW * 0.9), rnd(st.VH * 0.1, st.VH * 0.35)), 300 + i * 260);
+    await wait(500); if (runId !== G.runId) return;
+    G.happy = { t: 0, txt };
+    await wait(3600);
+  }
+  // the things of each party, drawn beside the two at the end of the road
+  function drawParty(c, oy) {
+    const p = G.party; p.t += 1 / 60; const X = sx(p.x), gy = oy + 160, t = p.t, k = '#1a1024';
+    if (p.occ === 'anniversary' || p.occ === 'love') {
+      c.globalAlpha = 0.22; R(c, 0, 0, st.VW, st.VH, '#ff9a6b'); c.globalAlpha = 1;
+      // a bench and a heart of little lights over the two
+      R(c, X - 16, gy - 10, 32, 3, '#c0703a'); R(c, X - 14, gy - 7, 2, 7, '#3a3a48'); R(c, X + 12, gy - 7, 2, 7, '#3a3a48');
+      const cx = sx(P.x) - 10, cy = gy - 52; for (let i = 0; i < 24; i++) { const a = i / 24 * Math.PI * 2, hx = 16 * Math.pow(Math.sin(a), 3), hy = -(13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a)); if (i / 24 < t * 1.2) R(c, Math.round(cx + hx * 0.9), Math.round(cy + hy * 0.9), 2, 2, (i + Math.floor(t * 6)) % 3 ? '#ffd84a' : '#ff8fa3'); }
+    } else if (p.occ === 'christmas') {
+      // the tree lights up, the snow falls
+      for (let l = 0; l < 4; l++) { const w = 8 + l * 6; R(c, X - w, gy - 46 + l * 10, w * 2, 11, k); R(c, X - w + 1, gy - 45 + l * 10, w * 2 - 2, 9, '#2f8a4a'); }
+      R(c, X - 3, gy - 6, 6, 6, '#6b4a2e'); R(c, X - 2, gy - 52, 4, 5, '#ffd84a');
+      for (let i = 0; i < 14; i++) { const on = t > 0.3 + i * 0.08 && (Math.floor(t * 3) + i) % 2; R(c, X - 14 + (i * 7) % 28, gy - 40 + Math.floor(i / 4) * 9, 2, 2, on ? ['#ffd84a', '#ff6b57', '#7cc6e8'][i % 3] : '#1f5a32'); }
+      for (let i = 0; i < 40; i++) R(c, (i * 37 + Math.floor(t * 30)) % st.VW, (t * 30 + i * 23) % st.VH, 1, 1, '#ffffff');
+    } else if (p.occ === 'graduation') {
+      // two mortarboards thrown up, again and again
+      for (let i = 0; i < 2; i++) { const u = (t * 0.8 + i * 0.5) % 1.4, y = gy - 30 - Math.sin(Math.min(1, u / 1.2) * Math.PI) * 50, x = X - 20 + i * 24; R(c, x - 6, y, 12, 3, k); R(c, x - 3, y + 3, 6, 3, k); R(c, x + 5, y + 1, 1, 6, '#ffd84a'); }
+    } else if (p.occ === 'birthday') {
+      // the table with the cake: the candles light up one by one; balloons go up
+      R(c, X - 18, gy - 14, 36, 3, k); R(c, X - 17, gy - 13, 34, 2, '#e9d8b4'); R(c, X - 15, gy - 11, 2, 11, '#6b4a2e'); R(c, X + 13, gy - 11, 2, 11, '#6b4a2e');
+      R(c, X - 10, gy - 24, 20, 10, k); R(c, X - 9, gy - 23, 18, 8, '#f2a3b0'); R(c, X - 9, gy - 23, 18, 2, '#fff6e0');
+      for (let i = 0; i < 4; i++) { R(c, X - 6 + i * 4, gy - 29, 1, 5, '#7cc6e8'); if (t > 0.3 + i * 0.25) R(c, X - 6 + i * 4, gy - 31 - (Math.floor(t * 8 + i) % 2), 1, 2, '#ffd84a'); }
+      for (let i = 0; i < 3; i++) { const by = gy - 40 - ((t * 14 + i * 20) % 60), bx = X + 22 + i * 9; c.fillStyle = ['#ff6b57', '#ffd84a', '#7cc6e8'][i]; c.beginPath(); c.ellipse(bx, by, 4, 5, 0, 0, 7); c.fill(); R(c, bx, by + 5, 1, 8, '#fff6e0'); }
+    } else {
+      // a toast: two glasses clinking
+      const j = Math.round(Math.abs(Math.sin(t * 3)) * 2);
+      c.drawImage(VG.item('cocktail'), X - 10 + j, gy - 30); c.drawImage(VG.item('cocktail'), X + 2 - j, gy - 30);
+      R(c, X - 14, gy - 14, 28, 3, k); R(c, X - 13, gy - 13, 26, 2, '#e9d8b4'); R(c, X - 1, gy - 11, 2, 11, '#6b4a2e');
+    }
+  }
+  // the street lamps of the last meters: they light up as she passes
+  function drawLamps(c, oy) { for (const l of G.lamps) { const on = P.x > l.x - 6; if (on && !l.t) { l.t = 0.001; Audio.sfx('pick'); } if (l.t) l.t += 1 / 60; drawLamp(c, sx(l.x), oy + 160, on, l.t); } }
   async function finishLevel() {
     const p = P, L = G.L;
     p.finished = true; G.mode = 'done'; byId('b-pause').hidden = true; const runId = G.runId;
@@ -6464,13 +6619,15 @@ const HR_DATA = (() => {
       setTimeout(() => { if (runId === G.runId) Audio.sfx('door'); }, 1250);                    // the side door slides open
       await wait(3000); if (runId !== G.runId) return;
       byId('app').classList.add('at-finish');
-      await VG.say(L.outro); if (runId !== G.runId) return;
+      await VG.say(L.outro); if (runId !== G.runId) return; // the boss: «Vediamo se corri ancora, senza {b}…»
       G.kidnap.ph = 'take'; G.kidnap.t = 0; Audio.sfx('swing');
       setTimeout(() => { if (runId === G.runId) { Audio.sfx('block'); G.shake = 0.1; } }, 1400); // the door slams
       setTimeout(() => { if (runId === G.runId) Audio.sfx('dash'); }, 1650);                     // and off they go
-      await wait(2900); if (runId !== G.runId) return;
+      await wait(1700); if (runId !== G.runId) return;
+      await VG.say([['crocco', '{A}! Continua a riempire l\'Album!'], ['falcon', '{B}!']]); if (runId !== G.runId) return; // while the van drives off
+      await wait(600); if (runId !== G.runId) return;
     } else if (L.n === 4) {
-      // she frees him: «Aspetta, ti libero!», three pulls on the rope (the chair shakes), it snaps
+      // A frees B: «Aspetta, ti libero!», three pulls on the rope (the chair shakes), it snaps
       G.freeing = true; Audio.play('tension');
       await VG.say([['falcon', 'Aspetta, ti libero!']]); if (runId !== G.runId) return;
       for (let i = 0; i < 3; i++) { G.tug = 0.22; G.shake = 0.07; Audio.sfx('tap'); await wait(340); if (runId !== G.runId) return; }
@@ -6478,21 +6635,12 @@ const HR_DATA = (() => {
       for (let i = 0; i < 18; i++) G.parts.push({ x: G.croccoX + rnd(-8, 8), y: G.croccoY - 14, vx: rnd(-80, 80), vy: rnd(-150, -50), life: 0.8, c: '#c8a24a', s: 1 });
       await wait(450); if (runId !== G.runId) return;
       G.celebrate = 0.01; Audio.sfx('ticket');
-      await VG.say([['crocco', 'Lo sapevo che arrivavi.'], ['crocco', 'Senti le campane del Duomo? Manca pochissimo a mezzanotte!'], ['falcon', 'Il conto alla rovescia, insieme!']]); if (runId !== G.runId) return;
-      // midnight: the clock in the bar counts the last seconds, 3 2 1 big golden numbers in the middle (each one pops,
-      // with a ring of light and a bell) and the two of them shout it; then BUON ANNO! and the fireworks
-      for (const n of [3, 2, 1]) { G.clockTxt = '23:59:5' + (10 - n); G.count = String(n); G.countT = 0; G.cheer = { txt: ['', 'Uno!', 'Due!', 'Tre!'][n], t: 0 }; Audio.sfx('bell'); G.shake = 0.06; await wait(950); if (runId !== G.runId) return; }
-      G.count = null; G.clockTxt = null; G.cheer = null; G.happy = { t: 0 };
-      Audio.play('valzer'); fireworks = 1; conf = VG.confetti(110, st.VW, st.VH); G.shake = 0.2;
-      for (let i = 0; i < 4; i++) setTimeout(() => fwBurst(rnd(st.VW * 0.2, st.VW * 0.9), rnd(st.VH * 0.1, st.VH * 0.4)), i * 220);
-      for (let i = 0; i < 4; i++) setTimeout(() => Audio.sfx('bell'), 200 + i * 900);
-      await wait(1400); if (runId !== G.runId) return;
+      await VG.say([['crocco', 'Lo sapevo che arrivavi.'], ['falcon', 'Andiamo, {b}: completiamo questo viaggio insieme.']]); if (runId !== G.runId) return;
+      // the last meters, played: B runs right behind; the street lamps light up as they pass
+      await lastMeters(); if (runId !== G.runId) return;
+      // the party of the occasion, where the road ends
+      await party(); if (runId !== G.runId) return;
       byId('app').classList.add('at-finish');
-      // the Album is always full here (each mini-boss gives his three memories before the finish line comes): the stage
-      // summary, with one button, «Completa l'Album»; the Album fills, it is leafed through, the letter is on its last page
-      await wait(800); if (runId !== G.runId) return;
-      await VG.say([['falcon', 'Buon anno, Crocco.'], ['crocco', 'Ce l\'hai fatta. E l\'Album è pieno… apriamolo insieme.']]); if (runId !== G.runId) return;
-      G.happy = null;
     } else {
       G.celebrate = 0.01; Audio.sfx('ticket');
       conf = VG.confetti(90, st.VW, st.VH);
@@ -6640,104 +6788,88 @@ const HR_DATA = (() => {
     }
     return { close, shut, open, get shutNow() { return state === 'shut'; } };
   })();
-  // ---------------------------------------------------------------- the animated introduction
-  // 29 December, the grey office. El Falcon at her desk, in the middle of the screen; three Consulenti Grigi drop work
-  // on her, from the right and from the left, and she turns to each of them; a fourth brings the internal mail from the
-  // left: a parcel. «Un pacco per me?…»; she opens it and the Album rises out of it turning once, then stays closed,
-  // its cover glowing, while Il Crocco's note is read. A pause; «Il report può aspettare»; she runs down the corridor
-  // and out of the door, into the colours. The camera follows her until the office has gone off the left edge; a bang
-  // off screen, and the Consulenti come in from the left already running, faster than her, shouting office things.
-  // The circle closes; «Run to You» as on the home; «Tappa 1 · Santorini».
-  // The lines go in the dialog box, as in the other games; the shouts are short words over their heads.
-  VG.SPEAKERS.grigio = { name: 'Consulente Grigio', col: '#c9bfe0', look: 'grigio' };
-  VG.SPEAKERS.va = { name: 'Dott. Valore Aggiunto', col: '#ff6b57', look: 'vaBoss' };
+  // ---------------------------------------------------------------- the animated introduction (standard, phase 2)
+  // A grey morning, rain. A line of grey people walks the same street at the same pace; A is one of them, nearly grey too.
+  // The henchmen walk beside the line and keep the pace with their three shouts (made to measure). «Ogni giorno uguale.»
+  // On the seat of a coloured bench, the only coloured thing: a parcel. A steps out of the line and, picking it up, gets
+  // the colours back. «Un pacco… per me?» Inside, the Album dei ricordi and a letter «Per {a}», which B reads. The line
+  // goes on without A; someone looks up and catches a little colour. The boss (in full colour) blocks the street, with
+  // its tag; the pile of boring things is already there. «Dove credi di andare?…» «Allora guardami.» A jumps on a henchman,
+  // leaps over the pile and the boss, lands beyond them and runs: under the feet the colour lights up and spreads ahead;
+  // the grey stays behind with the boss. «Fermate quella corsa, prima che diventi una moda!» In the coloured street the
+  // henchmen get their colours as they come in; «Run to You» big in the middle; the circle closes on «Tappa 1 · {luogo1}».
+  // The lines go in the dialog box; the shouts are yellow words over the henchmen's heads.
   const INTRO_KEY = SAVE_KEY + '_intro_seen';
-  const PHASES = ['work', 'c1', 'c2', 'c3', 'sigh', 'mail', 'parcel', 'reveal', 'album', 'albumClose', 'think', 'stand', 'escape', 'out', 'title'];
-  const SHOUTS = ['Dobbiamo creare valore!', 'Torna alla scrivania!', 'La call inizia tra cinque minuti!', 'Chi firma il report?!'];
-  // the shape of the scene in game pixels (W = st.VW), shared by the timing and the drawing
-  const IN = {
-    FROM_LEFT: { c2: true, mail: true },        // c1 and c3 come from the right, c2 and the mail from the left
-    RUN: 175, OUT_RUN: 120, CHASE: 130, EXIT: 190, GAP: 0.8, SHOUT: 2.1, LEAD: 0.25,
-    deskX: W => Math.round(W * 0.5), doorX: W => Math.round(W * 2.1), pileX: W => Math.round(W * 1.15),
-    stop: (W, left) => Math.round(W * 0.5) + (left ? -68 : 44),
-    // seconds from the door until the office has gone off the left edge (then the camera stops)
-    outF: W => (30 + W * 0.5) / 120,
-  };
-  IN.burst = IN.LEAD + 3 * IN.GAP + IN.SHOUT + 0.2;   // after the camera stops: the four of them, each shout read in full
+  const SHOUTS = [TXT.PEZZI.grido1, TXT.PEZZI.grido2, TXT.PEZZI.grido3].filter(Boolean); // the three shouts made to measure
+  const SCL = (O.scagnozzi || {}).divisa || 'grigio';
+  // a sprite turned grey (mix 1 = all grey), keeping one colour (the boss's colour on the henchmen): pixel by pixel, once
+  const GREY_CACHE = {};
+  function greyed(img, mix = 1, keep = null, key = '') {
+    const id = key + '|' + mix + '|' + keep; if (key && GREY_CACHE[id]) return GREY_CACHE[id];
+    const o = document.createElement('canvas'); o.width = img.width; o.height = img.height; const g = o.getContext('2d'); g.drawImage(img, 0, 0);
+    const d = g.getImageData(0, 0, o.width, o.height), p = d.data;
+    const kr = keep ? parseInt(keep.slice(1, 3), 16) : -1, kg = keep ? parseInt(keep.slice(3, 5), 16) : -1, kb = keep ? parseInt(keep.slice(5, 7), 16) : -1;
+    for (let i = 0; i < p.length; i += 4) {
+      if (!p[i + 3]) continue;
+      if (keep && Math.abs(p[i] - kr) < 6 && Math.abs(p[i + 1] - kg) < 6 && Math.abs(p[i + 2] - kb) < 6) continue;
+      const l = 0.3 * p[i] + 0.59 * p[i + 1] + 0.11 * p[i + 2], m = mix;
+      p[i] = p[i] + (l - p[i]) * m; p[i + 1] = p[i + 1] + (l - p[i + 1]) * m; p[i + 2] = p[i + 2] + (l - p[i + 2]) * m;
+    }
+    g.putImageData(d, 0, 0); if (key) GREY_CACHE[id] = o; return o;
+  }
+  const CROWD = ['ragazzo', 'turista', 'barista', 'lina', 'ragazza', 'revisore', 'pescatore', 'salim'].filter(k => LOOKS[k]);
   function playIntro() {
     return new Promise(async res => {
       hideOv(); byId('title').hidden = true; byId('b-pause').hidden = true;
-      G.mode = 'intro'; const I = G.intro = { t: 0, ph: 'work', pt: 0, sub: '', st: 0, grey: 0.85, beats: {}, skipped: false, pile: 4, pileL: 0 };
-      Iris.shut('Ufficio, 29 dicembre');
+      G.mode = 'intro'; const I = G.intro = { t: 0, ph: 'line', pt: 0, beats: {}, skipped: false, scroll: 0, aGrey: 0.65, card: false };
+      Iris.shut('');
       Audio.play('hub');
       let skip = null, ended = false;
       const finish = () => {
-        if (ended) return; ended = true; if (skip) skip.remove();
+        if (ended) return; ended = true; if (skip) skip.remove(); introAlbum(null); const bc = byId('boss-card'); if (bc) bc.remove();
         try { localStorage.setItem(INTRO_KEY, '1'); } catch (e) {}
         save.introPlayed = true; save.introSeen = true; persist(); res();
       };
       { // «Salta ›» is always there, also the first time
         skip = el('button', 'chip intro-skip', 'Salta ›'); skip.type = 'button';
-        skip.onclick = async e => { e.stopPropagation(); if (I.skipped) return; I.skipped = true; for (let i = 0; i < 30 && VG.Dialog.open; i++) VG.Dialog.advance(); await Iris.close('Santorini', 'Tappa 1'); finish(); };
+        skip.onclick = async e => { e.stopPropagation(); if (I.skipped) return; I.skipped = true; for (let i = 0; i < 30 && VG.Dialog.open; i++) VG.Dialog.advance(); await Iris.close(TXT.V.luogo1, 'Tappa 1'); finish(); };
         byId('app').appendChild(skip);
       }
-      const step = async (ph, ms, sub = '') => { if (I.skipped) return; I.ph = ph; I.pt = 0; I.sub = sub; I.st = 0; await wait(ms); };
-      const sub = async (s, ms) => { if (I.skipped) return; I.sub = s; I.st = 0; await wait(ms); };
+      const step = async (ph, ms) => { if (I.skipped) return; I.ph = ph; I.pt = 0; await wait(ms); };
       const say = async lines => { if (!I.skipped) await VG.say(lines); };
-      // the time a Consulente needs to walk off the screen, on his side
-      const exitMs = left => { const W = st.VW, s = IN.stop(W, left); return Math.round((left ? s + 24 : W + 24 - s) / IN.EXIT * 1000); };
-      // a Consulente comes in, drops something on her desk (or on the floor, from the left: the desk is full), says it, goes
-      const visit = async (ph, line, gives) => {
-        const left = !!IN.FROM_LEFT[ph];
-        await step(ph, 1450, 'in'); if (I.skipped) return;
-        if (gives) { if (left) I.pileL += gives; else I.pile += gives; Audio.sfx('block'); G.shake = 0.08; }
-        await sub('stand', 250); await say([['grigio', line]]); await sub('out', exitMs(left));
-      };
-      await wait(1300); if (I.skipped) return;
+      await wait(600); if (I.skipped) return;
       Iris.open();
-      await step('work', 2600);
-      await visit('c1', 'Il report entro il 31. Niente ferie, quest\'anno.', 4);
-      await visit('c2', 'Riunione alle sei. E alle sette, per preparare quella delle otto.', 3);
-      await visit('c3', 'Nuovo task assegnato: creare valore. Scadenza: ieri.', 4);
-      await step('sigh', 1700);
-      // the internal mail, from the left
-      await visit('mail', 'Posta per lei.', 0);
-      // the parcel on her desk: who is it from?
-      await step('parcel', 500);
-      await say([['falcon', 'Un pacco per me?… Non sarà mica da parte della mia Crocchetta?']]);
-      if (I.skipped) return; I.sub = 'open'; I.st = 0;
-      await say([['falcon', 'Ora lo apro!']]);
-      await step('reveal', 3600);
-      await step('album', 500);
-      await say([['crocco', 'Falcotto, ti ho organizzato un viaggio. Perché non scappi dall\'ufficio e mi raggiungi a Santorini? Ti aspetto al tramonto, sotto il mulino di Oia.'],
-        ['crocco', 'Da lì ci facciamo i nostri viaggettini, insieme.'],
-        ['crocco', 'Lungo la strada qualcuno proverà a fermarti: saltagli in testa e ti ridarà i nostri ricordi. Attaccali all\'Album: nell\'ultima pagina ti ho lasciato una cosa, ma è una sorpresa per dopo.']]);
-      await step('albumClose', 500);
-      await say([['falcon', 'E il report?']]);
-      await step('think', 2600);
-      await say([['falcon', 'Il report può aspettare.']]);
-      await step('stand', 700);
+      await step('line', 5200);                                    // the line, the three shouts
+      await say([['falcon', 'Ogni giorno uguale.']]);
+      await step('parcel', 2300);                                  // the parcel on the bench: A steps out and takes it
+      await say([['falcon', 'Un pacco… per me?']]);
+      await step('open', 900);                                     // the Album and the letter
+      await say([['crocco', '{a}, le giornate grigie possono aspettare. Ti aspetto a {luogo1}.'],
+        ['crocco', 'Per strada ti ho lasciato un po\' di {cibi}. E nell\'ultima pagina dell\'Album c\'è una sorpresa. Ma è per dopo.']]);
+      await step('boss', 2500);                                    // the boss blocks the street, its tag drops and goes
+      await say([['boss', 'Dove credi di andare? Le tue giornate sono mie. [ingresso] Da qui non si scappa.'], ['falcon', 'Allora guardami.']]);
       if (I.skipped) return;
       Audio.sfx('dash'); Audio.play('adventure');
-      { const W = st.VW; await step('escape', Math.round((IN.doorX(W) + 14 - IN.deskX(W)) / IN.RUN * 1000) + 120); }
-      await step('out', Math.round((IN.outF(st.VW) + IN.burst) * 1000));
+      await step('escape', 2300);                                  // the jump, the leap, the colour
+      say([['boss', 'Fermate quella corsa, prima che diventi una moda!']]);
+      await wait(2400); if (I.skipped) return;
+      for (let i = 0; i < 30 && VG.Dialog.open; i++) VG.Dialog.advance();
+      await step('title', 3600);                                   // the coloured street, «Run to You»
       if (I.skipped) return;
-      await Iris.close('<span class="iris-logo"><small>El Falcon &amp; Il Crocco</small><b>Run to You</b></span>');
-      await wait(2600); if (I.skipped) return;
-      await Iris.close('Santorini', 'Tappa 1');
-      await wait(1300);
+      await Iris.close(TXT.V.luogo1, 'Tappa 1');
+      await wait(1500);
       finish();
     });
   }
   function wrapText(txt, n) { const out = []; let line = ''; for (const w of txt.split(' ')) { if ((line + ' ' + w).trim().length > n) { out.push(line.trim()); line = w; } else line += ' ' + w; } if (line.trim()) out.push(line.trim()); return out; }
   const ease = k => k < 0 ? 0 : k > 1 ? 1 : 1 - Math.pow(1 - k, 3);
-  // the intro's Album: an HTML copy of the finished Album's cover, placed over the canvas in game pixels
+  // the intro's Album: an HTML copy of the Album's cover (the same as Memory Lane's), placed over the canvas in game pixels
   let introAlbumEl = null;
   function introAlbum(g) {
     if (!g) { if (introAlbumEl) introAlbumEl.hidden = true; return; }
     if (!introAlbumEl) {
       introAlbumEl = el('div', 'ia'); introAlbumEl.setAttribute('aria-hidden', 'true');
-      introAlbumEl.innerHTML = '<div class="ab-cover ia-cover"><canvas class="ab-emb" width="18" height="16"></canvas><b>L\'Album</b><span class="ab-n">dei viaggettini</span><span class="ab-shine"></span></div><span class="ia-back"></span><span class="ab-rib"></span>';
+      introAlbumEl.innerHTML = '<div class="ab-cover ia-cover"><canvas class="ab-emb" width="18" height="16"></canvas><b>L\'Album</b><span class="ab-n">dei ricordi</span><span class="ab-shine"></span></div><span class="ia-back"></span><span class="ab-rib"></span>';
       const e = introAlbumEl.querySelector('.ab-emb').getContext('2d'); e.imageSmoothingEnabled = false; e.drawImage(VG.item('heart'), 5, 3);
       byId('app').appendChild(introAlbumEl);
     }
@@ -6747,148 +6879,133 @@ const HR_DATA = (() => {
     E.style.setProperty('--w', (g.w * k * 2) + 'px');
     E.classList.toggle('back', g.flip < 0); E.classList.toggle('shining', !!g.shine);
   }
+  // the boss's tag in the intro: the same paper tag of the stages, with the name and the line under it (no hearts)
+  function introBossCard(show) {
+    const old = byId('boss-card');
+    if (!show) { if (old) { old.classList.add('out'); setTimeout(() => old.remove(), 450); } return; }
+    if (old) old.remove();
+    const card = el('div', 'boss-card intro'); card.id = 'boss-card'; card.setAttribute('role', 'status');
+    card.innerHTML = `<div class="bc-tag"><span class="bc-por"></span><span class="bc-txt"><b>${TXT.V.boss}</b><span class="bc-hint">${TXT.PEZZI.sottotitolo}</span></span></div>`;
+    const cv = document.createElement('canvas'); cv.className = 'px'; VG.portrait(cv, humanoidSprite(BOSS.look, LOOKS[BOSS.look]).left); card.querySelector('.bc-por').appendChild(cv);
+    app.appendChild(card); setTimeout(() => Audio.sfx('block'), VG.REDUCED ? 0 : 420);
+  }
+  // the street: buildings, windows, pavement, road; grey or in colour (the same layout, so the colour can take over)
+  const ST_COL = ['#4f8fd6', '#f2c94c', '#e07a5f', '#7cc6a8', '#c77dd6', '#f4a261', '#5cb85c', '#e9796f', '#7cc6e8'];
+  function drawStreet(c, W, H, gy, off, colour) {
+    if (colour) { const s = c.createLinearGradient(0, 0, 0, gy); s.addColorStop(0, '#ff9a6b'); s.addColorStop(1, '#ffd59a'); c.fillStyle = s; c.fillRect(0, 0, W, gy); }
+    else { const s = c.createLinearGradient(0, 0, 0, gy); s.addColorStop(0, '#7b7f8a'); s.addColorStop(1, '#a3a6ae'); c.fillStyle = s; c.fillRect(0, 0, W, gy); }
+    const bw = 30, n = Math.ceil(W / bw) + 2, o = ((off % bw) + bw) % bw, i0 = Math.floor(off / bw);
+    for (let j = -1; j < n; j++) {
+      const idx = i0 + j, bx = Math.round(j * bw - o), h = 26 + ((idx * 37) % 23 + 23) % 23;
+      R(c, bx, gy - 10 - h, bw - 2, h + 10, colour ? ST_COL[((idx % 9) + 9) % 9] : (idx % 2 ? '#6c707b' : '#62666f'));
+      for (let wy = gy - 6 - h; wy < gy - 16; wy += 7) for (let wx = bx + 4; wx < bx + bw - 6; wx += 6) R(c, wx, wy, 3, 4, colour ? '#fff3c4' : '#868a94');
+    }
+    R(c, 0, gy - 10, W, 10, colour ? '#e9d8b4' : '#8b8e96'); R(c, 0, gy, W, H - gy, colour ? '#c9a27a' : '#55585f');
+    for (let x = -(((off * 1.2) % 14) + 14) % 14; x < W; x += 14) R(c, Math.round(x), gy + 9, 7, 1, colour ? '#b08860' : '#6a6d74');
+  }
   function drawIntro(c, dt) {
-    const I = G.intro; I.t += dt; I.pt += dt; I.st += dt; const t = I.t, pt = I.pt, ph = I.ph, W = st.VW, H = st.VH, gy = H - 22;
+    const I = G.intro; I.t += dt; I.pt += dt; const t = I.t, pt = I.pt, ph = I.ph, W = st.VW, H = st.VH, gy = H - 20;
     const beat = (name, fn) => { if (!I.beats[name]) { I.beats[name] = true; fn(); } };
     const big = (img, x, y, k = 2) => c.drawImage(img, Math.round(x - img.width * k / 2), Math.round(y - img.height * k), img.width * k, img.height * k);
-    const after = p => PHASES.indexOf(ph) >= PHASES.indexOf(p);
-    const deskX = IN.deskX(W), doorX = IN.doorX(W), pileX = IN.pileX(W), outF = IN.outF(W);
-    // her run down the corridor, with a jump over a pile of files, and out of the door
-    let fx = deskX, fy = 0;
-    if (ph === 'escape') { const d = Math.min(pt * IN.RUN, doorX + 14 - deskX); fx = deskX + d; const jx = pileX - 40; if (fx > jx && fx < jx + 80) { fy = -Math.sin((fx - jx) / 80 * Math.PI) * 30; beat('jump', () => Audio.sfx('tap')); } }
-    const outside = ph === 'out', outT = outside ? pt : 0;
-    if (outside) fx = doorX + 14 + outT * IN.OUT_RUN;
-    // the camera keeps her in the middle, from the desk to the street, and stops when the office has gone off the left
-    const cam = ph === 'escape' ? Math.max(0, fx - W * 0.5) : outside ? Math.min(fx - W * 0.5, doorX + 44) : 0;
-    const X = x => Math.round(x - cam);
-    // the colours come back when she is out of the door
-    I.grey = outside ? Math.max(0, 0.85 - outT / 0.6) : 0.85;
-    // ---- the office wall and the corridor; windows with the blinds half down and the rain behind
-    R(c, 0, 0, W, gy, '#7d8394'); R(c, 0, gy - 26, W, 26, '#6b7080'); R(c, 0, gy - 27, W, 1, '#9aa0b4');
-    for (const wx of [14, Math.round(W * 0.74), Math.round(W * 1.25), Math.round(W * 1.72)]) {
-      const x0 = X(wx); if (x0 < -70 || x0 > W + 10) continue;
-      R(c, x0, 16, 64, 46, '#3a3f4c'); R(c, x0 + 2, 18, 60, 42, '#8f9bb0');
-      for (let i = 0; i < 10; i++) { const ry = (t * 80 + i * 19 + wx) % 17; R(c, x0 + 4 + (i * 13 + wx) % 56, 39 + ry, 1, 4, '#c9d2e2'); }
-      for (let y = 18; y < 37; y += 3) R(c, x0 + 2, y, 60, 2, '#d8dce6'); R(c, x0 + 2, 38, 60, 1, '#3a3f4c');   // blinds half down: slats on top, rain below R(c, x0 + 31, 18, 2, 42, '#3a3f4c');
+    const order = ['line', 'parcel', 'open', 'boss', 'escape', 'title'], after = p => order.indexOf(ph) >= order.indexOf(p);
+    const ft = Math.floor(t * 6) % 2, scl = humanoidSprite(SCL, LOOKS[SCL]), acc = (LOOKS[SCL] || {}).accC, bl = humanoidSprite(BOSS.look, LOOKS[BOSS.look]);
+    // the street walks by while they walk (the line goes right), it stops when the bench is in front of A
+    if (ph === 'line') I.scroll = Math.min(I.scroll + dt * 22, 110);
+    const benchX = Math.round(W * 0.5 + 110 - I.scroll), aLineX = Math.round(W * 0.34), pileX = Math.round(W * 0.66);
+    // ---- the title: everything in colour, the run goes on; the henchmen come in from the left and get their colours
+    if (ph === 'title') {
+      I.scroll += dt * 60; drawStreet(c, W, H, gy, I.scroll, true);
+      const ax = Math.round(W * 0.7); big(VG.falcon('right', ['a', 'stand', 'b', 'stand'][Math.floor(t * 12) % 4]), ax, gy + 2);
+      for (let i = 0; i < 3; i++) { const x = Math.round(-30 + pt * 52 - i * 30); if (x < -30) continue; const img = scl[Math.floor(t * 10 + i) % 2 ? 'a' : 'right']; big(x < 20 ? greyed(img, 1, acc, 'sc' + (Math.floor(t * 10 + i) % 2)) : img, x, gy + 4); }
+      const k = ease(clamp((pt - 0.3) / 0.6, 0, 1));
+      st.text('Run to You', W / 2, Math.round(H * 0.42), { size: Math.max(44, 22 * st.SCALE * (0.9 + 0.1 * k)), col: '#fbf6ec', align: 'center', stroke: '#2a1a2e', alpha: k });
+      return;
     }
-    const cx = X(Math.round(W * 0.3)), cy = 28; c.fillStyle = '#2a2d36'; c.beginPath(); c.arc(cx, cy, 11, 0, 7); c.fill(); c.fillStyle = '#f6f2ea'; c.beginPath(); c.arc(cx, cy, 9, 0, 7); c.fill();
-    const a1 = t * 2 * Math.PI / 6, a2 = t * 2 * Math.PI / 60; c.strokeStyle = '#2a2d36'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + Math.sin(a1) * 7, cy - Math.cos(a1) * 7); c.stroke(); c.lineWidth = 2; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + Math.sin(a2) * 5, cy - Math.cos(a2) * 5); c.stroke();
-    if (!after('escape')) { const s = Math.floor(t); if (s !== I.tick) { I.tick = s; Audio.sfx('tap'); } }
-    for (const ox of [W * 0.95, W * 1.55]) { const x0 = X(ox); if (x0 < -60 || x0 > W + 60) continue; R(c, x0 - 30, gy - 26, 60, 4, '#2a1a2e'); R(c, x0 - 29, gy - 25, 58, 3, '#9c6b3e'); R(c, x0 - 27, gy - 22, 4, 22, '#6b4a2e'); R(c, x0 + 23, gy - 22, 4, 22, '#6b4a2e'); R(c, x0 - 20, gy - 38, 16, 12, '#2a2d36'); R(c, x0 - 19, gy - 37, 14, 9, '#4fb3e8'); }
-    { const x0 = X(W * 1.35); R(c, x0 - 5, gy - 34, 10, 14, '#bfe3f2'); R(c, x0 - 6, gy - 20, 12, 20, '#e8e4f0'); R(c, x0 - 6, gy - 20, 12, 1, '#2a1a2e'); }
-    // the street outside (in colour), behind the door: long enough for the whole chase
-    { const x0 = X(doorX + 32); if (x0 < W) { const len = W * 3; R(c, x0, 0, len, gy, '#7cc6e8'); R(c, x0, gy - 40, len, 40, '#f6e3b5'); for (let i = 0; i * 46 + 20 < len; i++) { const bx = x0 + 20 + i * 46; if (bx > W || bx < -40) continue; R(c, bx, gy - 70 + (i % 2) * 14, 30, 70 - (i % 2) * 14, ['#ff6b57', '#ffd84a', '#7fd18a', '#f2a3b0', '#4fb3e8', '#c9bfe0'][i % 6]); } c.fillStyle = '#ffd84a'; c.beginPath(); c.arc(x0 + W * 0.6, 26, 10, 0, 7); c.fill(); } }
-    // the door with its green sign: it opens for her (and the Consulenti slam it open off screen, later)
-    { const dx = X(doorX); if (dx > -40 && dx < W + 40) { const open = outside ? 1 : ph === 'escape' ? clamp((fx - (doorX - 30)) / 30, 0, 1) : 0;
-      R(c, dx - 2, gy - 62, 34, 62, '#2a2d36'); R(c, dx, gy - 60, 30, 60, '#4a4e5c');
-      R(c, dx, gy - 60, Math.round(30 * (1 - open * 0.8)), 60, '#8a6a44'); R(c, dx + Math.round(30 * (1 - open * 0.8)) - 4, gy - 32, 2, 4, '#ffd84a');
-      R(c, dx + 2, gy - 72, 26, 8, '#2f8a4a'); st.text('USCITA', dx + 15, gy - 68, { size: Math.max(8, 3 * st.SCALE), col: '#eaffea', align: 'center', font: 'num', shadow: false }); } }
-    // floor
-    R(c, 0, gy, W, H - gy, '#4a4e5c'); for (let x = -(cam % 16); x < W; x += 16) R(c, Math.round(x), gy, 1, H - gy, '#41444f'); R(c, 0, gy, W, 1, '#2a2d36');
-    if (outside) { const x0 = X(doorX + 32); R(c, x0, gy, W * 3, H - gy, '#c9b48a'); R(c, x0, gy, W * 3, 1, '#8a7a5a'); }
-    // El Falcon at her desk: typing; turning to whoever comes; sinking under the files; looking around before she goes
-    const dX = X(deskX);
-    const visitor = ['c1', 'c2', 'c3', 'mail'].includes(ph), vLeft = !!IN.FROM_LEFT[ph];
-    if (!after('escape')) {
-      const typing = ph === 'work' ? Math.floor(t * 6) % 2 : 0, sink = ph === 'sigh' || (ph === 'mail' && I.sub === 'in') ? 6 : 0;
-      let img = VG.falcon('down');
-      // she turns to the Consulente when he is close, and back to the screen when he goes
-      if (visitor && ((I.sub === 'in' && I.st > 0.5) || I.sub === 'stand')) img = VG.falcon(vLeft ? 'left' : 'right');
-      if (ph === 'think') { const k = Math.floor(pt / 0.65); img = VG.falcon(k === 1 ? 'up' : k === 2 ? 'left' : k >= 3 ? 'right' : 'down'); }
-      if (ph === 'stand') img = VG.falcon('right');
-      big(img, dX - 2, gy - 14 + typing + sink - (ph === 'stand' ? Math.min(8, pt * 30) : 0));
-      if (ph === 'sigh' && pt > 0.4 && pt < 1.3) { R(c, dX + 10, gy - 48 - Math.round((pt - 0.4) * 12), 3, 2, 'rgba(255,255,255,.8)'); R(c, dX + 13, gy - 51 - Math.round((pt - 0.4) * 12), 2, 2, 'rgba(255,255,255,.6)'); beat('sigh', () => Audio.sfx('error')); }
-      if (ph === 'think' && pt < 1.9) st.text('…', dX + 14, gy - 58, { size: Math.max(14, 6 * st.SCALE), col: '#fff6e0', align: 'center', stroke: '#1a1024', shadow: false });
-      if (ph === 'parcel' && pt > 0.2) st.text(I.sub === 'open' ? '!' : '?', dX + 14, gy - 58 - (I.sub === 'open' ? 0 : Math.round(Math.sin(t * 4) * 1.5)), { size: Math.max(16, 7 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false });
+    // ---- the grey street (and, from the escape, the colour lighting up ahead of A)
+    drawStreet(c, W, H, gy, I.scroll, false);
+    // the escape path of A: run, stomp on the henchman, leap over the pile and the boss, land beyond, run off
+    let ax = aLineX, ay = 0, aImg = null, colourFrom = null;
+    const scX = Math.round(W * 0.56), bossX = Math.round(W * 0.78), landX = Math.round(W * 0.9);
+    if (after('parcel')) ax = ph === 'parcel' ? aLineX + (benchX - 16 - aLineX) * ease(pt / 1.2) : benchX - 16;
+    if (ph === 'escape') {
+      const s0 = benchX - 16;
+      if (pt < 0.35) { ax = s0 + (scX - s0) * (pt / 0.35); ay = -Math.sin(pt / 0.35 * Math.PI) * 10 - (pt / 0.35) * 12; }
+      else if (pt < 1.25) { const k = (pt - 0.35) / 0.9; ax = scX + (landX - scX) * k; ay = -22 - Math.sin(k * Math.PI) * 38 + k * 22; beat('stomp', () => { Audio.sfx('hit'); G.shake = 0.15; }); if (k > 0.45) beat('jump2', () => Audio.sfx('tap')); }
+      else { const k = pt - 1.25; ax = landX + k * 90; ay = 0; beat('land', () => Audio.sfx('block')); }
+      if (pt > 1.2) colourFrom = landX - 10;
     }
-    // her desk: monitor (slammed shut when she stands up), the pile of files that grows, the parcel
-    R(c, dX - 34, gy - 26, 68, 4, '#2a1a2e'); R(c, dX - 33, gy - 25, 66, 3, '#9c6b3e'); R(c, dX - 31, gy - 22, 4, 22, '#6b4a2e'); R(c, dX + 27, gy - 22, 4, 22, '#6b4a2e'); R(c, dX - 27, gy - 22, 54, 10, '#8a5a32');
-    const shut = after('stand');
-    if (ph === 'stand') beat('slam', () => { Audio.sfx('block'); G.shake = 0.12; });
-    if (shut) R(c, dX - 28, gy - 29, 18, 3, '#2a2d36'); else { R(c, dX - 28, gy - 40, 18, 13, '#2a2d36'); R(c, dX - 27, gy - 39, 16, 10, ph === 'work' && Math.floor(t * 3) % 2 ? '#7cc6e8' : '#4fb3e8'); R(c, dX - 21, gy - 27, 4, 2, '#2a2d36'); }
-    for (let i = 0; i < I.pile; i++) R(c, dX + 16 + (i % 3 === 2 ? 1 : 0), gy - 28 - i * 2, 14, 2, i % 2 ? '#e8e4f0' : '#f6f2ea');
-    // the files from the left: on the floor beside the desk, because the desk is full
-    for (let i = 0; i < I.pileL; i++) R(c, dX - 48 + (i % 3 === 1 ? 1 : 0), gy - 2 - i * 2, 14, 2, i % 2 ? '#e8e4f0' : '#f6f2ea');
-    if (after('mail') && !after('reveal') && (ph !== 'mail' || I.sub !== 'in')) {
-      // the parcel; it gives a little jump when she decides to open it
-      const px = dX - 6, jy = ph === 'parcel' && I.sub === 'open' ? -Math.round(Math.abs(Math.sin(I.st * 9)) * 2) : 0;
-      R(c, px, gy - 38 + jy, 20, 12, '#2a1a2e'); R(c, px + 1, gy - 37 + jy, 18, 10, '#c8843a'); R(c, px + 9, gy - 37 + jy, 2, 10, '#d64545'); R(c, px + 1, gy - 33 + jy, 18, 2, '#d64545');
+    // the colour: from where A landed, under the feet and spreading ahead (to the right); a soft wavy edge
+    if (colourFrom !== null) {
+      c.save(); c.beginPath(); c.moveTo(W, 0); c.lineTo(colourFrom + 4, 0);
+      for (let y = 0; y <= H; y += 4) c.lineTo(colourFrom + Math.round(Math.sin(y * 0.35 + t * 6) * 3), y);
+      c.lineTo(W, H); c.closePath(); c.clip(); drawStreet(c, W, H, gy, I.scroll, true); c.restore();
+      const spread = Math.min(W, ax + 14 + (pt - 1.2) * 60);
+      if (spread < W) { c.globalAlpha = 0.35; R(c, Math.round(spread), 0, W - Math.round(spread), H, '#7b7f8a'); c.globalAlpha = 1; }
     }
-    // the pile of files in the corridor that she jumps
-    { const x0 = X(pileX); for (let i = 0; i < 6; i++) R(c, x0 - 8, gy - 2 - i * 2, 16, 2, i % 2 ? '#e8e4f0' : '#f6f2ea'); R(c, x0 - 8, gy - 13, 16, 1, '#2a1a2e'); }
-    // the Consulenti who come to her desk, from the right (c1, c3) and from the left (c2, the mail)
-    const gl = humanoidSprite('grigio', LOOKS.grigio);
-    if (visitor) {
-      const stop = IN.stop(W, vLeft), edge = vLeft ? -20 : W + 20, dir = vLeft ? -1 : 1;   // dir: the side he goes back to
-      const gx = I.sub === 'in' ? edge + (stop - edge) * ease(I.st / 1.3) : I.sub === 'out' ? stop + dir * I.st * IN.EXIT : stop;
-      const walk = (I.sub === 'in' && I.st < 1.3) || I.sub === 'out', toRight = I.sub === 'out' ? !vLeft : vLeft, ft = Math.floor(t * 8) % 2;
-      const img = gl[walk ? (toRight ? (ft ? 'a' : 'right') : (ft ? 'aL' : 'left')) : 'down_stand'];
-      big(img, X(gx), gy + 1);
-      if (I.sub === 'in') {
-        // what he carries, in front of him
-        const hx = vLeft ? X(gx) + 2 : X(gx) - 10;
-        if (ph === 'mail') { R(c, hx - 2, gy - 28, 16, 10, '#2a1a2e'); R(c, hx - 1, gy - 27, 14, 8, '#c8843a'); R(c, hx + 5, gy - 27, 2, 8, '#d64545'); } else { R(c, hx, gy - 26, 14, 6, '#f6f2ea'); R(c, hx, gy - 26, 14, 1, '#c9bfe0'); }
-      }
+    // the bench (in colour) with the parcel on its seat, until A takes it
+    { const bx = benchX; R(c, bx - 20, gy - 21, 40, 3, '#c0703a'); R(c, bx - 20, gy - 17, 40, 2, '#a85e2e'); R(c, bx - 17, gy - 15, 2, 5, '#3a3a48'); R(c, bx + 15, gy - 15, 2, 5, '#3a3a48');
+      R(c, bx - 21, gy - 11, 42, 3, '#d9824a'); R(c, bx - 21, gy - 8, 42, 1, '#8f4a22'); R(c, bx - 18, gy - 7, 2, 7, '#3a3a48'); R(c, bx + 16, gy - 7, 2, 7, '#3a3a48');
+      const taken = after('open') || (ph === 'parcel' && pt > 1.3);
+      if (!taken) { const px = bx + 4; c.globalAlpha = 0.18 + 0.08 * Math.sin(t * 4); c.fillStyle = '#ffd84a'; c.beginPath(); c.arc(px, gy - 18, 12, 0, 7); c.fill(); c.globalAlpha = 1;
+        R(c, px - 8, gy - 23, 16, 12, '#2a1a2e'); R(c, px - 7, gy - 22, 14, 10, '#e9524a'); R(c, px - 1, gy - 22, 2, 10, '#ffd84a'); R(c, px - 7, gy - 18, 14, 2, '#ffd84a'); R(c, px - 4, gy - 25, 3, 2, '#ffd84a'); R(c, px + 1, gy - 25, 3, 2, '#ffd84a'); } }
+    // the pile of boring things, on the pavement ahead (already there from the start)
+    for (let i = 0; i < 7; i++) R(c, pileX - 9 + (i % 2), gy - 2 - i * 3, 18, 3, i % 2 ? '#d8d8d8' : '#c4c4c4');
+    // the line: grey people walking; from the parcel on, it goes on without A and leaves to the right
+    const leave = after('parcel') ? (ph === 'parcel' ? pt : (I.leaveT = (I.leaveT || 0) + dt) + 2.3) * 26 : 0;
+    const LINE = [0.04, 0.19, 0.49, 0.64, 0.79, 0.94]; // A walks at 0.34
+    for (let i = 0; i < LINE.length; i++) {
+      const x = Math.round(W * LINE[i] + leave); if (x > W + 20) continue;
+      const look = CROWD[i % CROWD.length], hs = humanoidSprite(look, LOOKS[look]);
+      // the one who looks up (from the letter on): turned towards us, a little colour
+      if (i === 3 && after('open')) { big(greyed(hs.down_stand, 0.45, null, 'up' + look), x, gy + 1); continue; }
+      big(greyed(hs[ft ? 'a' : 'right'], 1, null, look + ft), x, gy + 1);
     }
-    // El Falcon running
-    if (after('escape') && X(fx) < W + 30) {
-      const f = VG.falcon('right', fy < 0 ? 'a' : ['a', 'stand', 'b', 'stand'][Math.floor(t * 12) % 4]);
-      big(f, X(fx), gy + 1 + fy); if (fy === 0 && Math.floor(t * 20) % 2) { R(c, X(fx) - 14, gy - 2, 2, 2, 'rgba(255,246,224,.7)'); R(c, X(fx) - 18, gy - 4, 2, 2, 'rgba(255,246,224,.45)'); }
+    // the henchmen: beside the line, grey with one detail in the boss's colour; then they stand by the boss
+    const scPos = after('boss') ? [scX, Math.round(W * 0.88)] : [Math.round(W * 0.12), Math.round(W * 0.72)];
+    scPos.forEach((x0, i) => {
+      if (ph === 'escape' && i === 0 && pt > 0.35) { big(greyed(scl.down_stand, 1, acc, 'sq'), x0, gy + 6, 2); return; }
+      if (ph === 'escape' && pt > 1.8) { const k = pt - 1.8; x0 += k * 70; } // after her
+      const walking = ph === 'line' || (ph === 'escape' && pt > 1.8);
+      big(greyed(scl[after('boss') ? (ph === 'escape' && pt > 1.8 ? (ft ? 'a' : 'right') : 'left') : walking ? (ft ? 'a' : 'right') : 'right'], 1, acc, 'sc' + i + ph + ft), Math.round(x0), gy + 9);
+    });
+    // their shouts, one after the other, over their heads
+    if (ph === 'line') for (let i = 0; i < SHOUTS.length; i++) {
+      const k = pt - 0.6 - i * 1.5; if (k < 0 || k > 1.4) continue;
+      if (k < 0.05) beat('sh' + i, () => Audio.sfx('warn'));
+      const x0 = i % 2 ? Math.round(W * 0.72) : Math.round(W * 0.12);
+      const sz = Math.max(14, 5.2 * st.SCALE), hw = SHOUTS[i].length * sz * 0.3 / st.SCALE;
+      st.text(SHOUTS[i], clamp(x0, hw + 4, W - hw - 4), gy - 56 - (i === 2 ? 8 : 0), { size: sz, col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false, alpha: clamp(Math.min(k * 8, (1.4 - k) * 4), 0, 1) });
     }
-    // the Consulenti after her: the door bangs off screen, then they come in from the left, already running, shouting
-    if (outside && outT >= outF) {
-      beat('bang', () => { Audio.sfx('door'); G.shake = 0.25; });
-      const sz = Math.max(17, 7 * st.SCALE);
-      for (let i = 0; i < 4; i++) {
-        const k = outT - outF - IN.LEAD - i * IN.GAP; if (k < 0) continue;
-        if (i === 0) beat('shout', () => Audio.sfx('warn'));
-        const sx2 = Math.round(-18 + k * IN.CHASE); if (sx2 > W + 30) continue;
-        big(gl[Math.floor(t * 10 + i) % 2 ? 'a' : 'right'], sx2, gy + 1);
-        if (k < IN.SHOUT) {
-          // the shout stays over his head, all inside the screen, and fades only at the end
-          const sh = SHOUTS[i % SHOUTS.length], hw = sh.length * sz * 0.28 / st.SCALE;
-          st.text(sh, clamp(sx2, hw + 4, W - hw - 4), gy - 46 - (i % 2) * 14, { size: sz, col: '#fff6e0', align: 'center', stroke: '#1a1024', shadow: false, alpha: clamp(Math.min(k * 8, (IN.SHOUT - k) * 4), 0, 1) });
-        }
-      }
+    // the boss: comes in from the right, in its full colours, and blocks the street
+    if (after('boss')) {
+      const bx = ph === 'boss' ? W + 24 + (bossX - W - 24) * ease(pt / 1.1) : bossX;
+      big(bl[ph === 'boss' && pt < 1.1 ? (ft ? 'aL' : 'left') : 'left'], Math.round(bx), gy + 2);
+      if (ph === 'boss' && pt > 0.6) beat('card', () => introBossCard(true));
+      if (ph === 'boss' && pt > 2.05) beat('cardOut', () => introBossCard(false));
     }
-    // grey until she is out: the colours drain away with a saturation layer
-    if (I.grey > 0.01) { c.save(); c.globalCompositeOperation = 'saturation'; c.globalAlpha = I.grey; c.fillStyle = '#808080'; c.fillRect(0, 0, W, H); c.restore(); }
-    // …but the Album is in colour: the only colourful thing in the office
-    // the Album: the room goes dark, light from the parcel, the Album rises turning once; then it stays there, closed,
-    // glowing, while Il Crocco speaks; at the end it comes down into her hands
-    if (!(ph === 'reveal' || ph === 'album' || ph === 'albumClose')) introAlbum(null);
-    if (ph === 'reveal' || ph === 'album' || ph === 'albumClose') {
-      const dark = ph === 'reveal' ? ease(pt / 0.6) : ph === 'album' ? 1 : 1 - ease(pt / 0.45);
-      c.globalAlpha = 0.7 * dark; R(c, 0, 0, W, H, '#0b0816'); c.globalAlpha = 1;
-      const ox = W / 2, oy2 = Math.round(H * 0.62);   // low enough to stay clear of the dialog box
-      if (ph === 'reveal') beat('rays', () => Audio.sfx('solve'));
-      // rays of light behind it: strong out of the parcel, softer while it floats
-      { c.save(); c.translate(ox, oy2); c.rotate(t * 0.6); c.globalAlpha = (ph === 'reveal' ? 0.25 : 0.14) * dark;
-        for (let i = 0; i < 10; i++) { c.rotate(Math.PI / 5); c.fillStyle = i % 2 ? '#ffd84a' : '#fff6e0'; c.beginPath(); c.moveTo(0, 0); c.lineTo(-10, -140); c.lineTo(10, -140); c.closePath(); c.fill(); }
-        c.restore(); c.globalAlpha = 1; }
-      // one slow turn while it rises, easing into place with the cover towards us
-      const k = ph === 'reveal' ? ease(clamp((pt - 0.4) / 2.6, 0, 1)) : 1;
-      const down = ph === 'albumClose' ? ease(pt / 0.45) : 0;
-      const rise = k * (1 - down * 0.85), spin = Math.cos(k * Math.PI * 2);
-      const bob = ph === 'album' ? Math.round(Math.sin(t * 2.2) * 2) : 0;
-      const cw = Math.round(66 * (0.5 + 0.5 * rise)), ch2 = Math.round(88 * (0.5 + 0.5 * rise));
-      const by = Math.round(oy2 - ch2 / 2 - rise * 6 + (1 - k) * 30 + down * (gy - 34 - oy2) + bob);
-      if (rise > 0.02 && down < 0.99) {
-        // the Album itself is the same cover as the finished Album (HTML, laid over the canvas): one look for both
-        introAlbum({ x: ox - cw / 2, y: by, w: cw, h: ch2, flip: spin, alpha: down < 0.5 ? 1 : 1 - (down - 0.5) * 2, shine: ph === 'album' });
-      } else introAlbum(null);
-      if (rise > 0.02 && down < 0.99) {
-        c.globalAlpha = 1;
-        if (ph === 'reveal' && k > 0.98) beat('cover', () => Audio.sfx('ticket'));
-        // little sparkles around it while it floats
-        if (ph === 'album') for (let i = 0; i < 6; i++) {
-          const a = i * 1.047 + t * 0.4, rx = ox + Math.cos(a) * (cw * 0.5 + 12), ry = by + ch2 / 2 + Math.sin(a) * (ch2 * 0.5 + 10);
-          if (Math.sin(t * 3 + i * 2.1) > 0.3) { R(c, rx, ry - 1, 1, 3, '#ffe9a8'); R(c, rx - 1, ry, 3, 1, '#ffe9a8'); }
-        }
-      }
+    // A: nearly grey in the line; picking up the parcel the colours come back
+    if (ph === 'parcel' && pt > 1.3) I.aGrey = Math.max(0, 0.65 - (pt - 1.3) * 1.6);
+    if (after('open')) I.aGrey = 0;
+    if (ph === 'parcel' && pt > 1.3) beat('take', () => Audio.sfx('ticket'));
+    if (ax < W + 30) {
+      const walkA = ph === 'line' || (ph === 'parcel' && pt < 1.2) || (ph === 'escape' && pt > 1.25);
+      let f = ph === 'escape' ? VG.falcon('right', ay < 0 ? 'a' : ['a', 'stand', 'b', 'stand'][Math.floor(t * 12) % 4]) : after('open') ? VG.falcon('down') : VG.falcon('right', walkA ? (ft ? 'a' : 'b') : 'stand');
+      if (I.aGrey > 0.01) f = greyed(f, I.aGrey, null, '');
+      big(f, Math.round(ax), Math.round(gy + 2 + ay));
     }
+    // the Album and the letter, big, while B reads it
+    if (ph === 'open') {
+      const k = ease(pt / 0.5);
+      introAlbum({ x: Math.round(W * 0.5), y: Math.round(H * 0.06 + (1 - k) * 10), w: 58, h: 76, flip: 1, alpha: k, shine: true });
+      const lx = Math.round(W * 0.56 + 46), ly = Math.round(H * 0.22);
+      c.save(); c.globalAlpha = k; c.translate(lx, ly); c.rotate(0.06);
+      R(c, -1, -1, 62, 40, '#2a1a2e'); R(c, 0, 0, 60, 38, '#fbf6ec'); c.strokeStyle = '#2a1a2e'; c.lineWidth = 1; c.beginPath(); c.moveTo(0, 0); c.lineTo(30, 18); c.lineTo(60, 0); c.stroke();
+      c.fillStyle = '#ff6b57'; c.beginPath(); c.arc(30, 18, 4, 0, 7); c.fill(); c.restore();
+      st.text('Per ' + TXT.V.a, lx + 30, ly + 32, { size: Math.max(13, 5 * st.SCALE), col: '#2a1a2e', align: 'center', shadow: false, alpha: k, font: 'hand' });
+    } else introAlbum(null);
+    // the rain, over the grey part
+    { const lim = colourFrom !== null ? colourFrom : W; for (let i = 0; i < 46; i++) { const x = (i * 53 + Math.floor(t * 20) * 7) % W, y = ((t * 140 + i * 37) % (H + 10)) - 10; if (x < lim) R(c, x, y, 1, 4, 'rgba(225,228,236,.45)'); } }
   }
-
   // ---------------------------------------------------------------- new game: everything back to the start
   // «Nuova partita»: everything back to zero (stages, tickets, stars, coins and the look), then the introduction
   async function newGame() {
@@ -7023,7 +7140,7 @@ const HR_DATA = (() => {
     }
     if (G.happy) {
       const hp = G.happy; hp.t += dt; const pop = VG.REDUCED ? 1 : hp.t < 0.12 ? 1.35 : hp.t < 0.24 ? 1.15 : 1, wob = VG.REDUCED ? 0 : Math.round(Math.sin(hp.t * 5) * 1.5);
-      st.text('BUON ANNO!', st.VW / 2, st.VH * 0.3 + wob, { size: Math.max(30, 12 * st.SCALE) * pop, col: '#ffd84a', align: 'center', stroke: '#1a1024' });
+      st.text(hp.txt || '', st.VW / 2, st.VH * 0.3 + wob, { size: Math.max(20, ((hp.txt || '').length > 22 ? 7 : 9) * st.SCALE) * pop, col: '#ffd84a', align: 'center', stroke: '#1a1024' });
     }
   }
   // one burst, on its own (the boss's KO, the stroke of midnight)
@@ -7044,6 +7161,6 @@ const HR_DATA = (() => {
 })();
 
 </script>
-<div style="position:fixed;left:6px;bottom:4px;z-index:99;font:10px/1 monospace;color:rgba(255,255,255,.45);pointer-events:none">base bf67b66</div>
+<div style="position:fixed;left:6px;bottom:4px;z-index:99;font:10px/1 monospace;color:rgba(255,255,255,.45);pointer-events:none">base 492b015</div>
 </body>
 </html>
