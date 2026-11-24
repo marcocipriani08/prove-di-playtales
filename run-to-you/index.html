@@ -1067,8 +1067,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia","punti":[{"disegno":"faro","at":0.3},{"disegno":"gatto","at":0.55}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"#8E929E","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"],"cappello":"tophat"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "9cc87ce";
-window.SALVATAGGIO = "rty_viaggettino_9cc87ce_";
+window.VERSIONE = "a9e5843";
+window.SALVATAGGIO = "rty_viaggettino_a9e5843_";
 </script>
 <script>
 /* motore/testi.js */
@@ -2621,6 +2621,89 @@ const LOOKS = {
 
 </script>
 <script>
+/* catalogo/boss.js */
+/* Run to You — i boss disegnati per gli ordini e i loro proiettili. Un boss per nome (antagonista.aspetto):
+ * { rows, walk, map }: 20 righe di fronte (decisione del 24 novembre: un disegno solo, 20 nelle scene, 40 nelle tappe),
+ * «walk» sono le ultime 3 righe nel passo. Se il boss è una persona si può anche usare uno dei personaggi di
+ * motore/sprites.js (LOOKS) con «alto». Proiettili: { frames: [righe, righe], pal } di 8 × 7, due fotogrammi che si
+ * alternano (il quaderno del Dott. Valore Aggiunto, «note», è nel motore). Ogni disegno nuovo resta qui. */
+'use strict';
+const BOSS_DISEGNI = {
+  // il Conte Posponi (dal ritardo): una sveglia con le campane, le tacche delle ore, gli occhi chiusi dal sonno e le lancette in ritardo, in
+  // pigiama a righe azzurro, guanti bianchi e pantofole rosse
+  conte: {
+    rows: [
+      '.BB........BB.',
+      'BBBB.kkkk.BBBB',
+      '.BbkkRRRRkkbB.',
+      '..kRRRRRRRRk..',
+      '.kRWWWttWWWRk.',
+      '.kRWeeWWeeWRk.',
+      '.kRtWWWWWWtRk.',
+      '.kRWWWWkWWWRk.',
+      '.kRWWWWkkkWRk.',
+      '.kRWWWWWWWWRk.',
+      '..kRWWttWWRk..',
+      '...kkRRRRkk...',
+      '..PPpPPPPpPP..',
+      '.wPPpPPPPpPPw.',
+      '.wPPpPPPPpPPw.',
+      '..PPpPPPPpPP..',
+      '..PPpP..PpPP..',
+      '..PPpP..PpPP..',
+      '.SSSSS..SSSSS.',
+      '.SSSSS..SSSSS.'
+    ],
+    walk: ['..PPpP..SSSSS.', '.SSSSS........', '.SSSSS........'],
+    map: { B: '#e9b52a', b: '#a8761a', R: '#d64545', W: '#fff6e0', e: '#2a1a2e', t: '#c9a46a', P: '#9cc8f0', p: '#5a8ac0', w: '#ffffff', S: '#c0392b' }
+  }
+};
+const PROIETTILI = {
+  // una sveglia che suona: le campane che tremano
+  sveglia: {
+    frames: [
+      ['.B....B.', 'BBkkkkBB', '.kRRRRk.', 'kRWWkWRk', 'kRWWkkRk', 'kRWWWWRk', '.kkkkkk.'],
+      ['B......B', '.BkkkkB.', '.kRRRRk.', 'kRWWkWRk', 'kRWWkkRk', 'kRWWWWRk', '.kkkkkk.']
+    ],
+    pal: { k: '#1a1024', B: '#e9b52a', R: '#d64545', W: '#fff6e0' }
+  }
+};
+// the drawn bosses become «looks» like the others: humanoidSprite draws them from their rows (with the steps)
+for (const id in BOSS_DISEGNI) LOOKS[id] = Object.assign({ disegnato: true }, BOSS_DISEGNI[id]);
+{
+  const hs = humanoidSprite;
+  humanoidSprite = function (id, o, scale = 1) {
+    if (!o || !o.disegnato) return hs(id, o, scale);
+    const key = 'hum_' + id + '_' + scale; if (SPRITE_CACHE[key]) return SPRITE_CACHE[key];
+    const base = outlineCanvas(rowsToCanvas(o.rows, o.map, scale));
+    const walk = o.rows.slice(0, o.rows.length - o.walk.length).concat(o.walk), walkC = outlineCanvas(rowsToCanvas(walk, o.map, scale));
+    return (SPRITE_CACHE[key] = { down_stand: base, down_a: walkC, right: base, left: flipCanvas(base), a: walkC, aL: flipCanvas(walkC) });
+  };
+}
+</script>
+<script>
+/* catalogo/cibi.js */
+/* Run to You — i cibi preferiti (cibo.disegno nell'ordine): quello che si raccoglie nelle tappe (tre per tappa, la
+ * calamita) e che compare nella scena della festa finale. Un cibo per nome: { icona: righe (12 di larghezza, 5–6 di
+ * altezza), pal, grande: { rows, map } } (il «grande» va accanto alla torta). Nel gioco l'icona è anche grigia (ancora da
+ * trovare) e dorata (la sfida): i colori si ricavano da soli dalla chiarezza di quelli veri. Ogni disegno resta qui. */
+'use strict';
+const CIBI = {
+  // il salamino al tartufo (il gioco di Sara)
+  salamino: { icona: ['.kkkkkkkkkk.', 'kxXxNxxXxNxk', 'kNxxxXxNxxXk', 'kxxXxNxxXxxk', '.kkkkkkkkkk.'], pal: { k: '#2a1a2e', x: '#b0413e', X: '#f4d6c8', N: '#2a1a1e' } },
+  // la parmigiana: una porzione nella teglia, a strati (sugo e mozzarella gratinati, melanzane fritte, ancora mozzarella
+  // e pomodoro), una foglia di basilico in cima
+  parmigiana: {
+    icona: ['.kkkkkkkkkk.', 'kxXxNxXxxXxk', 'kMMmMMMmMMMk', 'kXxXXxXxXXxk', 'kddddddddddk', '.kkkkkkkkkk.'],
+    pal: { k: '#2a1a2e', x: '#d6402e', X: '#fff0d0', N: '#3f9a4a', M: '#7a4426', m: '#a8643a', d: '#c8643a' },
+    grande: { rows: ['..kkkkkkkk..', '.kxXxNxXxXk.', 'kxXxxXxxXxxk', 'kMMmMMMmMMMk', 'kXxXXxXxXXxk', 'kMmMMMmMMmMk', 'kddddddddddk', '.kkkkkkkkkk.'],
+      map: { x: '#d6402e', X: '#fff0d0', N: '#3f9a4a', M: '#7a4426', m: '#a8643a', d: '#c8643a' } }
+  }
+};
+// the big ones become items (VG.item) like the others
+for (const id in CIBI) if (CIBI[id].grande) CUSTOM[id] = CIBI[id].grande;
+</script>
+<script>
 /* motore/audio.js */
 /* Copiato da Operazione Viaggettino (sola lettura) con tools/extract.js. Non modificare a mano. */
 // ===== Chiptune music & sound effects (WebAudio, generated) =====
@@ -2949,6 +3032,49 @@ const Postcard = (() => {
 
 </script>
 <script>
+/* catalogo/luoghi.js */
+/* Run to You — le cartoline dei luoghi disegnate per gli ordini (96 × 64), accanto a quelle copiate da Operazione
+ * Viaggettino (catalogo/cartoline.js, che non si tocca). Un luogo per nome «t_…»: { name, cap, draw(c) }. Si aggiungono
+ * alle cartoline di Viaggettino (POSTCARDS, PC_ORDER, Postcard.paint), così il gioco le tratta allo stesso modo.
+ * Ogni cartolina nuova resta qui per riusarla con lo stesso luogo. */
+'use strict';
+const LUOGHI = (() => {
+  const W = 96, H = 64, k = '#1a1024';
+  const R = (c, x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
+  const sky = (c, cols, h = H) => { const bh = Math.ceil(h / cols.length); cols.forEach((col, i) => R(c, 0, i * bh, W, bh + 1, col)); };
+  const sea = (c, y, a, b) => { R(c, 0, y, W, H - y, a); for (let yy = y + 2; yy < H; yy += 3) for (let x = (yy * 7) % 9; x < W; x += 9 + (yy % 4)) R(c, x, yy, 4, 1, b); };
+  return {
+    // Procida: la Marina della Corricella con le case color pastello una sopra l'altra, gli archi e le scale, i gozzi
+    // in acqua; in cima Terra Murata con il Palazzo d'Avalos e la cupola dell'abbazia, nel pomeriggio d'estate
+    t_procida: { name: 'Procida', cap: 'Qui l\'estate ha il cognome di famiglia.', draw(c) {
+      sky(c, ['#6aa8e0', '#86b8e4', '#a6c8e6', '#c8d8e6', '#f0dcc4'], 30);
+      // the tuff cliff of Terra Murata, with the palace and the abbey on top
+      for (let x = 56; x < W; x++) { const y = Math.round(12 + Math.max(0, 60 - x) * 0.6 + Math.sin(x * 0.4) * 0.8); R(c, x, y, 1, 30, '#c9a46a'); R(c, x, y, 1, 1, '#e0c08a'); }
+      R(c, 62, 6, 26, 7, '#e8d8b8'); R(c, 62, 6, 26, 1, '#fff2d8'); for (let i = 0; i < 6; i++) R(c, 64 + i * 4, 8, 2, 2, '#5a4a3a');
+      R(c, 76, 2, 6, 4, '#e8d8b8'); R(c, 78, 0, 2, 2, '#c8b898'); R(c, 88, 5, 5, 8, '#f0e4c8'); R(c, 89, 3, 3, 2, '#d8a050');
+      // the houses of the Corricella, stacked up the hill: pastel walls, arches, stairs, little windows
+      const walls = ['#f2b8b0', '#f6d88a', '#a8d0e8', '#f6f0e4', '#f2a6c0', '#b8e0b8', '#f6c890', '#e8c0e0'];
+      let n = 0;
+      for (let row = 0; row < 4; row++) for (let col = 0; col < 8; col++) {
+        const x = col * 10 - (row % 2) * 5 + row * 3, y = 44 - row * 8 - Math.max(0, col - 4) * 2; if (x > 66 - row * 2 || x < -6) continue;
+        const wc = walls[(n++ * 3 + row) % walls.length], w = 10, h = 9;
+        R(c, x, y, w, h, wc); R(c, x, y, w, 1, 'rgba(255,255,255,.35)'); R(c, x + w - 1, y, 1, h, 'rgba(0,0,0,.1)');
+        if ((row + col) % 2 === 0) { R(c, x + 2, y + 3, 5, 6, '#3a2a3a'); R(c, x + 3, y + 2, 3, 1, '#3a2a3a'); } // an arch (the «vefio»)
+        else { R(c, x + 2, y + 3, 2, 3, '#3a6a9a'); R(c, x + 6, y + 3, 2, 3, '#3a6a9a'); }
+        if ((row * 3 + col) % 4 === 1) for (let s = 0; s < 4; s++) R(c, x + 7 - s, y + 5 + s, 2, 1, 'rgba(0,0,0,.18)');  // outside stairs
+      }
+      // the quay and the sea with the fishing boats
+      R(c, 0, 51, 70, 2, '#d8c8a8'); R(c, 0, 53, 70, 1, '#a8987a');
+      sea(c, 54, '#2a7ab0', '#4a9acc');
+      for (const [bx, col] of [[8, '#d64545'], [28, '#f6d88a'], [48, '#4a9acc'], [74, '#f6f0e4']]) { R(c, bx, 55, 12, 2, col); R(c, bx + 1, 57, 10, 1, '#5a3a2a'); R(c, bx + 2, 54, 8, 1, '#fff6e0'); }
+    } }
+  };
+})();
+// add them to Viaggettino's postcards: names, numbers in the Album, drawing
+for (const id in LUOGHI) { POSTCARDS[id] = { name: LUOGHI[id].name, cap: LUOGHI[id].cap }; if (!PC_ORDER.includes(id)) PC_ORDER.push(id); }
+{ const paint = Postcard.paint; Postcard.paint = (cv, id) => { if (!LUOGHI[id]) return paint(cv, id); const c = cv.getContext('2d'); c.imageSmoothingEnabled = false; c.clearRect(0, 0, 96, 64); LUOGHI[id].draw(c); }; }
+</script>
+<script>
 /* catalogo/costumi.js */
 /* I costumi su misura dei mondi (uno per luogo, solo nel gioco di chi ha quel luogo; il disegno resta qui per riusarlo
  * con lo stesso luogo). Stesso formato dei costumi fissi del sito (PTAvatar.COSTUMES): { name, look } dove look sono i
@@ -2958,7 +3084,9 @@ window.COSTUMI_MONDI = {
   oia: { name: 'Tramonto a Oia', look: { top: 'dress', outfit: '#F6F2EA', shoes: '#FFFFFF', accessories: { head: 'flower' } } },
   pilota: { name: 'Pilota di Ios', look: { top: 'tank', outfit: '#F6F2EA', accessories: { head: 'bandana', face: 'sunglasses' } } },
   tresor: { name: 'Notte al Tresor', look: { top: 'jacket', outfit: '#2A2A38', legs: 'pants', pants: '#16141C', shoes: '#26222E', accessories: { face: 'sunglasses' } } },
-  valzer: { name: 'Valzer di Capodanno', look: { top: 'dress', outfit: '#1E2A5E', shoes: '#FFD84A', accessories: { neck: 'necklace' }, extra: { gown: true } } }
+  valzer: { name: 'Valzer di Capodanno', look: { top: 'dress', outfit: '#1E2A5E', shoes: '#FFD84A', accessories: { neck: 'necklace' }, extra: { gown: true } } },
+  // Procida: la maglia a righe da marinaio, i pantaloncini, il cappello di paglia e le espadrillas
+  procida: { name: 'Estate alla Corricella', look: { top: 'stripes', outfit: '#2F6FC0', legs: 'shorts', pants: '#F6F2EA', shoes: '#D9C29A', accessories: { head: 'strawhat' } } }
 };
 
 /* «Unisciti a loro», il costume segreto (3 stelle in tutte le tappe): vestiti come il boss dell'ordine. Uno per boss,
@@ -2966,7 +3094,9 @@ window.COSTUMI_MONDI = {
  * (i suoi colori e il suo dettaglio tipico). Disegnato insieme al boss, resta qui per riusarlo. */
 window.COSTUMI_BOSS = {
   // il Dott. Valore Aggiunto: abito scuro, cravatta rossa, cilindro con la fascia rossa, monocolo d'oro
-  vaBoss: { look: { top: 'jacket', outfit: '#2A2D36', legs: 'pants', pants: '#1A1C22', shoes: '#1A1C22', accessories: { head: 'none', face: 'none', neck: 'tie' }, extra: { hat: 'tophat', hatBand: '#D64545', monocle: true } } }
+  vaBoss: { look: { top: 'jacket', outfit: '#2A2D36', legs: 'pants', pants: '#1A1C22', shoes: '#1A1C22', accessories: { head: 'none', face: 'none', neck: 'tie' }, extra: { hat: 'tophat', hatBand: '#D64545', monocle: true } } },
+  // il Conte Posponi: pigiama azzurro a righe, berretto da notte, pantofole rosse
+  conte: { look: { top: 'stripes', outfit: '#9CC8F0', legs: 'pants', pants: '#9CC8F0', shoes: '#C0392B', accessories: { head: 'none', face: 'none', neck: 'none' }, extra: { hat: 'skihat', hatColor: '#9CC8F0' } } }
 };
 </script>
 <script>
@@ -2996,6 +3126,37 @@ const PUNTI = (() => {
       R(c, X + 5, b - 15, 10, 5, '#ff9a3c'); R(c, X + 4, b - 17, 4, 4, '#ff9a3c'); R(c, X + 4, b - 18, 1, 1, '#ff9a3c'); R(c, X + 7, b - 18, 1, 1, '#ff9a3c');
       R(c, X + 5, b - 16, 1, 1, k); R(c, X + 14, b - 12, 4, 2, '#ff9a3c'); R(c, X + 8, b - 14, 1, 3, '#d9762a'); R(c, X + 11, b - 14, 1, 3, '#d9762a');
       if (Math.floor((t || 0) * 0.8) % 2) { R(c, X + 1, b - 22, 2, 1, '#fff6e0'); R(c, X + 2, b - 21, 1, 1, '#fff6e0'); R(c, X + 1, b - 20, 2, 1, '#fff6e0'); }
+    } }
+,
+    // Procida: Terra Murata, lo sperone di tufo giallo sul mare, con il Palazzo d'Avalos lungo e severo e l'abbazia di San
+    // Michele con la cupola (sull'orizzonte, velato dalla distanza)
+    terramurata: { strato: 'lontano', w: 96, draw(c, X, b) {
+      for (let x = 0; x < 96; x++) { const y = Math.round(b - 26 - Math.min(x, 96 - x) * 0.35 - Math.sin(x * 0.3) * 1.2); R(c, X + x, y, 1, b - y, '#c8aa78'); R(c, X + x, y, 1, 1, '#dcc290'); }
+      R(c, X + 20, b - 52, 46, 14, '#e2d2b0'); R(c, X + 20, b - 52, 46, 1, '#f2e6cc'); for (let i = 0; i < 9; i++) for (let r = 0; r < 2; r++) R(c, X + 23 + i * 5, b - 49 + r * 6, 2, 3, '#8a7a62');
+      R(c, X + 66, b - 48, 16, 10, '#ecdcbc'); R(c, X + 72, b - 54, 6, 6, '#ecdcbc'); R(c, X + 73, b - 57, 4, 3, '#c89a5a'); R(c, X + 74, b - 59, 2, 2, '#c89a5a');
+      R(c, X + 10, b - 40, 10, 6, '#e8d8c0'); R(c, X + 84, b - 38, 8, 6, '#f0c8b0');
+    } },
+    // Procida: Vivara, l'isolotto verde, con il ponte ad archi che la unisce alla spiaggia della Chiaiolella
+    vivara: { strato: 'lontano', w: 110, draw(c, X, b) {
+      for (let x = 0; x < 70; x++) { const y = Math.round(b - 4 - Math.sin(x / 70 * Math.PI) * 22); R(c, X + 40 + x, y, 1, b - y, x % 9 < 5 ? '#5a8a5a' : '#4f7a50'); }
+      for (let i = 0; i < 8; i++) R(c, X + 48 + i * 7, b - 18 - (i % 3) * 3, 4, 3, '#6a9a64');
+      R(c, X, b - 6, 46, 2, '#a8a096'); for (let i = 0; i < 5; i++) { R(c, X + 2 + i * 9, b - 4, 2, 4, '#a8a096'); } R(c, X, b - 7, 46, 1, '#c8c0b4');
+    } },
+    // Procida: la doccia all'aperto della terrazza, con l'asciugamano a righe e le ciabatte (accanto a chi corre)
+    terrazza: { strato: 'vicino', w: 30, draw(c, X, b, t) {
+      R(c, X, b - 10, 30, 10, '#f6f0e4'); R(c, X, b - 10, 30, 1, '#fffaf0'); R(c, X, b - 1, 30, 1, '#d8ccb8');
+      R(c, X + 20, b - 46, 2, 36, '#8a8f9c'); R(c, X + 20, b - 46, 8, 2, '#8a8f9c'); R(c, X + 25, b - 45, 5, 2, '#6b6f7a'); R(c, X + 22, b - 22, 3, 2, '#d64545');
+      if (Math.floor((t || 0) * 6) % 2) for (let i = 0; i < 5; i++) R(c, X + 26 + (i % 3), b - 42 + i * 6, 1, 2, '#cfe8f6');
+      R(c, X + 3, b - 22, 10, 12, '#f6f0e4'); for (let y = 0; y < 12; y += 4) R(c, X + 3, b - 22 + y, 10, 2, '#3a8ac0'); R(c, X + 3, b - 22, 10, 1, k);
+      R(c, X + 14, b - 3, 4, 2, '#ff6b57'); R(c, X + 22, b - 3, 4, 2, '#4dd7ff');
+    } },
+    // Procida: il gommoncino giallo al largo, con la retina alzata, a caccia di meduse (piccolo, sul mare dell'orizzonte)
+    gommone: { strato: 'lontano', w: 30, draw(c, X, b, t) {
+      const bob = Math.round(Math.sin((t || 0) * 2)), y = b - 27 + bob; // on the sea, just under the horizon (over the roofs)
+      R(c, X + 2, y, 22, 4, k); R(c, X + 3, y + 1, 20, 2, '#ffd23f'); R(c, X + 3, y + 1, 20, 1, '#fff0a8'); R(c, X + 4, y + 3, 18, 1, '#ff8a3d');
+      R(c, X + 10, y - 5, 3, 5, '#ff6b57'); R(c, X + 10, y - 7, 3, 2, '#f1c7a1'); R(c, X + 14, y - 5, 3, 5, '#4a6cc0'); R(c, X + 14, y - 7, 3, 2, '#f1c7a1');
+      for (let i = 0; i < 8; i++) R(c, X + 17 + i, y - 6 - i, 1, 1, '#8a5a32'); R(c, X + 24, y - 16, 5, 4, '#e6eef6');
+      R(c, X + 26, y + 6, 3, 1, '#f2a6d8'); R(c, X + 26, y + 7, 1, 1, '#f2a6d8'); R(c, X + 28, y + 7, 1, 1, '#f2a6d8');
     } }
   };
 })();
@@ -3397,7 +3558,7 @@ const VG = (() => {
     else setTimeout(() => { try { env.focus({ preventScroll: true }); } catch (e) { } }, 50);
     // the cake scene (same as Viaggettino's ending)
     const cv2 = byId('end-cake'), c = cv2.getContext('2d'); c.imageSmoothingEnabled = false;
-    const sal = item('salamino', 1, false);
+    const sal = item(CUSTOM[(window.ORDINE.cibo || {}).disegno] ? window.ORDINE.cibo.disegno : 'salamino', 1, false); // the favourite food
     const conf = Array.from({ length: REDUCED ? 0 : 60 }, () => ({ x: Math.random() * cv2.width, y: Math.random() * cv2.height, v: 10 + Math.random() * 25, c: pick(['#ffd84a', '#ff6b57', '#7cc6e8', '#f2a3b0', '#7fd18a']) }));
     let last = performance.now();
     const frame = now => {
@@ -3548,7 +3709,41 @@ const CARTE = (() => {
     falcon(c) { scene(c, ['#ff9a6b', '#ffb36b', '#ffd08a'], '#e9c46a'); R(c, 60, 34, 18, 13, '#c0392b'); R(c, 61, 35, 16, 11, '#d64545'); R(c, 68, 35, 1, 11, '#9e2f3a'); c.drawImage(VG.item('ticket'), 62, 38); bigS(c, VG.falcon('down'), 40, 58); },
     crocco(c) { scene(c, ['#7cc6e8', '#a8d2f2', '#c8e2f4'], '#4a6cc0'); bigS(c, VG.crocco('down'), 46, 58); R(c, 64, 24, 2, 14, '#f2a3b0'); R(c, 62, 20, 5, 5, '#f2a3b0'); R(c, 66, 19, 2, 2, '#1a1024'); R(c, 63, 38, 2, 4, '#1a1024'); },
     pirati(c) { scene(c, ['#4a98e8', '#7ab8ee', '#a8d4f4'], '#c8a878'); R(c, 0, 40, 96, 6, '#1f80b0'); bigS(c, VG.item('poodle'), 44, 60); c.drawImage(VG.item('gyros'), 66, 44); },
-    mozart(c) { scene(c, ['#9ab6d8', '#bcd0e6', '#dde8f2'], '#f4f8ff'); for (let i = 0; i < 18; i++) R(c, (i * 37) % 96, (i * 23) % 44, 1, 1, '#fff'); c.globalAlpha = .85; bigS(c, VG.npc('mozart'), 44, 60); c.globalAlpha = 1; R(c, 64, 16, 2, 8, '#2a1a2e'); R(c, 62, 22, 3, 3, '#2a1a2e'); R(c, 70, 12, 2, 8, '#2a1a2e'); R(c, 68, 18, 3, 3, '#2a1a2e'); R(c, 66, 12, 6, 1, '#2a1a2e'); }
+    mozart(c) { scene(c, ['#9ab6d8', '#bcd0e6', '#dde8f2'], '#f4f8ff'); for (let i = 0; i < 18; i++) R(c, (i * 37) % 96, (i * 23) % 44, 1, 1, '#fff'); c.globalAlpha = .85; bigS(c, VG.npc('mozart'), 44, 60); c.globalAlpha = 1; R(c, 64, 16, 2, 8, '#2a1a2e'); R(c, 62, 22, 3, 3, '#2a1a2e'); R(c, 70, 12, 2, 8, '#2a1a2e'); R(c, 68, 18, 3, 3, '#2a1a2e'); R(c, 66, 12, 6, 1, '#2a1a2e'); },
+    // Procida: la corsa a chi arriva primo alla doccia in terrazza, di ritorno dal mare. La doccia all'aperto sul terrazzo
+    // al tramonto, l'acqua che scende, l'asciugamano a righe sul muretto, le ciabatte perse lungo la corsa, il mare dietro
+    doccia(c) {
+      VG.bands(c, 96, 40, ['#f6a86b', '#f8bc7a', '#fad08e', '#fce0a8']); R(c, 0, 30, 96, 6, '#3a8ac0'); R(c, 0, 30, 96, 1, '#fce8c0');
+      R(c, 0, 36, 96, 28, '#d8845a'); for (let y = 38; y < 64; y += 5) R(c, 0, y, 96, 1, '#c07048'); for (let x = 0; x < 96; x += 9) R(c, x + (Math.floor(x / 9) % 2) * 4, 36, 1, 28, '#c07048');
+      R(c, 0, 26, 96, 10, '#f6f0e4'); R(c, 0, 26, 96, 1, '#fffaf0'); R(c, 0, 35, 96, 1, '#d8ccb8');                    // the low wall of the terrace
+      // the shower: the pipe, the head, the tap and the water
+      R(c, 60, 4, 3, 50, '#8a8f9c'); R(c, 61, 4, 1, 50, '#b8bdc8'); R(c, 60, 4, 14, 3, '#8a8f9c'); R(c, 70, 6, 8, 3, '#6b6f7a'); R(c, 63, 34, 4, 2, '#d64545');
+      for (let i = 0; i < 14; i++) R(c, 70 + (i * 5) % 8, 11 + ((i * 7) % 5) * 7 + (i % 3), 1, 3, '#cfe8f6');
+      R(c, 64, 54, 18, 2, '#a8d0e8'); R(c, 66, 53, 14, 1, '#cfe8f6');                                               // the puddle
+      // the striped towel on the wall, a lemon in its pot
+      R(c, 22, 20, 14, 14, '#f6f0e4'); for (let y = 20; y < 34; y += 4) R(c, 22, y, 14, 2, '#3a8ac0'); R(c, 22, 20, 14, 1, '#1a1024');
+      R(c, 6, 22, 8, 6, '#c8643a'); R(c, 5, 22, 10, 1, '#a8542e'); R(c, 7, 15, 6, 7, '#3f9a4a'); R(c, 8, 17, 2, 2, '#ffe14d'); R(c, 11, 19, 2, 2, '#ffe14d');
+      // the flip-flops left behind on the way, and the wet footprints that race to the shower
+      R(c, 14, 50, 6, 3, '#ff6b57'); R(c, 16, 49, 2, 1, '#1a1024'); R(c, 30, 56, 6, 3, '#4dd7ff'); R(c, 32, 55, 2, 1, '#1a1024');
+      for (let i = 0; i < 5; i++) { R(c, 36 + i * 5, 46 - (i % 2) * 3, 2, 3, '#b86a44'); R(c, 34 + i * 5, 52 + (i % 2) * 3, 2, 3, '#b86a44'); }
+    },
+    // Procida: la caccia alle meduse sul gommoncino gonfiabile, al largo, con la retina: il mare blu fondo, il gommoncino
+    // giallo, la retina tesa e le meduse sotto il pelo dell'acqua
+    meduse(c) {
+      VG.bands(c, 96, 22, ['#5ab0f0', '#7cc2f4', '#a0d4f6']); R(c, 74, 4, 8, 8, '#fff2c0'); R(c, 73, 6, 10, 4, '#fff2c0');
+      R(c, 0, 18, 96, 2, '#8a9ab8'); R(c, 6, 15, 18, 3, '#8a9ab8'); R(c, 10, 13, 8, 2, '#8a9ab8');                    // Procida, far away
+      for (let y = 20; y < 64; y++) R(c, 0, y, 96, 1, y < 30 ? '#1f6ab0' : y < 44 ? '#1a5a98' : '#154a80');
+      for (let i = 0; i < 16; i++) R(c, (i * 23) % 96, 21 + (i * 7) % 8, 5, 1, '#4a8ac8');
+      // the inflatable dinghy: yellow tube, orange bottom, the rope round the side
+      R(c, 22, 22, 40, 7, '#1a1024'); R(c, 23, 23, 38, 5, '#ffd23f'); R(c, 23, 23, 38, 1, '#fff0a8'); R(c, 20, 23, 3, 5, '#1a1024'); R(c, 61, 23, 3, 5, '#1a1024');
+      R(c, 21, 24, 2, 3, '#ffd23f'); R(c, 61, 24, 2, 3, '#ffd23f'); R(c, 24, 28, 36, 2, '#ff8a3d');
+      for (let x = 26; x < 60; x += 6) R(c, x, 25, 3, 1, '#c0392b');
+      // the net on its pole, in the water, and the jellyfish (pink domes, trailing tentacles)
+      R(c, 58, 12, 2, 2, '#8a5a32'); for (let i = 0; i < 26; i++) R(c, 58 + Math.round(i * 0.55), 12 + i, 1, 1, '#8a5a32');
+      R(c, 68, 36, 10, 8, '#e6eef6'); for (let x = 69; x < 78; x += 2) R(c, x, 37, 1, 6, '#9ab0c8'); R(c, 67, 35, 12, 1, '#c8d6e6');
+      const jelly = (x, y, col) => { R(c, x - 3, y, 7, 2, col); R(c, x - 2, y - 1, 5, 1, col); R(c, x - 1, y - 2, 3, 1, 'rgba(255,255,255,.6)'); for (let t = -2; t <= 2; t += 2) for (let j = 0; j < 5; j++) R(c, x + t + (j % 2), y + 2 + j, 1, 1, col); };
+      jelly(72, 40, '#f2a6d8'); jelly(36, 44, '#e88ad0'); jelly(50, 54, '#f6c0e6'); jelly(16, 50, '#e88ad0');
+    }
   };
 })();
 </script>
@@ -3850,6 +4045,66 @@ const AMBIENTI = (() => {
     landmark(c, x, g) { // the lifeguard tower at the end of the beach
       R(c, x + 4, g - 30, 2, 30, '#f6f2ea'); R(c, x + 26, g - 30, 2, 30, '#f6f2ea'); R(c, x + 2, g - 40, 28, 10, '#d64545'); R(c, x + 2, g - 40, 28, 2, '#f6f2ea'); R(c, x, g - 46, 32, 6, '#f6f2ea'); R(c, x + 6, g - 37, 20, 2, '#f6f2ea');
       R(c, x + 34, g - 50, 2, 50, '#8a6a44'); R(c, x + 36, g - 50, 12, 8, '#d64545'); R(c, x + 36, g - 46, 12, 1, '#ffd84a');
+    },
+    signs: [], low: ['#2f8fd0', '#f6f2ea']
+  };
+  // ---- Procida (from the «mare» base, 24 Nov 2026, order «procida»): the Gulf with Ischia, Vivara and the Vesuvio far
+  // away; the Corricella's pastel houses stacked in two rows with their arches («vefi») and outside stairs, washing on
+  // the lines, lemon trees, the fishing boats («gozzi») on the quay; the stone quay; the fish trap as a block; sea urchins
+  T.procida = {
+    music: 'island', farW: 1280, midW: 1664,
+    sky: ['#4a8ad8', '#5a96dc', '#6aa2e0', '#7eb0e4', '#94bee8', '#aacbea', '#c4d6ea', '#e2dcd4', '#f4e2c8'],
+    sun: { x: 0.7, y: 0.22, r: 11, col: '#fff2c0' },
+    far(c, W, H, b) {
+      // the Vesuvio, faint, with its two humps
+      for (let i = 0; i < 2; i++) { const cx = (0.15 + i * 0.5) * W; for (let x = -110; x <= 110; x++) { const y = Math.round(Math.max(0, 34 - Math.abs(x) * 0.3) + (Math.abs(x) < 24 ? -Math.abs(Math.sin(x * 0.13)) * 3 : 0)); if (y > 0) R(c, cx + x, b - 30 - y, 1, y, '#9ab0c8'); } }
+      R(c, 0, b - 30, W, H, '#2a7ab8'); for (let y = b - 29; y < H; y += 3) for (let x = (y * 7) % 17; x < W; x += 17) R(c, x, y, 6, 1, '#4a95d0');
+      R(c, 0, b - 31, W, 1, '#d8eaf6');
+      // Ischia, big, with the Epomeo; Vivara, small and green
+      for (let i = 0; i < 2; i++) { const cx = (0.42 + i * 0.5) * W, w = 260; for (let x = -w / 2; x < w / 2; x++) { const u = x / (w / 2), y = Math.round(22 * Math.sqrt(Math.max(0, 1 - u * u)) + 12 * Math.max(0, 1 - Math.abs(u + 0.15) * 3)); R(c, cx + x, b - 30 - y, 1, y, '#6f8faa'); } }
+      for (let i = 0; i < 2; i++) { const cx = (0.3 + i * 0.5) * W; for (let x = -30; x < 30; x++) { const y = Math.round(9 * Math.sqrt(Math.max(0, 1 - (x / 30) ** 2))); R(c, cx + x, b - 30 - y, 1, y, '#6a8a74'); } }
+      // a ferry crossing, a sail
+      for (let i = 0; i < 2; i++) { const x = (0.6 + i * 0.5) * W; R(c, x, b - 29, 22, 3, '#f6f2ea'); R(c, x + 4, b - 33, 12, 4, '#f6f2ea'); R(c, x + 6, b - 32, 8, 1, '#3a6a9a'); R(c, x + 2, b - 26, 18, 1, '#d64545'); }
+    },
+    mid(c, W, H, b) {
+      const walls = ['#f2b8b0', '#f6d88a', '#a8d0e8', '#f6f0e4', '#f2a6c0', '#b8e0b8', '#f6c890', '#e8c0e0', '#f0e0a0'];
+      for (let i = 0; i < 26; i++) {
+        const x = i * 64, row = i % 2, n = i * 5;
+        // the back row, higher up the hill, and the front row on the quay
+        if (i % 4 === 3) { const gx = x + 20, col = ['#d64545', '#2f6fc0'][i % 2]; R(c, gx, b - 9, 22, 4, col); R(c, gx + 2, b - 5, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 10, 20, 1, '#fff6e0'); continue; } // a gap: the sea shows, a boat
+        for (const [tier, dy, hh] of [[0, 16, 16], [1, 0, 20]]) {
+          const w = 30 + ((n + tier) % 3) * 4, hx = x + (tier ? 2 : 18) + (row ? 6 : 0), y = b - 6 - hh - dy, col = walls[(n + tier * 4) % walls.length];
+          R(c, hx, y, w, hh + dy + 6, col); R(c, hx, y, w, 1, 'rgba(255,255,255,.4)'); R(c, hx + w - 2, y, 2, hh, 'rgba(0,0,0,.08)');
+          R(c, hx - 1, y - 2, w + 2, 2, '#f6f2ea');                                           // the flat white roof
+          if ((n + tier) % 2 === 0) { R(c, hx + 6, y + 8, 14, hh - 8, '#4a3040'); R(c, hx + 8, y + 6, 10, 2, '#4a3040'); R(c, hx + 9, y + 5, 8, 1, '#4a3040'); } // the arch
+          else { R(c, hx + 5, y + 6, 6, 7, '#3a6a9a'); R(c, hx + 17, y + 6, 6, 7, '#3a6a9a'); R(c, hx + 4, y + 13, 8, 1, '#f6f2ea'); R(c, hx + 16, y + 13, 8, 1, '#f6f2ea'); }
+          if ((n + tier) % 3 === 1) for (let s = 0; s < 8; s++) R(c, hx + w - 4 - s, y + hh - 2 - s * 2, 4, 1, 'rgba(0,0,0,.16)'); // outside stairs
+          if (tier && i % 4 === 1) { R(c, hx + 2, y + 3, w - 4, 1, '#8a8076'); for (let k2 = 0; k2 < 4; k2++) R(c, hx + 4 + k2 * 7, y + 4, 4, 5, ['#ff6b57', '#fff6e0', '#4dd7ff', '#ffd84a'][k2]); } // the washing
+        }
+        // a lemon tree in a garden, then a boat on the quay
+        if (i % 3 === 2) { const lx = x + 54; disc(c, lx, b - 18, 8, '#3f8a3a'); R(c, lx - 1, b - 12, 2, 6, '#6b4a2e'); for (let k2 = 0; k2 < 5; k2++) R(c, lx - 5 + k2 * 3, b - 22 + (k2 % 2) * 6, 2, 2, '#ffe14d'); }
+        if (i % 3 === 0) { const gx = x + 40, col = ['#d64545', '#2f6fc0', '#f6d88a', '#3f9a4a'][i % 4]; R(c, gx, b - 9, 22, 4, col); R(c, gx + 2, b - 5, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 10, 20, 1, '#fff6e0'); R(c, gx + 18, b - 14, 1, 5, '#8a6a44'); }
+      }
+    },
+    ground: { top: '#d8ccb0', top2: '#c4b696', fill: '#a8987a', grout: '#8a7a5e', deep: '#6e604a' },
+    plat: { top: '#c8945a', side: '#a8743e', under: '#7a5228', trama: 'legno' },
+    water: { a: '#1f80b0', b: '#3fa0d0', top: '#cfe6f6' },
+    block(c, x, y) { // a fisherman's trap: wicker, round, with its mouth
+      R(c, x + 1, y + 2, 14, 14, '#8a5a32'); R(c, x + 2, y + 1, 12, 1, '#8a5a32'); for (let k2 = 0; k2 < 14; k2 += 3) R(c, x + 1, y + 3 + k2, 14, 1, '#c8944a'); for (let k2 = 0; k2 < 14; k2 += 4) R(c, x + 2 + k2, y + 2, 1, 14, '#6b4426');
+      R(c, x + 5, y + 6, 6, 6, '#3a2418'); R(c, x + 6, y + 7, 4, 4, '#5a3a22');
+    },
+    hazard(c, x, y) {
+      R(c, x, y + 14, 16, 2, '#8a8076');
+      for (let k2 = 0; k2 < 2; k2++) { const cx = x + 4 + k2 * 8, cy = y + 11;
+        for (let a = 0; a <= 12; a++) { const an = Math.PI + a * Math.PI / 12; for (let r = 3; r < 6; r++) R(c, Math.round(cx + Math.cos(an) * r), Math.round(cy + 1 + Math.sin(an) * r), 1, 1, r < 4 ? '#2a1a3a' : '#3a2a4a'); }
+        R(c, cx - 3, cy - 1, 7, 4, '#2a1a3a'); R(c, cx - 1, cy - 1, 2, 1, '#7a5a98'); }
+    },
+    hazardName: 'ricci di mare',
+    enemy: 'grigio', tough: 'senior', flyer: 'gull', faller: 'limone', special: 'granita', specialName: 'Granita al limone',
+    landmark(c, x, g) { // the Corricella at the finish: a pink house with its big arch and stairs, a boat in front
+      R(c, x, g - 50, 56, 50, '#f2b8b0'); R(c, x - 1, g - 52, 58, 2, '#f6f2ea'); R(c, x + 6, g - 36, 20, 36, '#4a3040'); R(c, x + 9, g - 39, 14, 3, '#4a3040'); R(c, x + 12, g - 41, 8, 2, '#4a3040');
+      for (let s = 0; s < 12; s++) R(c, x + 50 - s * 2, g - 4 - s * 3, 6, 1, '#d89890'); R(c, x + 32, g - 44, 8, 9, '#3a6a9a'); R(c, x + 44, g - 44, 8, 9, '#3a6a9a');
+      R(c, x + 60, g - 8, 26, 5, '#2f6fc0'); R(c, x + 62, g - 3, 22, 2, '#5a3a2a'); R(c, x + 61, g - 9, 24, 1, '#fff6e0');
     },
     signs: [], low: ['#2f8fd0', '#f6f2ea']
   };
@@ -4780,10 +5035,12 @@ const HR_DATA = (() => {
   const SAL = {};
   function salamiIcon(kind) {
     if (SAL[kind]) return SAL[kind];
-    const rows = ['.kkkkkkkkkk.', 'kxXxNxxXxNxk', 'kNxxxXxNxxXk', 'kxxXxNxxXxxk', '.kkkkkkkkkk.'];
-    const pal = kind === 'grey' ? { k: '#2a2145', x: '#4a3d78', X: '#6a5a8a', N: '#3a2f60' }
-      : kind === 'gold' ? { k: '#2a1a2e', x: '#e9b52a', X: '#fff0a8', N: '#a8761a' } : { k: '#2a1a2e', x: '#b0413e', X: '#f4d6c8', N: '#2a1a1e' };
-    const cv = document.createElement('canvas'); cv.width = 12; cv.height = 5; const c = cv.getContext('2d');
+    // the order's favourite food (catalogo/cibi.js); grey and gold: the same drawing, each colour mapped by its lightness
+    const F = CIBI[(O.cibo || {}).disegno] || CIBI.salamino, rows = F.icona;
+    const lum = h => { const n = parseInt(h.slice(1), 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
+    const ramp = kind === 'grey' ? ['#2a2145', '#3a2f60', '#4a3d78', '#6a5a8a'] : ['#2a1a2e', '#a8761a', '#e9b52a', '#fff0a8'];
+    const pal = {}; for (const ch in F.pal) pal[ch] = kind === 'on' ? F.pal[ch] : ch === 'k' ? ramp[0] : ramp[1 + Math.min(2, Math.floor(lum(F.pal[ch]) * 3))];
+    const cv = document.createElement('canvas'); cv.width = 12; cv.height = rows.length; const c = cv.getContext('2d');
     rows.forEach((r, y) => [...r].forEach((ch, x) => { if (pal[ch]) R(c, x, y, 1, 1, pal[ch]); }));
     return (SAL[kind] = cv);
   }
@@ -4791,6 +5048,8 @@ const HR_DATA = (() => {
   const NOTE_C = [];
   function noteImg(f) {
     if (NOTE_C[f]) return NOTE_C[f];
+    const PR = PROIETTILI[(O.antagonista || {}).proiettile]; // the boss's own projectile (catalogo/boss.js), if drawn
+    if (PR) { const cv = document.createElement('canvas'); cv.width = 8; cv.height = 7; const c = cv.getContext('2d'); PR.frames[f].forEach((r, y) => [...r].forEach((ch, x) => { if (PR.pal[ch]) R(c, x, y, 1, 1, PR.pal[ch]); })); return (NOTE_C[f] = cv); }
     const rows = f ? ['k......k', 'Wk....kW', 'WWk..kWW', 'WWWkkWWW', 'kWWkkWWk', '.kkRRkk.', '...kk...']
       : ['kkkkkkkk', 'kRRRRRWk', 'kRrrRRWk', 'kRRRRRWk', 'kRrrrRWk', 'kRRRRRWk', 'kkkkkkkk'];
     const pal = { k: '#1a1024', R: '#d64545', r: '#9e2f3a', W: '#fff6e0' };
@@ -4820,7 +5079,7 @@ const HR_DATA = (() => {
     const dk = (h, t) => { const n = parseInt(h.slice(1), 16), q = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(v => Math.round(v * (1 - t))); return '#' + q.map(v => v.toString(16).padStart(2, '0')).join(''); };
     const col = tough ? dk(SG.divisa, 0.35) : SG.divisa;
     const ch = PTAvatar.wear({ v: 2, skin: '#F6C9A2', hairStyle: 'short', hairColor: '#2B1A12', body: 'athletic', height: 'kid', top: 'jacket', outfit: col, legs: 'pants', pants: dk(SG.divisa, 0.5), shoes: '#26222E', brows: 'thick', eyeShape: 'dots', mouth: 'closed', facialHair: 'none', blush: 'off', accessories: { head: 'none', face: 'sunglasses', ears: 'none', neck: 'tie' } },
-      SG.cappello ? { extra: { hat: SG.cappello } } : null);
+      SG.cappello ? { extra: { hat: SG.cappello, hatColor: SG.cappelloColore } } : null);
     // always from the front, also when they walk (Marco, 24 Nov: less realistic but nicer); 'kid' height everywhere
     const front = f => PTAvatar.sprite(ch, { frame: f });
     const r = { down_stand: front('stand'), down_a: front('a'), right: front('stand'), a: front('a') };
@@ -5040,7 +5299,7 @@ const HR_DATA = (() => {
         case 'chase': G.trigs.push({ x: d.x, t: -1 }); break;
         case 'boss': G.bossTrig = { x: d.x, done: false }; break;
         case 'cp': G.cp = { x: d.x, y: d.y }; break;
-        case 'finish': G.finish = d.x; break;
+        case 'finish': G.finish = G.finish0 = d.x; break; // finish0: the length of the stage, the boss's arena can stretch G.finish
         case 'crocco': G.croccoX = d.x; G.croccoY = d.y; break;
         case 'sign': G.signs.push({ x: d.x, y: d.y, txt: [G.th.name + ' 6 km', G.th.name + ' 4 km', G.th.name + ' 2 km', G.th.name + ' 500 m'][d.k] || '' }); break;
       }
@@ -5175,7 +5434,7 @@ const HR_DATA = (() => {
     G.buddy = together() && !LEVELS[i].theme.quad ? { trail: [], cj: { y: 0, vy: 0 }, d: BUDDY_D } : null; // on the quad he already rides behind her
     const L = LEVELS[i]; G.L = L; G.th = L.theme; G.li = i;
     built = buildLevel(L); G.grid = built.grid; G.W = built.W;
-    G.cp = null; G.finish = 0;
+    G.cp = null; G.finish = 0; G.finish0 = 0;
     if (!fromCp) { G.taken = new Set(); G.cpReached = false; G.cpSnap = null; G.time = 0; P.coins = 0; P.tickets = [false, false, false]; P.cards = [false, false, false]; P.gold = false; }
     spawnFromDefs(built.defs, fromCp ? G.cpSnap.taken : null);
     if (fromCp) { G.taken = new Set(G.cpSnap.taken); P.coins = G.cpSnap.coins; P.tickets = G.cpSnap.tickets.slice(); P.cards = (G.cpSnap.cards || [false, false, false]).slice(); P.gold = !!G.cpSnap.gold; G.time = G.cpSnap.time; G.cpReached = true; }
@@ -5780,11 +6039,11 @@ const HR_DATA = (() => {
   // place along the road (at: 0 the start, 1 the finish), moving as fast as that layer
   const PUNTO_K = { lontano: 0.15, mezzo: 0.4, vicino: 1 };
   function drawPunti(c, strato, base) {
-    const list = G.L && G.L.punti; if (!list || !list.length || !G.finish) return;
+    const list = G.L && G.L.punti, F = G.finish0 || G.finish; if (!list || !list.length || !F) return;
     const k = PUNTO_K[strato];
     for (const p of list) {
       const d = PUNTI[p.disegno]; if (!d || d.strato !== strato) continue;
-      const X = Math.round((p.at * G.finish - G.cam) * k + st.VW * 0.5 - d.w / 2);
+      const X = Math.round((p.at * F - G.cam) * k + st.VW * 0.5 - d.w / 2);
       if (X > st.VW + 4 || X + d.w < -4) continue;
       d.draw(c, X, base, G.t);
     }
@@ -7241,7 +7500,7 @@ const HR_DATA = (() => {
     const n = LEVELS.filter(L => save.gold[L.id]).length; box.setAttribute('aria-label', TXT.t(`{Cibi} d'oro: ${n} su ${LEVELS.length}`));
     save.goldSeen = save.goldSeen || {}; let fresh = false;
     LEVELS.forEach(L => {
-      const got = !!save.gold[L.id], cv = pxCanvas(12, 5, c => c.drawImage(salamiIcon(got ? 'gold' : 'grey'), 0, 0));
+      const got = !!save.gold[L.id], gi = salamiIcon(got ? 'gold' : 'grey'), cv = pxCanvas(12, gi.height, c => c.drawImage(gi, 0, 0));
       cv.title = L.theme.name;
       if (got && !save.goldSeen[L.id]) { cv.classList.add('pop'); save.goldSeen[L.id] = true; fresh = true; }
       box.appendChild(cv);
@@ -7438,7 +7697,7 @@ const HR_DATA = (() => {
     G.endless = { bounds: E.bounds, seg: 0, x0: 3 * TILE, trail: [], best: save.endBest || 0, cj: { y: 0, vy: 0 }, fade: null };
     G.L = { id: 'endless', theme: E.bounds[0].th, n: 0, intro: [], outro: [] }; G.th = E.bounds[0].th; G.li = -1;
     built = E; G.grid = E.grid; G.W = E.W;
-    G.cp = null; G.finish = 0;
+    G.cp = null; G.finish = 0; G.finish0 = 0;
     G.taken = new Set(); G.cpReached = false; G.cpSnap = null; G.time = 0; P.coins = 0; P.tickets = [false, false, false]; P.cards = [false, false, false]; P.gold = false;
     spawnFromDefs(E.defs, null);
     G.finish = 1e9; G.croccoX = -99999; G.croccoY = 0; // no finish line, nobody waiting
