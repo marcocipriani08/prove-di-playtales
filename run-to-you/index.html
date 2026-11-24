@@ -1067,8 +1067,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia","punti":[{"disegno":"faro","at":0.3},{"disegno":"gatto","at":0.55}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"#8E929E","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"],"cappello":"tophat"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "9480db5";
-window.SALVATAGGIO = "rty_viaggettino_9480db5_";
+window.VERSIONE = "00144ea";
+window.SALVATAGGIO = "rty_viaggettino_00144ea_";
 </script>
 <script>
 /* motore/testi.js */
@@ -3845,7 +3845,7 @@ const AMBIENTI = (() => {
     low: ['#c8843a', '#f2e6c4'], // colours of the low banner you slide under
   };
   T.skiathos = {
-    music: 'festa', water: { a: '#1f80b0', b: '#3fa0d0', top: '#7fd0e8' },
+    music: 'festa',
     sky: ['#4a98e8', '#5aa2ea', '#6aaeec', '#7ab8ee', '#90c6f0', '#a8d4f4'],
     sun: { x: 0.82, y: 0.22, r: 8, col: '#fff6d0' },
     far(c, W, H, b) {
@@ -3872,7 +3872,7 @@ const AMBIENTI = (() => {
     low: ['#c0503a', '#f6f2ea'], // colours of the low banner you slide under
   };
   T.malta = {
-    music: 'hub', water: { a: '#1f5f9a', b: '#3f80b8', top: '#7cc6e8' },
+    music: 'hub',
     sky: ['#5aa0e0', '#6aaae4', '#7ab4e8', '#8cc0ee', '#a2ccf2', '#b8dcf6'],
     sun: { x: 0.3, y: 0.2, r: 8, col: '#fff6d0' },
     far(c, W, H, b) {
@@ -3931,7 +3931,7 @@ const AMBIENTI = (() => {
     low: ['#d64545', '#f4f4f4'], // colours of the low banner you slide under
   };
   T.praga = {
-    music: 'tension', water: { a: '#2a3a6a', b: '#3a4a8a', top: '#6a7ab0' },
+    music: 'tension',
     skyStart: ['#5a78b0', '#6a84b6', '#7a90bc', '#8e9cc0', '#a4a8c2', '#bab2c0', '#d4bcb4', '#ecc8a8'],
     sky: ['#3a3a6a', '#4a4272', '#6a5a8a', '#8a6a8a', '#a87a8a', '#c08a8a', '#e09e8a', '#f2b28a'],
     sunStart: { y: 0.45, col: '#fff0c0' },
@@ -4032,7 +4032,6 @@ const AMBIENTI = (() => {
     },
     ground: { top: '#f2e2b8', top2: '#e0cc98', fill: '#d8c08a', grout: '#c0a670', deep: '#a88e5a' },
     plat: { top: '#c8945a', side: '#a8743e', under: '#7a5228', trama: 'legno' },
-    water: { a: '#1f80b0', b: '#3fa0d0', top: '#cfe6f6' },
     block(c, x, y) { R(c, x, y + 2, 16, 14, '#8a8076'); R(c, x + 2, y, 12, 4, '#a09488'); R(c, x + 1, y + 2, 5, 3, '#b4a89a'); R(c, x + 10, y + 8, 4, 2, '#6e665e'); R(c, x + 3, y + 11, 3, 2, '#6e665e'); R(c, x, y + 14, 16, 2, '#3f9a4a'); },
     hazard(c, x, y) { // sea urchins: black and spiky
       R(c, x, y + 14, 16, 2, '#8a8076');
@@ -4088,7 +4087,6 @@ const AMBIENTI = (() => {
     },
     ground: { top: '#d8ccb0', top2: '#c4b696', fill: '#a8987a', grout: '#8a7a5e', deep: '#6e604a' },
     plat: { top: '#c8945a', side: '#a8743e', under: '#7a5228', trama: 'legno' },
-    water: { a: '#1f80b0', b: '#3fa0d0', top: '#cfe6f6' },
     block(c, x, y) { // a fisherman's trap: wicker, round, with its mouth
       R(c, x + 1, y + 2, 14, 14, '#8a5a32'); R(c, x + 2, y + 1, 12, 1, '#8a5a32'); for (let k2 = 0; k2 < 14; k2 += 3) R(c, x + 1, y + 3 + k2, 14, 1, '#c8944a'); for (let k2 = 0; k2 < 14; k2 += 4) R(c, x + 2 + k2, y + 2, 1, 14, '#6b4426');
       R(c, x + 5, y + 6, 6, 6, '#3a2418'); R(c, x + 6, y + 7, 4, 4, '#5a3a22');
@@ -4281,7 +4279,6 @@ const AMBIENTI = (() => {
     },
     ground: { top: '#d8d0c0', top2: '#c0b8a8', fill: '#a89c88', grout: '#8a7e6a', deep: '#6e6250' },
     plat: { top: '#c8945a', side: '#a8743e', under: '#7a5228', trama: 'legno' },
-    water: { a: '#2a7a98', b: '#4a9ab4', top: '#cfe6ee' },
     block(c, x, y) { R(c, x, y, 16, 16, '#8a6a44'); for (let k = 0; k < 16; k += 4) R(c, x, y + k, 16, 1, '#6b4a2e'); R(c, x + 2, y + 2, 2, 2, '#2a1a2e'); R(c, x + 12, y + 10, 2, 2, '#2a1a2e'); },
     hazard(c, x, y) { // reeds and stones by the water
       R(c, x + 1, y + 12, 14, 4, '#8a8076'); R(c, x + 3, y + 11, 4, 2, '#a09488'); for (let i = 0; i < 5; i++) { R(c, x + 2 + i * 3, y + 2 + (i % 2) * 2, 1, 10, '#5a7a3a'); R(c, x + 2 + i * 3, y + 1 + (i % 2) * 2, 1, 3, '#6b4a2e'); }
@@ -5946,7 +5943,6 @@ const HR_DATA = (() => {
     const p = P;
     // TEMPORARY cheat: immortal, she is put back on the last safe ground before the hole
     if (cheatImmortal) { Object.assign(p, { x: p.safeX, y: surfaceBelow(p.safeX, 0) || 160, vx: 0, vy: 0, ground: true, jumps: 0, inv: 1 }); G.runHurt = true; float(p.x, p.y - 26, 'Per un pelo!', '#7cc6e8', true); return; }
-    if (G.th.water) { Audio.sfx('splash'); for (let i = 0; i < 12; i++) G.parts.push({ x: p.x + rnd(-6, 6), y: MAP_H - 24, vx: rnd(-40, 40), vy: rnd(-160, -60), life: 0.7, c: G.th.water.top, s: 2 }); }
     // a fall is not a lost heart: it ends the attempt, and you start again from the aperitivo (or the start)
     (G.hurtLog = G.hurtLog || []).push({ why: 'pit', x: Math.round(p.x / 16), kind: '' });
     G.runHurt = true; G.shake = 0.3; G.flashT = 0.3; Audio.sfx('hurt');
@@ -6062,14 +6058,9 @@ const HR_DATA = (() => {
   function drawTiles(c, ox, oy) {
     const g = G.th.ground, pl = G.th.plat;
     const x0 = Math.max(0, Math.floor(G.cam / TILE) - 1), x1 = Math.min(G.W - 1, Math.ceil((G.cam + st.VW) / TILE) + 1);
-    // water in the pits
-    if (G.th.water) {
-      const wy = oy + 168, wa = G.th.water;
-      R(c, 0, wy, st.VW, st.VH - wy, wa.a);
-      for (let y = wy + 3; y < st.VH; y += 3) for (let x = ((y * 7 + Math.floor(G.t * 10)) % 12) - 12; x < st.VW; x += 12) R(c, x, y, 5, 1, wa.b);
-      for (let x = -((G.cam * 1 + G.t * 14) % 8); x < st.VW; x += 8) R(c, x, wy + Math.round(Math.sin(G.t * 3 + x * 0.1)), 4, 1, wa.top);
-    }
-    else { // no water: the pits are a dark gorge, darker and darker going down
+    // the pits are always a dark gorge, darker and darker going down, from just under the road (24 Nov: also at the
+    // sea; the water started lower and left a strip under the road, which looked like a slab floating on the sea)
+    {
       R(c, 0, oy + 162, st.VW, st.VH - oy - 162, '#241a3c'); R(c, 0, oy + 170, st.VW, st.VH - oy - 170, '#170f26'); R(c, 0, oy + 180, st.VW, st.VH - oy - 180, '#0a0614');
       for (let x = -(Math.floor(G.cam * 0.6) % 24); x < st.VW; x += 24) R(c, x, oy + 167, 10, 1, '#352a58');
     }
@@ -7807,7 +7798,7 @@ const HR_DATA = (() => {
       if (rec) { Audio.play('ending'); Audio.sfx('ticket'); conf = VG.confetti(70, st.VW, st.VH); } else Audio.play('hub');
       const box = menuBox();
       const panel = el('div', 'panel page-done free-done end-done');
-      panel.innerHTML = `<h2>${kind === 'fell' ? (G.th.water ? 'Splash!' : 'Che volo!') : 'Bloccata in ufficio'}</h2><p class="sub">Partita libera · ${G.th.name}</p><p class="free-moves">Siete arrivati a <b>${m} m</b></p>${rec ? '<p class="rev-rec">Nuovo record!</p>' : `<p class="end-best">Record: <b>${save.endBest || 0} m</b></p>`}<p class="end-coins">Monete <b>+${P.coins}</b></p>`;
+      panel.innerHTML = `<h2>${kind === 'fell' ? 'Che volo!' : 'Bloccata in ufficio'}</h2><p class="sub">Partita libera · ${G.th.name}</p><p class="free-moves">Siete arrivati a <b>${m} m</b></p>${rec ? '<p class="rev-rec">Nuovo record!</p>' : `<p class="end-best">Record: <b>${save.endBest || 0} m</b></p>`}<p class="end-coins">Monete <b>+${P.coins}</b></p>`;
       const row = el('div', 'row next-row');
       const mk = (label, cls, fn) => { const b = el('button', 'btn ' + cls, label); b.type = 'button'; b.onclick = e => { e.stopPropagation(); Audio.unlock(); fn(); }; row.appendChild(b); return b; };
       mk('Rigioca ›', 'primary wide', startEndless);
@@ -8217,7 +8208,7 @@ const HR_DATA = (() => {
       if (runId !== G.runId || G.mode !== 'over') return;
       // always the same window: El Falcon knocked about, a title that changes, one line, the same buttons
       const p = el('div', 'panel lose');
-      const title = kind === 'fell' ? (G.th.water ? 'Splash!' : 'Che volo!') : 'Che peccato!';
+      const title = kind === 'fell' ? 'Che volo!' : 'Che peccato!';
       const why = kind === 'fell' ? 'Occhio ai buchi.' : TXT.t('Stavolta hanno vinto {scagnozzi}.');
       p.innerHTML = `<div class="lose-top"><span class="lose-pic"></span><div><h2>${title}</h2><p class="sub">${why}</p></div></div>`;
       const pic = falconPose('hurt'), pc = pxCanvas(pic.width, pic.height, c2 => c2.drawImage(pic, 0, 0)); p.querySelector('.lose-pic').appendChild(pc);
