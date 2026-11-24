@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#120e24">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -647,6 +647,12 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { .spot-hole, .spot-hole.nudge { animation: none; } }
   /* lists and panels scroll only up and down: no sideways dragging */
   #ov, #ov .panel { overflow-x: hidden; touch-action: pan-y; overscroll-behavior: contain; }
+  html, body { touch-action: manipulation; } /* no zoom on a double tap, anywhere (the pinch: see run.js) */
+  /* the shop never scrolls: when the space is short it gets smaller as a whole (run.js, fitShop) */
+  #ov:has(> .negozio) { overflow: hidden; overscroll-behavior: none; touch-action: none; }
+  #ov .panel.negozio { touch-action: none; }
+  /* while the screen is dark around the note, the page under it stays still */
+  body.spot-on #ov, body.spot-on #ov .panel { overflow: hidden !important; touch-action: none; }
   .album-extra.fresh { animation: exIn .9s cubic-bezier(.2,1.3,.4,1) .3s both; }
   @keyframes exIn { from { opacity: 0; transform: translateY(24px) scale(.96); } }
   .panel.shake { animation: albumShake .5s ease .35s; }
@@ -1061,8 +1067,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"normal","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia"},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane"},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"grigio","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "ac6b9bb";
-window.SALVATAGGIO = "rty_viaggettino_ac6b9bb_";
+window.VERSIONE = "c784529";
+window.SALVATAGGIO = "rty_viaggettino_c784529_";
 </script>
 <script>
 /* motore/testi.js */
@@ -3031,7 +3037,7 @@ const VG = (() => {
     const id = look.costume, recol = PTAvatar.recolors(HERO.a, 2).find(r => r.id === id);
     const cos = id === 'og' ? (window.COSTUMI_BOSS || {})[(window.ORDINE.antagonista || {}).aspetto] || BOSS_FALLBACK
       : recol || PTAvatar.COSTUMES[id] || (window.COSTUMI_MONDI || {})[id];
-    return PTAvatar.wear(HERO.a, cos, ...[...(look.jewels || '')].map(j => PTAvatar.JEWELS[j]));
+    return PTAvatar.wear(HERO.a, cos); // (no jewels on the customer's characters: they would not show)
   };
   function avFrames(k) {
     const key = k === 'a' ? 'a_' + look.costume + '_' + (look.jewels || '') : k;
@@ -6796,12 +6802,15 @@ const HR_DATA = (() => {
         const below = b.bottom + pad + 54 < innerHeight;
         tip.style.top = (below ? b.bottom + pad + 12 : b.top - pad - 48) + 'px';
       };
-      place(); addEventListener('resize', place);
+      // it follows the note (the page of the Album may still be moving when it starts) and the page stays still
+      document.body.classList.add('spot-on');
+      const follow = () => { if (!blk.isConnected) return; place(); requestAnimationFrame(follow); };
+      place(); addEventListener('resize', place); requestAnimationFrame(follow);
       const t0 = performance.now();
       blk.addEventListener('click', e => {
         if (performance.now() - t0 < 500) return;
         const b = target.getBoundingClientRect();
-        if (e.clientX >= b.left - 8 && e.clientX <= b.right + 8 && e.clientY >= b.top - 8 && e.clientY <= b.bottom + 8) { removeEventListener('resize', place); blk.remove(); res(); }
+        if (e.clientX >= b.left - 8 && e.clientX <= b.right + 8 && e.clientY >= b.top - 8 && e.clientY <= b.bottom + 8) { removeEventListener('resize', place); blk.remove(); document.body.classList.remove('spot-on'); res(); }
         else { hole.classList.remove('nudge'); void hole.offsetWidth; hole.classList.add('nudge'); Audio.sfx('tap'); }
       });
     });
@@ -6851,7 +6860,7 @@ const HR_DATA = (() => {
   async function meetVillain() {
     hideOv(); G.mode = 'board';
     await villainSays(PEST.steal);
-    await VG.say([['crocco', 'Ridacci la nostra foto!'], ['pest', 'Sfida accettata.']]);
+    await VG.say([['crocco', 'Ridacci la nostra foto!'], ['falcon', 'Sfida accettata!']]); // the villain throws the challenge, the two accept it
     save.villainMet = true; persist(); checkMissions();
     showChallenges();
   }
@@ -7333,7 +7342,8 @@ const HR_DATA = (() => {
       <div class="sh-body"><div class="sh-lbl"><p class="sh-nm"></p><p class="sh-st"></p></div><div class="sh-stage"><canvas class="sh-big px" width="44" height="40" aria-hidden="true"></canvas></div><div class="sh-grid"></div></div>`;
     const big = p.querySelector('.sh-big'), bc = big.getContext('2d'); bc.imageSmoothingEnabled = false;
     const tabsEl = p.querySelector('.sh-tabs'), grid = p.querySelector('.sh-grid'), act = p.querySelector('.sh-act');
-    const TABS = [['vestiti', 'Vestiti'], ['viaggi', 'Speciali'], ['gioielli', 'Gioielli']];
+    // the jewels are not sold to the customer's characters: on them they are one or two pixels, they would not show
+    const TABS = [['vestiti', 'Vestiti'], ['viaggi', 'Speciali'], ['gioielli', 'Gioielli']].filter(t => t[0] !== 'gioielli' || !VG.hero.avatar('a'));
     const everyday = Object.keys(VG.COSTUMES).filter(id => !WORLD_COSTUME[id] && id !== 'og'), trips = [...Object.keys(WORLD_COSTUME), 'og'];
     const jName = k => JEWEL_NAME[k] || VG.JEWELS[k].name;
     // the vetrina: El Falcon turns slowly on the pedestal (front, side, back, side), with a little hop at each turn
@@ -7433,6 +7443,9 @@ const HR_DATA = (() => {
     const row = p.querySelector('.sh-row');
     row.appendChild(mkBtn('Fatto', 'primary', () => { back(); }));
     paint(); showOv(p); requestAnimationFrame(drawBig);
+    // it never scrolls: when the screen is short (Safari's bars) the whole shop gets smaller to fit
+    const fitShop = () => { if (!p.isConnected) { removeEventListener('resize', fitShop); return; } p.style.zoom = 1; const cs = getComputedStyle(ov), room = ov.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom); const k = Math.min(1, room / p.offsetHeight); p.style.zoom = k < 1 ? k.toFixed(3) : ''; };
+    fitShop(); addEventListener('resize', fitShop);
   }
   // ---------------------------------------------------------------- the wallet: always top-left in the menus (not in the home, not while running)
   // It is the only place where the coins to spend are shown; a tap opens the Negozio, then back to the same screen.
@@ -8373,6 +8386,10 @@ const HR_DATA = (() => {
   requestAnimationFrame(frame);
 
   // hooks for automated tests / video recordings
+  // no zoom: Safari zooms with two fingers or a double tap even when the page says no
+  ['gesturestart', 'gesturechange', 'gestureend'].forEach(ev => document.addEventListener(ev, e => e.preventDefault(), { passive: false }));
+  document.addEventListener('touchmove', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  document.addEventListener('dblclick', e => e.preventDefault(), { passive: false });
   window.HR = { G, P, save, LEVELS, go, levelIntro, showBoard, startLevel, showWardrobe, setAuto: v => { G.auto = v; Bot.reset(); }, Bot, pose: falconPose };
 })();
 
