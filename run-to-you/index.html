@@ -1067,8 +1067,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia","punti":[{"disegno":"faro","at":0.3},{"disegno":"gatto","at":0.55}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"#8E929E","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"],"cappello":"tophat"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "70fb68f";
-window.SALVATAGGIO = "rty_viaggettino_70fb68f_";
+window.VERSIONE = "5a44b0c";
+window.SALVATAGGIO = "rty_viaggettino_5a44b0c_";
 </script>
 <script>
 /* motore/testi.js */
@@ -6222,6 +6222,51 @@ const HR_DATA = (() => {
     c.drawImage(g, x - 1, y); c.drawImage(g, x + 1, y); c.drawImage(g, x, y - 1); c.drawImage(g, x, y + 1);
     c.globalAlpha = 1;
   }
+  // The quad of the customer's characters (24 Nov, drawn with Marco): high off the ground, knobbly tyres, a fender over
+  // each wheel; a high padded seat for B, hers a step lower, both right under them (read from the drawings, so nobody
+  // floats); a black top case against B's back; a sporty front that rises over the wheel and drops to the headlight,
+  // the bumper bar, the handlebar up to A's hand. X, Y: the middle and the ground; spin: the turn of the wheels.
+  function quadPoly(c, pts, col) {
+    const ys = pts.map(p => p[1]), y0 = Math.min(...ys), y1 = Math.max(...ys);
+    for (let y = y0; y <= y1; y++) { const xs = []; for (let i = 0; i < pts.length; i++) { const [ax, ay] = pts[i], [bx, by] = pts[(i + 1) % pts.length]; if ((ay <= y && by > y) || (by <= y && ay > y)) xs.push(ax + (y - ay) * (bx - ax) / (by - ay)); }
+      xs.sort((a, b) => a - b); for (let i = 0; i + 1 < xs.length; i += 2) R(c, Math.round(xs[i]), y, Math.round(xs[i + 1]) - Math.round(xs[i]) + 1, 1, col); }
+  }
+  function quadTyre(c, cx, cy, spin) {
+    const K = '#1a1024', disc = (r, col) => { for (let y = -r; y <= r; y++) { const w = Math.round(Math.sqrt(r * r - y * y + r * 0.6)); R(c, cx - w, cy + y, 2 * w + 1, 1, col); } };
+    disc(5, K); disc(4, '#2a2a34');
+    for (let a = 0; a < 12; a++) { const an = a * Math.PI / 6 + spin; R(c, Math.round(cx + Math.cos(an) * 5), Math.round(cy + Math.sin(an) * 5), 1, 1, '#3a3a48'); }
+    disc(2, '#9aa0b4'); R(c, Math.round(cx + Math.cos(spin) * 2), Math.round(cy + Math.sin(spin) * 2), 1, 1, K);
+  }
+  function drawQuadAv(c, X, Y, anim, withB, fl) {
+    const K = '#1a1024', BODY = '#2e2e3a', HI = '#5a5a6e', RED = '#d64545', SEAT = '#6b4a32', SEATH = '#8a6442', poly = (pts, col) => quadPoly(c, pts.map(([x, y]) => [X + x, Y + y]), col);
+    const spin = anim * 9, sA = Y - 15, sB = Y - 18, A = VG.hero.ch('a'), fa = seatedImg('a'), ya = sA - (seatRow(fa) + 1);
+    // the top case on its rack, seen from the side, against B's back
+    poly([[-24, -24], [-16, -24], [-16, -15], [-25, -15], [-26, -17], [-26, -22]], K);
+    poly([[-24, -23], [-17, -23], [-17, -16], [-24, -16], [-25, -17], [-25, -22]], '#2a2a34');
+    R(c, X - 24, Y - 23, 7, 1, '#4a4a5a'); R(c, X - 25, Y - 20, 8, 1, K); R(c, X - 23, Y - 19, 5, 1, '#3a3a48'); R(c, X - 26, Y - 19, 1, 2, RED);
+    R(c, X - 25, Y - 15, 9, 2, K);
+    quadTyre(c, X - 10, Y - 5, spin);
+    // the back: the fender over the wheel, the two seats
+    poly([[-18, -14], [-2, -14], [-2, -9], [-5, -9], [-7, -11], [-13, -11], [-15, -9], [-18, -9]], K);
+    poly([[-17, -13], [-3, -13], [-3, -10], [-6, -10], [-7, -12], [-13, -12], [-14, -10], [-17, -10]], BODY);
+    R(c, X - 17, Y - 13, 14, 1, HI);
+    R(c, X - 16, sB - 1, 13, sA - sB + 3, K); R(c, X - 15, sB, 11, sA - sB + 1, SEAT); R(c, X - 15, sB, 11, 1, SEATH);
+    R(c, X - 4, sA - 1, 10, 3, K); R(c, X - 3, sA, 8, 1, SEATH);
+    if (withB) { const kb = seatedImg('b'); c.drawImage(kb, X - 17, sB - (seatRow(kb) + 1)); }
+    powerGlow(c, fa, X - 6, ya); c.drawImage(fa, X - 6, ya);
+    if (withB) { const B = VG.hero.ch('b'); R(c, X - 3, sA - 6, 4, 2, B.outfit); R(c, X + 1, sA - 6, 2, 2, B.skin); } // his arm round her waist
+    R(c, X - 9, ya + 10 + fl, 3, 1, 'rgba(255,246,224,.7)'); R(c, X - 11, ya + 13 - fl, 2, 1, 'rgba(255,246,224,.5)'); // the wind
+    quadTyre(c, X + 12, Y - 5, spin);
+    // the sporty front, the bumper bar, the frame between the wheels
+    poly([[2, -17], [8, -17], [17, -13], [18, -10], [16, -10], [14, -12], [9, -12], [6, -9], [2, -9]], K);
+    poly([[3, -16], [8, -16], [16, -13], [16, -11], [14, -13], [9, -13], [6, -10], [3, -10]], BODY);
+    poly([[3, -16], [8, -16], [15, -13], [11, -14], [3, -14]], HI);
+    R(c, X + 4, Y - 13, 6, 1, RED); R(c, X + 9, Y - 14, 4, 1, RED);
+    R(c, X + 15, Y - 13, 2, 1, '#ffe38a'); R(c, X + 17, Y - 12, 1, 1, '#fff6e0');
+    R(c, X + 18, Y - 11, 1, 5, K); R(c, X + 17, Y - 7, 2, 1, K); R(c, X - 3, Y - 9, 6, 1, K);
+    // the handlebar: out of the front, a little ahead of her face, back to her hand
+    R(c, X + 8, Y - 21, 2, 5, K); R(c, X + 4, Y - 22, 6, 2, K); R(c, X + 3, Y - 22, 2, 2, A.skin);
+  }
   // the quad, 26 × 14: dark body, a red stripe, a seat for two, a handlebar, big wheels with hubs that turn
   const QUAD_IMG = [];
   function quadImg(fr) {
@@ -6305,15 +6350,9 @@ const HR_DATA = (() => {
       const bump = p.ground ? Math.round(Math.sin(p.anim * 3)) : 0;
       const q = quadImg(p.ground ? Math.floor(p.anim * 2) % 2 : 0), f = VG.falcon('right', 'stand'), k = VG.crocco('right', 'stand');
       const seat = Y - 11 + bump, fl = Math.floor(G.t * 10) % 2;
-      if (VG.hero.avatar('a')) { // the customer's characters: both sitting (avatar.js), B behind and a little higher
-        const fa = seatedImg('a'), ya = seat - 2 - seatRow(fa), A = VG.hero.ch('a'), gone = G.kidnap && G.kidnap.ph === 'take';
-        powerGlow(c, fa, X - 6, ya);
-        if (!gone && VG.hero.avatar('b')) { const kb = seatedImg('b'); c.drawImage(kb, X - 16, seat - 4 - seatRow(kb)); }
-        c.drawImage(fa, X - 6, ya);
-        if (!gone && VG.hero.avatar('b')) { const B = VG.hero.ch('b'); R(c, X - 3, seat - 6, 4, 2, B.outfit); R(c, X + 1, seat - 6, 2, 2, B.skin); } // his arm round her waist
-        R(c, X - 9, ya + 7 + fl, 3, 1, 'rgba(255,246,224,.7)'); R(c, X - 11, ya + 10 - fl, 2, 1, 'rgba(255,246,224,.5)'); // the wind
-        R(c, X + 4, seat - 7, 4, 1, A.skin); R(c, X + 8, seat - 8, 1, 2, '#2a1a2e'); // hands on the handlebar
-        c.drawImage(q, X - 13, Y - q.height + 1 + bump);
+      if (VG.hero.avatar('a')) { // the customer's characters: both sitting (avatar.js) on the sporty quad, B behind and higher
+        const gone = G.kidnap && G.kidnap.ph === 'take';
+        drawQuadAv(c, X, Y + bump, p.ground ? p.anim : 0, !gone && VG.hero.avatar('b'), fl);
         if (p.ground && fl) { R(c, X - 16, Y - 3, 2, 2, '#e3d4ae'); R(c, X - 19, Y - 5, 1, 1, '#e3d4ae'); }
         return;
       }
