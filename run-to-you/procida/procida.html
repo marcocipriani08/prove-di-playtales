@@ -1067,8 +1067,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: procida */
 window.ORDINE = {"codice":"procida","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"procida","luogo":{"titolo":"Procida","sottotitolo":"Casa, d'estate","frase":"Qui l'estate ha il cognome di famiglia.","disegno":"t_procida"},"ricordi":[{"titolo":"Corsa alla doccia","frase":"Dal mare alla terrazza di corsa: chi arriva secondo aspetta, gocciolando.","disegno":"doccia"},{"titolo":"Caccia alle meduse","frase":"Un gommoncino, una retina e il coraggio dei pirati: le meduse tremavano.","disegno":"meduse"}],"costume":"procida","punti":[{"disegno":"terramurata","at":0.1},{"disegno":"faro","at":0.24},{"disegno":"gommone","at":0.38},{"disegno":"terrazza","at":0.52},{"disegno":"vivara","at":0.64}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"parmigiana","plurale":"parmigiane","articolo":"le","disegno":"parmigiana"},"antagonista":{"nome":"Il Conte Posponi","presentazione":"Puntuale come il traghetto d'agosto","ingresso":"Arrivo tra cinque minuti… facciamo dieci.","sconfitta":"Ancora… cinque… minuti…","aspetto":"conte","proiettile":"sveglia"},"scagnozzi":{"nome":"i Ritardatari","singolare":"Ritardatario","divisa":"#8E929E","cappello":"skihat","cappelloColore":"#9CC8F0","grida":["Che fretta c'è?!","Cinque minuti e arriviamo!","Ci vediamo… più tardi!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci una parmigiana e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "a9e5843";
-window.SALVATAGGIO = "rty_procida_a9e5843_";
+window.VERSIONE = "9480db5";
+window.SALVATAGGIO = "rty_procida_9480db5_";
 </script>
 <script>
 /* motore/testi.js */
@@ -3808,7 +3808,7 @@ const AMBIENTI = (() => {
     },
     mid(c, W, H, b) {
       for (let x = 0; x < W; x++) { const y = Math.round(b - 10 - 9 * Math.max(0, Math.sin(x / 40)) - 3 * Math.sin(x / 9)); R(c, x, y, 1, H, '#e3d4ae'); R(c, x, y, 1, 1, '#f2e6c4'); }
-      for (let i = 0; i < 6; i++) { const x = i * 90 + 30; R(c, x, b - 26, 2, 16, '#7a5a3a'); R(c, x - 5, b - 28, 12, 3, '#5a8a3a'); R(c, x - 3, b - 31, 8, 3, '#6aa84a'); }
+      for (let i = 0; i < 6; i++) { const x = i * 90 + 30, dune = Math.round(b - 10 - 9 * Math.max(0, Math.sin(x / 40)) - 3 * Math.sin(x / 9)); R(c, x, b - 26, 2, Math.max(16, dune - (b - 26) + 1), '#7a5a3a'); R(c, x - 5, b - 28, 12, 3, '#5a8a3a'); R(c, x - 3, b - 31, 8, 3, '#6aa84a'); }
     },
     ground: { top: '#f2e6c4', top2: '#e9d6a0', fill: '#e3d0a0', grout: '#d0b880', deep: '#c0a470' },
     plat: { top: '#c9b48a', side: '#a8946a', under: '#8a7a5a' },
@@ -3998,11 +3998,11 @@ const AMBIENTI = (() => {
   // about 3 screens (1280), middle about 4 (1664); everything periodic repeats exactly on the width, so no seams.
   const TAU = Math.PI * 2, wav = (x, W, n) => Math.sin(TAU * n * x / W);
   const tri = (c, x, y, w, h, col) => { c.fillStyle = col; c.beginPath(); c.moveTo(Math.round(x), Math.round(y + h)); c.lineTo(Math.round(x + w / 2), Math.round(y)); c.lineTo(Math.round(x + w), Math.round(y + h)); c.fill(); };
-  const pine = (c, x, y, h, col, snow) => { for (let i = 0; i < 3; i++) { const w = 6 + i * 4, yy = y + i * (h / 4); tri(c, x - w / 2, yy, w, h / 3, col); if (snow) R(c, x - 1, yy + 1, 2, 1, '#ffffff'); } R(c, x - 1, y + h * 0.85, 2, h * 0.2, '#5a3a22'); };
+  const pine = (c, x, y, h, col, snow) => { for (let i = 0; i < 3; i++) { const w = 6 + i * 4, yy = y + i * (h / 4); tri(c, x - w / 2, yy, w, h / 3, col); if (snow) R(c, x - 1, yy + 1, 2, 1, '#ffffff'); } R(c, x - 1, y + Math.floor(h * 0.7), 2, h - Math.floor(h * 0.7), '#5a3a22'); };
   const cypress = (c, x, y, h, col) => { for (let k = 0; k < h; k++) { const w = Math.max(1, Math.round(Math.sin(Math.PI * Math.min(1, (k + 1) / h)) * 4 * (k < h * 0.25 ? k / (h * 0.25) : 1))); R(c, x - w / 2, y + k, w, 1, col); } };
   // ---- the sea: an island or a seaside town (beaches, pastel houses, palms, the lighthouse at the finish)
   T.mare = {
-    music: 'island', farW: 1280, midW: 1664,
+    piede: { top: '#e0d4b8', fill: '#c0b090', line: '#a0906e' }, music: 'island', farW: 1280, midW: 1664,
     sky: ['#4a8ad8', '#5a96dc', '#6aa2e0', '#7eb0e4', '#94bee8', '#aacbea', '#c4d6ea', '#dfe0e4', '#f2e6d8'],
     sun: { x: 0.76, y: 0.24, r: 11, col: '#fff2c0' },
     far(c, W, H, b) {
@@ -4017,7 +4017,7 @@ const AMBIENTI = (() => {
       for (let i = 0; i < 13; i++) {
         const x = i * 128 + (i % 3) * 14;
         if (i % 4 === 3) { // a palm between the houses
-          for (let k = 0; k < 34; k++) R(c, x + 30 + Math.round(Math.sin(k / 9) * 2), b - 6 - k, 3, 1, k % 4 ? '#8a6a44' : '#6b4f30');
+          for (let k = 0; k < 40; k++) R(c, x + 30 + Math.round(Math.sin(Math.max(0, k - 6) / 9) * 2), b - 1 - k, 3, 1, k % 4 ? '#8a6a44' : '#6b4f30');
           for (let a = 0; a < 6; a++) { const an = Math.PI + a * Math.PI / 5; for (let r = 2; r < 15; r++) R(c, x + 31 + Math.cos(an) * r, b - 40 + Math.sin(an) * r * 0.5 + r * r * 0.03, 2, 2, a % 2 ? '#3f9a4a' : '#2e7a38'); }
           continue;
         }
@@ -4027,7 +4027,7 @@ const AMBIENTI = (() => {
           R(c, hx - 1, hy - 3, w + 2, 3, roofs[(i + j) % 3]); R(c, hx + 4, hy + 5, 4, 5, '#3a8fb7'); if (w > 22) R(c, hx + 13, hy + 5, 4, 5, '#3a8fb7'); R(c, hx + w / 2 - 2, hy + h - 2, 4, 8, '#8a5a32');
         }
         // the beach in front: an umbrella
-        if (i % 2 === 0) { const ux = x + 84; R(c, ux, b - 18, 1, 13, '#8a6a44'); for (let k = -8; k <= 8; k++) { const hh = Math.round(4 * Math.sqrt(1 - (k / 9) ** 2)); R(c, ux + k, b - 18 - hh, 1, hh + 1, (Math.floor((k + 8) / 3) % 2) ? '#ff6b57' : '#fff6e0'); } R(c, ux - 8, b - 7, 9, 2, '#4dd7ff'); }
+        if (i % 2 === 0) { const ux = x + 84; R(c, ux, b - 18, 1, 18, '#8a6a44'); for (let k = -8; k <= 8; k++) { const hh = Math.round(4 * Math.sqrt(1 - (k / 9) ** 2)); R(c, ux + k, b - 18 - hh, 1, hh + 1, (Math.floor((k + 8) / 3) % 2) ? '#ff6b57' : '#fff6e0'); } R(c, ux - 8, b - 7, 9, 2, '#4dd7ff'); }
       }
     },
     ground: { top: '#f2e2b8', top2: '#e0cc98', fill: '#d8c08a', grout: '#c0a670', deep: '#a88e5a' },
@@ -4052,14 +4052,14 @@ const AMBIENTI = (() => {
   // away; the Corricella's pastel houses stacked in two rows with their arches («vefi») and outside stairs, washing on
   // the lines, lemon trees, the fishing boats («gozzi») on the quay; the stone quay; the fish trap as a block; sea urchins
   T.procida = {
-    music: 'island', farW: 1280, midW: 1664,
+    piede: { top: '#d8ccb0', fill: '#b4a688', line: '#94866a' }, music: 'island', farW: 1280, midW: 1664,
     sky: ['#4a8ad8', '#5a96dc', '#6aa2e0', '#7eb0e4', '#94bee8', '#aacbea', '#c4d6ea', '#e2dcd4', '#f4e2c8'],
     sun: { x: 0.7, y: 0.22, r: 11, col: '#fff2c0' },
     far(c, W, H, b) {
+      R(c, 0, b - 31, W, 1, '#d8eaf6');   // the light on the horizon: first, so the mountains and the islands stand on it
       // the Vesuvio, faint, with its two humps
       for (let i = 0; i < 2; i++) { const cx = (0.15 + i * 0.5) * W; for (let x = -110; x <= 110; x++) { const y = Math.round(Math.max(0, 34 - Math.abs(x) * 0.3) + (Math.abs(x) < 24 ? -Math.abs(Math.sin(x * 0.13)) * 3 : 0)); if (y > 0) R(c, cx + x, b - 30 - y, 1, y, '#9ab0c8'); } }
       R(c, 0, b - 30, W, H, '#2a7ab8'); for (let y = b - 29; y < H; y += 3) for (let x = (y * 7) % 17; x < W; x += 17) R(c, x, y, 6, 1, '#4a95d0');
-      R(c, 0, b - 31, W, 1, '#d8eaf6');
       // Ischia, big, with the Epomeo; Vivara, small and green
       for (let i = 0; i < 2; i++) { const cx = (0.42 + i * 0.5) * W, w = 260; for (let x = -w / 2; x < w / 2; x++) { const u = x / (w / 2), y = Math.round(22 * Math.sqrt(Math.max(0, 1 - u * u)) + 12 * Math.max(0, 1 - Math.abs(u + 0.15) * 3)); R(c, cx + x, b - 30 - y, 1, y, '#6f8faa'); } }
       for (let i = 0; i < 2; i++) { const cx = (0.3 + i * 0.5) * W; for (let x = -30; x < 30; x++) { const y = Math.round(9 * Math.sqrt(Math.max(0, 1 - (x / 30) ** 2))); R(c, cx + x, b - 30 - y, 1, y, '#6a8a74'); } }
@@ -4071,7 +4071,7 @@ const AMBIENTI = (() => {
       for (let i = 0; i < 26; i++) {
         const x = i * 64, row = i % 2, n = i * 5;
         // the back row, higher up the hill, and the front row on the quay
-        if (i % 4 === 3) { const gx = x + 20, col = ['#d64545', '#2f6fc0'][i % 2]; R(c, gx, b - 9, 22, 4, col); R(c, gx + 2, b - 5, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 10, 20, 1, '#fff6e0'); continue; } // a gap: the sea shows, a boat
+        if (i % 4 === 3) { const gx = x + 20, col = ['#d64545', '#2f6fc0'][i % 2]; R(c, gx, b - 6, 22, 4, col); R(c, gx + 2, b - 2, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 7, 20, 1, '#fff6e0'); continue; } // a gap: the sea shows, a boat
         for (const [tier, dy, hh] of [[0, 16, 16], [1, 0, 20]]) {
           const w = 30 + ((n + tier) % 3) * 4, hx = x + (tier ? 2 : 18) + (row ? 6 : 0), y = b - 6 - hh - dy, col = walls[(n + tier * 4) % walls.length];
           R(c, hx, y, w, hh + dy + 6, col); R(c, hx, y, w, 1, 'rgba(255,255,255,.4)'); R(c, hx + w - 2, y, 2, hh, 'rgba(0,0,0,.08)');
@@ -4083,7 +4083,7 @@ const AMBIENTI = (() => {
         }
         // a lemon tree in a garden, then a boat on the quay
         if (i % 3 === 2) { const lx = x + 54; disc(c, lx, b - 18, 8, '#3f8a3a'); R(c, lx - 1, b - 12, 2, 6, '#6b4a2e'); for (let k2 = 0; k2 < 5; k2++) R(c, lx - 5 + k2 * 3, b - 22 + (k2 % 2) * 6, 2, 2, '#ffe14d'); }
-        if (i % 3 === 0) { const gx = x + 40, col = ['#d64545', '#2f6fc0', '#f6d88a', '#3f9a4a'][i % 4]; R(c, gx, b - 9, 22, 4, col); R(c, gx + 2, b - 5, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 10, 20, 1, '#fff6e0'); R(c, gx + 18, b - 14, 1, 5, '#8a6a44'); }
+        if (i % 3 === 0) { const gx = x + 40, col = ['#d64545', '#2f6fc0', '#f6d88a', '#3f9a4a'][i % 4]; R(c, gx, b - 6, 22, 4, col); R(c, gx + 2, b - 2, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 7, 20, 1, '#fff6e0'); R(c, gx + 18, b - 11, 1, 5, '#8a6a44'); }
       }
     },
     ground: { top: '#d8ccb0', top2: '#c4b696', fill: '#a8987a', grout: '#8a7a5e', deep: '#6e604a' },
@@ -4150,7 +4150,7 @@ const AMBIENTI = (() => {
   };
   // ---- a modern city at night: skyscrapers, lit windows, neon, asphalt (Milan, London, New York, Tokyo…)
   T.citta_moderna = {
-    music: 'techno', night: true, farW: 1280, midW: 1664,
+    piede: { top: '#a8adb8', fill: '#7d828e', line: '#5d6270' }, music: 'techno', night: true, farW: 1280, midW: 1664,
     sky: ['#0f0b2a', '#130e30', '#171236', '#1d1640', '#251c4c', '#2e2358', '#3a2a62'],
     moon: { x: 0.18, y: 0.16 },
     far(c, W, H, b) {
@@ -4184,7 +4184,7 @@ const AMBIENTI = (() => {
   };
   // ---- the mountains in winter: snowy peaks, pine woods, chalets, snow on everything
   T.montagna = {
-    music: 'snow', snow: true, farW: 1280, midW: 1664,
+    piede: { top: '#f4f8ff', fill: '#dde8f2', line: '#c4d4e4' }, music: 'snow', snow: true, farW: 1280, midW: 1664,
     sky: ['#3a7ad8', '#4a86dc', '#5a92e0', '#6e9ee2', '#86ace6', '#9cbae8', '#b6c8ec', '#d0d8f0', '#e6eaf4'],
     sun: { x: 0.7, y: 0.22, r: 10, col: '#fff8e0' },
     far(c, W, H, b) {
@@ -4218,7 +4218,7 @@ const AMBIENTI = (() => {
   };
   // ---- the countryside: rolling hills, fields, cypresses, a farmhouse, vineyards (Tuscany, Langhe, Provence…)
   T.campagna = {
-    music: 'adventure', farW: 1280, midW: 1664,
+    piede: { top: '#8ab04a', fill: '#6e9a3a', line: '#5a8030' }, music: 'adventure', farW: 1280, midW: 1664,
     sky: ['#4a8ad8', '#5a96dc', '#6ea2de', '#84b0e0', '#9cbee2', '#b4cae2', '#ccd6e0', '#e2dcd2', '#f2e2c4'],
     sun: { x: 0.8, y: 0.26, r: 11, col: '#fff2c0' },
     far(c, W, H, b) {
@@ -4230,14 +4230,14 @@ const AMBIENTI = (() => {
       for (let i = 0; i < 13; i++) {
         const x = i * 128;
         // vineyard rows
-        for (let r = 0; r < 6; r++) { R(c, x + 4 + r * 9, b - 12, 7, 6, '#4a7a3a'); R(c, x + 5 + r * 9, b - 13, 5, 1, '#6a9a4a'); if ((r + i) % 3 === 0) R(c, x + 7 + r * 9, b - 9, 2, 2, '#7a3a7a'); }
+        for (let r = 0; r < 6; r++) { R(c, x + 4 + r * 9, b - 8, 7, 6, '#4a7a3a'); R(c, x + 5 + r * 9, b - 9, 5, 1, '#6a9a4a'); R(c, x + 7 + r * 9, b - 2, 1, 2, '#6b4a2e'); if ((r + i) % 3 === 0) R(c, x + 7 + r * 9, b - 5, 2, 2, '#7a3a7a'); }
         if (i % 3 === 0) { // the farmhouse (casale) in stone with a terracotta roof
           const cx = x + 64, w = 50, h = 26; R(c, cx, b - h - 6, w, h + 6, '#d8c09a'); R(c, cx - 2, b - h - 9, w + 4, 4, '#b8542e'); R(c, cx + 30, b - h - 20, 14, 14, '#d8c09a'); R(c, cx + 29, b - h - 22, 16, 3, '#b8542e');
           R(c, cx + 6, b - h, 6, 7, '#3f7a4a'); R(c, cx + 20, b - h, 6, 7, '#3f7a4a'); R(c, cx + 34, b - 16, 9, 10, '#5a3a22');
         } else if (i % 3 === 1) { // haystacks
-          for (let k = 0; k < 3; k++) { const hx = x + 70 + k * 16; disc(c, hx, b - 10, 7, '#e8c860'); R(c, hx - 7, b - 10, 14, 4, '#d8b850'); R(c, hx - 5, b - 13, 10, 1, '#c8a840'); }
+          for (let k = 0; k < 3; k++) { const hx = x + 70 + k * 16; disc(c, hx, b - 7, 7, '#e8c860'); R(c, hx - 7, b - 7, 14, 7, '#d8b850'); R(c, hx - 5, b - 10, 10, 1, '#c8a840'); }
         } else { // a big oak
-          disc(c, x + 90, b - 34, 16, '#4a7a3a'); disc(c, x + 80, b - 28, 11, '#5a8a44'); disc(c, x + 100, b - 26, 12, '#3f6a32'); R(c, x + 88, b - 22, 5, 16, '#6b4a2e');
+          disc(c, x + 90, b - 34, 16, '#4a7a3a'); disc(c, x + 80, b - 28, 11, '#5a8a44'); disc(c, x + 100, b - 26, 12, '#3f6a32'); R(c, x + 88, b - 22, 5, 22, '#6b4a2e');
         }
       }
     },
@@ -4269,11 +4269,11 @@ const AMBIENTI = (() => {
       const walls = ['#f2d8b0', '#e8c0a0', '#f6e8d0', '#d8a888'];
       for (let i = 0; i < 13; i++) {
         const x = i * 128;
-        for (let k = 0; k < 3; k++) { disc(c, x + 10 + k * 14, b - 22 - (k % 2) * 4, 9, k % 2 ? '#3f7a4a' : '#4a8a54'); R(c, x + 9 + k * 14, b - 14, 2, 8, '#5a3a22'); }
+        for (let k = 0; k < 3; k++) { disc(c, x + 10 + k * 14, b - 22 - (k % 2) * 4, 9, k % 2 ? '#3f7a4a' : '#4a8a54'); R(c, x + 9 + k * 14, b - 14, 2, 14, '#5a3a22'); }
         if (i % 2 === 1) { // a villa with its garden
           const cx = x + 56, w = 46, h = 30, col = walls[i % walls.length]; R(c, cx, b - h - 6, w, h + 6, col); R(c, cx - 2, b - h - 9, w + 4, 4, '#b8542e');
           for (let k = 0; k < 3; k++) { R(c, cx + 5 + k * 14, b - h, 6, 8, '#3a5a7a'); R(c, cx + 5 + k * 14, b - h + 13, 6, 8, '#3a5a7a'); } R(c, cx, b - 10, w, 4, '#e8dcc0');
-          cypress(c, cx - 6, b - 30, 24, '#2e5a3a'); cypress(c, cx + w + 6, b - 30, 24, '#2e5a3a');
+          cypress(c, cx - 6, b - 30, 30, '#2e5a3a'); cypress(c, cx + w + 6, b - 30, 30, '#2e5a3a');
         } else { // the little pier with a boat
           R(c, x + 70, b - 8, 40, 2, '#8a6a44'); for (let k = 0; k < 4; k++) R(c, x + 72 + k * 12, b - 6, 2, 6, '#6b4a2e'); R(c, x + 80, b - 4, 22, 4, '#f6f2ea'); R(c, x + 82, b - 2, 18, 2, '#3a8fb7');
         }
@@ -5986,6 +5986,15 @@ const HR_DATA = (() => {
   // ---------------------------------------------------------------- rendering
   let far = null, mid = null;
   const STRIPS = new Map();
+  // What the houses of the middle layer stand on (24 Nov): a strip under them as far as the bottom of the screen. It is
+  // hidden by the road, except over the gaps (water, holes), where without it the houses would float. Each environment
+  // can give its own (th.piede: { top, fill, line }: a quay, a pavement, grass, snow); otherwise the colours of its ground.
+  function piede(c, W, H, b, th) {
+    const g = th.ground || {}, p = Object.assign({ top: g.top2 || g.top || '#b8a888', fill: g.fill || '#8a7a5e', line: g.grout || '#6e604a' }, th.piede || {});
+    c.fillStyle = p.fill; c.fillRect(0, b, W, H - b); c.fillStyle = p.top; c.fillRect(0, b, W, 2);
+    c.fillStyle = p.line; for (let y = b + 6; y < H; y += 6) c.fillRect(0, y, W, 1);
+    for (let y = b + 2, r = 0; y < H; y += 6, r++) for (let x = (r % 2) * 8; x < W; x += 16) c.fillRect(x, y, 1, 4);
+  }
   function buildStrips() {
     const H = st.VH, b = groundScreenY(), key = (G.th.name || '') + '|' + (G.th.far ? G.th.far.toString().length : 0) + '|' + H + '|' + b;
     const got = STRIPS.get(key);
@@ -5994,7 +6003,7 @@ const HR_DATA = (() => {
     // about 4, so the two never line up the same way again; Viaggettino's environments stay at 512)
     const mk = (fn, w) => { const cv = document.createElement('canvas'); cv.width = w; cv.height = H; const c = cv.getContext('2d'); c.imageSmoothingEnabled = false; fn(c, w, H, b); return cv; };
     far = mk((c, W, H, b) => G.th.far(c, W, H, b - 10), G.th.farW || 512);
-    mid = mk((c, W, H, b) => G.th.mid(c, W, H, b + 2), G.th.midW || 512);
+    mid = mk((c, W, H, b) => { G.th.mid(c, W, H, b + 2); piede(c, W, H, b + 2, G.th); }, G.th.midW || 512);
     if (STRIPS.size > 12) STRIPS.clear();
     STRIPS.set(key, [far, mid]);
     stripsDirty = false;
