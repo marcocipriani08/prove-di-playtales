@@ -464,7 +464,7 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
   .ia .ia-back { position: absolute; inset: 0; border-radius: 10px 3px 3px 10px; background: repeating-linear-gradient(45deg, rgba(0,0,0,.06) 0 2px, transparent 2px 5px), linear-gradient(90deg, #8e2833, #6e1d26); box-shadow: 0 0 0 3px var(--paper-ink); display: none; }
   .ia.back .ia-back { display: block; } .ia.back .ia-cover, .ia.back .ab-rib { visibility: hidden; }
   .ia.shining .ab-shine { animation: shine 1.2s ease-out infinite; animation-delay: 1.4s; }
-  .ia .ab-rib { bottom: -14px; }
+  .ia .ab-rib { bottom: -22px; z-index: -1; } /* behind the cover: it hangs out from under the pages, as in the Album */
   .ab-rib { position: absolute; z-index: 0; right: 13%; bottom: -16px; width: 12px; height: 34px; background: #e7b84a; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%); box-shadow: inset -3px 0 0 rgba(0,0,0,.15); }
   /* a gleam passes over the cover once it is sealed */
   .ab.sealed .ab-cover { animation: none; }
@@ -1059,7 +1059,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"disegno":"crocco"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia"},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane"},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"grigio","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "e5665f8";
+window.VERSIONE = "7106d67";
+window.SALVATAGGIO = "rty_viaggettino_7106d67_";
 </script>
 <script>
 /* motore/testi.js */
@@ -2043,9 +2044,12 @@ const VG = (() => {
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; return e; };
 
   // ---------- storage (fails silently in private mode) ----------
+  // each game has its own save (the build sets SALVATAGGIO: the order's code, plus the version in the test games), so
+  // another game, the original or an older test version on the same phone never decide what this one has already shown
+  const SAVE = window.SALVATAGGIO || 'rty_';
   const store = {
-    get(k, d) { try { const v = localStorage.getItem('vgmini_' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
-    set(k, v) { try { localStorage.setItem('vgmini_' + k, JSON.stringify(v)); } catch (e) { } }
+    get(k, d) { try { const v = localStorage.getItem(SAVE + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(SAVE + k, JSON.stringify(v)); } catch (e) { } }
   };
 
   // ---------- El Falcon's wardrobe ----------
@@ -2063,9 +2067,9 @@ const VG = (() => {
       edit(r, v) { if (v === 'down') put(r, 5, 3, 'kkkkkkkk'); else if (v === 'side') put(r, 5, 8, 'kkkkk'); } }
   };
   const JEWELS = { o: { name: 'Orecchini', price: 40 }, b: { name: 'Bracciale', price: 40 }, c: { name: 'Collana di Skiathos', price: 0, gift: true } };
-  const look = Object.assign({ costume: 'classica', jewels: '', owned: { classica: true }, ownedJ: {} }, (() => { try { return JSON.parse(localStorage.getItem('vgmini_look')) || {}; } catch (e) { return {}; } })());
+  const look = Object.assign({ costume: 'classica', jewels: '', owned: { classica: true }, ownedJ: {} }, (() => { try { return JSON.parse(localStorage.getItem(SAVE + 'look')) || {}; } catch (e) { return {}; } })());
   window.VG_JEWELS = look.jewels;
-  function saveLook() { window.VG_JEWELS = look.jewels; try { localStorage.setItem('vgmini_look', JSON.stringify(look)); } catch (e) { } }
+  function saveLook() { window.VG_JEWELS = look.jewels; try { localStorage.setItem(SAVE + 'look', JSON.stringify(look)); } catch (e) { } }
   function falconFrames() {
     const cos = COSTUMES[look.costume] || COSTUMES.classica, jk = look.jewels || '';
     const key = 'vgfal_' + look.costume + '_' + jk; if (SPRITE_CACHE[key]) return SPRITE_CACHE[key];
@@ -4119,7 +4123,11 @@ const HR_DATA = (() => {
   }
   const VA_NOTE = 35; // the notebooks fly back towards her at 35 px/s: about 150 px/s against her run (before: 175, in an arc)
   // its rhythm: runs for a while, then stumbles and stands still for a moment (seconds)
-  const bossT = e => ({ run: Math.max(0.5, 1.5 + ((e.tier || 1) - 1) * 0.12 - e.misses * 0.35 - (3 - e.hp) * 0.15), stop: Math.max(0.9, 1.4 - ((e.tier || 1) - 1) * 0.1) + e.misses * 0.2 });
+  // when it stops it waits as long as she needs to reach it plus the same margin in every stage (the stages run at
+  // different speeds: a fixed time was almost impossible in stage 3); a little longer after each miss
+  const BOSS_MARGIN = 0.5;
+  const bossStop = e => Math.max(0, e.x - P.x) / Math.max(60, G.th.speed) + BOSS_MARGIN + e.misses * 0.2;
+  const bossT = e => ({ run: Math.max(0.5, 1.5 + ((e.tier || 1) - 1) * 0.12 - e.misses * 0.35 - (3 - e.hp) * 0.15), stop: e.state === 'stop' && e.stopFor ? e.stopFor : bossStop(e) });
   // where it will be in dt seconds (the autopilot plans with this); null when it cannot be touched
   function bossAt(e, dt) {
     const T = bossT(e);
@@ -4146,7 +4154,7 @@ const HR_DATA = (() => {
           Audio.sfx('swing'); e.volT = 1.0;
         }
       } else if (e.cdT <= 0 && ahead > 70 && ahead < 240) {
-        const lvl = 3 - e.hp; e.vq = (e.final ? [['low'], ['low', 'high'], ['low', 'high', 'low']] : [['low'], ['low'], ['low', 'high']])[lvl] || ['low', 'high', 'low']; e.volT = 0; e.cdT = (e.final ? [2.4, 3.2, 4.0] : [3.0, 3.4, 3.8])[lvl] || 4.0;
+        const lvl = 3 - e.hp; e.vq = (e.final ? [['low', 'high'], ['low', 'high', 'low'], ['low', 'high', 'low', 'high']] : [['low'], ['low'], ['low', 'high']])[lvl] || ['low', 'high', 'low']; e.volT = 0; e.cdT = (e.final ? [3.0, 3.8, 4.6] : [3.0, 3.4, 3.8])[lvl] || 4.0;
       }
     }
     if (e.state === 'enter') {
@@ -4156,7 +4164,7 @@ const HR_DATA = (() => {
       if (e.y >= gy) { e.y = gy; e.vy = 0; G.shake = 0.25; Audio.sfx('explode'); dust(e.x, e.y, 10); e.state = 'run'; e.st = 0; e.ghost = false; }
     } else if (e.state === 'run') {
       e.vx = sp; e.x += sp * dt; e.y = gy;
-      if (e.st > T.run) { e.state = 'stop'; e.st = 0; e.vx = 0; Audio.sfx('block'); dust(e.x, e.y, 4); }
+      if (e.st > T.run) { e.state = 'stop'; e.st = 0; e.vx = 0; e.stopFor = bossStop(e); Audio.sfx('block'); dust(e.x, e.y, 4); }
     } else if (e.state === 'stop') {
       e.vx = 0; e.y = gy;
       if (e.st > T.stop || p.x > e.x + 26) { if (p.x > e.x + 26) e.misses++; bossDash(e); }
@@ -5673,7 +5681,7 @@ const HR_DATA = (() => {
   function openLetter(from) {
     save.ending = true; persist(); checkMissions();
     stopAll(); G.mode = 'ending';
-    VG.ending({ reread: false, from: from instanceof DOMRect ? from : null, stats: `Album dei Viaggettini: ${gotCount()} ricordi su ${COLLECTION.length}`, buttons: [{ label: 'Continua', primary: true, onClick: () => { const en = byId('ending'); if (en) en.remove(); const f = A.afterLetter; A.afterLetter = null; if (f) { f(); return; } showAlbum(!save.afterIntro); } }] });
+    VG.ending({ reread: false, from: from instanceof DOMRect ? from : null, stats: `Album dei ricordi: ${gotCount()} ricordi su ${COLLECTION.length}`, buttons: [{ label: 'Continua', primary: true, onClick: () => { const en = byId('ending'); if (en) en.remove(); const f = A.afterLetter; A.afterLetter = null; if (f) { f(); return; } showAlbum(!save.afterIntro); } }] });
   }
 
   // ---------------- the Album: the menu of the game ----------------
@@ -6210,7 +6218,7 @@ const HR_DATA = (() => {
     showAlbum();
   }
   function tappeGoBack() { const f = tappeBack; tappeBack = null; if (f) f(); else showTitle(); }
-  function statsLine() { return `Album dei Viaggettini: ${gotCount()} ricordi su ${COLLECTION.length}`; }
+  function statsLine() { return `Album dei ricordi: ${gotCount()} ricordi su ${COLLECTION.length}`; }
   // ---------------------------------------------------------------- coins: they are spent only in the wardrobe
   // Prices are set here, for Run to You (the shared COSTUMES/JEWELS keep their own): one full run of the four stages
   // (about 350-450 coins) buys one or two things, the rest comes by playing again.
@@ -6562,7 +6570,7 @@ const HR_DATA = (() => {
       G.lamps = []; for (let i = 1; i <= 5; i++) G.lamps.push({ x: P.x + 40 + i * 6 * TILE, t: 0 });
       G.partyX = P.x + 38 * TILE; G.finish = G.partyX; G.lastMeters = res;
       P.finished = false; G.mode = 'run';
-      G.banner = { title: 'Ultimi metri: insieme!', sub: '', t: 2.4, col: '#ffd84a' }; Audio.play('adventure');
+      Audio.play('adventure');
     });
   }
   // the party: the big words of the occasion, its things, confetti and fireworks
@@ -7110,13 +7118,15 @@ const HR_DATA = (() => {
         c.save(); c.translate(-sh, 0); c.beginPath(); c.moveTo(0, 0); c.lineTo(W * 0.6, 0); c.lineTo(W * 0.4, H); c.lineTo(0, H); c.closePath(); c.fillStyle = '#ff6b57'; c.fill();
         c.globalAlpha = 0.18; for (let i = 0; i < 9; i++) R(c, 0, i * 12 + Math.round(t * 40) % 12, W, 3, '#1a1024'); c.globalAlpha = 1;
         const bb = bl.down_stand; c.drawImage(bb, Math.round(W * 0.2 - bb.width * 2), Math.round(H * 0.5 - bb.height * 2), bb.width * 4, bb.height * 4); c.restore();
-        c.save(); c.translate(sh, 0); c.beginPath(); c.moveTo(W * 0.6 - 1, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * 0.4 - 1, H); c.closePath(); c.fillStyle = '#2a2145'; c.fill();
+        c.save(); c.translate(sh, 0); c.beginPath(); c.moveTo(W * 0.6 - 1, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * 0.4 - 1, H); c.closePath(); c.fillStyle = '#2a2145'; c.fill(); c.save(); c.clip();
+        c.globalAlpha = 0.35; for (let i = 0; i < 9; i++) R(c, 0, i * 12 + 6 - Math.round(t * 40) % 12, W, 3, '#4a3d78'); c.globalAlpha = 1; c.restore(); // its stripes too, running the other way
         const ab = VG.falcon('down'); c.drawImage(ab, Math.round(W * 0.8 - ab.width * 1.5), Math.round(H * 0.62 - ab.height * 1.5), ab.width * 3, ab.height * 3); c.restore();
         // the tag: name and the line made to measure
         if (k >= 1 && !out) {
           const nm = TXT.V.boss, sb = TXT.PEZZI.sottotitolo, tx = Math.round(W * 0.2), ty = Math.round(H * 0.16);
           st.text(nm, tx, ty, { size: Math.max(18, 7.5 * st.SCALE), col: '#fff6e0', align: 'center', stroke: '#1a1024' });
           if (sb) st.text(sb, tx, ty + 10, { size: Math.max(12, 4.4 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false });
+          st.text(TXT.V.A, Math.round(W * 0.8), ty, { size: Math.max(18, 7.5 * st.SCALE), col: '#fff6e0', align: 'center', stroke: '#1a1024' }); // and her name on her side
         }
         if (k >= 1) vsClash(c, W, H, pt, t, out);
       }
