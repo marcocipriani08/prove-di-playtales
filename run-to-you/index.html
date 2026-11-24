@@ -1059,7 +1059,7 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"disegno":"crocco"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia"},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane"},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"grigio","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "e289728";
+window.VERSIONE = "e5665f8";
 </script>
 <script>
 /* motore/testi.js */
@@ -4673,7 +4673,7 @@ const HR_DATA = (() => {
     if (G.party) drawParty(c, oy);
     if (G.vanFlee) { const v = G.vanFlee; v.t += 1 / 60; const x = G.cam - 90 + v.t * 320; if (x < G.cam + st.VW + 90) drawVan(c, sx(x), oy + 160, 0, v.t * 20); else G.vanFlee = null; }
     if (G.monocle) { const m = G.monocle, X = sx(m.x), Y = oy + Math.round(m.y); c.strokeStyle = '#ffd84a'; c.lineWidth = 1; c.beginPath(); c.arc(X, Y - 2, 2.5, 0, 7); c.stroke(); R(c, X + 2, Y - 1, 3, 1, '#c8a24a'); }
-    if (G.vaLine) { const v = G.vaLine, a = clamp(v.t * 2, 0, 1), y = Math.round(st.VH * 0.5); c.globalAlpha = 0.75 * a; R(c, 0, y - 14, st.VW, 28, '#1a1024'); c.globalAlpha = 1; st.text(TXT.V.boss, st.VW / 2, y - 6, { size: Math.max(12, 4.6 * st.SCALE), col: '#ff6b57', align: 'center', shadow: false, alpha: a }); st.text('«Il valore… il valore era… nei weekend…»', st.VW / 2, y + 6, { size: Math.max(17, 7 * st.SCALE), col: '#fff6e0', align: 'center', font: 'body', shadow: false, alpha: a }); }
+    if (G.vaLine) { const v = G.vaLine, a = clamp(v.t * 2, 0, 1), y = Math.round(st.VH * 0.5); c.globalAlpha = 0.75 * a; R(c, 0, y - 14, st.VW, 28, '#1a1024'); c.globalAlpha = 1; st.text(TXT.V.boss, st.VW / 2, y - 6, { size: Math.max(12, 4.6 * st.SCALE), col: '#ff6b57', align: 'center', shadow: false, alpha: a }); st.text('«' + TXT.PEZZI.sconfitta + '»', st.VW / 2, y + 6, { size: Math.max(17, 7 * st.SCALE), col: '#fff6e0', align: 'center', font: 'body', shadow: false, alpha: a }); }
     // player (in the endless run Il Crocco runs behind her)
     if (G.endless || G.buddy) drawBuddy(c, oy);
     drawPlayer(c, sx(P.x), oy + P.y);
@@ -4738,27 +4738,29 @@ const HR_DATA = (() => {
   function drawCp(c, X, Y) { drawLamp(c, X, Y, G.cpReached, G.cpAnim || 0); }
   function drawLamp(c, X, Y, on, a) {
     if (X < -40 || X > st.VW + 40) return;
-    const k = '#1a1024', post = '#5d6270', hi = '#7e8492';
+    const k = '#1a1024', post = '#2f8a8f', hi = '#6fd0c8', brass = '#d79a35', gold = '#ffd84a';
     // how bent it is: 1 asleep and drooping; waking up it straightens with a little overshoot (boing), then 0
     const bend = !on ? 1 : a <= 0 ? 0 : a < 0.18 ? 1 - a / 0.18 : a < 0.9 ? -0.35 * Math.exp(-(a - 0.18) * 5) * Math.cos((a - 0.18) * 18) : 0;
     const bx = h => Math.round(bend * 0.0042 * h * h); // the lean grows towards the top
     if (on) { const g = 0.18 + 0.06 * Math.sin(G.t * 3); c.globalAlpha = g; c.fillStyle = '#ffd84a'; c.beginPath(); c.ellipse(X, Y, 18, 3, 0, 0, 7); c.fill(); c.beginPath(); c.arc(X + 6 + bx(44), Y - 41, 12, 0, 7); c.fill(); c.globalAlpha = 1; }
     // the base and the post, two pixels at a time, bending
-    R(c, X - 4, Y - 3, 8, 3, k); R(c, X - 3, Y - 2, 6, 2, '#4a4f5c');
-    for (let h = 2; h < 46; h += 2) { const x = X + bx(h); R(c, x - 2, Y - h - 2, 4, 2, k); R(c, x - 1, Y - h - 2, 2, 2, post); R(c, x - 1, Y - h - 2, 1, 2, hi); }
+    R(c, X - 5, Y - 4, 10, 4, k); R(c, X - 4, Y - 3, 8, 3, '#1f5f66'); R(c, X - 4, Y - 3, 8, 1, brass);
+    for (let h = 4; h < 46; h += 2) { const x = X + bx(h), band = h === 18 || h === 34; R(c, x - 2, Y - h - 2, 4, 2, k); R(c, x - 1, Y - h - 2, 2, 2, band ? gold : post); R(c, x - 1, Y - h - 2, 1, 2, band ? '#fff2b0' : hi); }
     // the arm and the head with its face
     const hx = X + bx(48), hy = Y - 48;
-    R(c, hx - 1, hy, 10, 3, k); R(c, hx, hy + 1, 8, 1, hi);
-    R(c, hx + 1, hy + 2, 13, 9, k); R(c, hx + 2, hy + 3, 11, 7, on ? '#ffe38a' : '#8a8f9c');
-    if (on) { R(c, hx + 4, hy + 5, 2, 2, k); R(c, hx + 9, hy + 5, 2, 2, k); R(c, hx + 5, hy + 8, 5, 1, k); R(c, hx + 4, hy + 7, 1, 1, k); R(c, hx + 10, hy + 7, 1, 1, k); }
-    else { R(c, hx + 4, hy + 6, 2, 1, k); R(c, hx + 9, hy + 6, 2, 1, k); R(c, hx + 6, hy + 8, 3, 1, '#5d6270'); }
+    R(c, hx - 1, hy, 10, 3, k); R(c, hx, hy + 1, 8, 1, brass);
+    // a little red hat with a gold knob, the frame in brass, the glass that lights up
+    R(c, hx + 2, hy - 2, 11, 3, k); R(c, hx + 3, hy - 1, 9, 2, '#e0503c'); R(c, hx + 3, hy - 1, 9, 1, '#ff8a6e'); R(c, hx + 6, hy - 4, 3, 2, k); R(c, hx + 7, hy - 4, 1, 1, gold);
+    R(c, hx + 1, hy + 1, 13, 10, k); R(c, hx + 2, hy + 2, 11, 8, brass); R(c, hx + 3, hy + 3, 9, 6, on ? '#fff0a8' : '#b9c6dc');
+    if (on) { R(c, hx + 4, hy + 4, 2, 2, k); R(c, hx + 9, hy + 4, 2, 2, k); R(c, hx + 5, hy + 7, 5, 1, k); R(c, hx + 4, hy + 6, 1, 1, k); R(c, hx + 10, hy + 6, 1, 1, k); R(c, hx + 3, hy + 6, 1, 1, '#ff8aa0'); R(c, hx + 11, hy + 6, 1, 1, '#ff8aa0'); }
+    else { R(c, hx + 4, hy + 5, 2, 1, k); R(c, hx + 9, hy + 5, 2, 1, k); R(c, hx + 6, hy + 7, 3, 1, '#6a7590'); }
     // asleep: little z's going up
     if (!on) for (let i = 0; i < 2; i++) { const u = (G.t * 0.6 + i * 0.5) % 1, zx = Math.round(hx + 14 + u * 6), zy = Math.round(hy - 2 - u * 10); c.globalAlpha = 1 - u; R(c, zx, zy, 4, 1, '#fff6e0'); R(c, zx + 2, zy + 1, 1, 1, '#fff6e0'); R(c, zx + 1, zy + 2, 1, 1, '#fff6e0'); R(c, zx, zy + 3, 4, 1, '#fff6e0'); c.globalAlpha = 1; }
     // waking up: a short flash of rays
     if (on && a > 0 && a < 0.6) { const u = a / 0.6; c.globalAlpha = 1 - u; for (let i = 0; i < 6; i++) { const an = Math.PI * (0.15 + i * 0.14), rr = 9 + u * 10; R(c, Math.round(hx + 7 + Math.cos(an) * rr), Math.round(hy + 6 + Math.sin(an) * rr), 2, 2, '#ffd84a'); } c.globalAlpha = 1; }
     // the little flag on the post: down when asleep; it goes up and waves when it wakes
     const up = on ? Math.min(1, (a / 0.6) || 1) : 0, fy = Math.round(Y - 14 - 22 * up), fx = X + bx(14 + 22 * up), wave = on ? Math.floor(G.t * 6) % 2 : 0;
-    R(c, fx - 9, fy, 7, 5, k); R(c, fx - 8, fy + 1, 5 - wave, 3, on ? '#ffd84a' : '#9aa0ad');
+    R(c, fx - 9, fy, 7, 5, k); R(c, fx - 8, fy + 1, 5 - wave, 3, on ? '#ff6b57' : '#9aa0ad'); if (on) R(c, fx - 8, fy + 2, 5 - wave, 1, '#fff6e0');
   }
   // a colour a bit darker (or lighter, with k > 1), for the shading of the themed pieces
   function shadeC(hex, k) { const n = parseInt(hex.slice(1), 16), f = v => Math.max(0, Math.min(255, Math.round(v * k))).toString(16).padStart(2, '0'); return '#' + f(n >> 16) + f((n >> 8) & 255) + f(n & 255); }
@@ -7075,22 +7077,48 @@ const HR_DATA = (() => {
           c.globalAlpha = 1 - col; big(o, Math.round(bx), gy + 1); c.globalAlpha = 1;
         }
       }
+      // the cut between the two halves: a crackling lightning bolt, and the «VS» slammed on top of it
+      function vsClash(c, W, H, pt, t, out) {
+        const a0 = clamp((pt - 0.35) / 0.12, 0, 1); out = clamp(out * 3, 0, 1); if (out >= 1) return; // when the halves part it goes first
+        c.globalAlpha = 1 - out;
+        // the bolt: a zigzag along the cut, drawn in square pixels (dark edge, yellow, white heart); it re-crackles
+        const seed = Math.floor(t * 14), N = 14, pts = [];
+        for (let i = 0; i <= N; i++) { const u = i / N, j = i === 0 || i === N ? 0 : ((Math.sin(i * 12.9898 + seed * 78.233) * 43758.5453) % 1); pts.push([W * (0.6 - 0.2 * u) + (i % 2 ? 1 : -1) * (4 + Math.abs(j) * 5), H * u]); }
+        const dots = (sz, col) => { for (let i = 0; i < N; i++) { const [x0, y0] = pts[i], [x1, y1] = pts[i + 1], n = Math.ceil(Math.hypot(x1 - x0, y1 - y0)); for (let s = 0; s <= n; s++) R(c, Math.round(x0 + (x1 - x0) * s / n - sz / 2), Math.round(y0 + (y1 - y0) * s / n - sz / 2), sz, sz, col); } };
+        dots(7, '#1a1024'); dots(4, '#ffd84a'); dots(2, '#fff6e0');
+        // the moment it strikes: a white flash on the whole screen
+        if (pt < 0.55) { c.globalAlpha = (1 - out) * 0.75 * (1 - clamp((pt - 0.35) / 0.2, 0, 1)); R(c, 0, 0, W, H, '#fff6e0'); c.globalAlpha = 1 - out; }
+        // the «VS»: slammed in from big to its size, a spiky burst behind, chunky pixel letters, slanted
+        const cx = W * 0.5, cy = H * 0.5, sc = 1 + 1.4 * (1 - a0) * (1 - a0);
+        c.save(); c.translate(cx, cy); c.scale(sc, sc);
+        c.save(); c.rotate(t * 0.8);
+        for (const [r0, r1, col] of [[34, 48, '#1a1024'], [30, 43, '#ff6b57'], [22, 33, '#ffd84a']]) { c.beginPath(); for (let i = 0; i < 24; i++) { const an = i * Math.PI / 12, rr = i % 2 ? r0 : r1; c.lineTo(Math.cos(an) * rr, Math.sin(an) * rr * 0.8); } c.closePath(); c.fillStyle = col; c.fill(); }
+        c.restore();
+        // the letters: the game's own pixel font, drawn on the small canvas so they come out chunky; slanted, a thick
+        // dark outline, a red shadow and a yellow-to-orange fill
+        c.rotate(-0.14); c.font = '700 40px "Pixelify Sans", monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.lineJoin = 'round';
+        c.lineWidth = 9; c.strokeStyle = '#1a1024'; c.strokeText('VS', 3, 4); c.fillStyle = '#7a1f2b'; c.fillText('VS', 3, 4);
+        c.strokeText('VS', 0, 0);
+        const gr = c.createLinearGradient(0, -14, 0, 14); gr.addColorStop(0, '#fff6a0'); gr.addColorStop(0.45, '#ffd84a'); gr.addColorStop(1, '#ff8a3c');
+        c.fillStyle = gr; c.fillText('VS', 0, 0);
+        c.restore(); c.globalAlpha = 1;
+      }
       // face to face: the screen splits on the diagonal, the boss big with its tag, A on the other side
       if (ph === 'versus') {
-        beat('vs', () => { Audio.sfx('ticket'); G.shake = 0.2; });
+        if (pt > 0.35) beat('vs', () => { Audio.sfx('explode'); Audio.sfx('ticket'); G.shake = 0.35; });
         const k = ease(clamp(pt / 0.35, 0, 1)), out = pt > 2.25 ? ease((pt - 2.25) / 0.3) : 0, sh = Math.round((1 - k + out) * W);
         c.save(); c.translate(-sh, 0); c.beginPath(); c.moveTo(0, 0); c.lineTo(W * 0.6, 0); c.lineTo(W * 0.4, H); c.lineTo(0, H); c.closePath(); c.fillStyle = '#ff6b57'; c.fill();
         c.globalAlpha = 0.18; for (let i = 0; i < 9; i++) R(c, 0, i * 12 + Math.round(t * 40) % 12, W, 3, '#1a1024'); c.globalAlpha = 1;
         const bb = bl.down_stand; c.drawImage(bb, Math.round(W * 0.2 - bb.width * 2), Math.round(H * 0.5 - bb.height * 2), bb.width * 4, bb.height * 4); c.restore();
-        c.save(); c.translate(sh, 0); c.beginPath(); c.moveTo(W * 0.6 + 2, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * 0.4 + 2, H); c.closePath(); c.fillStyle = '#2a2145'; c.fill();
+        c.save(); c.translate(sh, 0); c.beginPath(); c.moveTo(W * 0.6 - 1, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * 0.4 - 1, H); c.closePath(); c.fillStyle = '#2a2145'; c.fill();
         const ab = VG.falcon('down'); c.drawImage(ab, Math.round(W * 0.8 - ab.width * 1.5), Math.round(H * 0.62 - ab.height * 1.5), ab.width * 3, ab.height * 3); c.restore();
         // the tag: name and the line made to measure
         if (k >= 1 && !out) {
           const nm = TXT.V.boss, sb = TXT.PEZZI.sottotitolo, tx = Math.round(W * 0.2), ty = Math.round(H * 0.16);
           st.text(nm, tx, ty, { size: Math.max(18, 7.5 * st.SCALE), col: '#fff6e0', align: 'center', stroke: '#1a1024' });
           if (sb) st.text(sb, tx, ty + 10, { size: Math.max(12, 4.4 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false });
-          st.text('VS', W * 0.5, H * 0.52, { size: Math.max(22, 10 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024' });
         }
+        if (k >= 1) vsClash(c, W, H, pt, t, out);
       }
     }
     // …but the Album is in colour: the only colourful thing in the office
