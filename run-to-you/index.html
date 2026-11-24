@@ -1061,8 +1061,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"disegno":"crocco"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia"},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane"},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"grigio","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "4fe5d7e";
-window.SALVATAGGIO = "rty_viaggettino_4fe5d7e_";
+window.VERSIONE = "9be18bc";
+window.SALVATAGGIO = "rty_viaggettino_9be18bc_";
 </script>
 <script>
 /* motore/testi.js */
@@ -3602,7 +3602,7 @@ const HR_DATA = (() => {
   }
   (function rotateScreen() {
     const ov = el('div'); ov.id = 'rotate'; ov.className = 'rot-rty'; ov.hidden = true; ov.setAttribute('role', 'alert');
-    ov.innerHTML = '<canvas class="rot-dummy" width="40" height="40" aria-hidden="true"></canvas><div class="rot-eye">El Falcon &amp; Il Crocco</div><canvas class="rot-ph" width="110" height="110" aria-hidden="true"></canvas><h2>Gira il telefono</h2><p>Non gira? Togli il blocco della rotazione.</p>';
+    ov.innerHTML = '<canvas class="rot-dummy" width="40" height="40" aria-hidden="true"></canvas><div class="rot-eye">' + TXT.V.A + ' &amp; ' + TXT.V.B + '</div><canvas class="rot-ph" width="110" height="110" aria-hidden="true"></canvas><h2>Gira il telefono</h2><p>Non gira? Togli il blocco della rotazione.</p>';
     // the background: the sky of the first stage, in bands (so in every copy it follows the first city)
     const sky = LEVELS[0].theme.sky, n = sky.length;
     ov.style.background = 'linear-gradient(180deg, ' + sky.map((col, i) => `${col} ${(i / n * 100).toFixed(1)}% ${((i + 1) / n * 100).toFixed(1)}%`).join(', ') + ')';
@@ -4030,7 +4030,7 @@ const HR_DATA = (() => {
     else if (e.t === 'special') { P.coins += 5; Audio.sfx('pick'); float(e.x, e.y - 10, '+5', '#ffd84a', true); sparkle(e.x, e.y, '#ff8a3d', 12); }
     else if (e.t === 'ticket' && hadTicket(e.k)) { P.coins += 5; Audio.sfx('pick'); float(e.x, e.y - 12, '+5', '#ffd84a', true); sparkle(e.x, e.y, '#fff0a8', 8); }
     else if (e.t === 'ticket') { P.tickets[e.k] = true; Audio.sfx('ticket'); float(e.x, e.y - 12, TXT.t('{Cibo}!'), '#ffd84a', true); sparkle(e.x, e.y, '#ffd84a', 20); G.tkPop = 0.6; }
-    else if (e.t === 'gold') { P.gold = true; Audio.sfx('solve'); float(e.x, e.y - 12, 'Salamino d\'oro!', '#ffd84a', true); sparkle(e.x, e.y, '#ffd84a', 30); sparkle(e.x, e.y, '#fff0a8', 16); G.tkPop = 0.8; }
+    else if (e.t === 'gold') { P.gold = true; Audio.sfx('solve'); float(e.x, e.y - 12, TXT.t('{Cibo} d\'oro!'), '#ffd84a', true); sparkle(e.x, e.y, '#ffd84a', 30); sparkle(e.x, e.y, '#fff0a8', 16); G.tkPop = 0.8; }
     else if (e.t === 'power') {
       Audio.sfx('save');
       if (e.p === 'H') { if (P.hp < 3) { P.hp++; G.hpPop = 0.6; float(e.x, e.y - 10, '+1 ♥', '#ff6b57', true); } else { P.coins += 5; float(e.x, e.y - 10, '+5', '#ffd84a', true); } }
@@ -4746,6 +4746,12 @@ const HR_DATA = (() => {
     if (!sq && Math.floor(G.t * 2.5) % 2) { const ay = mat - 6; R(c, X - 1, ay - 6, 2, 1, '#ffd84a'); R(c, X - 2, ay - 5, 4, 1, '#ffd84a'); R(c, X - 3, ay - 4, 6, 1, '#ffd84a'); R(c, X - 4, ay - 3, 8, 1, '#ffd84a'); R(c, X - 1, ay - 2, 2, 3, '#ffd84a'); }
   }
   function drawCp(c, X, Y) { drawLamp(c, X, Y, G.cpReached, G.cpAnim || 0); }
+  // a little yellow star (over the two when they are together or celebrate: stars, not hearts, suit every gift)
+  function starOver(c, x, y) {
+    const X = Math.round(x), Y = Math.round(y), k = '#1a1024', y1 = '#ffd84a', w = '#fff6e0';
+    R(c, X + 2, Y - 1, 3, 9, k); R(c, X - 1, Y + 2, 9, 3, k); R(c, X + 1, Y + 1, 5, 5, k);
+    R(c, X + 3, Y, 1, 7, y1); R(c, X, Y + 3, 7, 1, y1); R(c, X + 2, Y + 2, 3, 3, y1); R(c, X + 3, Y + 3, 1, 1, w);
+  }
   function drawLamp(c, X, Y, on, a) {
     if (X < -40 || X > st.VW + 40) return;
     const k = '#1a1024', post = '#2f8a8f', hi = '#6fd0c8', brass = '#d79a35', gold = '#ffd84a';
@@ -4853,8 +4859,8 @@ const HR_DATA = (() => {
     const fr = G.celebrate > 0 ? (Math.floor(G.celebrate * 8) % 2 ? 'a' : 'b') : 'stand';
     c.fillStyle = 'rgba(0,0,0,.28)'; c.beginPath(); c.ellipse(X, Y, 7, 2, 0, 0, 7); c.fill();
     VG.draw(c, G.th.quad ? VG.npc('custode', fr === 'a' ? 'aL' : 'left') : VG.crocco('left', fr), X, Y - hop);
-    if (near && !P.finished && Math.floor(G.t * 1.5) % 2) c.drawImage(VG.item('heart'), X - 4, Y - 30);
-    if (G.celebrate > 0) for (let i = 0; i < 2; i++) { const t = (G.celebrate * 0.8 + i * 0.5) % 1; c.globalAlpha = 1 - t; c.drawImage(VG.item('heart'), X - 14 + i * 16, Y - 26 - t * 26); c.globalAlpha = 1; }
+    if (near && !P.finished && Math.floor(G.t * 1.5) % 2) starOver(c, X - 3, Y - 30);
+    if (G.celebrate > 0) for (let i = 0; i < 2; i++) { const t = (G.celebrate * 0.8 + i * 0.5) % 1; c.globalAlpha = 1 - t; starOver(c, X - 13 + i * 16, Y - 26 - t * 26); c.globalAlpha = 1; }
   }
   // ---------------------------------------------------------------- the poses of the run (built like her costumes:
   // same head, same outfit and jewels from VG.look, so every costume works in every pose). sprites.js stays untouched.
@@ -6143,7 +6149,7 @@ const HR_DATA = (() => {
     if (cel) fr = Math.floor(G.celebrate * 8) % 2 ? 'a' : 'b';
     const img = !g && vy < -70 ? croccoPose('up') : !g && vy > 70 ? croccoPose('down') : VG.crocco('right', fr);
     VG.draw(c, img, X, Y + 1 - hop);
-    if (cel) for (let i = 0; i < 2; i++) { const t = (G.celebrate * 0.8 + i * 0.5) % 1; c.globalAlpha = 1 - t; c.drawImage(VG.item('heart'), X - 4 + i * 14, Y - 26 - t * 26); c.globalAlpha = 1; }
+    if (cel) for (let i = 0; i < 2; i++) { const t = (G.celebrate * 0.8 + i * 0.5) % 1; c.globalAlpha = 1 - t; starOver(c, X - 3 + i * 14, Y - 26 - t * 26); c.globalAlpha = 1; }
   }
   // Il Crocco sliding: as she does, sitting back with his legs out along the ground
   function croccoSlide() {
@@ -6195,7 +6201,7 @@ const HR_DATA = (() => {
     stopAll(); G.mode = 'board'; Audio.play('hub');
     const box = menuBox();
     const panel = el('div', 'panel free-pick');
-    panel.innerHTML = `<h2>Partita libera</h2><p class="sub">El Falcon e Il Crocco, insieme: più lontano che potete.</p>${save.endBest ? `<p class="free-moves">Record <b>${save.endBest} m</b></p>` : ''}`;
+    panel.innerHTML = `<h2>Partita libera</h2><p class="sub">${TXT.V.A} e ${TXT.V.B}, insieme: più lontano che potete.</p>${save.endBest ? `<p class="free-moves">Record <b>${save.endBest} m</b></p>` : ''}`;
     const row = el('div', 'row next-row');
     const go1 = el('button', 'btn primary wide', 'Corri ›'); go1.type = 'button'; go1.onclick = () => { Audio.unlock(); startEndless(); }; row.appendChild(go1);
     const bk = el('button', 'btn ghost', 'Indietro'); bk.type = 'button'; bk.onclick = () => showAlbum(); row.appendChild(bk);
