@@ -6788,45 +6788,45 @@ const HR_DATA = (() => {
     }
     return { close, shut, open, get shutNow() { return state === 'shut'; } };
   })();
-  // ---------------------------------------------------------------- the animated introduction (standard, phase 2)
-  // A grey morning, rain. A line of grey people walks the same street at the same pace; A is one of them, nearly grey too.
-  // The henchmen walk beside the line and keep the pace with their three shouts (made to measure). «Ogni giorno uguale.»
-  // On the seat of a coloured bench, the only coloured thing: a parcel. A steps out of the line and, picking it up, gets
-  // the colours back. «Un pacco… per me?» Inside, the Album dei ricordi and a letter «Per {a}», which B reads. The line
-  // goes on without A; someone looks up and catches a little colour. The boss (in full colour) blocks the street, with
-  // its tag; the pile of boring things is already there. «Dove credi di andare?…» «Allora guardami.» A jumps on a henchman,
-  // leaps over the pile and the boss, lands beyond them and runs: under the feet the colour lights up and spreads ahead;
-  // the grey stays behind with the boss. «Fermate quella corsa, prima che diventi una moda!» In the coloured street the
-  // henchmen get their colours as they come in; «Run to You» big in the middle; the circle closes on «Tappa 1 · {luogo1}».
-  // The lines go in the dialog box; the shouts are yellow words over the henchmen's heads.
+  // ---------------------------------------------------------------- the animated introduction
+  // The original intro of Run to You, made standard (decided with Marco on 24 November). A grey room, the blinds half
+  // down, the rain: A at the desk. Three henchmen of the boss drop papers on the desk (the pile grows), each with one of
+  // the three shouts made to measure; a fourth brings the post: a parcel. «Un pacco… per me? Non sarà mica da parte di
+  // {b}?» · «Ora lo apro!»; the Album dei ricordi rises out of it turning once, then stays closed and glowing while B's
+  // letter is read. Then the boss gets a moment of its own: the music stops, the lights flicker, the rain stops; the door
+  // on the left bursts open with a thunderclap and there is only its black shape against the light; two henchmen stand
+  // to attention beside the door; three heavy steps (the screen shakes) and its colours come in, with its music; the
+  // screen splits on the diagonal, the boss big with its tag on one side, A on the other. «Dove credi di andare? Le tue
+  // giornate sono mie. [ingresso] Da qui non si scappa.» · «Ah sì? Io non credo proprio!». A runs off the other way,
+  // down the corridor, jumps the pile of papers and goes out of the door, into the colours; the camera follows until the
+  // room has gone; a bang off screen, and the henchmen and the boss come in from the left already running, shouting.
+  // The circle closes on «Run to You»; «Tappa 1 · {luogo1}».
+  // The lines go in the dialog box; the shouts are short words over their heads. The boss is always in full colour
+  // (drawn over the grey of the room).
   const INTRO_KEY = SAVE_KEY + '_intro_seen';
+  const PHASES = ['work', 'c1', 'c2', 'c3', 'sigh', 'mail', 'parcel', 'reveal', 'album', 'albumClose', 'hush', 'door', 'steps', 'versus', 'face', 'stand', 'escape', 'out', 'title'];
+  const SCL = (O.scagnozzi || {}).divisa || 'grigio', esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
   const SHOUTS = [TXT.PEZZI.grido1, TXT.PEZZI.grido2, TXT.PEZZI.grido3].filter(Boolean); // the three shouts made to measure
-  const SCL = (O.scagnozzi || {}).divisa || 'grigio';
-  // a sprite turned grey (mix 1 = all grey), keeping one colour (the boss's colour on the henchmen): pixel by pixel, once
-  const GREY_CACHE = {};
-  function greyed(img, mix = 1, keep = null, key = '') {
-    const id = key + '|' + mix + '|' + keep; if (key && GREY_CACHE[id]) return GREY_CACHE[id];
-    const o = document.createElement('canvas'); o.width = img.width; o.height = img.height; const g = o.getContext('2d'); g.drawImage(img, 0, 0);
-    const d = g.getImageData(0, 0, o.width, o.height), p = d.data;
-    const kr = keep ? parseInt(keep.slice(1, 3), 16) : -1, kg = keep ? parseInt(keep.slice(3, 5), 16) : -1, kb = keep ? parseInt(keep.slice(5, 7), 16) : -1;
-    for (let i = 0; i < p.length; i += 4) {
-      if (!p[i + 3]) continue;
-      if (keep && Math.abs(p[i] - kr) < 6 && Math.abs(p[i + 1] - kg) < 6 && Math.abs(p[i + 2] - kb) < 6) continue;
-      const l = 0.3 * p[i] + 0.59 * p[i + 1] + 0.11 * p[i + 2], m = mix;
-      p[i] = p[i] + (l - p[i]) * m; p[i + 1] = p[i + 1] + (l - p[i + 1]) * m; p[i + 2] = p[i + 2] + (l - p[i + 2]) * m;
-    }
-    g.putImageData(d, 0, 0); if (key) GREY_CACHE[id] = o; return o;
-  }
-  const CROWD = ['ragazzo', 'turista', 'barista', 'lina', 'ragazza', 'revisore', 'pescatore', 'salim'].filter(k => LOOKS[k]);
+  // the shape of the scene in game pixels (W = st.VW), shared by the timing and the drawing
+  const IN = {
+    FROM_LEFT: { c2: true, mail: true },        // c1 and c3 come from the right, c2 and the mail from the left
+    RUN: 175, OUT_RUN: 120, CHASE: 130, EXIT: 190, GAP: 0.8, SHOUT: 2.1, LEAD: 0.25,
+    bossDoor: W => Math.round(W * 0.09), bossStop: W => Math.round(W * 0.27),   // the door on the left, where the boss stops
+    deskX: W => Math.round(W * 0.5), doorX: W => Math.round(W * 2.1), pileX: W => Math.round(W * 1.15),
+    stop: (W, left) => Math.round(W * 0.5) + (left ? -68 : 44),
+    // seconds from the door until the office has gone off the left edge (then the camera stops)
+    outF: W => (30 + W * 0.5) / 120,
+  };
+  IN.burst = IN.LEAD + 3 * IN.GAP + IN.SHOUT + 0.2;   // after the camera stops: the four of them, each shout read in full
   function playIntro() {
     return new Promise(async res => {
       hideOv(); byId('title').hidden = true; byId('b-pause').hidden = true;
-      G.mode = 'intro'; const I = G.intro = { t: 0, ph: 'line', pt: 0, beats: {}, skipped: false, scroll: 0, aGrey: 0.65, card: false };
-      Iris.shut('');
+      G.mode = 'intro'; const I = G.intro = { t: 0, ph: 'work', pt: 0, sub: '', st: 0, grey: 0.85, beats: {}, skipped: false, pile: 4, pileL: 0 };
+      Iris.shut('Una giornata grigia…');
       Audio.play('hub');
       let skip = null, ended = false;
       const finish = () => {
-        if (ended) return; ended = true; if (skip) skip.remove(); introAlbum(null); const bc = byId('boss-card'); if (bc) bc.remove();
+        if (ended) return; ended = true; if (skip) skip.remove();
         try { localStorage.setItem(INTRO_KEY, '1'); } catch (e) {}
         save.introPlayed = true; save.introSeen = true; persist(); res();
       };
@@ -6835,35 +6835,60 @@ const HR_DATA = (() => {
         skip.onclick = async e => { e.stopPropagation(); if (I.skipped) return; I.skipped = true; for (let i = 0; i < 30 && VG.Dialog.open; i++) VG.Dialog.advance(); await Iris.close(TXT.V.luogo1, 'Tappa 1'); finish(); };
         byId('app').appendChild(skip);
       }
-      const step = async (ph, ms) => { if (I.skipped) return; I.ph = ph; I.pt = 0; await wait(ms); };
+      const step = async (ph, ms, sub = '') => { if (I.skipped) return; I.ph = ph; I.pt = 0; I.sub = sub; I.st = 0; await wait(ms); };
+      const sub = async (s, ms) => { if (I.skipped) return; I.sub = s; I.st = 0; await wait(ms); };
       const say = async lines => { if (!I.skipped) await VG.say(lines); };
-      await wait(600); if (I.skipped) return;
+      // the time a Consulente needs to walk off the screen, on his side
+      const exitMs = left => { const W = st.VW, s = IN.stop(W, left); return Math.round((left ? s + 24 : W + 24 - s) / IN.EXIT * 1000); };
+      // a Consulente comes in, drops something on her desk (or on the floor, from the left: the desk is full), says it, goes
+      const visit = async (ph, line, gives) => {
+        const left = !!IN.FROM_LEFT[ph];
+        await step(ph, 1450, 'in'); if (I.skipped) return;
+        if (gives) { if (left) I.pileL += gives; else I.pile += gives; Audio.sfx('block'); G.shake = 0.08; }
+        await sub('stand', 250); await say([['scag', line]]); await sub('out', exitMs(left));
+      };
+      await wait(1300); if (I.skipped) return;
       Iris.open();
-      await step('line', 5200);                                    // the line, the three shouts
-      await say([['falcon', 'Ogni giorno uguale.']]);
-      await step('parcel', 2300);                                  // the parcel on the bench: A steps out and takes it
-      await say([['falcon', 'Un pacco… per me?']]);
-      await step('open', 900);                                     // the Album and the letter
+      await step('work', 2600);
+      await visit('c1', '[grido1]', 4);
+      await visit('c2', '[grido2]', 3);
+      await visit('c3', '[grido3]', 4);
+      await step('sigh', 1700);
+      // the internal mail, from the left
+      await visit('mail', 'Posta in arrivo!', 0);
+      // the parcel on her desk: who is it from?
+      await step('parcel', 500);
+      await say([['falcon', 'Un pacco… per me? Non sarà mica da parte di {b}?']]);
+      if (I.skipped) return; I.sub = 'open'; I.st = 0;
+      await say([['falcon', 'Ora lo apro!']]);
+      await step('reveal', 3600);
+      await step('album', 500);
       await say([['crocco', '{a}, le giornate grigie possono aspettare. Ti aspetto a {luogo1}.'],
         ['crocco', 'Per strada ti ho lasciato un po\' di {cibi}. E nell\'ultima pagina dell\'Album c\'è una sorpresa. Ma è per dopo.']]);
-      await step('boss', 2500);                                    // the boss blocks the street, its tag drops and goes
-      await say([['boss', 'Dove credi di andare? Le tue giornate sono mie. [ingresso] Da qui non si scappa.'], ['falcon', 'Allora guardami.']]);
+      await step('albumClose', 500);
+      // the boss: a moment of its own
+      Audio.stop(); await step('hush', 1100);                       // the music stops, the lights flicker, the rain stops
+      await step('door', 1300);                                    // the door bursts open: only a black shape against the light
+      Audio.play('boss'); await step('steps', 1700);               // three heavy steps, its colours come in
+      await step('versus', 2600);                                  // the screen splits: the boss and A face to face
+      await step('face', 200);
+      await say([['boss', 'Dove credi di andare? Le tue giornate sono mie. [ingresso] Da qui non si scappa.'], ['falcon', 'Ah sì? Io non credo proprio!']]);
+      await step('stand', 700);
       if (I.skipped) return;
       Audio.sfx('dash'); Audio.play('adventure');
-      await step('escape', 2300);                                  // the jump, the leap, the colour
-      say([['boss', 'Fermate quella corsa, prima che diventi una moda!']]);
-      await wait(2400); if (I.skipped) return;
-      for (let i = 0; i < 30 && VG.Dialog.open; i++) VG.Dialog.advance();
-      await step('title', 3600);                                   // the coloured street, «Run to You»
+      { const W = st.VW; await step('escape', Math.round((IN.doorX(W) + 14 - IN.deskX(W)) / IN.RUN * 1000) + 120); }
+      await step('out', Math.round((IN.outF(st.VW) + IN.burst) * 1000));
       if (I.skipped) return;
+      await Iris.close(`<span class="iris-logo"><small>${esc(TXT.V.A)} &amp; ${esc(TXT.V.B)}</small><b>Run to You</b></span>`);
+      await wait(2600); if (I.skipped) return;
       await Iris.close(TXT.V.luogo1, 'Tappa 1');
-      await wait(1500);
+      await wait(1300);
       finish();
     });
   }
   function wrapText(txt, n) { const out = []; let line = ''; for (const w of txt.split(' ')) { if ((line + ' ' + w).trim().length > n) { out.push(line.trim()); line = w; } else line += ' ' + w; } if (line.trim()) out.push(line.trim()); return out; }
   const ease = k => k < 0 ? 0 : k > 1 ? 1 : 1 - Math.pow(1 - k, 3);
-  // the intro's Album: an HTML copy of the Album's cover (the same as Memory Lane's), placed over the canvas in game pixels
+  // the intro's Album: an HTML copy of the finished Album's cover, placed over the canvas in game pixels
   let introAlbumEl = null;
   function introAlbum(g) {
     if (!g) { if (introAlbumEl) introAlbumEl.hidden = true; return; }
@@ -6879,133 +6904,195 @@ const HR_DATA = (() => {
     E.style.setProperty('--w', (g.w * k * 2) + 'px');
     E.classList.toggle('back', g.flip < 0); E.classList.toggle('shining', !!g.shine);
   }
-  // the boss's tag in the intro: the same paper tag of the stages, with the name and the line under it (no hearts)
-  function introBossCard(show) {
-    const old = byId('boss-card');
-    if (!show) { if (old) { old.classList.add('out'); setTimeout(() => old.remove(), 450); } return; }
-    if (old) old.remove();
-    const card = el('div', 'boss-card intro'); card.id = 'boss-card'; card.setAttribute('role', 'status');
-    card.innerHTML = `<div class="bc-tag"><span class="bc-por"></span><span class="bc-txt"><b>${TXT.V.boss}</b><span class="bc-hint">${TXT.PEZZI.sottotitolo}</span></span></div>`;
-    const cv = document.createElement('canvas'); cv.className = 'px'; VG.portrait(cv, humanoidSprite(BOSS.look, LOOKS[BOSS.look]).left); card.querySelector('.bc-por').appendChild(cv);
-    app.appendChild(card); setTimeout(() => Audio.sfx('block'), VG.REDUCED ? 0 : 420);
-  }
-  // the street: buildings, windows, pavement, road; grey or in colour (the same layout, so the colour can take over)
-  const ST_COL = ['#4f8fd6', '#f2c94c', '#e07a5f', '#7cc6a8', '#c77dd6', '#f4a261', '#5cb85c', '#e9796f', '#7cc6e8'];
-  function drawStreet(c, W, H, gy, off, colour) {
-    if (colour) { const s = c.createLinearGradient(0, 0, 0, gy); s.addColorStop(0, '#ff9a6b'); s.addColorStop(1, '#ffd59a'); c.fillStyle = s; c.fillRect(0, 0, W, gy); }
-    else { const s = c.createLinearGradient(0, 0, 0, gy); s.addColorStop(0, '#7b7f8a'); s.addColorStop(1, '#a3a6ae'); c.fillStyle = s; c.fillRect(0, 0, W, gy); }
-    const bw = 30, n = Math.ceil(W / bw) + 2, o = ((off % bw) + bw) % bw, i0 = Math.floor(off / bw);
-    for (let j = -1; j < n; j++) {
-      const idx = i0 + j, bx = Math.round(j * bw - o), h = 26 + ((idx * 37) % 23 + 23) % 23;
-      R(c, bx, gy - 10 - h, bw - 2, h + 10, colour ? ST_COL[((idx % 9) + 9) % 9] : (idx % 2 ? '#6c707b' : '#62666f'));
-      for (let wy = gy - 6 - h; wy < gy - 16; wy += 7) for (let wx = bx + 4; wx < bx + bw - 6; wx += 6) R(c, wx, wy, 3, 4, colour ? '#fff3c4' : '#868a94');
-    }
-    R(c, 0, gy - 10, W, 10, colour ? '#e9d8b4' : '#8b8e96'); R(c, 0, gy, W, H - gy, colour ? '#c9a27a' : '#55585f');
-    for (let x = -(((off * 1.2) % 14) + 14) % 14; x < W; x += 14) R(c, Math.round(x), gy + 9, 7, 1, colour ? '#b08860' : '#6a6d74');
-  }
   function drawIntro(c, dt) {
-    const I = G.intro; I.t += dt; I.pt += dt; const t = I.t, pt = I.pt, ph = I.ph, W = st.VW, H = st.VH, gy = H - 20;
+    const I = G.intro; I.t += dt; I.pt += dt; I.st += dt; const t = I.t, pt = I.pt, ph = I.ph, W = st.VW, H = st.VH, gy = H - 22;
     const beat = (name, fn) => { if (!I.beats[name]) { I.beats[name] = true; fn(); } };
     const big = (img, x, y, k = 2) => c.drawImage(img, Math.round(x - img.width * k / 2), Math.round(y - img.height * k), img.width * k, img.height * k);
-    const order = ['line', 'parcel', 'open', 'boss', 'escape', 'title'], after = p => order.indexOf(ph) >= order.indexOf(p);
-    const ft = Math.floor(t * 6) % 2, scl = humanoidSprite(SCL, LOOKS[SCL]), acc = (LOOKS[SCL] || {}).accC, bl = humanoidSprite(BOSS.look, LOOKS[BOSS.look]);
-    // the street walks by while they walk (the line goes right), it stops when the bench is in front of A
-    if (ph === 'line') I.scroll = Math.min(I.scroll + dt * 22, 110);
-    const benchX = Math.round(W * 0.5 + 110 - I.scroll), aLineX = Math.round(W * 0.34), pileX = Math.round(W * 0.66);
-    // ---- the title: everything in colour, the run goes on; the henchmen come in from the left and get their colours
-    if (ph === 'title') {
-      I.scroll += dt * 60; drawStreet(c, W, H, gy, I.scroll, true);
-      const ax = Math.round(W * 0.7); big(VG.falcon('right', ['a', 'stand', 'b', 'stand'][Math.floor(t * 12) % 4]), ax, gy + 2);
-      for (let i = 0; i < 3; i++) { const x = Math.round(-30 + pt * 52 - i * 30); if (x < -30) continue; const img = scl[Math.floor(t * 10 + i) % 2 ? 'a' : 'right']; big(x < 20 ? greyed(img, 1, acc, 'sc' + (Math.floor(t * 10 + i) % 2)) : img, x, gy + 4); }
-      const k = ease(clamp((pt - 0.3) / 0.6, 0, 1));
-      st.text('Run to You', W / 2, Math.round(H * 0.42), { size: Math.max(44, 22 * st.SCALE * (0.9 + 0.1 * k)), col: '#fbf6ec', align: 'center', stroke: '#2a1a2e', alpha: k });
-      return;
+    const after = p => PHASES.indexOf(ph) >= PHASES.indexOf(p);
+    const deskX = IN.deskX(W), doorX = IN.doorX(W), pileX = IN.pileX(W), outF = IN.outF(W);
+    // her run down the corridor, with a jump over a pile of files, and out of the door
+    let fx = deskX, fy = 0;
+    if (ph === 'escape') { const d = Math.min(pt * IN.RUN, doorX + 14 - deskX); fx = deskX + d; const jx = pileX - 40; if (fx > jx && fx < jx + 80) { fy = -Math.sin((fx - jx) / 80 * Math.PI) * 30; beat('jump', () => Audio.sfx('tap')); } }
+    const outside = ph === 'out', outT = outside ? pt : 0;
+    if (outside) fx = doorX + 14 + outT * IN.OUT_RUN;
+    // the camera keeps her in the middle, from the desk to the street, and stops when the office has gone off the left
+    const cam = ph === 'escape' ? Math.max(0, fx - W * 0.5) : outside ? Math.min(fx - W * 0.5, doorX + 44) : 0;
+    const X = x => Math.round(x - cam);
+    // the colours come back when she is out of the door
+    I.grey = outside ? Math.max(0, 0.85 - outT / 0.6) : 0.85;
+    // ---- the office wall and the corridor; windows with the blinds half down and the rain behind
+    R(c, 0, 0, W, gy, '#7d8394'); R(c, 0, gy - 26, W, 26, '#6b7080'); R(c, 0, gy - 27, W, 1, '#9aa0b4');
+    for (const wx of [14, Math.round(W * 0.74), Math.round(W * 1.25), Math.round(W * 1.72)]) {
+      const x0 = X(wx); if (x0 < -70 || x0 > W + 10) continue;
+      R(c, x0, 16, 64, 46, '#3a3f4c'); R(c, x0 + 2, 18, 60, 42, '#8f9bb0');
+      if (!['hush', 'door'].includes(ph)) for (let i = 0; i < 10; i++) { const ry = (t * 80 + i * 19 + wx) % 17; R(c, x0 + 4 + (i * 13 + wx) % 56, 39 + ry, 1, 4, '#c9d2e2'); }
+      for (let y = 18; y < 37; y += 3) R(c, x0 + 2, y, 60, 2, '#d8dce6'); R(c, x0 + 2, 38, 60, 1, '#3a3f4c');   // blinds half down: slats on top, rain below R(c, x0 + 31, 18, 2, 42, '#3a3f4c');
     }
-    // ---- the grey street (and, from the escape, the colour lighting up ahead of A)
-    drawStreet(c, W, H, gy, I.scroll, false);
-    // the escape path of A: run, stomp on the henchman, leap over the pile and the boss, land beyond, run off
-    let ax = aLineX, ay = 0, aImg = null, colourFrom = null;
-    const scX = Math.round(W * 0.56), bossX = Math.round(W * 0.78), landX = Math.round(W * 0.9);
-    if (after('parcel')) ax = ph === 'parcel' ? aLineX + (benchX - 16 - aLineX) * ease(pt / 1.2) : benchX - 16;
-    if (ph === 'escape') {
-      const s0 = benchX - 16;
-      if (pt < 0.35) { ax = s0 + (scX - s0) * (pt / 0.35); ay = -Math.sin(pt / 0.35 * Math.PI) * 10 - (pt / 0.35) * 12; }
-      else if (pt < 1.25) { const k = (pt - 0.35) / 0.9; ax = scX + (landX - scX) * k; ay = -22 - Math.sin(k * Math.PI) * 38 + k * 22; beat('stomp', () => { Audio.sfx('hit'); G.shake = 0.15; }); if (k > 0.45) beat('jump2', () => Audio.sfx('tap')); }
-      else { const k = pt - 1.25; ax = landX + k * 90; ay = 0; beat('land', () => Audio.sfx('block')); }
-      if (pt > 1.2) colourFrom = landX - 10;
+    const cx = X(Math.round(W * 0.3)), cy = 28; c.fillStyle = '#2a2d36'; c.beginPath(); c.arc(cx, cy, 11, 0, 7); c.fill(); c.fillStyle = '#f6f2ea'; c.beginPath(); c.arc(cx, cy, 9, 0, 7); c.fill();
+    const a1 = t * 2 * Math.PI / 6, a2 = t * 2 * Math.PI / 60; c.strokeStyle = '#2a2d36'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + Math.sin(a1) * 7, cy - Math.cos(a1) * 7); c.stroke(); c.lineWidth = 2; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + Math.sin(a2) * 5, cy - Math.cos(a2) * 5); c.stroke();
+    if (!after('escape') && !after('hush')) { const s = Math.floor(t); if (s !== I.tick) { I.tick = s; Audio.sfx('tap'); } }
+    for (const ox of [W * 0.95, W * 1.55]) { const x0 = X(ox); if (x0 < -60 || x0 > W + 60) continue; R(c, x0 - 30, gy - 26, 60, 4, '#2a1a2e'); R(c, x0 - 29, gy - 25, 58, 3, '#9c6b3e'); R(c, x0 - 27, gy - 22, 4, 22, '#6b4a2e'); R(c, x0 + 23, gy - 22, 4, 22, '#6b4a2e'); R(c, x0 - 20, gy - 38, 16, 12, '#2a2d36'); R(c, x0 - 19, gy - 37, 14, 9, '#4fb3e8'); }
+    { const x0 = X(W * 1.35); R(c, x0 - 5, gy - 34, 10, 14, '#bfe3f2'); R(c, x0 - 6, gy - 20, 12, 20, '#e8e4f0'); R(c, x0 - 6, gy - 20, 12, 1, '#2a1a2e'); }
+    // the street outside (in colour), behind the door: long enough for the whole chase
+    { const x0 = X(doorX + 32); if (x0 < W) { const len = W * 3; R(c, x0, 0, len, gy, '#7cc6e8'); R(c, x0, gy - 40, len, 40, '#f6e3b5'); for (let i = 0; i * 46 + 20 < len; i++) { const bx = x0 + 20 + i * 46; if (bx > W || bx < -40) continue; R(c, bx, gy - 70 + (i % 2) * 14, 30, 70 - (i % 2) * 14, ['#ff6b57', '#ffd84a', '#7fd18a', '#f2a3b0', '#4fb3e8', '#c9bfe0'][i % 6]); } c.fillStyle = '#ffd84a'; c.beginPath(); c.arc(x0 + W * 0.6, 26, 10, 0, 7); c.fill(); } }
+    // the door with its green sign: it opens for her (and the Consulenti slam it open off screen, later)
+    { const dx = X(doorX); if (dx > -40 && dx < W + 40) { const open = outside ? 1 : ph === 'escape' ? clamp((fx - (doorX - 30)) / 30, 0, 1) : 0;
+      R(c, dx - 2, gy - 62, 34, 62, '#2a2d36'); R(c, dx, gy - 60, 30, 60, '#4a4e5c');
+      R(c, dx, gy - 60, Math.round(30 * (1 - open * 0.8)), 60, '#8a6a44'); R(c, dx + Math.round(30 * (1 - open * 0.8)) - 4, gy - 32, 2, 4, '#ffd84a');
+      R(c, dx + 2, gy - 72, 26, 8, '#2f8a4a'); st.text('USCITA', dx + 15, gy - 68, { size: Math.max(8, 3 * st.SCALE), col: '#eaffea', align: 'center', font: 'num', shadow: false }); } }
+    // the door of the room, on the left: the boss comes in from here
+    { const dx = X(IN.bossDoor(W)); if (dx > -40) { const open = after('door') ? (ph === 'door' ? ease(pt / 0.25) : 1) : 0;
+      R(c, dx - 16, gy - 62, 32, 62, '#2a2d36');
+      if (open > 0) { c.fillStyle = '#fff6e0'; c.globalAlpha = ph === 'door' ? 1 : 0.6; R(c, dx - 14, gy - 60, 28, 60, '#fff6e0'); c.globalAlpha = 1; }
+      R(c, dx - 14, gy - 60, Math.round(28 * (1 - open * 0.85)), 60, '#6b5a44'); R(c, dx - 14 + Math.round(28 * (1 - open * 0.85)) - 4, gy - 32, 2, 4, '#c9bfe0'); } }
+    // floor
+    R(c, 0, gy, W, H - gy, '#4a4e5c'); for (let x = -(cam % 16); x < W; x += 16) R(c, Math.round(x), gy, 1, H - gy, '#41444f'); R(c, 0, gy, W, 1, '#2a2d36');
+    if (outside) { const x0 = X(doorX + 32); R(c, x0, gy, W * 3, H - gy, '#c9b48a'); R(c, x0, gy, W * 3, 1, '#8a7a5a'); }
+    // El Falcon at her desk: typing; turning to whoever comes; sinking under the files; looking around before she goes
+    const dX = X(deskX);
+    const visitor = ['c1', 'c2', 'c3', 'mail'].includes(ph), vLeft = !!IN.FROM_LEFT[ph];
+    if (!after('escape')) {
+      const typing = ph === 'work' ? Math.floor(t * 6) % 2 : 0, sink = ph === 'sigh' || (ph === 'mail' && I.sub === 'in') ? 6 : 0;
+      let img = VG.falcon('down');
+      // she turns to the Consulente when he is close, and back to the screen when he goes
+      if (visitor && ((I.sub === 'in' && I.st > 0.5) || I.sub === 'stand')) img = VG.falcon(vLeft ? 'left' : 'right');
+      if (ph === 'think') { const k = Math.floor(pt / 0.65); img = VG.falcon(k === 1 ? 'up' : k === 2 ? 'left' : k >= 3 ? 'right' : 'down'); }
+      if (['door', 'steps', 'versus', 'face'].includes(ph)) img = VG.falcon('left');
+      if (ph === 'stand') img = VG.falcon('right');
+      big(img, dX - 2, gy - 14 + typing + sink - (ph === 'stand' ? Math.min(8, pt * 30) : 0));
+      if (ph === 'sigh' && pt > 0.4 && pt < 1.3) { R(c, dX + 10, gy - 48 - Math.round((pt - 0.4) * 12), 3, 2, 'rgba(255,255,255,.8)'); R(c, dX + 13, gy - 51 - Math.round((pt - 0.4) * 12), 2, 2, 'rgba(255,255,255,.6)'); beat('sigh', () => Audio.sfx('error')); }
+      if (ph === 'door' && pt > 0.3) st.text('!', dX + 14, gy - 58, { size: Math.max(16, 7 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false });
+      if (ph === 'think' && pt < 1.9) st.text('…', dX + 14, gy - 58, { size: Math.max(14, 6 * st.SCALE), col: '#fff6e0', align: 'center', stroke: '#1a1024', shadow: false });
+      if (ph === 'parcel' && pt > 0.2) st.text(I.sub === 'open' ? '!' : '?', dX + 14, gy - 58 - (I.sub === 'open' ? 0 : Math.round(Math.sin(t * 4) * 1.5)), { size: Math.max(16, 7 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false });
     }
-    // the colour: from where A landed, under the feet and spreading ahead (to the right); a soft wavy edge
-    if (colourFrom !== null) {
-      c.save(); c.beginPath(); c.moveTo(W, 0); c.lineTo(colourFrom + 4, 0);
-      for (let y = 0; y <= H; y += 4) c.lineTo(colourFrom + Math.round(Math.sin(y * 0.35 + t * 6) * 3), y);
-      c.lineTo(W, H); c.closePath(); c.clip(); drawStreet(c, W, H, gy, I.scroll, true); c.restore();
-      const spread = Math.min(W, ax + 14 + (pt - 1.2) * 60);
-      if (spread < W) { c.globalAlpha = 0.35; R(c, Math.round(spread), 0, W - Math.round(spread), H, '#7b7f8a'); c.globalAlpha = 1; }
+    // her desk: monitor (slammed shut when she stands up), the pile of files that grows, the parcel
+    R(c, dX - 34, gy - 26, 68, 4, '#2a1a2e'); R(c, dX - 33, gy - 25, 66, 3, '#9c6b3e'); R(c, dX - 31, gy - 22, 4, 22, '#6b4a2e'); R(c, dX + 27, gy - 22, 4, 22, '#6b4a2e'); R(c, dX - 27, gy - 22, 54, 10, '#8a5a32');
+    const shut = after('stand');
+    if (ph === 'stand') beat('slam', () => { Audio.sfx('block'); G.shake = 0.12; });
+    if (shut) R(c, dX - 28, gy - 29, 18, 3, '#2a2d36'); else { R(c, dX - 28, gy - 40, 18, 13, '#2a2d36'); R(c, dX - 27, gy - 39, 16, 10, ph === 'work' && Math.floor(t * 3) % 2 ? '#7cc6e8' : '#4fb3e8'); R(c, dX - 21, gy - 27, 4, 2, '#2a2d36'); }
+    for (let i = 0; i < I.pile; i++) R(c, dX + 16 + (i % 3 === 2 ? 1 : 0), gy - 28 - i * 2, 14, 2, i % 2 ? '#e8e4f0' : '#f6f2ea');
+    // the files from the left: on the floor beside the desk, because the desk is full
+    for (let i = 0; i < I.pileL; i++) R(c, dX - 48 + (i % 3 === 1 ? 1 : 0), gy - 2 - i * 2, 14, 2, i % 2 ? '#e8e4f0' : '#f6f2ea');
+    if (after('mail') && !after('reveal') && (ph !== 'mail' || I.sub !== 'in')) {
+      // the parcel; it gives a little jump when she decides to open it
+      const px = dX - 6, jy = ph === 'parcel' && I.sub === 'open' ? -Math.round(Math.abs(Math.sin(I.st * 9)) * 2) : 0;
+      R(c, px, gy - 38 + jy, 20, 12, '#2a1a2e'); R(c, px + 1, gy - 37 + jy, 18, 10, '#c8843a'); R(c, px + 9, gy - 37 + jy, 2, 10, '#d64545'); R(c, px + 1, gy - 33 + jy, 18, 2, '#d64545');
     }
-    // the bench (in colour) with the parcel on its seat, until A takes it
-    { const bx = benchX; R(c, bx - 20, gy - 21, 40, 3, '#c0703a'); R(c, bx - 20, gy - 17, 40, 2, '#a85e2e'); R(c, bx - 17, gy - 15, 2, 5, '#3a3a48'); R(c, bx + 15, gy - 15, 2, 5, '#3a3a48');
-      R(c, bx - 21, gy - 11, 42, 3, '#d9824a'); R(c, bx - 21, gy - 8, 42, 1, '#8f4a22'); R(c, bx - 18, gy - 7, 2, 7, '#3a3a48'); R(c, bx + 16, gy - 7, 2, 7, '#3a3a48');
-      const taken = after('open') || (ph === 'parcel' && pt > 1.3);
-      if (!taken) { const px = bx + 4; c.globalAlpha = 0.18 + 0.08 * Math.sin(t * 4); c.fillStyle = '#ffd84a'; c.beginPath(); c.arc(px, gy - 18, 12, 0, 7); c.fill(); c.globalAlpha = 1;
-        R(c, px - 8, gy - 23, 16, 12, '#2a1a2e'); R(c, px - 7, gy - 22, 14, 10, '#e9524a'); R(c, px - 1, gy - 22, 2, 10, '#ffd84a'); R(c, px - 7, gy - 18, 14, 2, '#ffd84a'); R(c, px - 4, gy - 25, 3, 2, '#ffd84a'); R(c, px + 1, gy - 25, 3, 2, '#ffd84a'); } }
-    // the pile of boring things, on the pavement ahead (already there from the start)
-    for (let i = 0; i < 7; i++) R(c, pileX - 9 + (i % 2), gy - 2 - i * 3, 18, 3, i % 2 ? '#d8d8d8' : '#c4c4c4');
-    // the line: grey people walking; from the parcel on, it goes on without A and leaves to the right
-    const leave = after('parcel') ? (ph === 'parcel' ? pt : (I.leaveT = (I.leaveT || 0) + dt) + 2.3) * 26 : 0;
-    const LINE = [0.04, 0.19, 0.49, 0.64, 0.79, 0.94]; // A walks at 0.34
-    for (let i = 0; i < LINE.length; i++) {
-      const x = Math.round(W * LINE[i] + leave); if (x > W + 20) continue;
-      const look = CROWD[i % CROWD.length], hs = humanoidSprite(look, LOOKS[look]);
-      // the one who looks up (from the letter on): turned towards us, a little colour
-      if (i === 3 && after('open')) { big(greyed(hs.down_stand, 0.45, null, 'up' + look), x, gy + 1); continue; }
-      big(greyed(hs[ft ? 'a' : 'right'], 1, null, look + ft), x, gy + 1);
+    // the pile of files in the corridor that she jumps
+    { const x0 = X(pileX); for (let i = 0; i < 6; i++) R(c, x0 - 8, gy - 2 - i * 2, 16, 2, i % 2 ? '#e8e4f0' : '#f6f2ea'); R(c, x0 - 8, gy - 13, 16, 1, '#2a1a2e'); }
+    // the Consulenti who come to her desk, from the right (c1, c3) and from the left (c2, the mail)
+    const gl = humanoidSprite(SCL, LOOKS[SCL]), bl = humanoidSprite(BOSS.look, LOOKS[BOSS.look]);
+    if (visitor) {
+      const stop = IN.stop(W, vLeft), edge = vLeft ? -20 : W + 20, dir = vLeft ? -1 : 1;   // dir: the side he goes back to
+      const gx = I.sub === 'in' ? edge + (stop - edge) * ease(I.st / 1.3) : I.sub === 'out' ? stop + dir * I.st * IN.EXIT : stop;
+      const walk = (I.sub === 'in' && I.st < 1.3) || I.sub === 'out', toRight = I.sub === 'out' ? !vLeft : vLeft, ft = Math.floor(t * 8) % 2;
+      const img = gl[walk ? (toRight ? (ft ? 'a' : 'right') : (ft ? 'aL' : 'left')) : 'down_stand'];
+      big(img, X(gx), gy + 1);
+      if (I.sub === 'in') {
+        // what he carries, in front of him
+        const hx = vLeft ? X(gx) + 2 : X(gx) - 10;
+        if (ph === 'mail') { R(c, hx - 2, gy - 28, 16, 10, '#2a1a2e'); R(c, hx - 1, gy - 27, 14, 8, '#c8843a'); R(c, hx + 5, gy - 27, 2, 8, '#d64545'); } else { R(c, hx, gy - 26, 14, 6, '#f6f2ea'); R(c, hx, gy - 26, 14, 1, '#c9bfe0'); }
+      }
     }
-    // the henchmen: beside the line, grey with one detail in the boss's colour; then they stand by the boss
-    const scPos = after('boss') ? [scX, Math.round(W * 0.88)] : [Math.round(W * 0.12), Math.round(W * 0.72)];
-    scPos.forEach((x0, i) => {
-      if (ph === 'escape' && i === 0 && pt > 0.35) { big(greyed(scl.down_stand, 1, acc, 'sq'), x0, gy + 6, 2); return; }
-      if (ph === 'escape' && pt > 1.8) { const k = pt - 1.8; x0 += k * 70; } // after her
-      const walking = ph === 'line' || (ph === 'escape' && pt > 1.8);
-      big(greyed(scl[after('boss') ? (ph === 'escape' && pt > 1.8 ? (ft ? 'a' : 'right') : 'left') : walking ? (ft ? 'a' : 'right') : 'right'], 1, acc, 'sc' + i + ph + ft), Math.round(x0), gy + 9);
-    });
-    // their shouts, one after the other, over their heads
-    if (ph === 'line') for (let i = 0; i < SHOUTS.length; i++) {
-      const k = pt - 0.6 - i * 1.5; if (k < 0 || k > 1.4) continue;
-      if (k < 0.05) beat('sh' + i, () => Audio.sfx('warn'));
-      const x0 = i % 2 ? Math.round(W * 0.72) : Math.round(W * 0.12);
-      const sz = Math.max(14, 5.2 * st.SCALE), hw = SHOUTS[i].length * sz * 0.3 / st.SCALE;
-      st.text(SHOUTS[i], clamp(x0, hw + 4, W - hw - 4), gy - 56 - (i === 2 ? 8 : 0), { size: sz, col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false, alpha: clamp(Math.min(k * 8, (1.4 - k) * 4), 0, 1) });
+    // El Falcon running
+    if (after('escape') && X(fx) < W + 30) {
+      const f = VG.falcon('right', fy < 0 ? 'a' : ['a', 'stand', 'b', 'stand'][Math.floor(t * 12) % 4]);
+      big(f, X(fx), gy + 1 + fy); if (fy === 0 && Math.floor(t * 20) % 2) { R(c, X(fx) - 14, gy - 2, 2, 2, 'rgba(255,246,224,.7)'); R(c, X(fx) - 18, gy - 4, 2, 2, 'rgba(255,246,224,.45)'); }
     }
-    // the boss: comes in from the right, in its full colours, and blocks the street
-    if (after('boss')) {
-      const bx = ph === 'boss' ? W + 24 + (bossX - W - 24) * ease(pt / 1.1) : bossX;
-      big(bl[ph === 'boss' && pt < 1.1 ? (ft ? 'aL' : 'left') : 'left'], Math.round(bx), gy + 2);
-      if (ph === 'boss' && pt > 0.6) beat('card', () => introBossCard(true));
-      if (ph === 'boss' && pt > 2.05) beat('cardOut', () => introBossCard(false));
+    // the Consulenti after her: the door bangs off screen, then they come in from the left, already running, shouting
+    if (outside && outT >= outF) {
+      beat('bang', () => { Audio.sfx('door'); G.shake = 0.25; });
+      const sz = Math.max(17, 7 * st.SCALE);
+      for (let i = 0; i < 4; i++) {
+        const k = outT - outF - IN.LEAD - i * IN.GAP; if (k < 0) continue;
+        if (i === 0) beat('shout', () => Audio.sfx('warn'));
+        const sx2 = Math.round(-18 + k * IN.CHASE); if (sx2 > W + 30) continue;
+        big((i === 3 ? bl : gl)[Math.floor(t * 10 + i) % 2 ? 'a' : 'right'], sx2, gy + 1); // the last one is the boss
+        if (k < IN.SHOUT) {
+          // the shout stays over his head, all inside the screen, and fades only at the end
+          const sh = i === 3 ? 'Fermate quella corsa!' : SHOUTS[i % SHOUTS.length], hw = sh.length * sz * 0.28 / st.SCALE;
+          st.text(sh, clamp(sx2, hw + 4, W - hw - 4), gy - 46 - (i % 2) * 14, { size: sz, col: '#fff6e0', align: 'center', stroke: '#1a1024', shadow: false, alpha: clamp(Math.min(k * 8, (IN.SHOUT - k) * 4), 0, 1) });
+        }
+      }
     }
-    // A: nearly grey in the line; picking up the parcel the colours come back
-    if (ph === 'parcel' && pt > 1.3) I.aGrey = Math.max(0, 0.65 - (pt - 1.3) * 1.6);
-    if (after('open')) I.aGrey = 0;
-    if (ph === 'parcel' && pt > 1.3) beat('take', () => Audio.sfx('ticket'));
-    if (ax < W + 30) {
-      const walkA = ph === 'line' || (ph === 'parcel' && pt < 1.2) || (ph === 'escape' && pt > 1.25);
-      let f = ph === 'escape' ? VG.falcon('right', ay < 0 ? 'a' : ['a', 'stand', 'b', 'stand'][Math.floor(t * 12) % 4]) : after('open') ? VG.falcon('down') : VG.falcon('right', walkA ? (ft ? 'a' : 'b') : 'stand');
-      if (I.aGrey > 0.01) f = greyed(f, I.aGrey, null, '');
-      big(f, Math.round(ax), Math.round(gy + 2 + ay));
+    // two henchmen to attention beside the door, as soon as it opens (grey, like the room)
+    if (after('door') && !after('escape')) { const d0 = X(IN.bossDoor(W)); big(gl.down_stand, d0 - 22, gy + 1); big(gl.down_stand, d0 + 22, gy + 1); }
+    // grey until she is out: the colours drain away with a saturation layer
+    if (I.grey > 0.01) { c.save(); c.globalCompositeOperation = 'saturation'; c.globalAlpha = I.grey; c.fillStyle = '#808080'; c.fillRect(0, 0, W, H); c.restore(); }
+    // ---- the boss's moment, drawn over the grey: it is always in full colour
+    if (after('hush') && !after('escape')) {
+      // the lights flicker
+      if (ph === 'hush') { const f = (Math.floor(pt * 14) % 3 === 0) || (pt > 0.5 && pt < 0.62); if (f) { c.globalAlpha = 0.55; R(c, 0, 0, W, H, '#0b0816'); c.globalAlpha = 1; } beat('flick', () => Audio.sfx('error')); }
+      if (ph === 'door') beat('thunder', () => { Audio.sfx('block'); Audio.sfx('door'); G.shake = 0.35; });
+      const d0 = X(IN.bossDoor(W)), d1 = X(IN.bossStop(W));
+      // the boss: a black shape in the doorway, then three heavy steps towards A while its colours come in
+      let bx = d0, col = 0, step = 0;
+      if (ph === 'steps') { const k = clamp(pt / 1.5, 0, 1), s3 = Math.min(2, Math.floor(k * 3)), u = clamp(k * 3 - s3, 0, 1); bx = d0 + (d1 - d0) * ((s3 + ease(u)) / 3); col = k; step = u < 0.5 ? 1 : 0;
+        for (let i = 0; i < 3; i++) if (k * 3 >= i + 0.55) beat('step' + i, () => { Audio.sfx('block'); G.shake = 0.18; }); }
+      else if (after('versus')) { bx = d1; col = 1; }
+      const bimg = bl[ph === 'steps' && step ? 'aL' : ph === 'steps' ? 'left' : 'right'];
+      if (ph !== 'versus') {
+        big(bimg, Math.round(bx), gy + 1);
+        if (col < 1) { // the black shape: the same sprite, filled black, fading into the colours
+          const o = document.createElement('canvas'); o.width = bimg.width; o.height = bimg.height; const g2 = o.getContext('2d');
+          g2.drawImage(bimg, 0, 0); g2.globalCompositeOperation = 'source-in'; g2.fillStyle = '#0b0816'; g2.fillRect(0, 0, o.width, o.height);
+          c.globalAlpha = 1 - col; big(o, Math.round(bx), gy + 1); c.globalAlpha = 1;
+        }
+      }
+      // face to face: the screen splits on the diagonal, the boss big with its tag, A on the other side
+      if (ph === 'versus') {
+        beat('vs', () => { Audio.sfx('ticket'); G.shake = 0.2; });
+        const k = ease(clamp(pt / 0.35, 0, 1)), out = pt > 2.25 ? ease((pt - 2.25) / 0.3) : 0, sh = Math.round((1 - k + out) * W);
+        c.save(); c.translate(-sh, 0); c.beginPath(); c.moveTo(0, 0); c.lineTo(W * 0.6, 0); c.lineTo(W * 0.4, H); c.lineTo(0, H); c.closePath(); c.fillStyle = '#ff6b57'; c.fill();
+        c.globalAlpha = 0.18; for (let i = 0; i < 9; i++) R(c, 0, i * 12 + Math.round(t * 40) % 12, W, 3, '#1a1024'); c.globalAlpha = 1;
+        const bb = bl.down_stand; c.drawImage(bb, Math.round(W * 0.2 - bb.width * 2), Math.round(H * 0.5 - bb.height * 2), bb.width * 4, bb.height * 4); c.restore();
+        c.save(); c.translate(sh, 0); c.beginPath(); c.moveTo(W * 0.6 + 2, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * 0.4 + 2, H); c.closePath(); c.fillStyle = '#2a2145'; c.fill();
+        const ab = VG.falcon('down'); c.drawImage(ab, Math.round(W * 0.8 - ab.width * 1.5), Math.round(H * 0.62 - ab.height * 1.5), ab.width * 3, ab.height * 3); c.restore();
+        // the tag: name and the line made to measure
+        if (k >= 1 && !out) {
+          const nm = TXT.V.boss, sb = TXT.PEZZI.sottotitolo, tx = Math.round(W * 0.2), ty = Math.round(H * 0.16);
+          st.text(nm, tx, ty, { size: Math.max(18, 7.5 * st.SCALE), col: '#fff6e0', align: 'center', stroke: '#1a1024' });
+          if (sb) st.text(sb, tx, ty + 10, { size: Math.max(12, 4.4 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024', shadow: false });
+          st.text('VS', W * 0.5, H * 0.52, { size: Math.max(22, 10 * st.SCALE), col: '#ffd84a', align: 'center', stroke: '#1a1024' });
+        }
+      }
     }
-    // the Album and the letter, big, while B reads it
-    if (ph === 'open') {
-      const k = ease(pt / 0.5);
-      introAlbum({ x: Math.round(W * 0.5), y: Math.round(H * 0.06 + (1 - k) * 10), w: 58, h: 76, flip: 1, alpha: k, shine: true });
-      const lx = Math.round(W * 0.56 + 46), ly = Math.round(H * 0.22);
-      c.save(); c.globalAlpha = k; c.translate(lx, ly); c.rotate(0.06);
-      R(c, -1, -1, 62, 40, '#2a1a2e'); R(c, 0, 0, 60, 38, '#fbf6ec'); c.strokeStyle = '#2a1a2e'; c.lineWidth = 1; c.beginPath(); c.moveTo(0, 0); c.lineTo(30, 18); c.lineTo(60, 0); c.stroke();
-      c.fillStyle = '#ff6b57'; c.beginPath(); c.arc(30, 18, 4, 0, 7); c.fill(); c.restore();
-      st.text('Per ' + TXT.V.a, lx + 30, ly + 32, { size: Math.max(13, 5 * st.SCALE), col: '#2a1a2e', align: 'center', shadow: false, alpha: k, font: 'hand' });
-    } else introAlbum(null);
-    // the rain, over the grey part
-    { const lim = colourFrom !== null ? colourFrom : W; for (let i = 0; i < 46; i++) { const x = (i * 53 + Math.floor(t * 20) * 7) % W, y = ((t * 140 + i * 37) % (H + 10)) - 10; if (x < lim) R(c, x, y, 1, 4, 'rgba(225,228,236,.45)'); } }
+    // …but the Album is in colour: the only colourful thing in the office
+    // the Album: the room goes dark, light from the parcel, the Album rises turning once; then it stays there, closed,
+    // glowing, while Il Crocco speaks; at the end it comes down into her hands
+    if (!(ph === 'reveal' || ph === 'album' || ph === 'albumClose')) introAlbum(null);
+    if (ph === 'reveal' || ph === 'album' || ph === 'albumClose') {
+      const dark = ph === 'reveal' ? ease(pt / 0.6) : ph === 'album' ? 1 : 1 - ease(pt / 0.45);
+      c.globalAlpha = 0.7 * dark; R(c, 0, 0, W, H, '#0b0816'); c.globalAlpha = 1;
+      const ox = W / 2, oy2 = Math.round(H * 0.62);   // low enough to stay clear of the dialog box
+      if (ph === 'reveal') beat('rays', () => Audio.sfx('solve'));
+      // rays of light behind it: strong out of the parcel, softer while it floats
+      { c.save(); c.translate(ox, oy2); c.rotate(t * 0.6); c.globalAlpha = (ph === 'reveal' ? 0.25 : 0.14) * dark;
+        for (let i = 0; i < 10; i++) { c.rotate(Math.PI / 5); c.fillStyle = i % 2 ? '#ffd84a' : '#fff6e0'; c.beginPath(); c.moveTo(0, 0); c.lineTo(-10, -140); c.lineTo(10, -140); c.closePath(); c.fill(); }
+        c.restore(); c.globalAlpha = 1; }
+      // one slow turn while it rises, easing into place with the cover towards us
+      const k = ph === 'reveal' ? ease(clamp((pt - 0.4) / 2.6, 0, 1)) : 1;
+      const down = ph === 'albumClose' ? ease(pt / 0.45) : 0;
+      const rise = k * (1 - down * 0.85), spin = Math.cos(k * Math.PI * 2);
+      const bob = ph === 'album' ? Math.round(Math.sin(t * 2.2) * 2) : 0;
+      const cw = Math.round(66 * (0.5 + 0.5 * rise)), ch2 = Math.round(88 * (0.5 + 0.5 * rise));
+      const by = Math.round(oy2 - ch2 / 2 - rise * 6 + (1 - k) * 30 + down * (gy - 34 - oy2) + bob);
+      if (rise > 0.02 && down < 0.99) {
+        // the Album itself is the same cover as the finished Album (HTML, laid over the canvas): one look for both
+        introAlbum({ x: ox - cw / 2, y: by, w: cw, h: ch2, flip: spin, alpha: down < 0.5 ? 1 : 1 - (down - 0.5) * 2, shine: ph === 'album' });
+      } else introAlbum(null);
+      if (rise > 0.02 && down < 0.99) {
+        c.globalAlpha = 1;
+        if (ph === 'reveal' && k > 0.98) beat('cover', () => Audio.sfx('ticket'));
+        // little sparkles around it while it floats
+        if (ph === 'album') for (let i = 0; i < 6; i++) {
+          const a = i * 1.047 + t * 0.4, rx = ox + Math.cos(a) * (cw * 0.5 + 12), ry = by + ch2 / 2 + Math.sin(a) * (ch2 * 0.5 + 10);
+          if (Math.sin(t * 3 + i * 2.1) > 0.3) { R(c, rx, ry - 1, 1, 3, '#ffe9a8'); R(c, rx - 1, ry, 3, 1, '#ffe9a8'); }
+        }
+      }
+    }
   }
+
   // ---------------------------------------------------------------- new game: everything back to the start
   // «Nuova partita»: everything back to zero (stages, tickets, stars, coins and the look), then the introduction
   async function newGame() {
@@ -7161,6 +7248,6 @@ const HR_DATA = (() => {
 })();
 
 </script>
-<div style="position:fixed;left:6px;bottom:4px;z-index:99;font:10px/1 monospace;color:rgba(255,255,255,.45);pointer-events:none">base 492b015</div>
+<div style="position:fixed;left:6px;bottom:4px;z-index:99;font:10px/1 monospace;color:rgba(255,255,255,.45);pointer-events:none">base b295409</div>
 </body>
 </html>
