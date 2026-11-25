@@ -2,7 +2,7 @@
 // build.js puts it next to the delivered game, with the name of the cache for that order and version).
 // The page is fetched from the network first (so a new version arrives as soon as there is a connection) and kept as a
 // copy for when there is none; icons and the manifest come from the copy. The fonts are inside the page.
-const CACHE = 'quizofus-mauro-48-efeec0d';
+const CACHE = 'quizofus-mauro-48-f44f7f9';
 const FILES = ['./', 'index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'favicon-32.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];
 
 self.addEventListener('install', e => {
