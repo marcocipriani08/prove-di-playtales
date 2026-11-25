@@ -1080,8 +1080,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia","punti":[{"disegno":"faro","at":0.3},{"disegno":"gatto","at":0.55}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"#8E929E","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"],"consegne":["Ecco il report del weekend. Sì, era sabato, ma il valore non va mica in vacanza.","Altre slide da rivedere! Le ferie? Le mettiamo in agenda dopo la prossima riunione.","Il piano ferie, approvato: zero giorni. Ottimizzato per creare valore."],"cappello":"tophat"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "6e59ed9";
-window.SALVATAGGIO = "rty_viaggettino_6e59ed9_";
+window.VERSIONE = "cb90f7b";
+window.SALVATAGGIO = "rty_viaggettino_cb90f7b_";
 window.MODALITA = "prova";
 </script>
 <script>
@@ -2069,6 +2069,187 @@ const TXT = (() => {
   }
 
   return { VERSION, OPTIONS, DEFAULTS, FIELDS, ZONES, GRID: { w: SW, h: SH }, normalize, validate, sprite, COSTUMES, JEWELS, wear, recolors };
+});
+</script>
+<script>
+/* motore/animali.js */
+/*
+ * Copiato dal sito Playtale (repository playtale, assets/js/animali.js, commit 643e2ee): non modificarlo qui, modificalo sul sito e ricopialo.
+ * Playtale — gli animali dei giochi (PTAnimali).
+ *
+ * Una sola fonte, come avatar.js: i giochi (Memory Lane, Run to You, Quiz of Us…) la copiano in motore/animali.js e il
+ * loro build controlla che la copia sia uguale a questa. Regole: REGOLE-ANIMALI.md. Si aggiunge, non si cambia: un
+ * disegno che c'è già non deve cambiare di un pixel (i giochi già fatti lo usano). Prova: animali-test.html.
+ *
+ * Lo stile (quello di Olly, il jack russell del Memory Lane di prova, che Marco preferisce): una griglia di pixel con la
+ * sua tavolozza, il contorno scuro di 1 pixel tutto intorno (#1a1024, come i personaggi), testa grande e corpo
+ * compatto, due toni per colore, i segni della razza, una posa con carattere. Guarda a destra; specchio: a sinistra.
+ *
+ *   PTAnimali.pixelSprite(righe, pal, specchio)   una griglia qualsiasi → una tela (w+2 × h+2, con il contorno); la
+ *                                                  tiene da parte e la seconda volta la ridà subito. Solo nel browser.
+ *   PTAnimali.sprite(nome, { tipo, posa, fotogramma, specchio })   un animale del catalogo → una tela.
+ *   PTAnimali.griglia(nome, { tipo, posa, fotogramma })            { righe, pal } (anche in Node, per i controlli).
+ *   PTAnimali.NOMI, PTAnimali.DISEGNI, PTAnimali.validate()        l'elenco, i dati, i controlli (righe, colori).
+ *
+ * Ogni animale: { chi, ordini, pal, tipi?: { nome: colori che cambiano }, pose: { nome: righe | [righe, righe…] } }.
+ * La prima posa e il primo tipo sono quelli di base; una posa con più fotogrammi è una lista di griglie.
+ */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.PTAnimali = api;
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const VERSION = 1;
+  const CONTORNO = '#1a1024';
+
+  function pixelSprite(righe, pal, specchio) {
+    const key = righe.join('|') + JSON.stringify(pal) + (specchio ? '<' : ''), cache = pixelSprite.cache || (pixelSprite.cache = new Map());
+    if (cache.has(key)) return cache.get(key);
+    const h = righe.length, w = righe[0].length, cv = document.createElement('canvas'); cv.width = w + 2; cv.height = h + 2;
+    const x = cv.getContext('2d'), at = (i, y) => y >= 0 && y < h && i >= 0 && i < w && righe[y][i] !== '.', X = i => specchio ? w - 1 - i : i;
+    x.fillStyle = CONTORNO; for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(([dx, dy]) => { if (!at(i + dx, y + dy)) x.fillRect(X(i + dx) + 1, y + dy + 1, 1, 1); });
+    for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) { x.fillStyle = pal[righe[y][i]] || '#ff00ff'; x.fillRect(X(i) + 1, y + 1, 1, 1); }
+    cache.set(key, cv); return cv;
+  }
+
+  const DISEGNI = {
+    // Olly, jack russell bianco con le macchie fulve: in piedi ad aspettare la pallina, coda dritta, lingua fuori
+    jack_russell_olly: {
+      chi: 'Olly, jack russell', ordini: 'Memory Lane francesca (carta olly), Run to You marco-natale (punto ollycorre, carta olly)',
+      pal: { W: '#fbf7ee', w: '#d9d2c4', T: '#c8843a', t: '#9a5a28', K: '#2a1a2e', N: '#1a1024', P: '#e86a7a' },
+      pose: {
+        in_piedi: [
+        '..............tt......',
+        '.............tttT.....',
+        '.............TttTTT...',
+        '.............TTTKTWWW.',
+        '.W...........TTTTWWWWN',
+        '.WW...........TTWWWP..',
+        '..W..........WWWWWP...',
+        '..WW.........WWWWW....',
+        '...WWWWTTTWWWWWWWW....',
+        '...WWWTTTTTWWWWWWW....',
+        '...wWWWWTTWWWWWWWw....',
+        '...wwWWWWWWWWWWWww....',
+        '...WW.ww....WW.ww.....',
+        '...WW.ww....WW.ww.....'
+      ]
+      }
+    },
+    // una capra: corna all'indietro, orecchio di traverso, barbetta, codino dritto, zoccoli scuri
+    capra: {
+      chi: 'capra', ordini: 'Run to You marco-natale (punto capreprato, carta capre)',
+      pal: { W: '#f6f0e4', w: '#d6ccbc', e: '#d6ccbc', t: '#f6f0e4', S: '#f6f0e4', B: '#e6dccc', h: '#7a6a52', H: '#b8a888', K: '#1a1024', P: '#e89a9a', F: '#4a3a2e' },
+      tipi: {
+        bianca: {},
+        marrone: { W: '#a8703e', w: '#82522a', e: '#82522a', t: '#a8703e', S: '#f6f0e4', B: '#5a3a22' },   // con la macchia bianca
+        pezzata: { S: '#3a2a2a' }
+      },
+      pose: {
+        in_piedi: [
+        '............hH......',
+        '...........hHH......',
+        '..........hHWWWW....',
+        '........eeWWWWWWW...',
+        '.........eWWWKWWWW..',
+        '..........WWWWWWWWP.',
+        '..........wWWWWWWW..',
+        '.t.........wWWWBB...',
+        '.tWWWWWWWWWWWWw.B...',
+        '..WWWWWWWWWWWWw.....',
+        '..WWWSSSWWWWWWw.....',
+        '..wWWSSWWWWWWww.....',
+        '...wwwwwwwwwwww.....',
+        '...WW.ww....WW.ww...',
+        '...FF.FF....FF.FF...'
+      ]
+      }
+    },
+    // Drieder, alpaca marrone con il frangione e il sorriso
+    alpaca_drieder: {
+      chi: 'Drieder, alpaca', ordini: 'Memory Lane prova-alpaca (carta drieder)',
+      pal: { B: '#a0673a', b: '#7e4e2a', L: '#c48a5a', F: '#e6bb84', E: '#2a1a2e', N: '#e8c49a', M: '#7a2a2a', h: '#3a2a2a' },
+      pose: {
+        in_piedi: [
+        '........B...B...',
+        '........BB.BB...',
+        '......FFFFFFF...',
+        '.....FFLFFLFFF..',
+        '.....FFFFFFFFFF.',
+        '......FLFFFLFF..',
+        '.......BEBBEB...',
+        '.......BBBBBB...',
+        '.......BNNNNB...',
+        '.......BMNNMB...',
+        '........NMMN....',
+        '.........BB.....',
+        '.........BB.....',
+        '..LLLLLLLBBB....',
+        '.LBBBBBBBBBB....',
+        'LBBBBBBBBBBB....',
+        'BBBBBBBBBBBb....',
+        'bBBBBBBBBBbb....',
+        '.bbBBBBBBbb.....',
+        '..B.B...B.B.....',
+        '..B.B...B.B.....',
+        '..h.h...h.h.....'
+      ]
+      }
+    },
+    // un leone marino del Pier 39: steso al sole o con il muso alzato
+    leone_marino: {
+      chi: 'leone marino', ordini: 'Memory Lane francesca (carta leoni-marini)',
+      pal: { B: '#7a5a46', b: '#563c2e', L: '#b0927a', f: '#4a3226', F: '#563c2e', K: '#1a1024', n: '#1a1024' },
+      pose: {
+        steso: [
+        '.............BBB..',
+        '............BBKBBn',
+        'F..bBBBBBBBBBBBBB.',
+        '.FbBBBBBBBBBBBBB..',
+        '.FbLLLLLLfLLLLb...',
+        'F..bbbbbbffbbb....'
+      ],
+        alzato: [
+        '...........BBB..',
+        '..........BBKBn.',
+        '..........BBBB..',
+        '.........BBBB...',
+        '........BBBBL...',
+        'F..bBBBBBBBLL...',
+        '.FbBBBBBBBBLL...',
+        '.FbLLLLLfLLLb...',
+        'F..bbbbbffbb....'
+      ]
+      }
+    }
+  };
+  const NOMI = Object.keys(DISEGNI);
+
+  function griglia(nome, o = {}) {
+    const d = DISEGNI[nome]; if (!d) throw new Error('animale sconosciuto: ' + nome);
+    const pose = Object.keys(d.pose), posa = d.pose[o.posa] ? o.posa : pose[0];
+    let righe = d.pose[posa]; if (Array.isArray(righe[0])) righe = righe[(o.fotogramma || 0) % righe.length];
+    const tipi = d.tipi ? Object.keys(d.tipi) : [], tipo = d.tipi && d.tipi[o.tipo] ? o.tipo : tipi[0];
+    return { righe, pal: Object.assign({}, d.pal, tipo ? d.tipi[tipo] : {}) };
+  }
+  const sprite = (nome, o = {}) => { const g = griglia(nome, o); return pixelSprite(g.righe, g.pal, o.specchio); };
+
+  // the checks: rows of the same width, every letter in the palette, a name of letters, digits and _
+  function validate() {
+    const err = [];
+    NOMI.forEach(n => {
+      const d = DISEGNI[n]; if (!/^[a-z0-9_]+$/.test(n)) err.push(`${n}: nome con lettere minuscole, numeri e _`);
+      Object.entries(d.pose).forEach(([p, g]) => (Array.isArray(g[0]) ? g : [g]).forEach((righe, f) => {
+        const w = righe[0].length; righe.forEach((r, y) => { if (r.length !== w) err.push(`${n} ${p} ${f}: riga ${y} lunga ${r.length}, non ${w}`); });
+        (d.tipi ? Object.keys(d.tipi) : [null]).forEach(t => { const pal = Object.assign({}, d.pal, t ? d.tipi[t] : {});
+          new Set(righe.join('').replace(/\./g, '')).forEach(ch => { if (!pal[ch]) err.push(`${n} ${p}${t ? ' ' + t : ''}: la lettera «${ch}» non è nella tavolozza`); }); });
+      }));
+    });
+    return err;
+  }
+
+  return { VERSION, CONTORNO, pixelSprite, DISEGNI, NOMI, griglia, sprite, validate };
 });
 </script>
 <script>
@@ -3351,35 +3532,8 @@ window.COSTUMI_BOSS = {
  * Le cose che stanno a terra si mettono con i pezzi di catalogo/pezzi.js (dichiarano dove poggiano: il controllo lo
  * verifica). Ogni disegno nuovo resta qui per riusarlo. */
 'use strict';
-// Animali a griglia di pixel, nello stile di Olly del Memory Lane di prova (francesca), che Marco preferisce: una
-// tavolozza, il contorno scuro di 1 pixel tutto intorno, testa grande e corpo compatto, due toni per colore, i segni
-// della razza e una posa con carattere. pixelSprite fa il disegno (con il contorno) una volta sola e lo tiene da parte.
-function pixelSprite(righe, pal, specchio) {
-  const key = righe.join('|') + JSON.stringify(pal) + (specchio ? '<' : ''), cache = pixelSprite.cache || (pixelSprite.cache = new Map());
-  if (cache.has(key)) return cache.get(key);
-  const h = righe.length, w = righe[0].length, cv = document.createElement('canvas'); cv.width = w + 2; cv.height = h + 2;
-  const x = cv.getContext('2d'), at = (i, y) => y >= 0 && y < h && i >= 0 && i < w && righe[y][i] !== '.', X = i => specchio ? w - 1 - i : i;
-  x.fillStyle = '#1a1024'; for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(([dx, dy]) => { if (!at(i + dx, y + dy)) x.fillRect(X(i + dx) + 1, y + dy + 1, 1, 1); });
-  for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) { x.fillStyle = pal[righe[y][i]] || '#ff00ff'; x.fillRect(X(i) + 1, y + 1, 1, 1); }
-  cache.set(key, cv); return cv;
-}
-// Olly, il jack russell (ordine marco-natale): lo stesso disegno del Memory Lane di prova, seduto ad aspettare la
-// pallina; serve al punto riconoscibile e alla carta del ricordo
-function ollySprite() {
-  return pixelSprite(['..............tt......', '.............tttT.....', '.............TttTTT...', '.............TTTKTWWW.', '.W...........TTTTWWWWN', '.WW...........TTWWWP..', '..W..........WWWWWP...',
-    '..WW.........WWWWW....', '...WWWWTTTWWWWWWWW....', '...WWWTTTTTWWWWWWW....', '...wWWWWTTWWWWWWWw....', '...wwWWWWWWWWWWWww....', '...WW.ww....WW.ww.....', '...WW.ww....WW.ww.....'],
-    { W: '#fbf7ee', w: '#d9d2c4', T: '#c8843a', t: '#9a5a28', K: '#2a1a2e', N: '#1a1024', P: '#e86a7a' });
-}
-// una capra (ordine marco-natale, Happy Village), guarda a destra (specchio: a sinistra): corna all'indietro, orecchio
-// di traverso, barbetta, codino dritto, zoccoli scuri; tipo 'bianca', 'marrone' (con la macchia bianca) o 'pezzata'
-function capraSprite(tipo, specchio) {
-  const col = { bianca: ['#f6f0e4', '#d6ccbc', '#f6f0e4', '#e6dccc'], marrone: ['#a8703e', '#82522a', '#f6f0e4', '#5a3a22'], pezzata: ['#f6f0e4', '#d6ccbc', '#3a2a2a', '#e6dccc'] }[tipo] || ['#f6f0e4', '#d6ccbc', '#f6f0e4', '#e6dccc'];
-  return pixelSprite(['............hH......', '...........hHH......', '..........hHWWWW....', '........eeWWWWWWW...', '.........eWWWKWWWW..', '..........WWWWWWWWP.',
-    '..........wWWWWWWW..', '.t.........wWWWBB...', '.tWWWWWWWWWWWWw.B...', '..WWWWWWWWWWWWw.....', '..WWWSSSWWWWWWw.....', '..wWWSSWWWWWWww.....', '...wwwwwwwwwwww.....',
-    '...WW.ww....WW.ww...', '...FF.FF....FF.FF...'],
-    { W: col[0], w: col[1], e: col[1], t: col[0], S: col[2], B: col[3], h: '#7a6a52', H: '#b8a888', K: '#1a1024', P: '#e89a9a', F: '#4a3a2e' }, specchio);
-}
-
+// Gli animali (Olly, le capre…) vengono da motore/animali.js (PTAnimali), copiato dal sito: un animale nuovo si
+// disegna lì (REGOLE-ANIMALI.md nel sito), mai qui.
 const PUNTI = (() => {
   const R = (c, x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
   const k = '#1a1024';
@@ -3472,8 +3626,8 @@ const PUNTI = (() => {
         R(c, x, su - 3, 80, 3, '#7a9a44'); R(c, x, su - 3, 80, 1, '#9cbc5e');
         for (let k2 = 0; k2 < 80; k2 += 13) R(c, x + k2, su - 20, 2, 17, '#8a6a44'); R(c, x, su - 18, 80, 1, '#a8844e'); R(c, x, su - 11, 80, 1, '#a8844e');
         const posa = (img, gx) => c.drawImage(img, gx, su - 2 - img.height + 1);
-        posa(capraSprite('marrone', true), x + 30); posa(capraSprite('pezzata'), x + 56);
-        const g = capraSprite('bianca'), gy = su - 2 - g.height + 1 + (Math.floor(tt * 3) % 2); posa(g, x + 2);
+        posa(PTAnimali.sprite('capra', { tipo: 'marrone', specchio: true }), x + 30); posa(PTAnimali.sprite('capra', { tipo: 'pezzata' }), x + 56);
+        const g = PTAnimali.sprite('capra', { tipo: 'bianca' }), gy = su - 2 - g.height + 1 + (Math.floor(tt * 3) % 2); posa(g, x + 2);
         R(c, x + 22, gy + 6, 8, 2, '#1a1024'); R(c, x + 22, gy + 6, 7, 1, '#e8c888'); R(c, x + 22, gy + 7, 7, 1, '#c8a060');   // il grissino
       }, { nome: 'capre' });
     } },
@@ -3552,7 +3706,7 @@ const PUNTI = (() => {
     } },
     // Posta: Olly, il jack russell giocherellone, che aspetta la pallina (accanto a chi corre); la pallina rimbalza
     ollycorre: { strato: 'vicino', w: 34, draw(c, X, b, t) {
-      const tt = t || 0, S = PEZZI.scena(c, b), O = ollySprite();
+      const tt = t || 0, S = PEZZI.scena(c, b), O = PTAnimali.sprite('jack_russell_olly');
       S.libero(X, O.width, (c, x, su) => c.drawImage(O, x, su - O.height + 1), { nome: 'Olly' });
       const h = Math.max(0, Math.round(Math.sin(tt * 5) * 9)); R(c, X + 28, b - 5 - h, 4, 5, '#d64545'); R(c, X + 27, b - 4 - h, 6, 3, '#d64545'); R(c, X + 28, b - 4 - h, 2, 1, '#f08080');
     } },
@@ -4229,7 +4383,7 @@ const CARTE = (() => {
   const { R } = VG;
   function scene(c, sky, ground) { VG.bands(c, 96, 46, sky); R(c, 0, 46, 96, 18, ground); R(c, 0, 46, 96, 1, 'rgba(0,0,0,.18)'); }
   const disc4 = (c, x, y, r, col) => { c.fillStyle = col; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); };
-  const OLLY = () => ollySprite();   // Olly, il jack russell (ordine marco-natale): in catalogo/punti.js
+  const OLLY = () => PTAnimali.sprite('jack_russell_olly');   // Olly, il jack russell (ordine marco-natale): in motore/animali.js
   const bigS = (c, img, x, y, k = 2) => { c.drawImage(img, Math.round(x - img.width * k / 2), Math.round(y - img.height * k), img.width * k, img.height * k); };
   return {
     falcon(c) { scene(c, ['#ff9a6b', '#ffb36b', '#ffd08a'], '#e9c46a'); R(c, 60, 34, 18, 13, '#c0392b'); R(c, 61, 35, 16, 11, '#d64545'); R(c, 68, 35, 1, 11, '#9e2f3a'); c.drawImage(VG.item('ticket'), 62, 38); bigS(c, VG.falcon('down'), 40, 58); },
@@ -4366,7 +4520,7 @@ const CARTE = (() => {
       for (let x = 2; x < 96; x += 14) R(c, x, 22, 2, 14, '#8a6a44'); R(c, 0, 25, 96, 1, '#a8844e'); R(c, 0, 30, 96, 1, '#a8844e');
       // le capre nello stile di Olly (a 2×): la bianca allunga il muso verso il grissino, la marrone guarda dall'altra parte
       const capra2 = (img, x, base) => c.drawImage(img, x, base - img.height * 2, img.width * 2, img.height * 2);
-      capra2(capraSprite('marrone', true), 52, 62); capra2(capraSprite('bianca'), 2, 62);
+      capra2(PTAnimali.sprite('capra', { tipo: 'marrone', specchio: true }), 52, 62); capra2(PTAnimali.sprite('capra', { tipo: 'bianca' }), 2, 62);
       R(c, 40, 40, 11, 4, '#1a1024'); R(c, 40, 41, 10, 1, '#e8c888'); R(c, 40, 42, 10, 1, '#c8a060'); for (let k = 0; k < 3; k++) R(c, 42 + k * 3, 41, 1, 1, '#d4b070');   // il grissino
       R(c, 84, 14, 10, 10, '#f6f0e4'); R(c, 84, 14, 10, 2, '#d64545'); for (let k = 0; k < 4; k++) R(c, 85 + k * 2, 9 + (k % 2), 1, 6, '#e8c888'); R(c, 88, 24, 2, 16, '#8a6a44');   // il pacco di grissini sul paletto
     },

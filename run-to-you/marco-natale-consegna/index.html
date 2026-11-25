@@ -1081,7 +1081,7 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: marco-natale */
 window.ORDINE = {"codice":"marco-natale","occasione":"christmas","regalo":{"per":"a","da":"altro","nome":"Paoletta"},"protagonisti":{"a":{"nome":"Marco","soprannome":"Chito","personaggio":{"v":2,"skin":"#E8AE7E","eyes":"#24124A","eyeShape":"dots","mouth":"closed","brows":"thick","blush":"on","freckles":"off","hairStyle":"middle","hairColor":"#2B1A12","facialHair":"none","body":"soft","height":"normal","top":"plaid","outfit":"#9B6BFF","legs":"pants","pants":"#26222E","shoes":"#F2C94C","accessories":{"head":"none","face":"none","ears":"earrings","neck":"none"},"glassesColor":"#2A1A2E"}},"b":{"nome":"Yellowferrari","personaggio":{"v":2,"skin":"#C98B5A","eyes":"#2A1A2E","eyeShape":"dots","mouth":"tongue","brows":"thick","blush":"on","freckles":"off","hairStyle":"undercut","hairColor":"#F2C94C","facialHair":"none","body":"soft","height":"normal","top":"overalls","outfit":"#9B6BFF","legs":"pants","pants":"#26222E","shoes":"#FFFFFF","accessories":{"head":"bandana","face":"sunglasses","ears":"earrings","neck":"none"},"glassesColor":"#2A1A2E"}}},"tappe":[{"ambiente":"camerota","luogo":{"titolo":"Happy Village","sottotitolo":"Marina di Camerota, d’estate","frase":"Villette in fila come casette delle bambole, e il mare a due passi. Qui l’estate non finiva mai.","disegno":"t_happyvillage"},"ricordi":[{"titolo":"La piscina","frase":"A sfioro sul mare, con l’idromassaggio e la fontana in mezzo. Il mare era lì, ma perché scomodarsi?","disegno":"piscina"},{"titolo":"Le capre","frase":"Ogni mattina, grissini per tutte. Non dicevano grazie, ma il giorno dopo erano di nuovo lì.","disegno":"capre"}],"costume":"camerota","punti":[{"disegno":"palinuro","at":0.1},{"disegno":"insegnahappy","at":0.14},{"disegno":"capreprato","at":0.26},{"disegno":"piscinasfioro","at":0.4},{"disegno":"torresaracena","at":0.54},{"disegno":"lettini","at":0.64}]},{"ambiente":"posta","viaggio":"train","luogo":{"titolo":"Posta","sottotitolo":"Le estati in montagna","frase":"Un paesino sulla Salaria, l’aria fresca e giornate lunghissime. Agosto, qui, durava il doppio.","disegno":"t_posta"},"ricordi":[{"titolo":"Olly","frase":"Jack Russell a pile infinite: gli lanciavi la pallina una volta e non finiva più.","disegno":"olly"},{"titolo":"I tornei di calcetto","frase":"Nessuna coppa, nessuna medaglia. Il premio era battere gli altri, e bastava eccome.","disegno":"calcetto"}],"costume":"posta","punti":[{"disegno":"terminillo","at":0.08},{"disegno":"salaria","at":0.12},{"disegno":"campanileposta","at":0.24},{"disegno":"campetto","at":0.38},{"disegno":"ollycorre","at":0.5},{"disegno":"fontanella","at":0.62}]},{"ambiente":"scanno","viaggio":"train","luogo":{"titolo":"Scanno","sottotitolo":"Il camp di basket","frase":"Allenamenti dalla mattina, il lago a forma di cuore e le gambe a pezzi la sera. Felici lo stesso.","disegno":"t_scanno"},"ricordi":[{"titolo":"Cena di squadra","frase":"Una sala enorme, la squadra intera a tavola e una fame da tre allenamenti. Il bis non si negava a nessuno.","disegno":"cenasquadra"},{"titolo":"Ping pong","frase":"Ogni minuto libero, una partita. «L’ultima», almeno dieci volte.","disegno":"pingpong"}],"costume":"scanno","punti":[{"disegno":"pedalo","at":0.08},{"disegno":"sentierocuore","at":0.14},{"disegno":"madonnalago","at":0.26},{"disegno":"borgoscanno","at":0.4},{"disegno":"canestro","at":0.52},{"disegno":"tavolopingpong","at":0.64}]},{"ambiente":"sapienza","viaggio":"train","luogo":{"titolo":"Sapienza","sottotitolo":"Economia, cinque anni belli","frase":"Lezioni, esami, appunti e serate. Cinque anni a Economia, e alla fine pure la corona d’alloro.","disegno":"t_sapienza"},"ricordi":[{"titolo":"Sara","frase":"Anche lei a Economia: stesse aule, stessi esami, e un motivo in più per andare a lezione.","disegno":"sara"},{"titolo":"Sbendi","frase":"Occhiali, capelli corti e un’idea per ogni sera. Le serate migliori cominciavano con «che facciamo?».","disegno":"sbendi"}],"costume":"sapienza","punti":[{"disegno":"cupolasanpietro","at":0.08},{"disegno":"minerva","at":0.14},{"disegno":"facoltaeconomia","at":0.3},{"disegno":"tram","at":0.44},{"disegno":"motorino","at":0.54},{"disegno":"barcornetti","at":0.64}]}],"cibo":{"singolare":"piatto di vongole","plurale":"piatti di vongole","articolo":"i","disegno":"vongole"},"antagonista":{"nome":"Il Signor Settembre","presentazione":"Puntuale come il primo giorno di scuola","ingresso":"L’estate è finita: zaino in spalla, si ricomincia.","sconfitta":"Va bene… facciamo che è ancora agosto…","aspetto":"settembre","proiettile":"foglia"},"scagnozzi":{"nome":"gli Impegni","singolare":"Impegno","divisa":"#8A5A32","cappello":"skihat","cappelloColore":"#FF7A2C","grida":["Le vacanze sono finite!","Si torna sui libri!","Agenda piena, niente mare!"],"consegne":["Ecco il diario nuovo. Bianco, pulito, e già pieno fino a giugno.","I compiti delle vacanze. Le vacanze sono finite, i compiti no.","L’agenda di settembre: lunedì impegni, martedì impegni, il resto… impegni."]},"lettera":{"testo":"Buon Natale Marco, ogni anno andrà meglio di quello prima. Basta volerlo.","firma":"Yellowferrari"}};
-window.VERSIONE = "cf6e0ea";
+window.VERSIONE = "cb90f7b";
 window.SALVATAGGIO = "rty_marco-natale_";
 window.MODALITA = "consegna";
 </script>
@@ -2073,6 +2073,187 @@ const TXT = (() => {
 });
 </script>
 <script>
+/* motore/animali.js */
+/*
+ * Copiato dal sito Playtale (repository playtale, assets/js/animali.js, commit 643e2ee): non modificarlo qui, modificalo sul sito e ricopialo.
+ * Playtale — gli animali dei giochi (PTAnimali).
+ *
+ * Una sola fonte, come avatar.js: i giochi (Memory Lane, Run to You, Quiz of Us…) la copiano in motore/animali.js e il
+ * loro build controlla che la copia sia uguale a questa. Regole: REGOLE-ANIMALI.md. Si aggiunge, non si cambia: un
+ * disegno che c'è già non deve cambiare di un pixel (i giochi già fatti lo usano). Prova: animali-test.html.
+ *
+ * Lo stile (quello di Olly, il jack russell del Memory Lane di prova, che Marco preferisce): una griglia di pixel con la
+ * sua tavolozza, il contorno scuro di 1 pixel tutto intorno (#1a1024, come i personaggi), testa grande e corpo
+ * compatto, due toni per colore, i segni della razza, una posa con carattere. Guarda a destra; specchio: a sinistra.
+ *
+ *   PTAnimali.pixelSprite(righe, pal, specchio)   una griglia qualsiasi → una tela (w+2 × h+2, con il contorno); la
+ *                                                  tiene da parte e la seconda volta la ridà subito. Solo nel browser.
+ *   PTAnimali.sprite(nome, { tipo, posa, fotogramma, specchio })   un animale del catalogo → una tela.
+ *   PTAnimali.griglia(nome, { tipo, posa, fotogramma })            { righe, pal } (anche in Node, per i controlli).
+ *   PTAnimali.NOMI, PTAnimali.DISEGNI, PTAnimali.validate()        l'elenco, i dati, i controlli (righe, colori).
+ *
+ * Ogni animale: { chi, ordini, pal, tipi?: { nome: colori che cambiano }, pose: { nome: righe | [righe, righe…] } }.
+ * La prima posa e il primo tipo sono quelli di base; una posa con più fotogrammi è una lista di griglie.
+ */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.PTAnimali = api;
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const VERSION = 1;
+  const CONTORNO = '#1a1024';
+
+  function pixelSprite(righe, pal, specchio) {
+    const key = righe.join('|') + JSON.stringify(pal) + (specchio ? '<' : ''), cache = pixelSprite.cache || (pixelSprite.cache = new Map());
+    if (cache.has(key)) return cache.get(key);
+    const h = righe.length, w = righe[0].length, cv = document.createElement('canvas'); cv.width = w + 2; cv.height = h + 2;
+    const x = cv.getContext('2d'), at = (i, y) => y >= 0 && y < h && i >= 0 && i < w && righe[y][i] !== '.', X = i => specchio ? w - 1 - i : i;
+    x.fillStyle = CONTORNO; for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(([dx, dy]) => { if (!at(i + dx, y + dy)) x.fillRect(X(i + dx) + 1, y + dy + 1, 1, 1); });
+    for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) { x.fillStyle = pal[righe[y][i]] || '#ff00ff'; x.fillRect(X(i) + 1, y + 1, 1, 1); }
+    cache.set(key, cv); return cv;
+  }
+
+  const DISEGNI = {
+    // Olly, jack russell bianco con le macchie fulve: in piedi ad aspettare la pallina, coda dritta, lingua fuori
+    jack_russell_olly: {
+      chi: 'Olly, jack russell', ordini: 'Memory Lane francesca (carta olly), Run to You marco-natale (punto ollycorre, carta olly)',
+      pal: { W: '#fbf7ee', w: '#d9d2c4', T: '#c8843a', t: '#9a5a28', K: '#2a1a2e', N: '#1a1024', P: '#e86a7a' },
+      pose: {
+        in_piedi: [
+        '..............tt......',
+        '.............tttT.....',
+        '.............TttTTT...',
+        '.............TTTKTWWW.',
+        '.W...........TTTTWWWWN',
+        '.WW...........TTWWWP..',
+        '..W..........WWWWWP...',
+        '..WW.........WWWWW....',
+        '...WWWWTTTWWWWWWWW....',
+        '...WWWTTTTTWWWWWWW....',
+        '...wWWWWTTWWWWWWWw....',
+        '...wwWWWWWWWWWWWww....',
+        '...WW.ww....WW.ww.....',
+        '...WW.ww....WW.ww.....'
+      ]
+      }
+    },
+    // una capra: corna all'indietro, orecchio di traverso, barbetta, codino dritto, zoccoli scuri
+    capra: {
+      chi: 'capra', ordini: 'Run to You marco-natale (punto capreprato, carta capre)',
+      pal: { W: '#f6f0e4', w: '#d6ccbc', e: '#d6ccbc', t: '#f6f0e4', S: '#f6f0e4', B: '#e6dccc', h: '#7a6a52', H: '#b8a888', K: '#1a1024', P: '#e89a9a', F: '#4a3a2e' },
+      tipi: {
+        bianca: {},
+        marrone: { W: '#a8703e', w: '#82522a', e: '#82522a', t: '#a8703e', S: '#f6f0e4', B: '#5a3a22' },   // con la macchia bianca
+        pezzata: { S: '#3a2a2a' }
+      },
+      pose: {
+        in_piedi: [
+        '............hH......',
+        '...........hHH......',
+        '..........hHWWWW....',
+        '........eeWWWWWWW...',
+        '.........eWWWKWWWW..',
+        '..........WWWWWWWWP.',
+        '..........wWWWWWWW..',
+        '.t.........wWWWBB...',
+        '.tWWWWWWWWWWWWw.B...',
+        '..WWWWWWWWWWWWw.....',
+        '..WWWSSSWWWWWWw.....',
+        '..wWWSSWWWWWWww.....',
+        '...wwwwwwwwwwww.....',
+        '...WW.ww....WW.ww...',
+        '...FF.FF....FF.FF...'
+      ]
+      }
+    },
+    // Drieder, alpaca marrone con il frangione e il sorriso
+    alpaca_drieder: {
+      chi: 'Drieder, alpaca', ordini: 'Memory Lane prova-alpaca (carta drieder)',
+      pal: { B: '#a0673a', b: '#7e4e2a', L: '#c48a5a', F: '#e6bb84', E: '#2a1a2e', N: '#e8c49a', M: '#7a2a2a', h: '#3a2a2a' },
+      pose: {
+        in_piedi: [
+        '........B...B...',
+        '........BB.BB...',
+        '......FFFFFFF...',
+        '.....FFLFFLFFF..',
+        '.....FFFFFFFFFF.',
+        '......FLFFFLFF..',
+        '.......BEBBEB...',
+        '.......BBBBBB...',
+        '.......BNNNNB...',
+        '.......BMNNMB...',
+        '........NMMN....',
+        '.........BB.....',
+        '.........BB.....',
+        '..LLLLLLLBBB....',
+        '.LBBBBBBBBBB....',
+        'LBBBBBBBBBBB....',
+        'BBBBBBBBBBBb....',
+        'bBBBBBBBBBbb....',
+        '.bbBBBBBBbb.....',
+        '..B.B...B.B.....',
+        '..B.B...B.B.....',
+        '..h.h...h.h.....'
+      ]
+      }
+    },
+    // un leone marino del Pier 39: steso al sole o con il muso alzato
+    leone_marino: {
+      chi: 'leone marino', ordini: 'Memory Lane francesca (carta leoni-marini)',
+      pal: { B: '#7a5a46', b: '#563c2e', L: '#b0927a', f: '#4a3226', F: '#563c2e', K: '#1a1024', n: '#1a1024' },
+      pose: {
+        steso: [
+        '.............BBB..',
+        '............BBKBBn',
+        'F..bBBBBBBBBBBBBB.',
+        '.FbBBBBBBBBBBBBB..',
+        '.FbLLLLLLfLLLLb...',
+        'F..bbbbbbffbbb....'
+      ],
+        alzato: [
+        '...........BBB..',
+        '..........BBKBn.',
+        '..........BBBB..',
+        '.........BBBB...',
+        '........BBBBL...',
+        'F..bBBBBBBBLL...',
+        '.FbBBBBBBBBLL...',
+        '.FbLLLLLfLLLb...',
+        'F..bbbbbffbb....'
+      ]
+      }
+    }
+  };
+  const NOMI = Object.keys(DISEGNI);
+
+  function griglia(nome, o = {}) {
+    const d = DISEGNI[nome]; if (!d) throw new Error('animale sconosciuto: ' + nome);
+    const pose = Object.keys(d.pose), posa = d.pose[o.posa] ? o.posa : pose[0];
+    let righe = d.pose[posa]; if (Array.isArray(righe[0])) righe = righe[(o.fotogramma || 0) % righe.length];
+    const tipi = d.tipi ? Object.keys(d.tipi) : [], tipo = d.tipi && d.tipi[o.tipo] ? o.tipo : tipi[0];
+    return { righe, pal: Object.assign({}, d.pal, tipo ? d.tipi[tipo] : {}) };
+  }
+  const sprite = (nome, o = {}) => { const g = griglia(nome, o); return pixelSprite(g.righe, g.pal, o.specchio); };
+
+  // the checks: rows of the same width, every letter in the palette, a name of letters, digits and _
+  function validate() {
+    const err = [];
+    NOMI.forEach(n => {
+      const d = DISEGNI[n]; if (!/^[a-z0-9_]+$/.test(n)) err.push(`${n}: nome con lettere minuscole, numeri e _`);
+      Object.entries(d.pose).forEach(([p, g]) => (Array.isArray(g[0]) ? g : [g]).forEach((righe, f) => {
+        const w = righe[0].length; righe.forEach((r, y) => { if (r.length !== w) err.push(`${n} ${p} ${f}: riga ${y} lunga ${r.length}, non ${w}`); });
+        (d.tipi ? Object.keys(d.tipi) : [null]).forEach(t => { const pal = Object.assign({}, d.pal, t ? d.tipi[t] : {});
+          new Set(righe.join('').replace(/\./g, '')).forEach(ch => { if (!pal[ch]) err.push(`${n} ${p}${t ? ' ' + t : ''}: la lettera «${ch}» non è nella tavolozza`); }); });
+      }));
+    });
+    return err;
+  }
+
+  return { VERSION, CONTORNO, pixelSprite, DISEGNI, NOMI, griglia, sprite, validate };
+});
+</script>
+<script>
 /* motore/sprites.js */
 /* Copiato da Operazione Viaggettino (sola lettura) con tools/extract.js. Non modificare a mano. */
 // ===== Pixel art: palette, character sprites, items =====
@@ -2645,6 +2826,35 @@ const LOOKS = {
  * alternano (il quaderno del Dott. Valore Aggiunto, «note», è nel motore). Ogni disegno nuovo resta qui. */
 'use strict';
 const BOSS_DISEGNI = {
+  // la Sessione Estiva (Quiz of Us, prova del 25 novembre: «ti stai godendo il bel tempo e arriva lei che ti chiude in
+  // casa»): un calendario di giugno con gli anelli, la testata rossa e i giorni d'esame cerchiati in rosso, gli occhi
+  // severi; la toga nera da commissione d'esame con il bordo dorato e la penna rossa per i voti
+  sessione: {
+    rows: [
+      '..G..G..G..G..',
+      '.RRRRRRRRRRRR.',
+      '.RrRRRRRRRRrR.',
+      '.WWWWWWWWWWWW.',
+      '.WeeWWWWWWeeW.',
+      '.WWeWWWWWWeWW.',
+      '.WNWNWWWWNWNW.',
+      '.WWWWeeeeWWWW.',
+      '.wwwwwwwwwwww.',
+      '...TTTTTTTT...',
+      '..TTtTYYTtTT..',
+      '.STTtTYYTtTTS.',
+      '.STTtTTTTtTTSP',
+      '..TTtTTTTtTT.P',
+      '..TTtTTTTtTT..',
+      '..TTtTTTTtTT..',
+      '..TTTTTTTTTT..',
+      '...YYYYYYYY...',
+      '...kk....kk...',
+      '..kkk....kkk..'
+    ],
+    walk: ['....kk..kk....', '...kkk..kkk...'],
+    map: { G: '#8a8f9c', R: '#d64545', r: '#9e2f3a', W: '#fff6e0', w: '#e9e2cf', e: '#2a1a2e', N: '#c0392b', T: '#26222e', t: '#3a3f55', Y: '#e9b52a', S: '#f2c8a0', P: '#d64545', k: '#1a1024' }
+  },
   // il Conte Posponi (dal ritardo): una sveglia con le campane, le tacche delle ore, gli occhi chiusi dal sonno e le lancette in ritardo, in
   // pigiama a righe azzurro, guanti bianchi e pantofole rosse
   conte: {
@@ -3104,6 +3314,80 @@ const LUOGHI = (() => {
   const sky = (c, cols, h = H) => { const bh = Math.ceil(h / cols.length); cols.forEach((col, i) => R(c, 0, i * bh, W, bh + 1, col)); };
   const sea = (c, y, a, b) => { R(c, 0, y, W, H - y, a); for (let yy = y + 2; yy < H; yy += 3) for (let x = (yy * 7) % 9; x < W; x += 9 + (yy % 4)) R(c, x, yy, 4, 1, b); };
   return {
+    // Economia, Sapienza (Quiz of Us, prova del 25 novembre; ridisegnata più ricca lo stesso giorno): la facoltà nel
+    // pomeriggio, con la facciata in luce e il fianco in ombra, le file di finestre con le tapparelle, il portico con le
+    // colonne e la targa, gli scalini con una ragazza seduta a leggere, due studenti che chiacchierano, uno in bici, la
+    // Vespa, il pino romano che fa ombra, le nuvole e il marciapiede a lastre
+    t_economia: { name: 'Economia, Sapienza', cap: 'Lezioni, appunti scambiati e aperitivi. Una laurea, in fondo, si prende anche al bar.', draw(c) {
+      sky(c, ['#6aa8e0', '#84b8e8', '#a0c8ee', '#bcd8f2', '#d8e6f2'], 42);
+      R(c, 6, 5, 14, 3, '#ffffff'); R(c, 9, 3, 8, 2, '#ffffff'); R(c, 56, 8, 16, 3, '#ffffff'); R(c, 60, 6, 8, 2, '#ffffff');
+      // the faculty: the front in the light, the right side in shadow, the cornice
+      R(c, 10, 12, 70, 32, '#e0bc90'); R(c, 80, 15, 10, 29, '#b8946a'); R(c, 9, 10, 72, 2, '#f4e8d4'); R(c, 80, 13, 10, 2, '#d0c0a8'); R(c, 10, 12, 70, 1, '#c8a47a');
+      for (let x = 13; x < 78; x += 6) for (let y = 15; y < 34; y += 6) {
+        const half = (x * 7 + y * 3) % 5 === 0;   // some blinds half down
+        R(c, x, y, 4, 4, '#4a6a8a'); R(c, x, y, 4, 1, '#8ab0d0'); if (half) R(c, x, y, 4, 2, '#d8d0c0'); R(c, x - 1, y + 4, 6, 1, '#f0e0c8');
+      }
+      for (let y = 17; y < 40; y += 6) R(c, 83, y, 3, 3, '#3a5070');
+      // the portico with the columns, its shadow, the doors and the plate
+      R(c, 34, 30, 26, 14, '#f2e6d0'); R(c, 34, 30, 26, 2, '#fff8ea'); for (let x = 35; x < 60; x += 5) { R(c, x, 32, 2, 12, '#fffaf0'); R(c, x + 2, 32, 1, 12, '#d0c4a8'); }
+      R(c, 41, 35, 12, 9, '#2a3a4a'); R(c, 46, 35, 1, 9, '#5a6a7a');
+      R(c, 37, 26, 20, 4, '#1a1024'); R(c, 38, 27, 18, 2, '#e9c46a'); for (let x = 39; x < 55; x += 3) R(c, x, 27, 2, 1, '#8a6a24');
+      R(c, 32, 44, 30, 2, '#e8dcc8'); R(c, 29, 46, 36, 2, '#d8ccb8'); R(c, 26, 48, 42, 2, '#c8bca8');           // the steps
+      // the pavement in slabs, the long afternoon shadows
+      R(c, 0, 50, 96, 14, '#b8b0a0'); for (let x = 0; x < 96; x += 8) R(c, x, 50, 1, 14, '#a8a090'); R(c, 0, 56, 96, 1, '#a8a090');
+      // the umbrella pine on the left, and its shadow on the front
+      c.globalAlpha = 0.18; R(c, 10, 16, 14, 24, '#3a2a1a'); c.globalAlpha = 1;
+      R(c, 5, 30, 2, 24, '#6a4a30'); R(c, -6, 20, 26, 6, '#2f5a32'); R(c, -2, 17, 18, 3, '#3a6a3a'); R(c, 0, 26, 20, 2, '#244a28'); R(c, 2, 18, 8, 1, '#4f8a4f');
+      // people: a girl reading on the steps, two friends talking, a bike going by
+      const p = (x, foot, shirt, hair, legs = '#2f4a7a') => { R(c, x + 1, foot - 13, 4, 4, '#f2c8a0'); R(c, x + 1, foot - 14, 4, 2, hair); R(c, x, foot - 9, 6, 5, shirt); R(c, x + 1, foot - 4, 2, 4, legs); R(c, x + 3, foot - 4, 2, 4, legs); };
+      R(c, 51, 41, 4, 4, '#f2c8a0'); R(c, 51, 40, 4, 2, '#c2410c'); R(c, 50, 45, 6, 3, '#9b6bff'); R(c, 49, 46, 4, 2, '#f2e94e'); R(c, 56, 47, 4, 1, '#2f4a7a');   // sitting, with a book
+      p(16, 60, '#d64545', '#3a2a1e'); R(c, 15, 52, 2, 4, '#2f5fb8'); p(23, 61, '#3a8a5a', '#1a1024');
+      // the bike
+      c.strokeStyle = '#1a1024'; c.lineWidth = 1; c.beginPath(); c.arc(68, 60, 3, 0, 7); c.stroke(); c.beginPath(); c.arc(77, 60, 3, 0, 7); c.stroke();
+      R(c, 68, 57, 9, 1, '#2f5fb8'); R(c, 71, 54, 1, 3, '#2f5fb8'); R(c, 76, 55, 1, 3, '#2f5fb8'); p(69, 55, '#ffd84a', '#2a1a12');
+      // the Vespa
+      R(c, 84, 55, 11, 5, '#7fd18a'); R(c, 85, 53, 5, 2, '#7fd18a'); R(c, 93, 50, 1, 5, '#5d6270'); R(c, 91, 50, 4, 1, '#5d6270'); R(c, 85, 54, 4, 1, '#a8e8b0');
+      R(c, 84, 60, 3, 3, k); R(c, 92, 60, 3, 3, k);
+    } },
+    // Roma · La Sapienza com'è nel Quiz of Us di Sara: il Rettorato con il portico e Minerva, i pini, una penna a forma di
+    // fenicottero (solo il gioco di Sara; per gli ordini c'è t_sapienza)
+    t_sapienza_sara: { name: 'Roma · La Sapienza', cap: 'Marketing, le quattro P e una penna a forma di fenicottero. Qui è cominciato tutto.', draw(c) {
+        const r = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(x, y, w, h); };
+        ['#7fb4e8', '#9cc6ee', '#bcd8f2', '#e8e2cc'].forEach((col, i) => r(0, i * 10, 96, 10, col));
+        r(0, 40, 96, 24, '#d9c9a0');
+        // umbrella pines
+        const pine = (x, y, w) => { r(x + w / 2 - 1, y, 2, 24, '#6a4a30'); r(x, y - 4, w, 4, '#2f5a32'); r(x + 2, y - 7, w - 4, 3, '#3a6a3a'); r(x + 5, y - 9, w - 10, 2, '#4a7a42'); };
+        pine(2, 22, 20); pine(76, 20, 18);
+        // the Rettorato: wings, portico with columns, steps
+        r(18, 20, 60, 26, '#efe3c6'); r(17, 18, 62, 2, '#cdbb92');
+        for (let x = 21; x < 36; x += 4) for (let y = 23; y < 42; y += 6) r(x, y, 2, 3, '#7a6a50');
+        for (let x = 62; x < 76; x += 4) for (let y = 23; y < 42; y += 6) r(x, y, 2, 3, '#7a6a50');
+        r(37, 16, 22, 6, '#e3d4b2'); r(36, 15, 24, 1, '#bfae86'); r(40, 18, 16, 2, '#cdbb92');
+        for (let x = 38; x < 58; x += 4) { r(x, 22, 2, 22, '#fbf6ea'); r(x + 2, 22, 1, 22, '#cbbd98'); }
+        r(36, 44, 24, 2, '#e6dcc6'); r(33, 46, 30, 2, '#d6ccb6'); r(30, 48, 36, 2, '#c8bea8');
+        // Minerva on her pedestal
+        r(45, 50, 6, 10, '#e3dccb'); r(44, 50, 8, 1, '#bdb4a0'); r(46, 39, 4, 11, '#5f7f6a'); r(47, 36, 2, 3, '#5f7f6a'); r(46, 35, 4, 1, '#4a6a56'); r(51, 33, 1, 17, '#4a5a4a');
+        // a flamingo pen, of course
+        r(10, 56, 12, 2, '#f2a3b0'); r(21, 55, 2, 2, '#e07a8f'); r(8, 57, 2, 1, '#2a1a2e');
+    } },
+    // il Fallo Carico di notte: il bar di Salim con il tavolino giallo (il gioco di Sara)
+    t_fallocarico: { name: 'Fallo Carico', cap: 'Il tavolino giallo, i prezzi da amici di Salim e un «quattro bianchi e mango» che cura due cuori.', draw(c) {
+        const r = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(x, y, w, h); };
+        r(0, 0, 96, 64, '#1c1636'); r(0, 0, 96, 12, '#241c46');
+        for (let i = 0; i < 14; i++) r((i * 37) % 96, (i * 13) % 18, 1, 1, '#fff6e0');
+        c.fillStyle = '#fff0b0'; c.beginPath(); c.arc(82, 8, 4, 0, 7); c.fill(); c.fillStyle = '#241c46'; c.beginPath(); c.arc(84, 7, 4, 0, 7); c.fill();
+        r(0, 20, 96, 32, '#4a3a6a'); for (let y = 22; y < 52; y += 4) for (let x = (y % 8) ? 0 : 4; x < 96; x += 8) r(x, y, 7, 3, '#54436f');
+        r(20, 10, 56, 8, '#2a1a2e'); r(22, 12, 52, 4, '#ff6b57'); r(24, 13, 48, 2, '#ffd0c8');
+        for (let x = 0; x < 96; x += 8) { r(x, 20, 4, 6, '#e94b3c'); r(x + 4, 20, 4, 6, '#fff6e0'); r(x + 1, 26, 2, 1, '#e94b3c'); r(x + 5, 26, 2, 1, '#fff6e0'); }
+        for (let x = 2; x < 96; x += 6) r(x, 28 + (x % 12 ? 1 : 0), 1, 1, ['#ffd84a', '#ff6b57', '#7cc6e8'][x % 3]);
+        r(58, 31, 30, 15, '#f2c46a'); r(57, 30, 32, 1, '#2a1a2e'); for (let x = 61; x < 86; x += 5) { r(x, 35, 2, 6, ['#3fa04a', '#7cc6e8', '#e94b3c'][x % 3]); r(x, 34, 2, 1, '#fff6e0'); }
+        r(10, 30, 14, 22, '#2a1a2e'); r(12, 32, 10, 20, '#6a4a30'); r(20, 41, 1, 2, '#ffd84a');
+        r(0, 52, 96, 12, '#3a2f55'); for (let x = 0; x < 96; x += 8) r(x + ((x / 8) % 2 ? 4 : 0), 56, 4, 4, '#433765');
+        r(36, 44, 22, 3, '#ffd84a'); r(46, 47, 2, 8, '#d9b21f'); r(41, 55, 12, 1, '#d9b21f');
+        r(40, 39, 3, 5, '#ffb347'); r(39, 38, 5, 1, '#fff6e0'); r(51, 39, 3, 5, '#ffb347'); r(50, 38, 5, 1, '#fff6e0');
+        r(28, 46, 6, 6, '#a0503a'); r(29, 40, 4, 6, '#3f9a4a'); r(62, 46, 6, 6, '#a0503a'); r(63, 40, 4, 6, '#3f9a4a');
+        r(44, 2, 1, 1, '#f2a3b0'); r(46, 2, 1, 1, '#f2a3b0'); r(43, 3, 5, 1, '#f2a3b0'); r(44, 4, 3, 1, '#f2a3b0'); r(45, 5, 1, 1, '#f2a3b0');
+    } },
     // Procida: la Marina della Corricella con le case color pastello una sopra l'altra, gli archi e le scale, i gozzi
     // in acqua; in cima Terra Murata con il Palazzo d'Avalos e la cupola dell'abbazia, nel pomeriggio d'estate
     t_procida: { name: 'Procida', cap: 'Qui l\'estate ha il cognome di famiglia.', draw(c) {
@@ -3249,35 +3533,8 @@ window.COSTUMI_BOSS = {
  * Le cose che stanno a terra si mettono con i pezzi di catalogo/pezzi.js (dichiarano dove poggiano: il controllo lo
  * verifica). Ogni disegno nuovo resta qui per riusarlo. */
 'use strict';
-// Animali a griglia di pixel, nello stile di Olly del Memory Lane di prova (francesca), che Marco preferisce: una
-// tavolozza, il contorno scuro di 1 pixel tutto intorno, testa grande e corpo compatto, due toni per colore, i segni
-// della razza e una posa con carattere. pixelSprite fa il disegno (con il contorno) una volta sola e lo tiene da parte.
-function pixelSprite(righe, pal, specchio) {
-  const key = righe.join('|') + JSON.stringify(pal) + (specchio ? '<' : ''), cache = pixelSprite.cache || (pixelSprite.cache = new Map());
-  if (cache.has(key)) return cache.get(key);
-  const h = righe.length, w = righe[0].length, cv = document.createElement('canvas'); cv.width = w + 2; cv.height = h + 2;
-  const x = cv.getContext('2d'), at = (i, y) => y >= 0 && y < h && i >= 0 && i < w && righe[y][i] !== '.', X = i => specchio ? w - 1 - i : i;
-  x.fillStyle = '#1a1024'; for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(([dx, dy]) => { if (!at(i + dx, y + dy)) x.fillRect(X(i + dx) + 1, y + dy + 1, 1, 1); });
-  for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (at(i, y)) { x.fillStyle = pal[righe[y][i]] || '#ff00ff'; x.fillRect(X(i) + 1, y + 1, 1, 1); }
-  cache.set(key, cv); return cv;
-}
-// Olly, il jack russell (ordine marco-natale): lo stesso disegno del Memory Lane di prova, seduto ad aspettare la
-// pallina; serve al punto riconoscibile e alla carta del ricordo
-function ollySprite() {
-  return pixelSprite(['..............tt......', '.............tttT.....', '.............TttTTT...', '.............TTTKTWWW.', '.W...........TTTTWWWWN', '.WW...........TTWWWP..', '..W..........WWWWWP...',
-    '..WW.........WWWWW....', '...WWWWTTTWWWWWWWW....', '...WWWTTTTTWWWWWWW....', '...wWWWWTTWWWWWWWw....', '...wwWWWWWWWWWWWww....', '...WW.ww....WW.ww.....', '...WW.ww....WW.ww.....'],
-    { W: '#fbf7ee', w: '#d9d2c4', T: '#c8843a', t: '#9a5a28', K: '#2a1a2e', N: '#1a1024', P: '#e86a7a' });
-}
-// una capra (ordine marco-natale, Happy Village), guarda a destra (specchio: a sinistra): corna all'indietro, orecchio
-// di traverso, barbetta, codino dritto, zoccoli scuri; tipo 'bianca', 'marrone' (con la macchia bianca) o 'pezzata'
-function capraSprite(tipo, specchio) {
-  const col = { bianca: ['#f6f0e4', '#d6ccbc', '#f6f0e4', '#e6dccc'], marrone: ['#a8703e', '#82522a', '#f6f0e4', '#5a3a22'], pezzata: ['#f6f0e4', '#d6ccbc', '#3a2a2a', '#e6dccc'] }[tipo] || ['#f6f0e4', '#d6ccbc', '#f6f0e4', '#e6dccc'];
-  return pixelSprite(['............hH......', '...........hHH......', '..........hHWWWW....', '........eeWWWWWWW...', '.........eWWWKWWWW..', '..........WWWWWWWWP.',
-    '..........wWWWWWWW..', '.t.........wWWWBB...', '.tWWWWWWWWWWWWw.B...', '..WWWWWWWWWWWWw.....', '..WWWSSSWWWWWWw.....', '..wWWSSWWWWWWww.....', '...wwwwwwwwwwww.....',
-    '...WW.ww....WW.ww...', '...FF.FF....FF.FF...'],
-    { W: col[0], w: col[1], e: col[1], t: col[0], S: col[2], B: col[3], h: '#7a6a52', H: '#b8a888', K: '#1a1024', P: '#e89a9a', F: '#4a3a2e' }, specchio);
-}
-
+// Gli animali (Olly, le capre…) vengono da motore/animali.js (PTAnimali), copiato dal sito: un animale nuovo si
+// disegna lì (REGOLE-ANIMALI.md nel sito), mai qui.
 const PUNTI = (() => {
   const R = (c, x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
   const k = '#1a1024';
@@ -3370,8 +3627,8 @@ const PUNTI = (() => {
         R(c, x, su - 3, 80, 3, '#7a9a44'); R(c, x, su - 3, 80, 1, '#9cbc5e');
         for (let k2 = 0; k2 < 80; k2 += 13) R(c, x + k2, su - 20, 2, 17, '#8a6a44'); R(c, x, su - 18, 80, 1, '#a8844e'); R(c, x, su - 11, 80, 1, '#a8844e');
         const posa = (img, gx) => c.drawImage(img, gx, su - 2 - img.height + 1);
-        posa(capraSprite('marrone', true), x + 30); posa(capraSprite('pezzata'), x + 56);
-        const g = capraSprite('bianca'), gy = su - 2 - g.height + 1 + (Math.floor(tt * 3) % 2); posa(g, x + 2);
+        posa(PTAnimali.sprite('capra', { tipo: 'marrone', specchio: true }), x + 30); posa(PTAnimali.sprite('capra', { tipo: 'pezzata' }), x + 56);
+        const g = PTAnimali.sprite('capra', { tipo: 'bianca' }), gy = su - 2 - g.height + 1 + (Math.floor(tt * 3) % 2); posa(g, x + 2);
         R(c, x + 22, gy + 6, 8, 2, '#1a1024'); R(c, x + 22, gy + 6, 7, 1, '#e8c888'); R(c, x + 22, gy + 7, 7, 1, '#c8a060');   // il grissino
       }, { nome: 'capre' });
     } },
@@ -3450,7 +3707,7 @@ const PUNTI = (() => {
     } },
     // Posta: Olly, il jack russell giocherellone, che aspetta la pallina (accanto a chi corre); la pallina rimbalza
     ollycorre: { strato: 'vicino', w: 34, draw(c, X, b, t) {
-      const tt = t || 0, S = PEZZI.scena(c, b), O = ollySprite();
+      const tt = t || 0, S = PEZZI.scena(c, b), O = PTAnimali.sprite('jack_russell_olly');
       S.libero(X, O.width, (c, x, su) => c.drawImage(O, x, su - O.height + 1), { nome: 'Olly' });
       const h = Math.max(0, Math.round(Math.sin(tt * 5) * 9)); R(c, X + 28, b - 5 - h, 4, 5, '#d64545'); R(c, X + 27, b - 4 - h, 6, 3, '#d64545'); R(c, X + 28, b - 4 - h, 2, 1, '#f08080');
     } },
@@ -4127,13 +4384,81 @@ const CARTE = (() => {
   const { R } = VG;
   function scene(c, sky, ground) { VG.bands(c, 96, 46, sky); R(c, 0, 46, 96, 18, ground); R(c, 0, 46, 96, 1, 'rgba(0,0,0,.18)'); }
   const disc4 = (c, x, y, r, col) => { c.fillStyle = col; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); };
-  const OLLY = () => ollySprite();   // Olly, il jack russell (ordine marco-natale): in catalogo/punti.js
+  const OLLY = () => PTAnimali.sprite('jack_russell_olly');   // Olly, il jack russell (ordine marco-natale): in motore/animali.js
   const bigS = (c, img, x, y, k = 2) => { c.drawImage(img, Math.round(x - img.width * k / 2), Math.round(y - img.height * k), img.width * k, img.height * k); };
   return {
     falcon(c) { scene(c, ['#ff9a6b', '#ffb36b', '#ffd08a'], '#e9c46a'); R(c, 60, 34, 18, 13, '#c0392b'); R(c, 61, 35, 16, 11, '#d64545'); R(c, 68, 35, 1, 11, '#9e2f3a'); c.drawImage(VG.item('ticket'), 62, 38); bigS(c, VG.falcon('down'), 40, 58); },
     crocco(c) { scene(c, ['#7cc6e8', '#a8d2f2', '#c8e2f4'], '#4a6cc0'); bigS(c, VG.crocco('down'), 46, 58); R(c, 64, 24, 2, 14, '#f2a3b0'); R(c, 62, 20, 5, 5, '#f2a3b0'); R(c, 66, 19, 2, 2, '#1a1024'); R(c, 63, 38, 2, 4, '#1a1024'); },
     pirati(c) { scene(c, ['#4a98e8', '#7ab8ee', '#a8d4f4'], '#c8a878'); R(c, 0, 40, 96, 6, '#1f80b0'); bigS(c, VG.item('poodle'), 44, 60); c.drawImage(VG.item('gyros'), 66, 44); },
     mozart(c) { scene(c, ['#9ab6d8', '#bcd0e6', '#dde8f2'], '#f4f8ff'); for (let i = 0; i < 18; i++) R(c, (i * 37) % 96, (i * 23) % 44, 1, 1, '#fff'); c.globalAlpha = .85; bigS(c, VG.npc('mozart'), 44, 60); c.globalAlpha = 1; R(c, 64, 16, 2, 8, '#2a1a2e'); R(c, 62, 22, 3, 3, '#2a1a2e'); R(c, 70, 12, 2, 8, '#2a1a2e'); R(c, 68, 18, 3, 3, '#2a1a2e'); R(c, 66, 12, 6, 1, '#2a1a2e'); },
+    // Economia, Sapienza (Quiz of Us, prova del 25 novembre; ridisegnata più ricca lo stesso giorno): l'aperitivo dopo
+    // l'ultima lezione. Il tramonto sui tetti di Roma con una cupola, le lucine a festone, due ragazzi al tavolino che
+    // brindano, due spritz con ghiaccio e arancia, patatine e olive, i libri chiusi con l'evidenziatore, una pianta
+    aperitivo(c) {
+      VG.bands(c, 96, 44, ['#f08a5a', '#f6a06a', '#f9b87a', '#fbcc8e', '#fddca6']);
+      disc4(c, 70, 34, 9, '#ffe9a8'); disc4(c, 70, 34, 6, '#fff4c8');                                              // the sun going down
+      // the rooftops of Rome against the light: roofs, a dome with its lantern, a bell tower, an antenna
+      R(c, 0, 33, 96, 11, '#8a4a3e');
+      [[0, 30, 14], [12, 32, 10], [24, 29, 12], [40, 31, 9], [80, 30, 16]].forEach(([x, y, w]) => { R(c, x, y, w, 44 - y, '#7a3e34'); R(c, x, y, w, 1, '#a0584a'); });
+      disc4(c, 54, 30, 8, '#6e3830'); R(c, 46, 30, 16, 14, '#6e3830'); R(c, 53, 19, 2, 4, '#6e3830'); R(c, 52, 18, 4, 1, '#6e3830');   // the dome
+      R(c, 86, 18, 5, 14, '#6e3830'); R(c, 87, 16, 3, 2, '#6e3830'); R(c, 88, 20, 1, 2, '#f9b87a');                                  // a bell tower
+      R(c, 30, 22, 1, 7, '#5a2e28'); R(c, 27, 23, 7, 1, '#5a2e28');
+      // the string lights, in a swag, with a little glow
+      for (let x = 0; x < 96; x++) { const y = 5 + Math.round(Math.sin(x / 96 * Math.PI) * 6); R(c, x, y, 1, 1, '#3a2a2a'); if (x % 7 === 3) { c.globalAlpha = 0.35; R(c, x - 1, y, 3, 3, '#fff4c0'); c.globalAlpha = 1; R(c, x, y + 1, 1, 2, '#fff8d8'); } }
+      // the terrace floor (terracotta), with the long shadows of the evening
+      R(c, 0, 44, 96, 20, '#b8624a'); for (let y = 47; y < 64; y += 4) R(c, 0, y, 96, 1, '#a4543e'); for (let x = 3; x < 96; x += 9) R(c, x, 44, 1, 20, '#a4543e');
+      c.globalAlpha = 0.25; R(c, 12, 58, 70, 4, '#3a1a14'); c.globalAlpha = 1;
+      // two people at the table, from behind against the light, raising their glasses
+      // seen from behind: the head (hair, the ears), the shoulders, the arm reaching to the middle with the glass
+      const tipo = (x, hair, shirt, right, hand) => { R(c, x + 1, 29, 6, 1, hair); R(c, x, 30, 8, 7, hair); R(c, right ? x + 8 : x - 1, 33, 1, 2, '#c08060'); R(c, x - 2, 37, 12, 10, shirt); R(c, x - 2, 37, 12, 1, 'rgba(255,255,255,.15)');
+        if (right) { R(c, x + 9, 34, hand - x - 9, 2, shirt); R(c, hand, 32, 2, 3, '#e0a080'); } else { R(c, hand + 2, 34, x - hand - 2, 2, shirt); R(c, hand, 32, 2, 3, '#e0a080'); } };
+      tipo(14, '#2a1a12', '#2f5fb8', true, 35); tipo(74, '#c2410c', '#9b6bff', false, 58);
+      // the table
+      R(c, 20, 43, 56, 4, '#e9c46a'); R(c, 20, 43, 56, 1, '#fff0b0'); R(c, 20, 47, 56, 1, '#a07a3a'); R(c, 46, 48, 4, 12, '#5d4630'); R(c, 40, 59, 16, 2, '#5d4630');
+      // the glasses clinking above the table, with ice, an orange slice, the straw
+      const spritz = (x, y) => { R(c, x, y, 7, 10, '#fff6e0'); R(c, x + 1, y + 2, 5, 7, '#ff7a3c'); R(c, x + 1, y + 2, 5, 1, '#ffb070'); R(c, x + 2, y + 3, 2, 2, '#ffe6d0'); R(c, x + 4, y + 5, 1, 1, '#ffe6d0');
+        R(c, x - 1, y + 1, 3, 3, '#ffb36b'); R(c, x, y + 2, 1, 1, '#fff0c0'); R(c, x + 5, y - 4, 1, 6, '#d64545'); R(c, x + 1, y + 9, 5, 1, '#e0d0b0'); };
+      spritz(37, 24); spritz(50, 24); R(c, 45, 22, 2, 1, '#ffffff'); R(c, 47, 21, 1, 1, '#ffffff'); R(c, 44, 20, 1, 1, '#ffffff');   // «cin!»
+      R(c, 24, 39, 10, 4, '#d64545'); R(c, 25, 37, 8, 2, '#ffd84a'); R(c, 26, 36, 2, 1, '#ffd84a'); R(c, 30, 36, 2, 1, '#ffe08a');   // the chips
+      R(c, 36, 41, 7, 2, '#ffffff'); R(c, 37, 40, 1, 1, '#5a8a2a'); R(c, 39, 40, 1, 1, '#6a9a3a'); R(c, 41, 40, 1, 1, '#5a8a2a');     // the olives
+      R(c, 58, 38, 14, 5, '#2f5fb8'); R(c, 59, 35, 12, 3, '#3a8a5a'); R(c, 58, 38, 14, 1, '#fff6e0'); R(c, 60, 33, 9, 2, '#f2e94e'); R(c, 68, 33, 1, 2, '#1a1024');   // the books, the highlighter
+      // a plant in a pot in the corner
+      R(c, 86, 52, 8, 8, '#a0503a'); R(c, 86, 52, 8, 1, '#c06a4a'); R(c, 85, 44, 4, 8, '#2f7a3a'); R(c, 89, 42, 4, 10, '#3f9a4a'); R(c, 92, 46, 3, 6, '#2f7a3a');
+    },
+    // il parchetto di Ingegneria (ridisegnato più ricco): schiaccia 5 quando eravamo tutti liberi. La facoltà dietro gli
+    // alberi, il prato a strisce, quattro ragazzi in cerchio a metà partita, uno che salta e schiaccia, il pallone con la
+    // scia, gli zaini ammucchiati vicino alla panchina, le ombre sul prato
+    schiaccia(c) {
+      VG.bands(c, 96, 40, ['#6aa8e0', '#86b8e8', '#a2c8ee', '#bcd8f2']);
+      R(c, 10, 6, 12, 3, '#ffffff'); R(c, 13, 4, 7, 2, '#ffffff'); R(c, 62, 9, 14, 3, '#ffffff'); R(c, 66, 7, 6, 2, '#ffffff');   // clouds
+      // the faculty behind: a long building with rows of windows and its shaded side
+      R(c, 18, 14, 62, 26, '#d8c8a8'); R(c, 18, 14, 62, 2, '#b8a888'); R(c, 74, 16, 6, 24, '#c0b090');
+      for (let x = 21; x < 72; x += 5) for (let y = 18; y < 38; y += 6) { R(c, x, y, 3, 4, '#5a7a9a'); R(c, x, y, 3, 1, '#8ab0d0'); }
+      // the trees: far ones darker, near ones lighter, with trunks
+      const tree = (x, y, w, h, a, b) => { R(c, x + Math.floor(w / 2) - 1, y + h - 2, 3, 46 - (y + h - 2), '#6a4a30'); R(c, x, y, w, h, a); R(c, x + 2, y - 2, w - 4, 2, a); R(c, x + 2, y + 1, w - 5, 3, b); R(c, x + 1, y + h - 2, w - 2, 1, 'rgba(0,0,0,.15)'); };
+      tree(0, 20, 16, 14, '#2a6a32', '#3a8a42'); tree(80, 18, 16, 16, '#2a6a32', '#3a8a42'); tree(8, 28, 12, 10, '#3a8a42', '#4fa852'); tree(76, 27, 12, 11, '#3a8a42', '#4fa852');
+      // the lawn, mown in stripes
+      R(c, 0, 40, 96, 24, '#5aa84a'); for (let y = 42; y < 64; y += 6) R(c, 0, y, 96, 3, '#4f9a40');
+      // a bench and the pile of backpacks
+      R(c, 4, 50, 18, 2, '#8a5a3a'); R(c, 4, 47, 18, 1, '#8a5a3a'); R(c, 5, 52, 1, 4, '#5a3a24'); R(c, 20, 52, 1, 4, '#5a3a24');
+      [['#d64545', 6, 56], ['#2f5fb8', 12, 57], ['#ffd84a', 17, 56], ['#3a8a5a', 9, 59]].forEach(([col, x, y]) => { R(c, x, y, 6, 5, col); R(c, x + 1, y - 1, 4, 1, col); R(c, x + 1, y + 1, 4, 1, 'rgba(255,255,255,.25)'); });
+      // four friends in a circle, mid-game: one jumps to smash the ball
+      const kid = (x, foot, shirt, hair, pose) => {
+        c.globalAlpha = 0.25; R(c, x - 1, foot, 8, 2, '#1a3a1a'); c.globalAlpha = 1;   // shadow on the grass
+        const y = pose === 'jump' ? foot - 6 : foot;
+        R(c, x + 1, y - 14, 4, 4, '#f2c8a0'); R(c, x + 1, y - 15, 4, 2, hair); R(c, x, y - 10, 6, 5, shirt);
+        R(c, x + 1, y - 5, 2, 4, '#2f4a7a'); R(c, x + 3, y - 5, 2, 4, '#2f4a7a'); R(c, x + 1, y - 1, 2, 1, '#fff'); R(c, x + 3, y - 1, 2, 1, '#fff');
+        if (pose === 'jump') { R(c, x + 5, y - 16, 2, 6, '#f2c8a0'); R(c, x - 1, y - 9, 1, 3, '#f2c8a0'); }
+        else if (pose === 'ready') { R(c, x - 1, y - 9, 1, 3, '#f2c8a0'); R(c, x + 6, y - 9, 1, 3, '#f2c8a0'); }
+        else { R(c, x - 2, y - 12, 2, 2, '#f2c8a0'); R(c, x + 6, y - 12, 2, 2, '#f2c8a0'); }   // hands up, waiting
+      };
+      kid(36, 50, '#2f5fb8', '#2a1a12', 'ready'); kid(62, 50, '#9b6bff', '#c2410c', 'up');
+      kid(44, 60, '#d64545', '#3a2a1e', 'jump'); kid(70, 61, '#3a8a5a', '#1a1024', 'ready');
+      // the ball, smashed down, with its trail
+      disc4(c, 53, 37, 3, '#ffffff'); R(c, 52, 35, 2, 1, '#d64545'); R(c, 54, 38, 2, 1, '#2f5fb8'); R(c, 51, 39, 4, 1, 'rgba(0,0,0,.12)');
+      R(c, 56, 33, 2, 1, 'rgba(255,255,255,.75)'); R(c, 59, 30, 2, 1, 'rgba(255,255,255,.5)'); R(c, 62, 27, 2, 1, 'rgba(255,255,255,.3)');   // the trail: it comes down from the right
+      R(c, 49, 34, 1, 1, '#fff8c0'); R(c, 48, 36, 1, 1, '#fff8c0'); R(c, 49, 38, 1, 1, '#fff8c0');   // the smack
+    },
     // Procida: la corsa a chi arriva primo alla doccia in terrazza, di ritorno dal mare. La doccia all'aperto sul terrazzo
     // al tramonto, l'acqua che scende, l'asciugamano a righe sul muretto, le ciabatte perse lungo la corsa, il mare dietro
     doccia(c) {
@@ -4196,7 +4521,7 @@ const CARTE = (() => {
       for (let x = 2; x < 96; x += 14) R(c, x, 22, 2, 14, '#8a6a44'); R(c, 0, 25, 96, 1, '#a8844e'); R(c, 0, 30, 96, 1, '#a8844e');
       // le capre nello stile di Olly (a 2×): la bianca allunga il muso verso il grissino, la marrone guarda dall'altra parte
       const capra2 = (img, x, base) => c.drawImage(img, x, base - img.height * 2, img.width * 2, img.height * 2);
-      capra2(capraSprite('marrone', true), 52, 62); capra2(capraSprite('bianca'), 2, 62);
+      capra2(PTAnimali.sprite('capra', { tipo: 'marrone', specchio: true }), 52, 62); capra2(PTAnimali.sprite('capra', { tipo: 'bianca' }), 2, 62);
       R(c, 40, 40, 11, 4, '#1a1024'); R(c, 40, 41, 10, 1, '#e8c888'); R(c, 40, 42, 10, 1, '#c8a060'); for (let k = 0; k < 3; k++) R(c, 42 + k * 3, 41, 1, 1, '#d4b070');   // il grissino
       R(c, 84, 14, 10, 10, '#f6f0e4'); R(c, 84, 14, 10, 2, '#d64545'); for (let k = 0; k < 4; k++) R(c, 85 + k * 2, 9 + (k % 2), 1, 6, '#e8c888'); R(c, 88, 24, 2, 16, '#8a6a44');   // il pacco di grissini sul paletto
     },
