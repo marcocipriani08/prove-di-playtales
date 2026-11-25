@@ -1067,8 +1067,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: procida */
 window.ORDINE = {"codice":"procida","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"procida","luogo":{"titolo":"Procida","sottotitolo":"Casa, d'estate","frase":"Qui l'estate ha il cognome di famiglia.","disegno":"t_procida"},"ricordi":[{"titolo":"Corsa alla doccia","frase":"Dal mare alla terrazza di corsa: chi arriva secondo aspetta, gocciolando.","disegno":"doccia"},{"titolo":"Caccia alle meduse","frase":"Un gommoncino, una retina e il coraggio dei pirati: le meduse tremavano.","disegno":"meduse"}],"costume":"procida","punti":[{"disegno":"terramurata","at":0.1},{"disegno":"faro","at":0.24},{"disegno":"gommone","at":0.38},{"disegno":"terrazza","at":0.52},{"disegno":"vivara","at":0.64}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"parmigiana","plurale":"parmigiane","articolo":"le","disegno":"parmigiana"},"antagonista":{"nome":"Il Conte Posponi","presentazione":"Puntuale come il traghetto d'agosto","ingresso":"Arrivo tra cinque minuti… facciamo dieci.","sconfitta":"Ancora… cinque… minuti…","aspetto":"conte","proiettile":"sveglia"},"scagnozzi":{"nome":"i Ritardatari","singolare":"Ritardatario","divisa":"#8E929E","cappello":"skihat","cappelloColore":"#9CC8F0","grida":["Che fretta c'è?!","Cinque minuti e arriviamo!","Ci vediamo… più tardi!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci una parmigiana e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "5035ffb";
-window.SALVATAGGIO = "rty_procida_5035ffb_";
+window.VERSIONE = "36938f0";
+window.SALVATAGGIO = "rty_procida_36938f0_";
 </script>
 <script>
 /* motore/testi.js */
@@ -3104,10 +3104,12 @@ window.COSTUMI_BOSS = {
 /* Run to You — catalogo dei punti riconoscibili: le cose del luogo che passano una volta sola durante una tappa
  * (monumenti, ma anche un faro, l'insegna di un bar, un cartello, un vaporetto, un gatto sul muretto…). Un disegno per
  * nome: { strato, w, draw(c, X, base) }, con X il bordo sinistro sullo schermo e base la riga del terreno di quello
- * strato. Gli strati: 'lontano' (scorre lento come lo sfondo lontano: per le cose grandi sull'orizzonte), 'mezzo' (come
- * le case dello sfondo), 'vicino' (sul terreno, accanto a chi corre: insegne, gatti, panchine; mai a forma di ostacolo).
+ * strato. Gli strati: 'lontano' (scorre lento come lo sfondo lontano: per le cose grandi sull'orizzonte), 'dietro'
+ * (come le case dello sfondo, ma dietro di loro: una collina, un castello in alto), 'mezzo' (come le case dello sfondo,
+ * davanti), 'vicino' (sul terreno, accanto a chi corre: insegne, gatti, panchine; mai a forma di ostacolo).
  * L'ordine li mette nelle tappe: tappe[i].punti = [{ disegno, at }] con at da 0 a 1 (dove passa lungo il percorso).
- * Ogni disegno nuovo resta qui per riusarlo. */
+ * Le cose che stanno a terra si mettono con i pezzi di catalogo/pezzi.js (dichiarano dove poggiano: il controllo lo
+ * verifica). Ogni disegno nuovo resta qui per riusarlo. */
 'use strict';
 const PUNTI = (() => {
   const R = (c, x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
@@ -3116,7 +3118,7 @@ const PUNTI = (() => {
     // un faro bianco e rosso sullo scoglio, con la luce che gira (per i luoghi di mare)
     faro: { strato: 'mezzo', w: 22, draw(c, X, b, t) {
       R(c, X, b - 6, 22, 6, '#6b6f7a'); R(c, X + 2, b - 8, 18, 2, '#8a8f9c');
-      for (let y = 0; y < 44; y++) { const w = 10 - Math.floor(y / 11), x = X + 11 - Math.ceil(w / 2); R(c, x, b - 8 - y, w, 1, Math.floor(y / 7) % 2 ? '#d64545' : '#f6f2ea'); }
+      for (let y = 0; y < 45; y++) { const w = 10 - Math.floor(y / 11), x = X + 11 - Math.ceil(w / 2); R(c, x, b - 8 - y, w, 1, Math.floor(y / 7) % 2 ? '#d64545' : '#f6f2ea'); }
       R(c, X + 6, b - 58, 10, 6, k); R(c, X + 7, b - 57, 8, 4, '#ffe38a'); R(c, X + 5, b - 61, 12, 3, '#d64545'); R(c, X + 10, b - 63, 2, 2, k);
       const on = Math.floor((t || 0) * 2) % 2; if (on) { c.globalAlpha = 0.35; R(c, X + 15, b - 57, 18, 3, '#ffe38a'); c.globalAlpha = 1; }
     } },
@@ -3128,13 +3130,20 @@ const PUNTI = (() => {
       if (Math.floor((t || 0) * 0.8) % 2) { R(c, X + 1, b - 22, 2, 1, '#fff6e0'); R(c, X + 2, b - 21, 1, 1, '#fff6e0'); R(c, X + 1, b - 20, 2, 1, '#fff6e0'); }
     } }
 ,
-    // Procida: Terra Murata, lo sperone di tufo giallo sul mare, con il Palazzo d'Avalos lungo e severo e l'abbazia di San
-    // Michele con la cupola (sull'orizzonte, velato dalla distanza)
-    terramurata: { strato: 'lontano', w: 96, draw(c, X, b) {
-      for (let x = 0; x < 96; x++) { const y = Math.round(b - 26 - Math.min(x, 96 - x) * 0.35 - Math.sin(x * 0.3) * 1.2); R(c, X + x, y, 1, b - y, '#c8aa78'); R(c, X + x, y, 1, 1, '#dcc290'); }
-      R(c, X + 20, b - 52, 46, 14, '#e2d2b0'); R(c, X + 20, b - 52, 46, 1, '#f2e6cc'); for (let i = 0; i < 9; i++) for (let r = 0; r < 2; r++) R(c, X + 23 + i * 5, b - 49 + r * 6, 2, 3, '#8a7a62');
-      R(c, X + 66, b - 48, 16, 10, '#ecdcbc'); R(c, X + 72, b - 54, 6, 6, '#ecdcbc'); R(c, X + 73, b - 57, 4, 3, '#c89a5a'); R(c, X + 74, b - 59, 2, 2, '#c89a5a');
-      R(c, X + 10, b - 40, 10, 6, '#e8d8c0'); R(c, X + 84, b - 38, 8, 6, '#f0c8b0');
+    // Procida: Terra Murata, lo sperone di tufo giallo che sale da terra proprio dietro le case della Corricella, a
+    // gradoni, con in cima il Palazzo d'Avalos lungo e severo e l'abbazia di San Michele con la cupola. Sta con le case
+    // (strato «dietro»: alla loro velocità, ma dietro di loro), fatto con i pezzi: ogni cosa poggia sulla roccia
+    terramurata: { strato: 'dietro', w: 130, draw(c, X, b) {
+      const S = PEZZI.scena(c, b), tufo = { colore: '#c9a46a', scuro: '#a8844e', luce: '#e0c08a', verde: '#6a9a4a' };
+      const t1 = S.terrazza(X, 130, 40, tufo), t2 = S.terrazza(X + 10, 108, 16, Object.assign({ su: t1 }, tufo)), t3 = S.terrazza(X + 18, 70, 8, Object.assign({ su: t2 }, tufo));
+      // the palace: long, pale, two rows of small windows, the walls down to the rock
+      S.libero(X + 20, 64, (c, x, su) => { R(c, x, su - 20, 64, 20, '#e8d8b8'); R(c, x, su - 20, 64, 1, '#f6ead0'); R(c, x - 1, su - 22, 66, 2, '#d8c8a4');
+        for (let i = 0; i < 11; i++) for (let r = 0; r < 2; r++) R(c, x + 3 + i * 5.6, su - 17 + r * 8, 2, 4, '#7a6a52'); R(c, x + 28, su - 6, 8, 6, '#5a4a3a'); }, { su: t3, nome: 'Palazzo d\'Avalos' });
+      // the abbey: a block with the dome and the little bell tower
+      S.libero(X + 90, 22, (c, x, su) => { R(c, x, su - 16, 22, 16, '#f0e4c8'); R(c, x, su - 16, 22, 1, '#fff6e0'); c.fillStyle = '#d8a050'; c.beginPath(); c.arc(x + 11, su - 16, 7, Math.PI, 0); c.fill();
+        R(c, x + 10, su - 26, 2, 4, '#d8a050'); R(c, x + 2, su - 24, 4, 8, '#f0e4c8'); R(c, x + 3, su - 22, 2, 2, '#7a6a52'); R(c, x + 8, su - 9, 6, 9, '#8a6a4a'); }, { su: t2, nome: 'abbazia' });
+      // two little houses on the lower step
+      S.casa(X + 4, 14, 10, { su: t1, colore: '#f0c8b0' }); S.casa(X + 112, 14, 12, { su: t1, colore: '#e8d8c0' });
     } },
     // Procida: Vivara, l'isolotto verde, con il ponte ad archi che la unisce alla spiaggia della Chiaiolella
     vivara: { strato: 'lontano', w: 110, draw(c, X, b) {
@@ -6119,7 +6128,7 @@ const HR_DATA = (() => {
   }
   // the recognisable points of this stage (catalogo/punti.js, from the order): each passes once, on its layer, at its
   // place along the road (at: 0 the start, 1 the finish), moving as fast as that layer
-  const PUNTO_K = { lontano: 0.15, mezzo: 0.4, vicino: 1 };
+  const PUNTO_K = { lontano: 0.15, dietro: 0.4, mezzo: 0.4, vicino: 1 }; // dietro: with the houses, but behind them
   function drawPunti(c, strato, base) {
     const list = G.L && G.L.punti, F = G.finish0 || G.finish; if (!list || !list.length || !F) return;
     const k = PUNTO_K[strato];
@@ -6207,6 +6216,7 @@ const HR_DATA = (() => {
     if (stripsDirty || !far) buildStrips();
     const cy0 = Math.round(G.camY || 0);
     drawStrip(c, far, 0.15, -4 + Math.round(cy0 * 0.3)); drawPunti(c, 'lontano', -4 + Math.round(cy0 * 0.3) + groundScreenY() - 10);
+    drawPunti(c, 'dietro', Math.round(cy0 * 0.6) + groundScreenY() + 2);
     drawStrip(c, mid, 0.4, Math.round(cy0 * 0.6)); drawPunti(c, 'mezzo', Math.round(cy0 * 0.6) + groundScreenY() + 2);
     // haze over the background (sky colour of the horizon): the city stays behind, what you run on stands out
     { const sk = G.th.sky; c.globalAlpha = G.th.night ? 0.15 : 0.2; R(c, 0, 0, st.VW, oy + 160, sk[sk.length - 1]); c.globalAlpha = 1; }
