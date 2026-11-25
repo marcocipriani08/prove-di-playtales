@@ -814,6 +814,7 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
   .menu-pop { position: absolute; top: calc(100% + 6px); right: 0; background: rgba(18,14,36,.92); border: 2px solid var(--line); border-radius: 12px; padding: 8px; box-shadow: 0 6px 0 rgba(0,0,0,.3); }
   #b-pause:not([hidden]) ~ .menu-pop, #app.talking .menu-pop { display: none; }
   .menu-pop .btn { min-width: 150px; font-size: 15px; padding: 9px 12px; }
+  .menu-pop:not([hidden]) { display: flex; flex-direction: column; gap: 6px; }
   @media (orientation: landscape) and (max-height: 500px) {
     /* at the finish the two stay in sight on the left: the cards and panels sit on the right */
     #app.at-finish #ov:has(> .page-done), #app.at-finish #memo { justify-content: flex-end; padding-left: 34vw; background: linear-gradient(90deg, rgba(10,7,22,0) 0, rgba(10,7,22,0) 26vw, rgba(10,7,22,.7) 36vw); }
@@ -1067,8 +1068,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: procida */
 window.ORDINE = {"codice":"procida","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"procida","luogo":{"titolo":"Procida","sottotitolo":"Casa, d'estate","frase":"Qui l'estate ha il cognome di famiglia.","disegno":"t_procida"},"ricordi":[{"titolo":"Corsa alla doccia","frase":"Dal mare alla terrazza di corsa: chi arriva secondo aspetta, gocciolando.","disegno":"doccia"},{"titolo":"Caccia alle meduse","frase":"Un gommoncino, una retina e il coraggio dei pirati: le meduse tremavano.","disegno":"meduse"}],"costume":"procida","punti":[{"disegno":"terramurata","at":0.1},{"disegno":"faro","at":0.24},{"disegno":"gommone","at":0.38},{"disegno":"terrazza","at":0.52},{"disegno":"vivara","at":0.64}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"parmigiana","plurale":"parmigiane","articolo":"le","disegno":"parmigiana"},"antagonista":{"nome":"Il Conte Posponi","presentazione":"Puntuale come il traghetto d'agosto","ingresso":"Arrivo tra cinque minuti… facciamo dieci.","sconfitta":"Ancora… cinque… minuti…","aspetto":"conte","proiettile":"sveglia"},"scagnozzi":{"nome":"i Ritardatari","singolare":"Ritardatario","divisa":"#8E929E","cappello":"skihat","cappelloColore":"#9CC8F0","grida":["Che fretta c'è?!","Cinque minuti e arriviamo!","Ci vediamo… più tardi!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci una parmigiana e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "b8f7339";
-window.SALVATAGGIO = "rty_procida_b8f7339_";
+window.VERSIONE = "53f9a5f";
+window.SALVATAGGIO = "rty_procida_53f9a5f_";
 </script>
 <script>
 /* motore/testi.js */
@@ -6256,7 +6257,7 @@ const HR_DATA = (() => {
       const img = enemyImg(e, e.t);
       if (!e.fly && !e.dead) { const gy = e.kind === 'hop' ? oy + e.yb : e.boss ? oy + (surfaceBelow(e.x, 0) || e.y) : Y; c.fillStyle = 'rgba(0,0,0,.25)'; c.beginPath(); c.ellipse(X, gy, e.boss ? 11 : 6, e.boss ? 2.5 : 1.5, 0, 0, 7); c.fill(); }
       if (e.boss && e.state === 'dash' && Math.floor(G.t * 16) % 2) continue;
-      if (e.boss && e.state === 'stop') { const b = Math.floor(G.t * 4) % 2; for (let i = 0; i < 3; i++) R(c, X - 8 + i * 7 + Math.round(Math.sin(G.t * 6 + i) * 2), Y - img.height - b, 2, 2, '#ffd84a'); } // just over the head, whatever its height
+      if (e.boss && e.state === 'stop') { const b = Math.floor(G.t * 4) % 2; for (let i = 0; i < 3; i++) R(c, X - 8 + i * 7 + Math.round(Math.sin(G.t * 6 + i) * 2), Y - 46 - b, 2, 2, '#ffd84a'); }
       if (e.flee && e.gone) continue;
       if (e.flee && e.flee.up) {
         const hs = humanoidSprite(e.look, LOOKS[e.look]); // the boss gets up small (20 instead of 40): it «deflates», as Marco likes
@@ -8550,11 +8551,24 @@ const HR_DATA = (() => {
     showOv(p);
   }
   byId('b-cheat').onclick = e => { e.stopPropagation(); Audio.unlock(); if (G.mode === 'intro' || G.mode === 'done' || G.mode === 'over' || G.mode === 'ending') return; openCheats(); };
-  // «Menu» outside a run: a little card under the chip with the sound switch (in a run: the pause menu, with the same switch)
+  // «Menu» outside a run: a little card under the chip with the sound switch (in a run: the pause menu, with the same switch;
+  // at the end of a stage: the pause menu's entries too)
   { const chip = byId('b-mute'), pop = byId('menu-pop'), au = byId('mp-audio');
     const paint = () => { au.textContent = Audio.on ? '♪ Audio: sì' : '♪ Audio: no'; au.setAttribute('aria-pressed', Audio.on ? 'true' : 'false'); };
     const close = () => { pop.hidden = true; chip.setAttribute('aria-expanded', 'false'); };
-    chip.onclick = e => { e.stopPropagation(); paint(); pop.hidden = !pop.hidden; chip.setAttribute('aria-expanded', pop.hidden ? 'false' : 'true'); if (!pop.hidden) Audio.sfx('pick'); };
+    // at the end of a stage (and on the results, or after a fall) the same entries as the pause menu, not only the sound
+    // (Marco, 25 Nov): Ricomincia, Tappe, Negozio, Esci; the screen underneath comes back when the shop is closed
+    const extra = () => {
+      pop.querySelectorAll('.mp-x').forEach(n => n.remove());
+      if (!G.L || !byId('title').hidden || !['done', 'board', 'over'].includes(G.mode)) return;
+      if (['memo', 'assemble', 'pest'].some(id => { const n = byId(id); return n && !n.hidden; })) return; // a memory being shown: first that
+      const item = (label, fn, cls = '') => { const b = mkBtn(label, 'mp-x ' + cls, () => { close(); fn(); }); pop.insertBefore(b, au); };
+      item('Ricomincia', () => G.endless ? startEndless() : go(G.li));
+      item('Tappe', openTappe);
+      item('Negozio', () => { const node = ov.hidden ? null : ov.firstElementChild, m = G.mode; showWardrobe(() => { if (node) showOv(node); else hideOv(); G.mode = m; }); }, 'shop-c');
+      const esci = mkBtn('Esci', 'mp-x ghost', () => { close(); showTitle(); }); pop.appendChild(esci);
+    };
+    chip.onclick = e => { e.stopPropagation(); paint(); if (pop.hidden) extra(); pop.hidden = !pop.hidden; chip.setAttribute('aria-expanded', pop.hidden ? 'false' : 'true'); if (!pop.hidden) Audio.sfx('pick'); };
     au.onclick = e => { e.stopPropagation(); Audio.toggle(); paint(); };
     document.addEventListener('pointerdown', e => { if (!pop.hidden && e.target !== chip && !pop.contains(e.target)) close(); }, true);
     window.closeMenuPop = close; }
