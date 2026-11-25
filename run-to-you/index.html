@@ -1067,8 +1067,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia","punti":[{"disegno":"faro","at":0.3},{"disegno":"gatto","at":0.55}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"#8E929E","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"],"cappello":"tophat"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "00144ea";
-window.SALVATAGGIO = "rty_viaggettino_00144ea_";
+window.VERSIONE = "5035ffb";
+window.SALVATAGGIO = "rty_viaggettino_5035ffb_";
 </script>
 <script>
 /* motore/testi.js */
@@ -3748,6 +3748,89 @@ const CARTE = (() => {
 })();
 </script>
 <script>
+/* catalogo/pezzi.js */
+/* Run to You — i pezzi con cui si mettono le cose a terra negli sfondi di mezzo. Ogni cosa dichiara su cosa poggia:
+ * la terra (la base dello sfondo) o la cima di un pezzo che fa da appoggio (una terrazza, un molo). Un pezzo messo dove
+ * sotto non c'è un appoggio largo quanto lui viene segnalato (tools/sospesi.js, nel controllo e nel provino): così
+ * niente può più galleggiare. Non è un limite alla fantasia: oltre ai pezzi pronti (case, terrazze, alberi, barche:
+ * scorciatoie per le cose che si ripetono, da cambiare liberamente) c'è il pezzo libero, dove si disegna qualsiasi cosa
+ * su misura del luogo e si dice solo quanto è larga e dove poggia.
+ *
+ *   const S = PEZZI.scena(c, b, W);           // b: la base (la terra); W: la larghezza dello sfondo (che si ripete)
+ *   const t = S.terrazza(x, w, h, opz);       // un gradino di roccia o un muro di terrazzamento: t è la sua cima (y)
+ *   S.casa(x, w, h, { su: t, ... });          // su: la y dell'appoggio (senza: la terra)
+ *   S.albero(x, 'limone' | 'tondo' | 'cipresso', { su }); S.barca(x, w, colore, { su });
+ * Ogni pezzo nuovo resta qui. */
+'use strict';
+const PEZZI = (() => {
+  const R = (c, x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
+  const disc = (c, x, y, r, col) => { c.fillStyle = col; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); };
+  const log = [];   // the pieces that do not stand on anything (read by tools/sospesi.js)
+  function scena(c, b, W) {
+    const appoggi = [{ x0: -1e9, x1: 1e9, y: b, nome: 'terra' }];   // what one can stand on: the ground and the tops
+    // the piece from x to x + w stands at y: there must be a support at that height under its whole width (the strip
+    // repeats: a piece across the right edge also counts at the left)
+    const poggia = (nome, x, w, y) => {
+      const ok = xx => appoggi.some(a => a.y === y && xx >= a.x0 && xx + 1 <= a.x1);
+      const sotto = [];
+      for (let k = 0; k < w; k++) { const xx = W ? ((Math.round(x) + k) % W + W) % W : Math.round(x) + k; if (!ok(xx) && !ok(xx - W) && !ok(xx + W)) sotto.push(xx); }
+      if (sotto.length) log.push({ pezzo: nome, x: Math.round(x), y, vuoto: sotto.length });
+    };
+    const S = {
+      // a step of rock (or a terrace wall): it stands on the support, its top becomes a support
+      terrazza(x, w, h, o = {}) {
+        const su = o.su === undefined ? b : o.su, y = su - h, col = o.colore || '#c9a46a', scuro = o.scuro || '#a8844e', luce = o.luce || '#e0c08a';
+        poggia('terrazza', x, w, su);
+        R(c, x, y, w, h, col); R(c, x, y, w, 1, luce);
+        for (let yy = y + 4; yy < su; yy += 5) R(c, x, yy, w, 1, scuro);                       // the courses of the tuff
+        for (let yy = y + 1, r = 0; yy < su; yy += 5, r++) for (let xx = x + (r % 2) * 5; xx < x + w; xx += 10) R(c, xx, yy, 1, 3, scuro);
+        if (o.verde) for (let xx = x + 2; xx < x + w - 2; xx += 7) R(c, xx, y - 1, 3, 1, o.verde);   // a little green on the edge
+        appoggi.push({ x0: x, x1: x + w, y, nome: 'terrazza' });
+        return y;
+      },
+      // a house: pastel walls, a flat white roof (or tiles), an arch or windows, the outside stairs, the washing
+      casa(x, w, h, o = {}) {
+        const su = o.su === undefined ? b : o.su, y = su - h, col = o.colore || '#f6f0e4';
+        poggia('casa', x, w, su);
+        R(c, x, y, w, h, col); R(c, x, y, w, 1, 'rgba(255,255,255,.4)'); R(c, x + w - 2, y, 2, h, 'rgba(0,0,0,.08)');
+        if (o.tetto === 'tegole') { R(c, x - 1, y - 3, w + 2, 3, o.tegole || '#c8643a'); } else R(c, x - 1, y - 2, w + 2, 2, '#f6f2ea');
+        if (o.arco) { const ax = x + 6, aw = Math.min(14, w - 12), ah = Math.min(h - 8, 16); R(c, ax, su - ah, aw, ah, '#4a3040'); R(c, ax + 2, su - ah - 2, aw - 4, 2, '#4a3040'); R(c, ax + 3, su - ah - 3, aw - 6, 1, '#4a3040'); }
+        else { const fy = y + 6; for (let fx = x + 5; fx + 6 <= x + w - 3; fx += 12) { R(c, fx, fy, 6, 7, '#3a6a9a'); R(c, fx - 1, fy + 7, 8, 1, '#f6f2ea'); } }
+        if (o.scale) for (let s = 0; s < Math.min(8, Math.floor(h / 2)); s++) R(c, x + w - 4 - s, su - 2 - s * 2, 4, 1, 'rgba(0,0,0,.16)');
+        if (o.panni) { R(c, x + 2, y + 3, w - 4, 1, '#8a8076'); ['#ff6b57', '#fff6e0', '#4dd7ff', '#ffd84a'].forEach((pc, k) => { if (x + 4 + k * 7 + 4 < x + w - 2) R(c, x + 4 + k * 7, y + 4, 4, 5, pc); }); }
+        return y;
+      },
+      // a tree with its trunk on the support
+      albero(x, tipo = 'tondo', o = {}) {
+        const su = o.su === undefined ? b : o.su;
+        poggia('albero', x - 1, 2, su);
+        if (tipo === 'cipresso') { const h = o.h || 24; for (let k = 0; k < h; k++) { const ww = Math.max(1, Math.round(Math.sin(Math.PI * Math.min(1, (k + 1) / h)) * 4)); R(c, x - ww / 2, su - h + k, ww, 1, o.colore || '#2e5a3a'); } return; }
+        const r = o.r || 8; R(c, x - 1, su - r - 4, 2, r + 4, '#6b4a2e'); disc(c, x, su - r - 6, r, o.colore || (tipo === 'limone' ? '#3f8a3a' : '#4a7a3a'));
+        if (tipo === 'limone') for (let k = 0; k < 5; k++) R(c, x - 5 + k * 3, su - r - 10 + (k % 2) * 6, 2, 2, '#ffe14d');
+      },
+      // a free piece: anything drawn on purpose for the place (a church, a kiosk, a merry-go-round…), pixel by pixel in
+      // disegno(c, x, su) with su the line it stands on; it only says how wide it is and what it stands on. If it is
+      // itself something to stand on (a pier, a wall), «appoggio» is the height of its top above su
+      libero(x, w, disegno, o = {}) {
+        const su = o.su === undefined ? b : o.su;
+        poggia(o.nome || 'pezzo libero', x, w, su);
+        disegno(c, x, su);
+        if (o.appoggio) { appoggi.push({ x0: x, x1: x + w, y: su - o.appoggio, nome: o.nome || 'pezzo libero' }); return su - o.appoggio; }
+        return su;
+      },
+      // a fishing boat pulled up on the support
+      barca(x, w, col, o = {}) {
+        const su = o.su === undefined ? b : o.su;
+        poggia('barca', x + 2, w - 4, su);
+        R(c, x, su - 6, w, 4, col); R(c, x + 2, su - 2, w - 4, 2, '#5a3a2a'); R(c, x + 1, su - 7, w - 2, 1, '#fff6e0'); if (o.albero !== false) R(c, x + w - 4, su - 11, 1, 5, '#8a6a44');
+      }
+    };
+    return S;
+  }
+  return { scena, log };
+})();
+</script>
+<script>
 /* catalogo/ambienti.js */
 /* Run to You — catalogo degli ambienti: paesaggi in pixel art, terreno, insidie, nemici e oggetti di ogni ambiente.
    Un ambiente non sa niente della storia: il nome del luogo viene dall'ordine, il percorso, la velocità, il quad, le battute
@@ -4066,23 +4149,17 @@ const AMBIENTI = (() => {
       for (let i = 0; i < 2; i++) { const x = (0.6 + i * 0.5) * W; R(c, x, b - 29, 22, 3, '#f6f2ea'); R(c, x + 4, b - 33, 12, 4, '#f6f2ea'); R(c, x + 6, b - 32, 8, 1, '#3a6a9a'); R(c, x + 2, b - 26, 18, 1, '#d64545'); }
     },
     mid(c, W, H, b) {
-      const walls = ['#f2b8b0', '#f6d88a', '#a8d0e8', '#f6f0e4', '#f2a6c0', '#b8e0b8', '#f6c890', '#e8c0e0', '#f0e0a0'];
+      // drawn with the pieces (catalogo/pezzi.js): the Corricella climbs the hill on steps of yellow tuff; on each step
+      // a house, in front of it a house on the quay; every few houses a gap with a boat on the quay
+      const S = PEZZI.scena(c, b, W), walls = ['#f2b8b0', '#f6d88a', '#a8d0e8', '#f6f0e4', '#f2a6c0', '#b8e0b8', '#f6c890', '#e8c0e0', '#f0e0a0'];
       for (let i = 0; i < 26; i++) {
-        const x = i * 64, row = i % 2, n = i * 5;
-        // the back row, higher up the hill, and the front row on the quay
-        if (i % 4 === 3) { const gx = x + 20, col = ['#d64545', '#2f6fc0'][i % 2]; R(c, gx, b - 6, 22, 4, col); R(c, gx + 2, b - 2, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 7, 20, 1, '#fff6e0'); continue; } // a gap: the sea shows, a boat
-        for (const [tier, dy, hh] of [[0, 16, 16], [1, 0, 20]]) {
-          const w = 30 + ((n + tier) % 3) * 4, hx = x + (tier ? 2 : 18) + (row ? 6 : 0), y = b - 6 - hh - dy, col = walls[(n + tier * 4) % walls.length];
-          R(c, hx, y, w, hh + dy + 6, col); R(c, hx, y, w, 1, 'rgba(255,255,255,.4)'); R(c, hx + w - 2, y, 2, hh, 'rgba(0,0,0,.08)');
-          R(c, hx - 1, y - 2, w + 2, 2, '#f6f2ea');                                           // the flat white roof
-          if ((n + tier) % 2 === 0) { R(c, hx + 6, y + 8, 14, hh - 8, '#4a3040'); R(c, hx + 8, y + 6, 10, 2, '#4a3040'); R(c, hx + 9, y + 5, 8, 1, '#4a3040'); } // the arch
-          else { R(c, hx + 5, y + 6, 6, 7, '#3a6a9a'); R(c, hx + 17, y + 6, 6, 7, '#3a6a9a'); R(c, hx + 4, y + 13, 8, 1, '#f6f2ea'); R(c, hx + 16, y + 13, 8, 1, '#f6f2ea'); }
-          if ((n + tier) % 3 === 1) for (let s = 0; s < 8; s++) R(c, hx + w - 4 - s, y + hh - 2 - s * 2, 4, 1, 'rgba(0,0,0,.16)'); // outside stairs
-          if (tier && i % 4 === 1) { R(c, hx + 2, y + 3, w - 4, 1, '#8a8076'); for (let k2 = 0; k2 < 4; k2++) R(c, hx + 4 + k2 * 7, y + 4, 4, 5, ['#ff6b57', '#fff6e0', '#4dd7ff', '#ffd84a'][k2]); } // the washing
-        }
-        // a lemon tree in a garden, then a boat on the quay
-        if (i % 3 === 2) { const lx = x + 54; disc(c, lx, b - 18, 8, '#3f8a3a'); R(c, lx - 1, b - 12, 2, 6, '#6b4a2e'); for (let k2 = 0; k2 < 5; k2++) R(c, lx - 5 + k2 * 3, b - 22 + (k2 % 2) * 6, 2, 2, '#ffe14d'); }
-        if (i % 3 === 0) { const gx = x + 40, col = ['#d64545', '#2f6fc0', '#f6d88a', '#3f9a4a'][i % 4]; R(c, gx, b - 6, 22, 4, col); R(c, gx + 2, b - 2, 18, 2, '#5a3a2a'); R(c, gx + 1, b - 7, 20, 1, '#fff6e0'); R(c, gx + 18, b - 11, 1, 5, '#8a6a44'); }
+        const x = i * 64, n = i * 5, row = i % 2;
+        if (i % 4 === 3) { S.barca(x + 20, 22, ['#d64545', '#2f6fc0'][i % 2]); continue; }
+        const tx = x - 2, tw = 66, t = S.terrazza(tx, tw, 22 + row * 2, { verde: '#6a9a4a' }); // the steps join up into the hill
+        S.casa(x + 8 + row * 8, 30 + (n % 3) * 3, 16, { su: t, colore: walls[n % walls.length], arco: n % 2 === 0, scale: n % 3 === 1 });
+        S.casa(x + 2 + row * 4, 30 + ((n + 1) % 3) * 4, 20, { colore: walls[(n + 4) % walls.length], arco: (n + 1) % 2 === 0, panni: i % 4 === 1, scale: (n + 1) % 3 === 1 });
+        if (i % 3 === 2) S.albero(x + 56, 'limone');
+        if (i % 3 === 0) S.barca(x + 40, 22, ['#d64545', '#2f6fc0', '#f6d88a', '#3f9a4a'][i % 4]);
       }
     },
     ground: { top: '#d8ccb0', top2: '#c4b696', fill: '#a8987a', grout: '#8a7a5e', deep: '#6e604a' },
