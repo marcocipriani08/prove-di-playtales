@@ -339,6 +339,18 @@ p.pt-line { margin: 0; cursor: default; }
   .ord.bad { opacity: .75; }
   .ord.bad .ord-n { background: var(--paper); }
   .ord:disabled { cursor: default; }
+  /* «Abbina»: four memories (one row each) and the four places as chips below */
+  .abb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .ord.abb { flex-direction: row; justify-content: flex-start; gap: 6px; padding: 5px 6px; text-align: left; }
+  .ord.abb canvas { width: min(48px, calc(11 * var(--vw))); max-width: 48px; flex: none; }
+  .abb-txt { display: flex; flex-direction: column; min-width: 0; }
+  .ord.abb .ord-name { font-size: min(14px, calc(3.4 * var(--vw))); white-space: normal; line-height: 1.1; }
+  .abb-to { font-family: var(--f-display); font-weight: 700; font-size: 13px; color: var(--berry, #c0392b); min-height: 15px; }
+  .ord.abb.good .abb-to { color: var(--leaf); }
+  .abb-pls { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 2px 0 6px; }
+  .abb-pl { min-height: 40px; padding: 6px 12px; border: 3px solid var(--paper-ink); border-radius: 999px; background: var(--paper); color: var(--paper-ink); font-family: var(--f-display); font-weight: 700; font-size: 15px; box-shadow: 0 3px 0 var(--paper-ink); }
+  .abb-pl.used { background: #fff6d0; }
+  .abb-pl:disabled { opacity: .7; }
   .ord-note { margin: 0; text-align: center; font-family: var(--f-body); font-size: 17px; color: var(--ink-dim); }
   @media (orientation: landscape) and (max-height: 500px) {
     /* low screen: two by two, the postcard small beside the name */
@@ -900,9 +912,9 @@ p.pt-line { margin: 0; cursor: default; }
 </div>
 <script>
 /* ordine: viaggettino */
-window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falconcino","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"Crocco","personaggio":{"disegno":"crocco"}}},"capitoli":[{"luogo":{"titolo":"Roma · La Sapienza","frase":"Marketing, le quattro P e una penna a forma di fenicottero. Qui è cominciato tutto.","disegno":"t_sapienza","domande":[{"domanda":"Dove ci siamo conosciuti?","giusta":"A lezione di Marketing alla Sapienza","sbagliate":["In biblioteca","A una festa di amici","In treno"],"battuta":"Prodotto, Prezzo, Posto e Promozione. Le quattro P. Poi ti sei seduta vicino a me e ho perso il filo.","prima":true},{"domanda":"Qual è il primo esame che abbiamo preparato insieme?","giusta":"Strategic Management","sbagliate":["International Marketing","Pietro Vito","Ragioneria"],"battuta":"Strategic Management. Il primo di tanti esami preparati insieme."}]},"ricordi":[{"titolo":"Fallo Carico","frase":"Il tavolino giallo, i prezzi da amici di Salim e un «quattro bianchi e mango» che cura due cuori.","disegno":"t_fallocarico","domande":[{"domanda":"Qual è il cocktail distintivo del Fallo Carico?","giusta":"Il «quattro bianchi e mango»","sbagliate":["Lo spritz","Il Limoncello & Sprite","Il mojito"],"battuta":"Quattro bianchi e mango. Salim dice che cura due cuori. Per me cura i nostri due."},{"domanda":"Quale di questi NON è un soprannome che ti do?","giusta":"Falchetta","sbagliate":["Falconcino","Falcocomero","Falconciuffolo"],"battuta":"Falconcino, Falcocomero, Falconciuffolo, Falcotto. Falchetta mai: troppo normale per te."}]},{"titolo":"Palermo","frase":"Il mercato, il caos, il cibo. Tre pezzi di biglietto e mezzo rotolo di scotch.","disegno":"t_palermo","domande":[{"domanda":"Qual è stato il nostro primo viaggio insieme?","giusta":"Palermo","sbagliate":["Malta","Santorini","Praga"],"battuta":"Palermo: il mercato, il caos, il cibo. E il primo biglietto attaccato insieme."},{"domanda":"Perché a Palermo non ti hanno fatto entrare in una chiesa?","giusta":"Eri vestita troppo scollata","sbagliate":["Le dee come te vanno contro il monoteismo","I Falcocomeri non possono entrare","Tanto per"],"battuta":"Troppo scollata per la chiesa. Per me invece andavi benissimo."}]}]},{"luogo":{"titolo":"Argentario","frase":"Acqua trasparente e scogli. Il Crocco giura di aver visto un polpo. Il polpo smentisce.","disegno":"t_argentario","domande":[{"domanda":"Dove abbiamo mangiato la frittura più buona di sempre?","giusta":"All'Argentario","sbagliate":["In un ristorante stellato","Al kebabaro di Piazza delle Province","A Termini"],"battuta":"All'Argentario. Nessuno stellato ci batte. Nemmeno Piazza delle Province."},{"tipo":"cartolina"}]},"ricordi":[{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","domande":[{"tipo":"vf","domanda":"Di che colore era il quad a Ios?","giusta":"Nero","sbagliate":["Rosso","Giallo","Blu"],"battuta":"Nero come la notte di Ios. Tu davanti a guidare, io dietro a tenermi forte."},{"domanda":"Qual è il posto migliore del mondo per fare una torre di sassi?","giusta":"La tomba di Omero","sbagliate":["La tangenziale","L'aula 9B","Il portabagagli del Pandino"],"battuta":"La tomba di Omero. Un poeta immortale e la nostra torre di sassi: bella coppia."}]},{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi","domande":[{"domanda":"Quali sono le due parole più usate in Grecia?","giusta":"Pita e Mythos","sbagliate":["Kalimera ed efcharistó","Opa e yamas","Ouzo e sirtaki"],"battuta":"Pita e Mythos. Il resto del greco è facoltativo."},{"domanda":"Chi è il nuotatore migliore di Skopelos?","giusta":"Pirati","sbagliate":["Michael Phelps","Federica Pellegrini","Gregorio Paltrinieri"],"battuta":"Pirati. Phelps prende ancora appunti."}]}]},{"luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","domande":[{"domanda":"Quanto era «centralissimo» l'hotel di Berlino?","giusta":"A sei chilometri dal centro","sbagliate":["Il centro era nella hall","Dalla finestra toccavi la Porta di Brandeburgo","Il Muro passava in camera"],"battuta":"Sei chilometri. Centralissimo, se hai le gambe di El Falcon."},{"domanda":"Dove abbiamo passato una notte a Berlino?","giusta":"Al Tresor","sbagliate":["In un karaoke","Sul tetto dell'hotel","In hotel a dormire"],"battuta":"Al Tresor, fino a tardi. Il ritorno in hotel è un'altra domanda."}]},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga","domande":[{"domanda":"Che canzone abbiamo cantato nel punto più alto di Praga?","giusta":"«Damme 'na mano» di Tony Effe","sbagliate":["«Volare» di Domenico Modugno","«Bohemian Rhapsody» dei Queen","«Despacito» di Luis Fonsi"],"battuta":"«Damme 'na mano». Praga ai nostri piedi e noi a squarciagola."},{"domanda":"Cosa si può fare a Praga la sera?","giusta":"Restare a casa a guardare Sanremo","sbagliate":["Una crociera sulla Moldava","Un concerto di musica classica","Un giro nei pub storici"],"battuta":"Praga di sera è bellissima. Ma c'era Sanremo."}]},{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","domande":[{"domanda":"Dove abbiamo festeggiato Capodanno insieme?","giusta":"Sotto il Duomo di Vienna","sbagliate":["A Praga","A Berlino","A Roma"],"battuta":"Sotto il Duomo di Santo Stefano, dopo aver scavalcato le transenne. Come due professionisti."},{"domanda":"Chi dei due pesta i piedi quando balla?","giusta":"Il Crocco","sbagliate":["El Falcon","Tutti e due","Nessuno, siamo perfetti"],"battuta":"Al valzer di Vienna solo due volte. Per i miei standard è un record."}]}]},{"luogo":{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo","domande":[{"domanda":"Quale grande artista è nato a Salisburgo?","giusta":"Mozart","sbagliate":["Sfera Ebbasta","Geolier","Gianni Celeste"],"battuta":"Mozart. Anche se con Gianni Celeste se la giocava."},{"domanda":"Quanti gradi fanno in media a Salisburgo?","giusta":"−12 °C","sbagliate":["18 °C","23 °C","26 °C"],"battuta":"Meno dodici. Ci siamo scaldati a forza di abbracci."}]},"ricordi":[{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo","domande":[{"domanda":"Qual è il quartiere più bello di tutta la Francia?","giusta":"La Petite France","sbagliate":["Gli Champs-Élysées","Il Trocadéro","Montmartre"],"battuta":"La Petite France: canali, case a graticcio e fiori ovunque. Montmartre si metta in fila."},{"tipo":"vf","domanda":"Di che colore è la cattedrale di Strasburgo?","giusta":"Rosa","sbagliate":["Bianca","Grigia","Gialla"],"battuta":"Rosa, come la pietra dei Vosgi."}]},{"titolo":"Tenerife","frase":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","disegno":"t_tenerife","domande":[{"domanda":"Qual è il nostro prossimo viaggettino?","giusta":"Tenerife","sbagliate":["Lisbona","Mykonos","Parigi"],"battuta":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","ultima":true},{"tipo":"vf","domanda":"Di che colore è la sabbia che ci aspetta a Tenerife?","giusta":"Nera","sbagliate":["Bianca","Rosa","Dorata"],"battuta":"Nera, vulcanica. E il Teide che ci guarda da lassù."}]}]}],"cronologia":["t_palermo","t_berlino","t_praga","t_ios","t_vienna","t_salisburgo","t_argentario","t_sporadi"],"antagonista":{"nome":"Il Consulente Grigio","motto":"Nemico giurato delle ferie altrui","aspetto":"grigio"},"lettera":{"testo":"Falconcino, qui è tardino\ne io sono un po' stanchino.\nPerò, quando penso a te,\npassa tutto, e sai perché?\nPerché il tuo visetto scemo\nmi fa correr come un treno,\ncorrer dal mio Falconcino,\nil mio bel batuffolino.","firma":"Il Crocco"}};
-window.VERSIONE = "6a73d43";
-window.SALVATAGGIO = "qou_viaggettino_6a73d43_";
+window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falconcino","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"Crocco","personaggio":{"disegno":"crocco"}}},"capitoli":[{"luogo":{"titolo":"Roma · La Sapienza","frase":"Marketing, le quattro P e una penna a forma di fenicottero. Qui è cominciato tutto.","disegno":"t_sapienza","domande":[{"domanda":"Dove ci siamo conosciuti?","giusta":"A lezione di Marketing alla Sapienza","sbagliate":["In biblioteca","A una festa di amici","In treno"],"battuta":"Prodotto, Prezzo, Posto e Promozione. Le quattro P. Poi ti sei seduta vicino a me e ho perso il filo.","prima":true},{"domanda":"Qual è il primo esame che abbiamo preparato insieme?","giusta":"Strategic Management","sbagliate":["International Marketing","Pietro Vito","Ragioneria"],"battuta":"Strategic Management. Il primo di tanti esami preparati insieme."}]},"ricordi":[{"titolo":"Fallo Carico","frase":"Il tavolino giallo, i prezzi da amici di Salim e un «quattro bianchi e mango» che cura due cuori.","disegno":"t_fallocarico","domande":[{"domanda":"Qual è il cocktail distintivo del Fallo Carico?","giusta":"Il «quattro bianchi e mango»","sbagliate":["Lo spritz","Il Limoncello & Sprite","Il mojito"],"battuta":"Quattro bianchi e mango. Salim dice che cura due cuori. Per me cura i nostri due."},{"domanda":"Quale di questi NON è un soprannome che ti do?","giusta":"Falchetta","sbagliate":["Falconcino","Falcocomero","Falconciuffolo"],"battuta":"Falconcino, Falcocomero, Falconciuffolo, Falcotto. Falchetta mai: troppo normale per te."}]},{"titolo":"Palermo","frase":"Il mercato, il caos, il cibo. Tre pezzi di biglietto e mezzo rotolo di scotch.","disegno":"t_palermo","domande":[{"domanda":"Qual è stato il nostro primo viaggio insieme?","giusta":"Palermo","sbagliate":["Malta","Santorini","Praga"],"battuta":"Palermo: il mercato, il caos, il cibo. E il primo biglietto attaccato insieme."},{"domanda":"Perché a Palermo non ti hanno fatto entrare in una chiesa?","giusta":"Eri vestita troppo scollata","sbagliate":["Le dee come te vanno contro il monoteismo","I Falcocomeri non possono entrare","Tanto per"],"battuta":"Troppo scollata per la chiesa. Per me invece andavi benissimo."}]}]},{"luogo":{"titolo":"Argentario","frase":"Acqua trasparente e scogli. Il Crocco giura di aver visto un polpo. Il polpo smentisce.","disegno":"t_argentario","domande":[{"domanda":"Dove abbiamo mangiato la frittura più buona di sempre?","giusta":"All'Argentario","sbagliate":["In un ristorante stellato","Al kebabaro di Piazza delle Province","A Termini"],"battuta":"All'Argentario. Nessuno stellato ci batte. Nemmeno Piazza delle Province."},{"tipo":"cartolina"}]},"ricordi":[{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","domande":[{"tipo":"vf","domanda":"Di che colore era il quad a Ios?","giusta":"Nero","sbagliate":["Rosso","Giallo","Blu"],"battuta":"Nero come la notte di Ios. Tu davanti a guidare, io dietro a tenermi forte."},{"domanda":"Qual è il posto migliore del mondo per fare una torre di sassi?","giusta":"La tomba di Omero","sbagliate":["La tangenziale","L'aula 9B","Il portabagagli del Pandino"],"battuta":"La tomba di Omero. Un poeta immortale e la nostra torre di sassi: bella coppia."}]},{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi","domande":[{"domanda":"Quali sono le due parole più usate in Grecia?","giusta":"Pita e Mythos","sbagliate":["Kalimera ed efcharistó","Opa e yamas","Ouzo e sirtaki"],"battuta":"Pita e Mythos. Il resto del greco è facoltativo."},{"domanda":"Chi è il nuotatore migliore di Skopelos?","giusta":"Pirati","sbagliate":["Michael Phelps","Federica Pellegrini","Gregorio Paltrinieri"],"battuta":"Pirati. Phelps prende ancora appunti."}]}]},{"luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","domande":[{"domanda":"Quanto era «centralissimo» l'hotel di Berlino?","giusta":"A sei chilometri dal centro","sbagliate":["Il centro era nella hall","Dalla finestra toccavi la Porta di Brandeburgo","Il Muro passava in camera"],"battuta":"Sei chilometri. Centralissimo, se hai le gambe di El Falcon."},{"domanda":"Dove abbiamo passato una notte a Berlino?","giusta":"Al Tresor","sbagliate":["In un karaoke","Sul tetto dell'hotel","In hotel a dormire"],"battuta":"Al Tresor, fino a tardi. Il ritorno in hotel è un'altra domanda."}]},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga","domande":[{"domanda":"Che canzone abbiamo cantato nel punto più alto di Praga?","giusta":"«Damme 'na mano» di Tony Effe","sbagliate":["«Volare» di Domenico Modugno","«Bohemian Rhapsody» dei Queen","«Despacito» di Luis Fonsi"],"battuta":"«Damme 'na mano». Praga ai nostri piedi e noi a squarciagola."},{"domanda":"Cosa si può fare a Praga la sera?","giusta":"Restare a casa a guardare Sanremo","sbagliate":["Una crociera sulla Moldava","Un concerto di musica classica","Un giro nei pub storici"],"battuta":"Praga di sera è bellissima. Ma c'era Sanremo."}]},{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","domande":[{"domanda":"Dove abbiamo festeggiato Capodanno insieme?","giusta":"Sotto il Duomo di Vienna","sbagliate":["A Praga","A Berlino","A Roma"],"battuta":"Sotto il Duomo di Santo Stefano, dopo aver scavalcato le transenne. Come due professionisti."},{"domanda":"Chi dei due pesta i piedi quando balla?","giusta":"Il Crocco","sbagliate":["El Falcon","Tutti e due","Nessuno, siamo perfetti"],"battuta":"Al valzer di Vienna solo due volte. Per i miei standard è un record."}]}]},{"luogo":{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo","domande":[{"domanda":"Quale grande artista è nato a Salisburgo?","giusta":"Mozart","sbagliate":["Sfera Ebbasta","Geolier","Gianni Celeste"],"battuta":"Mozart. Anche se con Gianni Celeste se la giocava."},{"domanda":"Quanti gradi fanno in media a Salisburgo?","giusta":"−12 °C","sbagliate":["18 °C","23 °C","26 °C"],"battuta":"Meno dodici. Ci siamo scaldati a forza di abbracci."}]},"ricordi":[{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo","domande":[{"domanda":"Qual è il quartiere più bello di tutta la Francia?","giusta":"La Petite France","sbagliate":["Gli Champs-Élysées","Il Trocadéro","Montmartre"],"battuta":"La Petite France: canali, case a graticcio e fiori ovunque. Montmartre si metta in fila."},{"tipo":"vf","domanda":"Di che colore è la cattedrale di Strasburgo?","giusta":"Rosa","sbagliate":["Bianca","Grigia","Gialla"],"battuta":"Rosa, come la pietra dei Vosgi."}]},{"titolo":"Tenerife","frase":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","disegno":"t_tenerife","domande":[{"domanda":"Qual è il nostro prossimo viaggettino?","giusta":"Tenerife","sbagliate":["Lisbona","Mykonos","Parigi"],"battuta":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","ultima":true},{"tipo":"vf","domanda":"Di che colore è la sabbia che ci aspetta a Tenerife?","giusta":"Nera","sbagliate":["Bianca","Rosa","Dorata"],"battuta":"Nera, vulcanica. E il Teide che ci guarda da lassù."}]}]}],"cronologia":["t_palermo","t_berlino","t_praga","t_ios","t_vienna","t_salisburgo","t_argentario","t_sporadi"],"antagonista":{"nome":"Il Consulente Grigio","motto":"Nemico giurato delle ferie altrui","ingresso":"Le ferie? Le ho spostate io a data da destinarsi.","aspetto":"grigio"},"lettera":{"testo":"Falconcino, qui è tardino\ne io sono un po' stanchino.\nPerò, quando penso a te,\npassa tutto, e sai perché?\nPerché il tuo visetto scemo\nmi fa correr come un treno,\ncorrer dal mio Falconcino,\nil mio bel batuffolino.","firma":"Il Crocco"}};
+window.VERSIONE = "d9b87e8";
+window.SALVATAGGIO = "qou_viaggettino_d9b87e8_";
 </script>
 <script>
 /* motore/testi.js */
@@ -917,6 +929,7 @@ window.SALVATAGGIO = "qou_viaggettino_6a73d43_";
      {a} {b}        soprannome (o il nome, se non c'è)
      {dest}         a chi è dedicata la lettera: «{a}» oppure «{a} e {b}» (regalo per tutti e due)
      {boss}         il nome dell'antagonista, con il suo articolo se ce l'ha («Il Consulente Grigio»)
+     {motto}        il suo motto con l'iniziale minuscola, senza punto finale; {ingresso} la sua battuta su misura
      {di boss} {a boss} {da boss} {su boss} {con boss}   preposizione + articolo giusti («del Consulente Grigio»)
      Con l'iniziale maiuscola ({Boss}) la prima lettera diventa maiuscola. */
 'use strict';
@@ -952,7 +965,10 @@ const TXT = (() => {
     return glue(PREP[prep][art], rest);
   }
   const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
-  const V = { A: P.a.nome, B: P.b.nome, a: sop(P.a), b: sop(P.b), dest: entrambi ? sop(P.a) + ' e ' + sop(P.b) : sop(P.a), boss: ant.nome || '' };
+  const low = s => s ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+  const V = { A: P.a.nome, B: P.b.nome, a: sop(P.a), b: sop(P.b), dest: entrambi ? sop(P.a) + ' e ' + sop(P.b) : sop(P.a), boss: ant.nome || '',
+    // the villain's motto after his name («Io sono Il Consulente Grigio, nemico giurato delle ferie altrui.») and his line made to measure
+    motto: low((ant.motto || '').trim().replace(/[.!]+$/, '')), ingresso: (ant.ingresso || '').trim() };
   function t(s) {
     if (typeof s !== 'string') return s;
     return s
@@ -2057,6 +2073,8 @@ const VG = (() => {
     falcon: { name: TXT.V.A, col: '#ffd84a', img: () => falcon('down') },
     crocco: { name: TXT.V.B, col: '#7cc6e8', img: () => crocco('down') },
     narr: { name: '', col: '#c9bfe0' },
+    // the host of the show: the villain of the order
+    host: { name: TXT.V.boss, col: '#ff8a73', look: (window.ORDINE.antagonista || {}).aspetto },
     custode: { name: 'Custode dell\'anfiteatro', col: '#7cc6e8', look: 'custode' },
     spa: { name: 'Proprietaria della spa', col: '#fff6e0', look: 'spa' }
   };
@@ -2210,7 +2228,7 @@ const VG = (() => {
     }
   }
 
-  // ---------- the ending: envelope, cake with two cocktails, card with the dedication ----------
+  // ---------- the ending: envelope, the party of the occasion, card with the dedication ----------
   // the letter: the title comes from the occasion, the text (one line per verse, as the customer wrote it) and the signature from the order
   const TITOLI = { birthday: 'Buon compleanno!', anniversary: 'Buon anniversario!', love: 'Buon San Valentino!', christmas: 'Buon Natale!', graduation: 'Congratulazioni!', other: 'Per te' };
   const DEDICA = { title: TITOLI[window.ORDINE.occasione] || TITOLI.other, lines: window.ORDINE.lettera.testo.split('\n'), sign: window.ORDINE.lettera.firma };
@@ -2304,34 +2322,76 @@ const VG = (() => {
       setTimeout(() => { ready = true; box.classList.remove('from'); try { env.focus({ preventScroll: true }); } catch (e) { } }, 800);
     }
     else setTimeout(() => { try { env.focus({ preventScroll: true }); } catch (e) { } }, 50);
-    // the cake scene (same as Viaggettino's ending)
+    // the party of the occasion (one scene each, the same for every order): birthday cake, sunset with hearts,
+    // Christmas tree in the snow, caps thrown in the air, a toast under the fireworks
     const cv2 = byId('end-cake'), c = cv2.getContext('2d'); c.imageSmoothingEnabled = false;
+    const OCC = (window.ORDINE && window.ORDINE.occasione) || 'birthday';
     const drink = item('cocktail', 1, false);
     const conf = Array.from({ length: REDUCED ? 0 : 60 }, () => ({ x: Math.random() * cv2.width, y: Math.random() * cv2.height, v: 10 + Math.random() * 25, c: pick(['#ffd84a', '#ff6b57', '#7cc6e8', '#f2a3b0', '#7fd18a']) }));
+    const snow = Array.from({ length: REDUCED ? 0 : 70 }, () => ({ x: Math.random() * cv2.width, y: Math.random() * cv2.height, v: 6 + Math.random() * 12 }));
+    const hearts = Array.from({ length: REDUCED ? 0 : 10 }, (_, i) => ({ x: 40 + Math.random() * 180, y: 140 + i * 14, v: 8 + Math.random() * 8 }));
+    const caps = [0, 1, 2].map(i => ({ x: 90 + i * 40, ph: i * 1.7 }));
+    const sparks = [];
+    const sky = (stops, split) => { const g = c.createLinearGradient(0, 0, 0, cv2.height); stops.forEach(([p, col]) => g.addColorStop(p, col)); c.fillStyle = g; c.fillRect(0, 0, cv2.width, cv2.height); };
+    const ground = (col, top) => { c.fillStyle = col; c.fillRect(0, cv2.height - 34, cv2.width, 34); c.fillStyle = top; c.fillRect(0, cv2.height - 34, cv2.width, 2); };
     let last = performance.now();
     const frame = now => {
       if (!document.body.contains(box)) return;
       const dt = Math.min(0.05, (now - last) / 1000); last = now; const t = now / 1000;
-      const W = cv2.width, H = cv2.height;
-      const grd = c.createLinearGradient(0, 0, 0, H); grd.addColorStop(0, '#ff9a6b'); grd.addColorStop(0.55, '#f2a3b0'); grd.addColorStop(0.56, '#3a2a5a'); grd.addColorStop(1, '#2a1f45');
-      c.fillStyle = grd; c.fillRect(0, 0, W, H);
-      c.fillStyle = '#ffd84a'; c.beginPath(); c.arc(W / 2, H * 0.55, 22, Math.PI, 0); c.fill();
-      c.fillStyle = 'rgba(255,216,74,.5)'; for (let i = 0; i < 5; i++) c.fillRect(W / 2 - 30 + i * 3, H * 0.58 + i * 4, 60 - i * 6, 1);
-      c.fillStyle = '#e9c46a'; c.fillRect(W / 2 - 70, H - 34, 140, 8); c.fillStyle = '#6b4a2e'; c.fillRect(W / 2 - 4, H - 26, 8, 26);
-      const cx = W / 2 - 26, cy = H - 60;
-      c.fillStyle = '#fff6e0'; c.fillRect(cx, cy + 10, 52, 16); c.fillStyle = '#f2a3b0'; c.fillRect(cx, cy + 10, 52, 4);
-      for (let i = 0; i < 6; i++) c.fillRect(cx + 2 + i * 9, cy + 14, 4, 3);
-      c.fillStyle = '#e9e2cf'; c.fillRect(cx - 4, cy + 26, 60, 2);
-      for (let i = 0; i < 26; i++) {
-        const row = i < 13 ? 0 : 1, col = i % 13, x = cx + 2 + col * 4, y = cy + 4 + (row ? 3 : 0);
-        c.fillStyle = ['#7cc6e8', '#ffd84a', '#ff6b57', '#7fd18a'][i % 4]; c.fillRect(x, y + (row ? 0 : -3), 1, 6);
-        c.fillStyle = Math.sin(t * 12 + i) > 0 ? '#ffd84a' : '#ffb36b'; c.fillRect(x, y + (row ? -2 : -5), 1, 2);
+      const W = cv2.width, H = cv2.height, gy = H - 34;
+      if (OCC === 'anniversary' || OCC === 'love') {
+        // sunset, a bench, hearts rising
+        sky([[0, '#ff9a6b'], [0.55, '#f2a3b0'], [0.56, '#3a2a5a'], [1, '#2a1f45']]);
+        c.fillStyle = '#ffd84a'; c.beginPath(); c.arc(W / 2, H * 0.55, 22, Math.PI, 0); c.fill();
+        c.fillStyle = 'rgba(255,216,74,.5)'; for (let i = 0; i < 5; i++) c.fillRect(W / 2 - 30 + i * 3, H * 0.58 + i * 4, 60 - i * 6, 1);
+        c.fillStyle = '#6b4a2e'; c.fillRect(W / 2 - 36, gy - 14, 72, 4); c.fillRect(W / 2 - 36, gy - 22, 72, 3); c.fillRect(W / 2 - 32, gy - 10, 3, 10); c.fillRect(W / 2 + 29, gy - 10, 3, 10);
+        hearts.forEach(hh => { hh.y -= hh.v * dt; if (hh.y < -10) { hh.y = H; hh.x = 40 + Math.random() * 180; } c.drawImage(item('heart'), Math.round(hh.x + Math.sin(t * 2 + hh.v) * 3), Math.round(hh.y)); });
+      } else if (OCC === 'christmas') {
+        // night, snow, a tree whose lights come on
+        sky([[0, '#0e1a3a'], [1, '#2a3a6a']]); ground('#eef4ff', '#ffffff');
+        const tx = W / 2, ty = gy;
+        c.fillStyle = '#6b4a2e'; c.fillRect(tx - 3, ty - 8, 6, 8);
+        for (let i = 0; i < 4; i++) { c.fillStyle = i % 2 ? '#2f7a3a' : '#3f9a4a'; c.fillRect(tx - 26 + i * 6, ty - 18 - i * 12, 52 - i * 12, 12); }
+        for (let i = 0; i < 14; i++) { const on = Math.sin(t * 3 + i) > -0.2; c.fillStyle = on ? ['#ffd84a', '#ff6b57', '#7cc6e8'][i % 3] : '#2a4a2a'; c.fillRect(tx - 22 + (i * 13) % 44, ty - 20 - Math.floor(i / 3.5) * 12, 2, 2); }
+        c.fillStyle = '#ffd84a'; c.fillRect(tx - 2, ty - 70, 4, 4); c.fillRect(tx - 4, ty - 68, 8, 1);
+        snow.forEach(s => { s.y += s.v * dt; s.x += Math.sin(t + s.v) * 0.2; if (s.y > H) { s.y = -2; s.x = Math.random() * W; } c.fillStyle = '#fff'; c.fillRect(Math.round(s.x), Math.round(s.y), 1, 1); });
+      } else if (OCC === 'graduation') {
+        // a bright day, the caps thrown up in the air
+        sky([[0, '#6aa8e0'], [1, '#c8e0f4']]); ground('#5aa84a', '#7fd18a');
+        caps.forEach(cp => {
+          const k = (t * 0.6 + cp.ph) % 2, y = gy - 20 - Math.sin(Math.min(1, k / 1.4) * Math.PI) * 70, x = cp.x + Math.sin(t + cp.ph) * 6;
+          c.fillStyle = '#1a1024'; c.fillRect(x - 8, y, 16, 3); c.fillRect(x - 4, y + 3, 8, 4); c.fillStyle = '#ffd84a'; c.fillRect(x + 6, y + 2, 1, 6);
+        });
+        conf.forEach(p => { p.y += p.v * dt; if (p.y > H) { p.y = -4; p.x = Math.random() * W; } c.fillStyle = p.c; c.fillRect(Math.round(p.x), Math.round(p.y), 2, 2); });
+      } else if (OCC === 'other') {
+        // night, a toast, fireworks
+        sky([[0, '#120e24'], [1, '#2a2145']]); ground('#2a1f45', '#4a3d78');
+        if (!REDUCED && Math.random() < dt * 1.6) { const x = 40 + Math.random() * 180, y = 20 + Math.random() * 40, col = pick(['#ffd84a', '#ff6b57', '#7cc6e8', '#f2a3b0']); for (let i = 0; i < 16; i++) sparks.push({ x, y, a: i / 16 * Math.PI * 2, r: 0, col, life: 1.2 }); }
+        for (const s of sparks) { s.r += 30 * dt; s.life -= dt; c.globalAlpha = Math.max(0, s.life); c.fillStyle = s.col; c.fillRect(Math.round(s.x + Math.cos(s.a) * s.r), Math.round(s.y + Math.sin(s.a) * s.r + (1.2 - s.life) * 6), 2, 2); }
+        c.globalAlpha = 1; for (let i = sparks.length - 1; i >= 0; i--) if (sparks[i].life <= 0) sparks.splice(i, 1);
+        c.fillStyle = '#e9c46a'; c.fillRect(W / 2 - 30, gy - 2, 60, 4);
+        c.drawImage(drink, W / 2 - 14, gy - 2 - drink.height); c.drawImage(drink, W / 2 + 2, gy - 2 - drink.height);
+      } else {
+        // birthday: sunset, the cake with its candles, balloons
+        sky([[0, '#ff9a6b'], [0.55, '#f2a3b0'], [0.56, '#3a2a5a'], [1, '#2a1f45']]);
+        c.fillStyle = '#e9c46a'; c.fillRect(W / 2 - 70, H - 34, 140, 8); c.fillStyle = '#6b4a2e'; c.fillRect(W / 2 - 4, H - 26, 8, 26);
+        const cx = W / 2 - 26, cy = H - 60;
+        c.fillStyle = '#fff6e0'; c.fillRect(cx, cy + 10, 52, 16); c.fillStyle = '#f2a3b0'; c.fillRect(cx, cy + 10, 52, 4);
+        for (let i = 0; i < 6; i++) c.fillRect(cx + 2 + i * 9, cy + 14, 4, 3);
+        c.fillStyle = '#e9e2cf'; c.fillRect(cx - 4, cy + 26, 60, 2);
+        for (let i = 0; i < 26; i++) {
+          const row = i < 13 ? 0 : 1, col = i % 13, x = cx + 2 + col * 4, y = cy + 4 + (row ? 3 : 0);
+          c.fillStyle = ['#7cc6e8', '#ffd84a', '#ff6b57', '#7fd18a'][i % 4]; c.fillRect(x, y + (row ? 0 : -3), 1, 6);
+          c.fillStyle = Math.sin(t * 12 + i) > 0 ? '#ffd84a' : '#ffb36b'; c.fillRect(x, y + (row ? -2 : -5), 1, 2);
+        }
+        [[W / 2 - 64, '#ff6b57'], [W / 2 + 58, '#7cc6e8'], [W / 2 + 72, '#ffd84a']].forEach(([bx, col], i) => {
+          const by = 24 + Math.sin(t * 1.4 + i) * 4; c.fillStyle = col; c.fillRect(bx - 5, by, 10, 12); c.fillRect(bx - 4, by - 1, 8, 14); c.fillStyle = 'rgba(255,255,255,.5)'; c.fillRect(bx - 3, by + 2, 2, 3);
+          c.fillStyle = '#c9bfe0'; c.fillRect(bx, by + 13, 1, gy - 14 - by - 13);
+        });
+        conf.forEach(p => { p.y += p.v * dt; p.x += Math.sin(t * 2 + p.v) * 0.3; if (p.y > H) { p.y = -4; p.x = Math.random() * W; } c.fillStyle = p.c; c.fillRect(Math.round(p.x), Math.round(p.y), 2, 2); });
       }
-      c.drawImage(drink, W / 2 + 38, H - 34 - drink.height); c.drawImage(drink, W / 2 + 52, H - 34 - drink.height);
-      c.fillStyle = '#ffd84a'; c.fillRect(W / 2 - 58, H - 46, 5, 10); c.fillStyle = '#ff8a3d'; c.fillRect(W / 2 - 48, H - 46, 5, 10);
       const f = falcon('right'), k = crocco('left');
-      c.drawImage(f, W / 2 - 100, H - 34 - f.height); c.drawImage(k, W / 2 + 76, H - 34 - k.height);
-      conf.forEach(p => { p.y += p.v * dt; p.x += Math.sin(t * 2 + p.v) * 0.3; if (p.y > H) { p.y = -4; p.x = Math.random() * W; } c.fillStyle = p.c; c.fillRect(Math.round(p.x), Math.round(p.y), 2, 2); });
+      c.drawImage(f, W / 2 - 100, gy - f.height); c.drawImage(k, W / 2 + 76, gy - k.height);
       requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);
@@ -2476,42 +2536,47 @@ const VG = (() => {
   //  Si compila dal questionario: il resto del codice non va toccato.
   //  Regole: risposte al massimo 40 caratteri, la prima risposta è quella giusta.
   // =====================================================================
+  const T = TXT.t, TL = lines => lines.map(l => [l[0], T(l[1])]);
   const CONTENT = {
-    bar: 'Fallo Carico',       // il locale dove si svolge il quiz
-    barSub: 'Tavolino giallo · tavolo 1',   // sotto il nome del locale, sullo scontrino
-    title: { eyebrow: TXT.t('{A} & {B}'), name: 'Quiz of Us', sub: 'In diretta dal tavolino giallo del Fallo Carico. Quanto conosci Il Crocco?' },
-    introTitle: 'Fallo Carico · venerdì sera',   // la scritta piccola sul cerchio nero dopo la scenetta
+    bar: 'Quiz of Us',       // in testa allo scontrino
+    barSub: 'Studio 1 · In diretta · prima fila',   // sotto, sullo scontrino
+    title: { eyebrow: TXT.t('{A} & {B}'), name: 'Quiz of Us', sub: 'Il quiz dei vostri ricordi.' },
+    introTitle: 'Quiz of Us · in diretta',   // la scritta piccola sul cerchio nero dopo la scenetta
     // la prima partita: la scenetta nel locale. ['scena', 'album'] mette l'Album sul tavolino, ['scena', 'vola'] lo apre e fa volare le cartoline dietro il bancone
-    intro: [
-      ['narr', 'Fallo Carico, il tavolino giallo.'],
-      ['falcon', 'Crocco… dov\'è il mio Album?'],
+    // la prima partita: lo studio. Il conduttore è l'antagonista: ['scena', 'album'] gli mette in mano l'Album, ['scena', 'vola'] lo apre e fa volare le cartoline sul tabellone
+    intro: TL([
+      ['narr', 'Le luci dello studio si accendono di colpo. Qualcuno ha preparato uno show per voi, e non è un amico.'],
+      ['host', 'Buonasera e benvenuti a Quiz of Us! Io sono {boss}, {motto}.'],
+      ['host', '{ingresso} Mi è giunta voce che a qualcuno, qui, io non piaccio.'],
+      ['host', 'Per ricambiare la gentilezza, ho preso una cosa vostra.'],
       ['scena', 'album'],
-      ['crocco', 'Ce l\'ho io. E le 12 cartoline dei nostri viaggettini le ho tolte tutte.'],
+      ['falcon', 'Quello è il nostro Album!'],
+      ['host', 'Era. Le 12 cartoline dei vostri ricordi ora sono il montepremi.'],
       ['scena', 'vola'],
-      ['falcon', 'Le mie cartoline!'],
-      ['crocco', 'Te le ridò, ma devi riconquistarle.'],
-      ['crocco', 'Ogni cartolina ha 2 domande. Indovinale tutte e due e la cartolina torna nell\'Album.'],
-      ['crocco', 'Se ne sbagli una, la riprovi nella partita dopo. Recupera tutte e 12 le cartoline e l\'Album torna completo.'],
-      ['falcon', 'E poi?'],
-      ['crocco', 'E poi vedrai. Siediti, Falconcino mio: si comincia.']
-    ],
+      ['host', 'Volete riaverle? Giocate al mio quiz. Altrimenti i vostri ricordi restano a me.'],
+      ['crocco', 'Ridacci le nostre cartoline!'],
+      ['host', 'Volentieri, se le vincete. Ogni cartolina ha 2 domande: indovinatele tutte e due e torna nell\'Album.'],
+      ['host', 'Ne sbagliate una? Ci riprovate alla prossima puntata. Riprendetevi tutte e 12 le cartoline e lo show è finito.'],
+      ['crocco', 'Vinci, {a}. Alla fine c\'è una sorpresa.'],
+      ['host', 'Non succederà. Pubblico, applauso!']
+    ]),
     // la prima volta che arrivano tre risposte giuste di fila
     streakTip: 'Tre di fila! Da adesso valgono ×1,5. A cinque di fila, ×2.',
     // L'ALBUM: 12 cartoline (4 capitoli: il luogo e 2 ricordi), 2 domande ciascuna. Vengono dall'ordine (ORDINE_ALBUM sotto).
     album: ORDINE_ALBUM,
     // la domanda fuori concorso alla fine del primo quiz: il «no» scappa
     bonus: {
-      q: 'Domanda fuori concorso: il prossimo viaggettino lo prenotiamo insieme?',
-      yes: ['Sì!', 'Sì, subito', 'Valigia già pronta'],
+      q: 'Domanda fuori concorso: il prossimo ricordo lo creiamo insieme?',
+      yes: ['Sì!', 'Sì, subito', 'Ci sto'],
       no: 'No',
       noGivesUp: 'Va bene, sì',
-      after: [['crocco', 'Lo sapevo. Prenoto io, il posto lo scegli tu.'], ['falcon', 'Affare fatto, Crocco.']]
+      after: [['crocco', 'Lo sapevo. Il posto lo scegli tu.'], ['falcon', 'Affare fatto.']]
     },
     // «Chi l'ha detto?»: the two names on the buttons
     who: { falcon: TXT.V.A, crocco: TXT.V.B },
-    // «Metti in ordine»: the trips from the first to the last (postcard keys). Empty = no interlude
+    // «Metti in ordine» (solo il gioco di Sara): the trips from the first to the last (postcard keys). Empty = «Abbina»
     chrono: window.ORDINE.cronologia || [],
-    orderPts: 200,       // punti se l'ordine è tutto giusto
+    orderPts: 200,       // punti se l'intermezzo (Abbina / Metti in ordine) è tutto giusto
     perGame: 12,         // domande per partita (con 24 domande: in 2 partite le hai viste tutte)
     flashCount: 12,      // affermazioni della Sfida lampo (vero o falso)
     flashSecs: 6,
@@ -2520,35 +2585,36 @@ const VG = (() => {
     flashSteady: 10,     // sfida del Grigio: tre Sfide lampo di fila con almeno tante frasi giuste
     playtaleUrl: '',   // il sito di Playtale (dove si ordina): vuoto = la firma non è un link
     // quando arriva la dodicesima cartolina (la partita si chiude e si completa l'Album)
-    albumDone: [['crocco', 'Ci siamo, Falcotto: l\'Album è completo! Il quiz finisce qui.'], ['falcon', 'Tutte e dodici? Fammi vedere!']],
+    albumDone: TL([['host', 'Dodici su dodici… non è possibile. Regia, chiudete il collegamento!'], ['crocco', 'L\'Album è di nuovo completo, {a}!'], ['falcon', 'Tutte e dodici? Fammi vedere!']]),
     // dalla seconda partita: una battuta a caso al posto dell'introduzione completa
     introShort: [
-      [['crocco', 'Bentornata al Fallo Carico, Falcotto. Altre dodici domande?'], ['falcon', 'Prontissima.']],
-      [['crocco', 'Salim ha già preparato il tavolino giallo. Si ricomincia!']],
-      [['crocco', 'Il pubblico è tornato. Vediamo quanto mi conosci stavolta.']],
-      [['crocco', 'Stesso tavolino, stesse luci. Si ricomincia, Falcotto.'], ['falcon', 'Stavolta le prendo tutte.']]
+      [['host', 'Ancora voi? Va bene: altre dodici domande, altre cartoline in palio.']],
+      [['host', 'Si riaccendono le luci. Le cartoline che restano sono ancora mie.'], ['falcon', 'Ancora per poco.']],
+      [['host', 'Puntata nuova, domande nuove. Il pubblico è già in piedi.']],
+      TL([['host', 'Silenzio in studio… si va in onda!'], ['crocco', 'Forza, {a}: si ricomincia.']])
     ],
     flashIntroShort: [
-      [['crocco', 'Sfida lampo! Dita pronte, Falcotto.']],
-      [['crocco', 'Vero o falso, sei secondi a frase. Via col vento!']]
+      [['host', 'Sfida lampo! Dita sul pulsante.']],
+      [['host', 'Vero o falso, sei secondi a frase. Regia, cronometro!']]
     ],
     flashIntro: [
-      ['crocco', 'Sfida lampo! Vero o falso, sei secondi a frase. Niente chiacchiere.'],
-      ['falcon', 'Sei secondi? Crocco, è una trappola.'],
-      ['crocco', 'È marketing, Falcotto. Via!']
+      ['host', 'Sfida lampo! Vero o falso, sei secondi a frase. Niente suggerimenti dal pubblico.'],
+      ['falcon', 'Sei secondi? È una trappola.'],
+      ['host', 'Si chiama televisione. Via!']
     ],
     // Fulmine: risposta giusta entro questi secondi
     boltSecs: 5, boltSecsFlash: 2,
-    BOLT: ['Sei un fulmine!', 'Ma come hai fatto? Sei un fulmine!', 'Fulmine! Non hai nemmeno letto tutto.', 'Velocissima. Sei un fulmine, Falcotto!'],
-    RIGHT: ['Esatto, Falcotto!', 'Risposta giusta! Il pubblico del Fallo Carico è in piedi.', 'Brava! Salim, segnati il punto.', 'Giusto! Lo sapevo che lo sapevi.', 'Sì! Questa vale un salamino.', 'Perfetto. Il fenicottero approva.'],
-    WRONG: ['Falconcino... davvero? Ritenta la prossima volta.', 'Nooo! Il pubblico è sotto shock.', 'Sbagliato! Salim ha rovesciato un cocktail.', 'Ahia. Questa la rifacciamo.', 'Mmh. Ci riproviamo alla prossima.'],
-    TIMEOUT: ['Tempo scaduto! Ti eri distratta col tramonto?', 'Il tempo è finito. La rifacciamo alla prossima.'],
-    // min = quota di risposte giuste (1 = tutte)
+    // le frasi del conduttore dopo ogni risposta (poi, la prima volta che una domanda è indovinata, {b} racconta il ricordo)
+    BOLT: ['Un fulmine!', 'Così veloce? Regia, controllate il pulsante.', 'Fulmine! Non hai nemmeno letto tutto.', 'Velocità sospetta. Un fulmine.'],
+    RIGHT: ['Risposta esatta… purtroppo.', 'Giusto. Il pubblico applaude, io no.', 'Esatto. Regia, segnate il punto.', 'Corretta. Ma la prossima è più difficile.', 'Giusta. Ve l\'hanno suggerita?', 'Esatto! Applauso. Breve, grazie.'],
+    WRONG: ['Sbagliato! Che peccato… per voi.', 'Nooo! Il pubblico è sotto shock. Io no.', 'Risposta errata! Questa cartolina resta a me.', 'Ahia. Ci riproviamo alla prossima puntata.'],
+    TIMEOUT: ['Tempo scaduto! Lo studio costa, sapete?', 'Il tempo è finito. Pubblicità!'],
+    // min = quota di risposte giuste (1 = tutte); il verdetto del conduttore sullo scontrino
     VERDICTS: [
-      { min: 1, stamp: 'Anima gemella', text: 'Tutte giuste. Falcotto, mi conosci meglio di come mi conosco io. Il fenicottero è tuo, per sempre.' },
-      { min: 0.8, stamp: 'Quasi perfetta', text: 'Quasi perfetta! Gli errori te li perdono solo perché sei tu. Brindiamo al tavolino giallo.' },
-      { min: 0.5, stamp: 'Promossa', text: 'Promossa, ma con riserva. Ci serve un altro viaggettino per ripassare. Valigia?' },
-      { min: 0, stamp: 'Da ripassare', text: 'Falconcino... mi sa che dobbiamo partire subito. Ripasso intensivo, destinazione Tenerife.' }
+      { min: 1, stamp: 'Imbattibili', text: 'Tutte giuste. Non capita mai, e non mi piace per niente.' },
+      { min: 0.8, stamp: 'Quasi perfetto', text: 'Quasi perfetto. Peccato: per un attimo ci avevo sperato.' },
+      { min: 0.5, stamp: 'Sufficiente', text: 'Sufficiente, ma con riserva. Qualche cartolina resta a me.' },
+      { min: 0, stamp: 'Da ripassare', text: 'Bocciatura in diretta. Le cartoline stanno benissimo dove sono.' }
     ]
   };
   // ---------------- the album and the questions ----------------
@@ -2600,10 +2666,10 @@ const VG = (() => {
   // ---------------- the Consulente Grigio (as in Memory Lane) and his challenges ----------------
   const ANT = window.ORDINE.antagonista;
   const PEST = { look: ANT.aspetto, name: ANT.nome, title: ANT.motto, of: TXT.withPrep('di', ANT.nome), note: 'Questa la tengo io.',
-    steal: ['Cercate questa? L\'ultima foto dell\'Album ce l\'ho io.', 'Tutto questo amore mi fa venire l\'orticaria. Volete la foto? Superate le mie sfide nella Sfida lampo e forse ve la ridò.'],
+    steal: ['Credevi fosse finita? L\'ultima foto dell\'Album ce l\'ho io.', 'Volete riaverla? Superate le mie sfide nella Sfida lampo. Forse ve la ridò.'],
     defeat: ['Va bene, va bene… avete vinto voi.', 'Tenetevela, la vostra foto. Ma non finisce qui!'] };
   // the missing photo: the two of them together (note: sample text, the real one comes from the order form)
-  const FINAL = { name: 'Noi due', note: 'L\'ultima foto dell\'Album è la mia preferita. La prossima la scattiamo insieme, in un posto nuovo.' };
+  const FINAL = { name: 'Noi due', note: 'Questa mancava. Adesso l\'Album è davvero completo.' };
   // all six are played in the Sfida lampo; save.fx keeps what has been reached
   const FX = () => save.fx || {};
   // all six are about the Sfida lampo (the timed game of true/false statements), never the normal games
@@ -2636,6 +2702,8 @@ const VG = (() => {
   const S = { mode: 'title', run: 0, flash: false, list: [], i: 0, score: 0, right: 0, streak: 0, bestStreak: 0, answers: [], tLeft: 0, tMax: 20, timerOn: false, locked: true, extra: 0 };
   const scene = { t: 0, falconJump: 0, falconShake: 0, croccoJump: 0, croccoTalk: 0, pirati: 0, salim: 0, hearts: [], conf: [], floats: [], spot: 0, flashBulbs: 0 };
 
+  // the host is at his desk from the first game until the Album is complete (then he leaves), and again from his return
+  function hostOn() { return !scene.hideHost && (!save.hostGone || !!save.villainMet); }
   // ---------------- canvas scene: the terrace of the Fallo Carico at night ----------------
   const st = VG.stage(byId('cv'), byId('fx'), { target: 190 });
   const DESK = () => document.documentElement.classList.contains('desk');
@@ -2681,111 +2749,145 @@ const VG = (() => {
   function drawScene(dt) {
     const c = st.ctx, L = layout(); scene.t += dt;
     const t = scene.t;
-    // the whole screen: night
-    R(c, 0, 0, st.VW, st.VH, '#120e24');
+    if (!scene.thumbs) scene.thumbs = ALBUM.map(e => { const cv = el('canvas'); cv.width = 96; cv.height = 64; paintPc(cv, e.i); return cv; });
+    // the whole screen: a TV studio in the dark (the quiz show of the villain, «Chi vuol essere milionario» style)
+    R(c, 0, 0, st.VW, st.VH, '#07071c');
     const { x: ox, w, h } = L;
     const floorY = L.floor != null ? L.floor : Math.round(h * 0.86);
-    // the facade sits close to the terrace: what is above is sky
-    const facadeH = Math.min(S.mode === 'title' && L.land ? 96 : 118, Math.round(h * 0.62));
-    const top = floorY - facadeH;
-    // sky
-    VG.bands(c, st.VW, top + 4, ['#120e24', '#160f2a', '#1b1530', '#211a39', '#2a2145']);
-    VG.stars(c, st.VW, Math.max(10, top - 6), t, 3, 30);
-    // moon, below the top chips
-    const mx = ox + Math.round(w * (S.mode === 'title' ? 0.84 : 0.2)), my = Math.max(30, Math.round(top * 0.45));   // on the cover the moon moves to the right, away from the sign
-    if (top > 26) { R(c, mx - 4, my - 6, 8, 12, '#fff0a8'); R(c, mx - 6, my - 4, 12, 8, '#fff0a8'); R(c, mx - 1, my - 5, 6, 9, '#1b1530'); R(c, mx + 1, my - 3, 5, 5, '#1b1530'); }
-    // the two buildings beside the bar, a little darker
-    R(c, 0, top + 8, st.VW, floorY - top - 8, '#2c2048');
-    for (let y = top + 10; y < floorY; y += 6) for (let x = ((y / 6) % 2) * 6; x < st.VW; x += 12) R(c, x, y, 10, 1, '#271c40');
-    // the bar
-    const cx0 = ox + w / 2, bw = Math.min(w - 8, 190), bx = Math.round(cx0 - bw / 2);
-    R(c, bx, top, bw, floorY - top, BRICK);
-    for (let y = top + 2; y < floorY; y += 6) for (let x = bx + ((y / 6) % 2) * 6; x < bx + bw; x += 12) R(c, x, y, Math.min(10, bx + bw - x), 1, BRICK2);
-    R(c, bx, top, bw, 3, '#4a3d78'); R(c, bx - 2, top - 2, bw + 4, 2, '#1a1024');
-    // on the cover the sign is the neon «Quiz of Us» (HTML), hung on this roof
     const TM = S.mode === 'title';
-    scene.roof = { x: cx0, y: top };
-    if (!TM) {
-    // sign on the roofline
-      const signW = 84, signY = top - 15;
-      R(c, cx0 - signW / 2 - 1, signY - 1, signW + 2, 14, '#1a1024'); R(c, cx0 - signW / 2, signY, signW, 12, '#2a1a2e');
-      R(c, cx0 - signW / 2 + 6, signY + 12, 2, 4, '#1a1024'); R(c, cx0 + signW / 2 - 8, signY + 12, 2, 4, '#1a1024');
-      const neon = Math.sin(t * 13) > -0.85 || Math.sin(t * 2.1) < 0.6;
-      st.text(CONTENT.bar.toUpperCase(), cx0, signY + 6.5, { size: Math.max(10, Math.round(4.6 * st.SCALE)), col: neon ? '#ff6b57' : '#7a3a3a', align: 'center', shadow: neon ? 'rgba(255,107,87,.4)' : false });
+    const cx0 = ox + w / 2;
+    // the back of the studio: deep blue bands, darker at the top
+    VG.bands(c, st.VW, floorY, ['#05051a', '#08082a', '#0b0c36', '#10114a', '#15175a', '#1b1d6a']);
+    // LED panels on the back wall: thin vertical lines that light up one after the other
+    for (let x = 4, k = 0; x < st.VW; x += 10, k++) {
+      const on = (Math.floor(t * 4) + k) % 9 === 0 || scene.flashBulbs > 0;
+      R(c, x, floorY - 70, 1, 52, on ? '#3a5cff' : '#141a5a');
     }
-    // the counter window on the right, Salim behind it
-    const dw = 40, dx = Math.round(bx + bw - dw - 10), dy = top + 22, dh = 30;
-    R(c, dx - 2, dy - 2, dw + 4, dh + 4, '#1a1024'); R(c, dx, dy, dw, dh, '#ffcf8a'); R(c, dx, dy, dw, 4, '#ffe0a8');
-    for (let i = 0; i < 8; i++) R(c, dx + 3 + i * 4.5, dy + 6, 2, 5, ['#7fd18a', '#ffd84a', '#ff6b57', '#7cc6e8'][i % 4]);
-    R(c, dx + 2, dy + 11, dw - 4, 1, '#9c6b3e');
-    const sal = VG.npc('salim', scene.salim > 0 && Math.floor(t * 6) % 2 ? 'down_a' : 'down_stand');
-    c.save(); c.beginPath(); c.rect(dx, dy, dw, dh); c.clip();
-    VG.draw(c, sal, dx + dw / 2, dy + dh + 6 - (scene.salim > 0 ? 3 : 0));
+    // the moving heads on the ceiling: six lights that follow a programme, as in a real studio. Every few seconds they
+    // change figure (mirrored sweep, all together, all on the stage, a fan that breathes), gliding from one to the next;
+    // on the cover they move fully, during a game slower and dimmer, so they never get in the way
+    const FIX = 6, fy = 2, spanH = floorY + 8, slow = TM ? 1 : 0.45;
+    const lx = i => cx0 + (i - (FIX - 1) / 2) * Math.min(32, w / 6.4);
+    const tt = t * slow, PER = 6.5, ph = tt / PER, pi = Math.floor(ph) % 4, pf = ph - Math.floor(ph);
+    const fig = (p, i) => {
+      const x0 = lx(i), side = i < FIX / 2 ? 1 : -1;
+      if (p === 0) return side * Math.sin(tt * 1.1) * 0.42 + (i - 2.5) * 0.04;                 // mirrored sweep
+      if (p === 1) return Math.sin(tt * 0.8 + i * 0.22) * 0.38;                                 // all together, a wave
+      if (p === 2) return Math.atan2(cx0 - x0, spanH) + Math.sin(tt * 2.2 + i) * 0.025;         // all on the stage
+      return (i - (FIX - 1) / 2) * 0.17 * (1 + 0.35 * Math.sin(tt * 1.3));                     // a fan that breathes
+    };
+    const ease = x => x * x * (3 - 2 * x), mix = pf > 0.82 ? ease((pf - 0.82) / 0.18) : 0;
+    const COLS = [['#46b8ff', '#7a6cff'], ['#7a6cff', '#b06cff'], ['#fff4d8', '#ffe8b0'], ['#46b8ff', '#ff6cc8']];
+    const beams = [];
+    for (let i = 0; i < FIX; i++) {
+      const an = fig(pi, i) * (1 - mix) + fig((pi + 1) % 4, i) * mix, x0 = lx(i), x1 = x0 + Math.tan(an) * spanH;
+      const col = COLS[mix > 0.5 ? (pi + 1) % 4 : pi][i % 2];
+      const pulse = 0.75 + 0.25 * Math.sin(tt * 2 + i * 0.9);
+      beams.push({ x0, x1, col, a: (TM ? 0.11 : 0.06) * pulse + (scene.flashBulbs > 0 ? 0.08 : 0) });
+    }
+    c.save();
+    for (const bm of beams) {
+      c.fillStyle = bm.col;
+      for (const [k, wd] of [[0.5, 22], [1, 11]]) {   // a soft edge and a brighter core
+        c.globalAlpha = bm.a * k;
+        c.beginPath(); c.moveTo(bm.x0 - 2, fy); c.lineTo(bm.x0 + 2, fy); c.lineTo(bm.x1 + wd, spanH); c.lineTo(bm.x1 - wd, spanH); c.closePath(); c.fill();
+      }
+    }
     c.restore();
-    R(c, dx - 3, dy + dh - 2, dw + 6, 5, '#6b4a2e'); R(c, dx - 3, dy + dh - 2, dw + 6, 1, '#9c6b3e');
-    if (scene.salim > 0) c.drawImage(VG.item('cocktail'), dx + dw / 2 + 6, dy + dh - 11);
-    // the window on the left, warm light
-    const wx = bx + 12, wy = top + 24;
-    R(c, wx - 1, wy - 1, 26, 24, '#1a1024'); R(c, wx, wy, 24, 22, Math.sin(t * 0.7) > -0.95 ? '#ffb36b' : '#e8925a');
-    R(c, wx + 11, wy, 2, 22, '#1a1024'); R(c, wx, wy + 10, 24, 1, '#1a1024');
-    R(c, wx - 2, wy + 22, 28, 3, '#6b4a2e'); for (let i = 0; i < 4; i++) R(c, wx + 1 + i * 6, wy + 19, 4, 3, i % 2 ? '#d64545' : '#3f9a4a');
-    // chalkboard menu between window and counter
-    const mbx = Math.round(wx + 34), mby = top + 26;
-    if (mbx + 30 < dx - 4) {
-      R(c, mbx - 1, mby - 1, 30, 26, '#6b4a2e'); R(c, mbx, mby, 28, 24, '#1f2a24');
-      st.text('MENU', mbx + 14, mby + 5, { size: Math.max(8, Math.round(2.6 * st.SCALE)), col: '#fff6e0', align: 'center', shadow: false });
-      for (let i = 0; i < 3; i++) { R(c, mbx + 3, mby + 11 + i * 4, 15 - i * 3, 1, '#c9d6e3'); R(c, mbx + 21, mby + 11 + i * 4, 4, 1, '#ffd84a'); }
-      R(c, mbx + 6, mby + 24, 2, 6, '#6b4a2e'); R(c, mbx + 20, mby + 24, 2, 6, '#6b4a2e');
-    }
-    // striped awning over the terrace
-    const aw = bw + 8, ax = bx - 4, ay = top + 6;
-    for (let x = 0; x < aw; x += 8) { R(c, ax + x, ay, 8, 8, (x / 8) % 2 ? '#fff6e0' : '#ff6b57'); }
-    for (let x = 0; x < aw; x += 8) { R(c, ax + x + 1, ay + 8, 6, 2, (x / 8) % 2 ? '#fff6e0' : '#ff6b57'); R(c, ax + x + 2, ay + 10, 4, 1, (x / 8) % 2 ? '#e8e4f0' : '#d9503e'); }
-    R(c, ax, ay - 1, aw, 1, '#1a1024');
-    // string lights under the awning
-    for (let k = 0; k < 2; k++) {
-      const y0 = ay + 14 + k * 3, span = bw - 10;
-      for (let x = 0; x < span; x += 2) { const s = Math.sin((x / span) * Math.PI * 2 + k) * 3; R(c, bx + 5 + x, y0 + Math.abs(s), 1, 1, '#1a1024'); }
-      for (let x = 4 + k * 8; x < span; x += 15) {
-        const s = Math.abs(Math.sin((x / span) * Math.PI * 2 + k) * 3);
-        const on = (Math.floor(t * 3) + x / 15) % 3 > (scene.flashBulbs > 0 ? -1 : 0.6);
-        R(c, bx + 4 + x, y0 + s + 1, 3, 3, on ? ['#ffd84a', '#ff6b57', '#7cc6e8', '#7fd18a'][(x / 15 | 0) % 4] : '#4a3d78');
+    // the lamps up there
+    for (let i = 0; i < FIX; i++) { const x0 = Math.round(lx(i)); R(c, x0 - 4, 0, 8, 3, '#2a2a4a'); R(c, x0 - 2, 3, 4, 2, beams[i].col); }
+    // the audience on the two sides, in the dark: rows of heads behind a lit balustrade
+    const ty0 = floorY - 18;
+    for (let row = 0; row < 3; row++) {
+      const y = ty0 - row * 7;
+      for (let x = (row % 2) * 4 - 2; x < st.VW; x += 8) {
+        if (Math.abs(x + 3 - cx0) < 56) continue;   // nobody behind the board
+        const bob = scene.flashBulbs > 0 && (x + row) % 3 === 0 ? -1 : 0;
+        R(c, x + 1, y - 5 + bob, 4, 1, '#0e0e30'); R(c, x, y - 4 + bob, 6, 4, '#0e0e30'); R(c, x + 1, y + bob, 4, 1, '#0e0e30'); R(c, x - 1, y + 2 + bob, 8, 5, '#0e0e30'); R(c, x + 1, y - 5 + bob, 2, 1, '#22225a');
       }
     }
-    // plants in pots at the corners of the terrace
-    for (const px of [bx + 4, bx + bw - 14]) {
-      R(c, px, floorY - 8, 10, 8, '#c8843a'); R(c, px - 1, floorY - 9, 12, 2, '#e9b872');
-      R(c, px + 1, floorY - 18, 8, 9, '#2f6a3a'); R(c, px + 3, floorY - 22, 4, 5, '#3f9a4a'); R(c, px - 1, floorY - 14, 3, 4, '#3f9a4a'); R(c, px + 8, floorY - 15, 3, 4, '#3f9a4a');
+    R(c, 0, ty0 + 6, st.VW, 3, '#1a1a52'); R(c, 0, ty0 + 6, st.VW, 1, '#46b8ff');
+    // the big board at the back: the twelve postcards of the Album, the ones won light up
+    const bw = 104, bh = TM ? Math.max(40, Math.min(60, floorY - 62 - 52)) : 60, bx = Math.round(cx0 - bw / 2), by = Math.round(floorY - 62 - bh);   // on the cover the neon sign needs room above
+    c.save(); c.globalAlpha = 0.18 + (scene.salim > 0 ? 0.25 : 0); c.fillStyle = '#46b8ff'; c.fillRect(bx - 8, by - 8, bw + 16, bh + 16); c.globalAlpha = 0.1; c.fillRect(bx - 14, by - 14, bw + 28, bh + 28); c.restore();
+    R(c, bx - 3, by - 3, bw + 6, bh + 6, '#c9a24a'); R(c, bx - 2, by - 2, bw + 4, bh + 4, '#7a5a1e'); R(c, bx - 1, by - 1, bw + 2, bh + 2, '#e8c86a');
+    // the bulbs around the frame, chasing each other (all on when something is won)
+    { let k = 0; const bulb = (x, y) => { const on = scene.salim > 0 || (k + Math.floor(t * (TM ? 10 : 5))) % 4 === 0; R(c, x, y, 2, 2, on ? '#fff4c0' : '#8a6a24'); k++; };
+      for (let x = bx - 2; x < bx + bw + 2; x += 5) bulb(x, by - 3);
+      for (let y = by + 2; y < by + bh + 2; y += 5) bulb(bx + bw + 1, y);
+      for (let x = bx + bw - 1; x > bx - 3; x -= 5) bulb(x, by + bh + 1);
+      for (let y = by + bh - 3; y > by - 3; y -= 5) bulb(bx - 3, y); }
+    R(c, bx, by, bw, bh, '#0a1440');
+    for (let y = by + 1; y < by + bh; y += 3) R(c, bx, y, bw, 1, '#0c1848');
+    // its legs, down to the floor
+    R(c, bx + 10, by + bh + 3, 3, floorY - by - bh - 3, '#1a1a40'); R(c, bx + bw - 13, by + bh + 3, 3, floorY - by - bh - 3, '#1a1a40');
+    scene.slots = [];
+    const gy = 3, sh2 = Math.min(13, Math.floor((bh - 15 - 2 * gy) / 3)), sw2 = Math.round(sh2 * 1.5), gx = 4, gw = 4 * sw2 + 3 * gx, sx0 = Math.round(cx0 - gw / 2), sy0 = by + 12;
+    for (let i = 0; i < 12; i++) {
+      const col = i % 4, row = (i / 4) | 0, x = sx0 + col * (sw2 + gx), y = sy0 + row * (sh2 + gy);
+      scene.slots.push({ x: x + sw2 / 2, y: y + sh2 / 2 });
+      const got = !TM && save.cards && save.cards[i] && !(scene.intro && scene.intro.cards.length);
+      R(c, x - 1, y - 1, sw2 + 2, sh2 + 2, got ? '#e8c86a' : '#1c2a6a');
+      if (got && scene.thumbs && scene.thumbs[i]) c.drawImage(scene.thumbs[i], x, y, sw2, sh2);
+      else {
+        // an empty slot: a «?» on a screen that ripples; a wave of light runs across the board (gold on the cover)
+        const wv = Math.sin(t * 2.4 - (col + row * 0.6) * 0.9), on = wv > 0.55;
+        const bg = TM ? (on ? '#2a4ab8' : wv > 0 ? '#16287a' : '#101c52') : (on ? '#16287a' : '#101c52');
+        R(c, x, y, sw2, sh2, bg);
+        const sweep = TM && ((t * 0.9) % 6) * 4 - (col + row) > 0 && ((t * 0.9) % 6) * 4 - (col + row) < 1.6;
+        const qc = sweep ? '#ffe08a' : on ? '#8ab8ff' : '#2a3a8a', qx = Math.round(x + sw2 / 2 - 2), qy = Math.round(y + sh2 / 2 - 4);
+        R(c, qx, qy, 4, 1, qc); R(c, qx + 3, qy + 1, 1, 2, qc); R(c, qx + 1, qy + 3, 2, 1, qc); R(c, qx + 1, qy + 5, 2, 2, qc);   // a «?»
+      }
     }
-    // terrace floor
-    R(c, 0, floorY, st.VW, st.VH - floorY, '#2a2145');
-    for (let y = floorY; y < st.VH; y += 8) for (let x = ((y - floorY) / 8 % 2) * 8; x < st.VW; x += 16) R(c, x, y, 8, 8, '#352a58');
-    R(c, 0, floorY, st.VW, 2, '#4a3d78');
-    // during a game (phone held upright) the terrace ends with a low railing and its lights, then the street:
-    // with a short question that is what shows between the two of them and the card, instead of a sea of floor
+    if (!TM) st.text('QUIZ OF US', cx0, by + 6, { size: Math.max(8, Math.round(2.8 * st.SCALE)), col: '#e8c86a', align: 'center', shadow: false });
+    // on the cover the neon «Quiz of Us» (HTML) hangs on top of the board
+    scene.roof = { x: cx0, y: by - 2 };
+    // the floor: dark, with the round lit stage in the middle (rings and spokes, as in the big quiz shows)
+    R(c, 0, floorY, st.VW, st.VH - floorY, '#06061a');
+    const rx = Math.min(w * 0.49, 100), ry = 15, ey0 = floorY + 9;
+    c.save();
+    const ring = (k, col) => { c.fillStyle = col; c.beginPath(); c.ellipse(cx0, ey0, rx * k, ry * k, 0, 0, 7); c.fill(); };
+    ring(1.04, '#46b8ff'); ring(1, '#120f3a'); ring(0.9, '#2a2080'); ring(0.86, '#191454'); ring(0.6, '#3a2fa8'); ring(0.56, '#231c6a'); ring(0.3, '#5a4ad8'); ring(0.26, '#3a2fa8');
+    c.strokeStyle = 'rgba(122,108,255,.35)'; c.lineWidth = 1;
+    for (let a = 0; a < 16; a++) { const an = a / 16 * Math.PI * 2 + t * 0.15; c.beginPath(); c.moveTo(cx0 + Math.cos(an) * rx * 0.3, ey0 + Math.sin(an) * ry * 0.3); c.lineTo(cx0 + Math.cos(an) * rx * 0.86, ey0 + Math.sin(an) * ry * 0.86); c.stroke(); }
+    // the outer ring of lights, running round
+    for (let a = 0; a < 28; a++) { const an = a / 28 * Math.PI * 2, on = (Math.floor(t * 6) + a) % 4 === 0 || scene.flashBulbs > 0; R(c, cx0 + Math.cos(an) * rx * 1.02 - 1, ey0 + Math.sin(an) * ry * 1.02 - 1, 2, 2, on ? '#ffffff' : '#46b8ff'); }
+    // where the beams touch the floor: pools of light
+    for (const bm of beams) { c.globalAlpha = bm.a * 1.6; c.fillStyle = bm.col; c.beginPath(); c.ellipse(bm.x1, ey0, 16, 4, 0, 0, 7); c.fill(); }
+    c.globalAlpha = 1;
+    c.restore();
+    // during a game (phone held upright) the stage ends with a lit step, then the front rows of the audience in the dark
     if (L.floor != null) {
-      const ry = floorY + 22;
-      R(c, 0, ry + 10, st.VW, st.VH - ry - 10, '#1a1430');                       // the street, below the terrace
-      for (let x = 0; x < st.VW; x += 24) R(c, x, ry + 22, 12, 1, '#2a2145');       // its dashed line
-      R(c, 0, ry + 10, st.VW, 1, '#120e24');
-      for (let x = 2; x < st.VW; x += 9) R(c, x, ry + 1, 2, 9, '#6b5a9a');          // posts
-      R(c, 0, ry, st.VW, 2, '#8a7fb8'); R(c, 0, ry + 2, st.VW, 1, '#4a3d78');       // the rail
-      for (let x = 5, k = 0; x < st.VW; x += 11, k++) {                             // its little lights, blinking slowly
-        const on = (Math.floor(t * 1.5) + k) % 3 !== 0;
-        R(c, x, ry - 2, 2, 2, on ? ['#ffd84a', '#ff8a73', '#7cc6e8'][k % 3] : '#4a3d78');
-      }
+      const sy = floorY + 28;
+      R(c, 0, sy, st.VW, 3, '#1a1a52'); R(c, 0, sy, st.VW, 1, '#46b8ff');
+      R(c, 0, sy + 3, st.VW, st.VH - sy - 3, '#04040f');
+      for (let x = 2; x < st.VW; x += 9) { R(c, x, sy + 10, 7, 7, '#0b0b24'); R(c, x - 1, sy + 17, 9, 8, '#0b0b24'); }
     }
     // spotlight
     if (scene.spot > 0) {
       c.globalAlpha = Math.min(0.28, scene.spot); c.fillStyle = scene.spotCol || '#ffd84a';
       c.beginPath(); c.moveTo(cx0 + 30, 0); c.lineTo(cx0 + 60, floorY + 6); c.lineTo(cx0 + 18, floorY + 6); c.closePath(); c.fill(); c.globalAlpha = 1;
     }
-    // the yellow table with two cocktails
+    // the host: the villain behind his desk in the middle (not on the cover, not before he walks in, not after he leaves)
     const tx = Math.round(cx0), ty = floorY + 2;
-    R(c, tx - 15, ty - 14, 30, 4, '#1a1024'); R(c, tx - 14, ty - 13, 28, 2, '#ffd84a'); R(c, tx - 14, ty - 11, 28, 1, '#d9b21f');
-    R(c, tx - 2, ty - 10, 4, 10, '#d9b21f'); R(c, tx - 7, ty - 1, 14, 2, '#d9b21f');
+    const host = TM || hostOn();
+    scene.hostX = tx; scene.hostTop = floorY - 52;
+    if (host) {
+      const hj = scene.croccoTalk > 0 && Math.floor(t * 8) % 2 ? 1 : 0;
+      // on the cover only his silhouette: who he is stays a surprise
+      if (TM && !scene.shadowHost) { const src = VG.npc(PEST.look, 'down_stand'), cv = el('canvas'); cv.width = src.width; cv.height = src.height; const x2 = cv.getContext('2d'); x2.drawImage(src, 0, 0); x2.globalCompositeOperation = 'source-in'; x2.fillStyle = '#03030c'; x2.fillRect(0, 0, cv.width, cv.height); scene.shadowHost = cv; }
+      const hi = TM ? scene.shadowHost : VG.npc(PEST.look, 'down_stand'), K = 2;
+      c.drawImage(hi, Math.round(tx - hi.width), Math.round(floorY - 4 - hi.height * K - hj), hi.width * K, hi.height * K);
+      // microphone
+      R(c, tx + 9, floorY - 30 - hj, 2, 7, '#5d6270'); R(c, tx + 8, floorY - 34 - hj, 4, 4, '#1a1024'); R(c, tx + 9, floorY - 33 - hj, 2, 2, '#8a8f9c');
+      // the desk: purple panel, gold top, a cyan strip and the «?»
+      const dkw = 30, dkx = tx - 15, dky = floorY - 12;
+      R(c, dkx - 1, dky - 1, dkw + 2, 15, '#05051a'); R(c, dkx, dky, dkw, 14, '#2e2380'); R(c, dkx, dky, dkw, 2, '#e8c86a'); R(c, dkx + 2, dky + 10, dkw - 4, 1, '#46b8ff');
+      R(c, tx - 1, dky + 3, 3, 1, '#e8c86a'); R(c, tx + 1, dky + 4, 1, 2, '#e8c86a'); R(c, tx, dky + 6, 1, 1, '#e8c86a'); R(c, tx, dky + 8, 1, 1, '#e8c86a');
+    }
+    // the targets of the postcards flying away in the intro: their slot on the board
+    const dx = bx, dy = by, dw = bw, dh = bh;
     const IN = scene.intro;
-    c.drawImage(VG.item('cocktail', 1, true), tx - 12, ty - 25); c.drawImage(VG.item('cocktail', 1, true), tx + 2, ty - 25);
     // the intro is a close-up: the camera zooms on the table and the counter (see frame())
     scene.focus = IN ? { x: cx0, y: floorY } : null;
     // the two of them, drawn at 2x
@@ -2815,19 +2917,21 @@ const VG = (() => {
     const lookF = IN && IN.look ? IN.look : 'left', lookK = IN && IN.look ? IN.look : 'right';
     big(VG.falcon(fWalk ? 'left' : lookF, fWalk ? step : scene.falconJump > 0 ? 'a' : 'stand'), fx + fs, floorY + 6 - fj - (fj || fWalk ? 0 : bob));
     big(VG.crocco(kWalk ? 'right' : lookK, kWalk ? step : scene.croccoTalk > 0 && Math.floor(t * 8) % 2 ? 'a' : 'stand'), kx, floorY + 6 - cj);
-    // microphone in Il Crocco's hand (not yet in the intro)
-    if (!IN) {
-      const mx2 = kx + (TM ? 18 : 12), my2 = floorY + 6 - cj - (TM ? 33 : 22);
-      R(c, mx2, my2, 2, 7, '#5d6270'); R(c, mx2 - 1, my2 - 4, 4, 4, '#1a1024'); R(c, mx2, my2 - 3, 2, 2, '#8a8f9c');
+    // the two podiums of the contestants (not in the intro, where they walk in): dark blue, a lit top and a light strip
+    if (!IN) for (const [px, col] of [[fx, '#ffd84a'], [kx, '#7cc6e8']]) {
+      const pw = TM ? 34 : 24, ph = TM ? 18 : 13, pxl = Math.round(px - pw / 2), pyt = floorY + 7 - ph;
+      R(c, pxl - 1, pyt - 1, pw + 2, ph + 2, '#05051a'); R(c, pxl, pyt, pw, ph, '#1a1f6a'); R(c, pxl, pyt, pw, 2, '#e8c86a');
+      R(c, pxl + 2, pyt + ph - 4, pw - 4, 1, col); R(c, pxl + 3, pyt + 4, pw - 6, ph - 9, '#232a80');
     }
     // the intro: the Album, held up between the two of them (as in Memory Lane), closed (1) or open (2)
-    const alx = tx, aly = floorY + 6 - 30 + Math.round(Math.sin(t * 3) * 1.5);
+    const alx = tx, aly = floorY - 22 + Math.round(Math.sin(t * 3) * 1.5);   // in the host's hands, in front of the desk
     if (IN && IN.album === 1) { R(c, alx - 9, aly - 12, 18, 24, '#1a1024'); R(c, alx - 8, aly - 11, 16, 22, '#b8343c'); R(c, alx - 8, aly - 11, 2, 22, '#7e2230'); R(c, alx - 4, aly - 5, 8, 1, '#e7b84a'); R(c, alx - 3, aly - 2, 6, 1, '#e7b84a'); c.drawImage(VG.item('heart'), alx - 3, aly + 2); }
     if (IN && IN.album === 2) { R(c, alx - 19, aly - 12, 38, 24, '#1a1024'); R(c, alx - 18, aly - 11, 17, 22, '#fbefd2'); R(c, alx + 1, aly - 11, 17, 22, '#fbefd2'); R(c, alx - 1, aly - 11, 2, 22, '#c9b89c'); }
     // the intro: the twelve postcards fly out of the Album and end up behind Salim's counter
     if (IN && IN.cards.length) {
-      const sx = alx, sy = aly - 4, ex = dx + dw / 2, ey = dy + dh / 2 + 4;
+      const sx = alx, sy = aly - 4;
       for (const k of IN.cards) {
+        const ex = scene.slots[k.i].x, ey = scene.slots[k.i].y;
         if (k.wait > 0) { k.wait -= dt; continue; }
         if (k.p >= 1) continue;
         k.p = Math.min(1, k.p + dt / 1.15);
@@ -3028,7 +3132,7 @@ const VG = (() => {
       S.goldShown = false; S.bolts = 0; S.double = false; S.dqAsked = false; S.doubleOk = false; S.newCards = [];
       // «Metti in ordine»: once per game (not in the Sfida lampo), halfway, never right before the golden question
       const half = Math.floor(S.list.length / 2);
-      S.orderAt = !flash && (CONTENT.chrono || []).length >= 4 ? (half === S.gold ? half + 1 : half) : -1; S.orderShown = false; S.orderOk = null;
+      S.orderAt = !flash && ((CONTENT.chrono || []).length >= 4 || ALBUM.length >= 12) ? (half === S.gold ? half + 1 : half) : -1; S.orderShown = false; S.orderOk = null;
       saveCur();
     }
     byId('end').hidden = true; byId('quiz').hidden = true; byId('b-exit').hidden = false;
@@ -3069,7 +3173,7 @@ const VG = (() => {
       const box = byId('quiz'); box.hidden = false; box.innerHTML = '';
       const head = resume ? numify(`Domanda ${S.i + 1} di ${S.list.length} · ${S.score} punti`) : S.flash ? 'Sfida lampo' : S.free ? 'Partita libera' : 'Tutto pronto';
       const card = el('div', 'q-card pop ready' + (S.flash ? ' flash' : ''), `<p class="ready-q">${head}</p>`);
-      const go = el('button', 'btn primary wide go-btn', resume ? 'Riprendi' : 'Pronta? Via!'); go.type = 'button';
+      const go = el('button', 'btn primary wide go-btn', resume ? 'Riprendi' : 'Pronti? Via!'); go.type = 'button';
       const t0 = performance.now();
       const fire = () => {
         if (!go.isConnected) { removeEventListener('keydown', key); return; }   // left with «Esci»
@@ -3147,7 +3251,7 @@ const VG = (() => {
     }
     if (S.i === S.orderAt && !S.orderShown) {
       const run = S.run; S.orderShown = true; saveCur();
-      S.orderOk = await orderGame(); saveCur();
+      S.orderOk = await ((CONTENT.chrono || []).length >= 4 ? orderGame() : matchGame()); saveCur();
       if (run !== S.run || S.mode !== 'play') return;
     }
     if (S.i === S.gold && !S.goldShown) {
@@ -3219,7 +3323,69 @@ const VG = (() => {
     });
   }
   // the golden question gets its own entrance: rays, a medal, a ribbon and a fanfare (a tap skips it)
-  // «Metti in ordine»: four trips at random, tapped from the first to the last (the order is in CONTENT.chrono)
+  // «Abbina»: one memory of each chapter and the four places; tap a memory, then the place where it happened
+  // (built from the order by itself: in the Album every chapter is its place and two memories)
+  function matchGame() {
+    return new Promise(res => {
+      const run = S.run;
+      const places = [0, 1, 2, 3].map(c => ALBUM[c * 3]);
+      const mems = shuffle([0, 1, 2, 3].map(c => ({ e: ALBUM[c * 3 + 1 + (Math.random() < 0.5 ? 0 : 1)], want: c })));
+      const box = byId('quiz'); box.hidden = false; box.innerHTML = '';
+      const card = el('div', 'q-card pop order match', `<div class="q-top"><span class="q-eyebrow">Abbina</span><span class="q-score"><span class="q-pts">${S.score}</span> punti</span></div><p class="q-text">Ogni ricordo al suo posto.</p><div class="ord-grid abb-grid"></div><div class="abb-pls"></div><p class="ord-note">Tocca un ricordo, poi il luogo dove è successo.</p>`);
+      const grid = card.querySelector('.abb-grid'), pls = card.querySelector('.abb-pls'), note = card.querySelector('.ord-note');
+      let sel = 0, done = false;
+      const got = mems.map(() => -1);
+      const cells = mems.map((m, i) => {
+        const b = el('button', 'ord abb', `<canvas width="96" height="64" aria-hidden="true"></canvas><span class="abb-txt"><span class="ord-name">${m.e.name}</span><span class="abb-to"></span></span>`);
+        b.type = 'button'; b.dataset.c = m.want; paintPc(b.querySelector('canvas'), m.e.i);
+        b.onclick = () => { if (done || run !== S.run) return; sel = i; Audio.sfx('tap'); paint(); };
+        grid.appendChild(b); return b;
+      });
+      const chips = places.map((p, c) => {
+        const b = el('button', 'abb-pl', p.name.split(' · ')[0]); b.type = 'button'; b.dataset.c = c;
+        b.onclick = () => {
+          if (done || run !== S.run) return;
+          got.forEach((g, i) => { if (g === c) got[i] = -1; });   // a place goes to one memory only
+          got[sel] = c; Audio.sfx('tap');
+          const next = got.findIndex(g => g < 0); if (next >= 0) sel = next;
+          paint();
+          if (got.every(g => g >= 0)) check();
+        };
+        pls.appendChild(b); return b;
+      });
+      const paint = () => {
+        cells.forEach((b, i) => { b.classList.toggle('on', i === sel && !done); b.querySelector('.abb-to').textContent = got[i] >= 0 ? '→ ' + places[got[i]].name.split(' · ')[0] : ''; });
+        chips.forEach((b, c) => b.classList.toggle('used', got.includes(c)));
+      };
+      const check = async () => {
+        done = true; paint(); await wait(350);
+        if (run !== S.run) { res(null); return; }
+        const ok = mems.every((m, i) => got[i] === m.want);
+        cells.forEach((b, i) => {
+          const good = got[i] === mems[i].want; b.classList.add(good ? 'good' : 'bad'); b.disabled = true;
+          if (!good) b.querySelector('.abb-to').textContent = '→ ' + places[mems[i].want].name.split(' · ')[0];   // where it belonged
+        });
+        chips.forEach(b => b.disabled = true);
+        if (ok) {
+          const before = S.score; S.score += CONTENT.orderPts;
+          countFrom(card.querySelector('.q-pts'), before, S.score, 700);
+          Audio.sfx('solve'); scene.falconJump = 1; scene.croccoJump = 0.8; scene.flashBulbs = 1.5;
+          scene.conf.push(...VG.confetti(50, st.VW, st.VH * 0.4));
+          popText('+' + CONTENT.orderPts, { col: '#ffd84a' });
+          note.textContent = 'Tutto giusto!';
+        } else {
+          Audio.sfx('error'); scene.falconShake = 0.5;
+          note.textContent = 'Quasi: ecco dove andavano';
+        }
+        announce(ok ? `Tutto giusto! Più ${CONTENT.orderPts} punti.` : 'Quasi: ecco dove andavano.');
+        await wait(ok ? 1400 : 2600);
+        if (run !== S.run) { res(null); return; }
+        res(ok);
+      };
+      paint(); box.appendChild(card);
+    });
+  }
+  // «Metti in ordine» (only Sara's game): four trips at random, tapped from the first to the last (the order is in CONTENT.chrono)
   function orderGame() {
     return new Promise(res => {
       const run = S.run;
@@ -3333,7 +3499,7 @@ const VG = (() => {
     return new Promise(res => {
       const b = el('div', 'bubble', txt); b.setAttribute('aria-hidden', 'true');
       byId('app').appendChild(b);
-      const x = (scene.croccoX || st.VW * 0.3) * st.SCALE, y = (scene.croccoTop || st.VH * 0.3) * st.SCALE;
+      const H = hostOn() && scene.hostX != null, x = (H ? scene.hostX : scene.croccoX || st.VW * 0.3) * st.SCALE, y = (H ? scene.hostTop : scene.croccoTop || st.VH * 0.3) * st.SCALE;
       const AW = byId('app').clientWidth;
       b.style.maxWidth = Math.min(260, AW - 24) + 'px';
       const w = b.offsetWidth;
@@ -3420,7 +3586,7 @@ const VG = (() => {
     if (ok && !save.seen[q.k]) {
       save.seen[q.k] = true; persist();
       const app = byId('app'); app.classList.add('dlg-top');
-      await VG.say([['crocco', first + ' ' + q.say]]);
+      await VG.say([[hostOn() ? 'host' : 'crocco', first], ['crocco', q.say]]);
       app.classList.remove('dlg-top');
     } else {
       await bubble(first, ok ? 1500 : 2100);
@@ -3434,6 +3600,7 @@ const VG = (() => {
       if (Object.keys(save.cards).length === ALBUM.length) {
         scene.croccoJump = 1.2; scene.falconJump = 1.2;
         await VG.say(CONTENT.albumDone); if (run !== S.run) return;
+        save.hostGone = true; persist(); Audio.sfx('door');   // «chiudete il collegamento»: he leaves the studio
         S.list = S.list.slice(0, S.i + 1); S.i = S.list.length; next(); return;
       }
     }
@@ -3491,7 +3658,7 @@ const VG = (() => {
     row('it', (S.flash ? 'SFIDA LAMPO' : S.free ? 'PARTITA LIBERA' : CONTENT.title.name.toUpperCase()));
     line(S.flash ? 'FRASI GIUSTE' : 'RISPOSTE GIUSTE', `${S.right}/${S.list.length}`);
     if (!S.flash && S.gold >= 0 && S.gold < S.list.length) line('DOMANDA D\'ORO X3', S.goldOk ? 'PRESA' : 'PERSA');
-    if (!S.flash && S.orderShown && S.orderOk != null) line('METTI IN ORDINE', S.orderOk ? '+' + CONTENT.orderPts : 'MANCATO');
+    if (!S.flash && S.orderShown && S.orderOk != null) line((CONTENT.chrono || []).length >= 4 ? 'METTI IN ORDINE' : 'ABBINA', S.orderOk ? '+' + CONTENT.orderPts : 'MANCATO');
     // the lines that make every receipt its own: the fastest right answer, the only wrong one
     const place = q => ALBUM[q.ai].name.split(' · ')[0].toUpperCase();
     const fast = S.answers.map((a, i) => a && a.ok && a.t != null ? { t: a.t, q: S.list[i] } : null).filter(Boolean).sort((x, y) => x.t - y.t)[0];
@@ -3679,6 +3846,7 @@ const VG = (() => {
   }
   // the Consulente Grigio walks on, says his lines in a bubble (a tap for each), and walks off
   async function villainSays(lines, present) {
+    scene.hideHost = true;   // he walks in himself, bigger: not at the desk meanwhile
     const stage = byId('pest'); stage.innerHTML = ''; stage.hidden = false;
     const guy = el('div', 'pest-guy', '<div class="bubble"></div><canvas aria-hidden="true"></canvas>'); stage.appendChild(guy);
     const cv = guy.querySelector('canvas'), bub = guy.querySelector('.bubble'), cx = cv.getContext('2d');
@@ -3696,6 +3864,7 @@ const VG = (() => {
     walking = true; guy.classList.add('out'); stage.classList.remove('dim'); if (Audio.duck) Audio.duck(1);
     await wait(VG.REDUCED ? 50 : 900);
     clearInterval(walkT); stage.hidden = true; stage.innerHTML = '';
+    scene.hideHost = false;
   }
   // the boss presentation band: it stays about 2 s (a tap closes it sooner), then the tag flies away
   function bossCard(stage) {
@@ -3972,7 +4141,7 @@ const VG = (() => {
     scene.conf.push(...VG.confetti(90, st.VW, st.VH));
     abSettle(ov, book, K);
     await wait(VG.REDUCED ? 50 : 1300); if (run !== S.run) return;
-    if (firstTime) { await VG.say([['crocco', 'Album completo, Falcotto! Dodici cartoline, tutte al loro posto.'], ['falcon', 'Lo sfogliamo insieme dall\'inizio?']]); if (run !== S.run) return; }
+    if (firstTime) { await VG.say([['crocco', 'Dodici cartoline, tutte al loro posto.'], ['falcon', 'Lo sfogliamo insieme dall\'inizio?']]); if (run !== S.run) return; }
     const row = ov.querySelector('.ab-btns');
     const b = el('button', 'btn primary letter', 'Sfoglia l\'Album'); b.type = 'button'; b.prepend(el('span', 'seal', '♥')); b.onclick = flipAlbum; row.appendChild(b);
     b.focus({ preventScroll: true });
@@ -4072,7 +4241,7 @@ const VG = (() => {
   // ---------------- PANNELLO TEST: da togliere alla fine (basta mettere TEST_MODE = false) ----------------
   const TEST_MODE = true;
   function testGive(i) { ALBUM[i].qs.forEach((Q, j) => { const k = `a${i}q${j}`; save.answered[k] = true; save.right[k] = true; }); save.cards[i] = true; }
-  function testAll() { ALBUM.forEach(e => testGive(e.i)); delete save.cur; persist(); }
+  function testAll() { ALBUM.forEach(e => testGive(e.i)); delete save.cur; save.hostGone = true; persist(); }
   function openTest() {
     if (byId('test-pnl')) { byId('test-pnl').remove(); return; }
     const showing = S.mode === 'play' && !S.locked && !!document.querySelector('.ans, .tf');
