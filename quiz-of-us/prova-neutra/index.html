@@ -339,18 +339,13 @@ p.pt-line { margin: 0; cursor: default; }
   .ord.bad { opacity: .75; }
   .ord.bad .ord-n { background: var(--paper); }
   .ord:disabled { cursor: default; }
-  /* «Abbina»: four memories (one row each) and the four places as chips below */
-  .abb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .ord.abb { flex-direction: row; justify-content: flex-start; gap: 6px; padding: 5px 6px; text-align: left; }
-  .ord.abb canvas { width: min(48px, calc(11 * var(--vw))); max-width: 48px; flex: none; }
-  .abb-txt { display: flex; flex-direction: column; min-width: 0; }
-  .ord.abb .ord-name { font-size: min(14px, calc(3.4 * var(--vw))); white-space: normal; line-height: 1.1; }
-  .abb-to { font-family: var(--f-display); font-weight: 700; font-size: 13px; color: var(--berry, #c0392b); min-height: 15px; }
-  .ord.abb.good .abb-to { color: var(--leaf); }
-  .abb-pls { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 2px 0 6px; }
-  .abb-pl { min-height: 40px; padding: 6px 12px; border: 3px solid var(--paper-ink); border-radius: 999px; background: var(--paper); color: var(--paper-ink); font-family: var(--f-display); font-weight: 700; font-size: 15px; box-shadow: 0 3px 0 var(--paper-ink); }
-  .abb-pl.used { background: #fff6d0; }
-  .abb-pl:disabled { opacity: .7; }
+  /* the wheel of the show */
+  .wh-wrap { position: relative; width: min(220px, 52vw, calc(30 * var(--vh))); aspect-ratio: 1; margin: 4px auto 6px; }
+  .wh { position: absolute; inset: 0; border-radius: 50%; border: 4px solid var(--paper-ink); box-shadow: 0 0 0 4px #e8c86a, 0 4px 0 6px var(--paper-ink); }
+  .wh-l { position: absolute; font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--paper-ink); text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+  .wh-hub { position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; display: grid; place-items: center; background: #2e2380; color: #e8c86a; border: 3px solid var(--paper-ink); font-family: var(--f-display); font-size: 18px; }
+  .wh-pin { position: absolute; left: 50%; top: -12px; z-index: 2; width: 0; height: 0; margin-left: -11px; border-left: 11px solid transparent; border-right: 11px solid transparent; border-top: 20px solid #ff6b57; filter: drop-shadow(0 2px 0 var(--paper-ink)); }
+  .wheel-card .go-btn { margin-top: 4px; }
   .ord-note { margin: 0; text-align: center; font-family: var(--f-body); font-size: 17px; color: var(--ink-dim); }
   @media (orientation: landscape) and (max-height: 500px) {
     /* low screen: two by two, the postcard small beside the name */
@@ -912,9 +907,9 @@ p.pt-line { margin: 0; cursor: default; }
 </div>
 <script>
 /* ordine: prova-neutra */
-window.ORDINE = {"codice":"prova-neutra","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"Alex","soprannome":"Alex","personaggio":{"disegno":"falcon"}},"b":{"nome":"Sam","soprannome":"Sam","personaggio":{"disegno":"crocco"}}},"capitoli":[{"luogo":{"titolo":"Roma · La Sapienza","frase":"Marketing, le quattro P e una penna a forma di fenicottero. Qui è cominciato tutto.","disegno":"t_sapienza","domande":[{"domanda":"Dove ci siamo conosciuti?","giusta":"A lezione di Marketing alla Sapienza","sbagliate":["In biblioteca","A una festa di amici","In treno"],"battuta":"Prodotto, Prezzo, Posto e Promozione. Le quattro P. Poi ti sei seduta vicino a me e ho perso il filo.","prima":true},{"domanda":"Qual è il primo esame che abbiamo preparato insieme?","giusta":"Strategic Management","sbagliate":["International Marketing","Pietro Vito","Ragioneria"],"battuta":"Strategic Management. Il primo di tanti esami preparati insieme."}]},"ricordi":[{"titolo":"Fallo Carico","frase":"Il tavolino giallo, i prezzi da amici di Salim e un «quattro bianchi e mango» che cura due cuori.","disegno":"t_fallocarico","domande":[{"domanda":"Qual è il cocktail distintivo del Fallo Carico?","giusta":"Il «quattro bianchi e mango»","sbagliate":["Lo spritz","Il Limoncello & Sprite","Il mojito"],"battuta":"Quattro bianchi e mango. Salim dice che cura due cuori. Per me cura i nostri due."},{"domanda":"Quale di questi NON è un soprannome che ti do?","giusta":"Falchetta","sbagliate":["Falconcino","Falcocomero","Falconciuffolo"],"battuta":"Falconcino, Falcocomero, Falconciuffolo, Falcotto. Falchetta mai: troppo normale per te."}]},{"titolo":"Palermo","frase":"Il mercato, il caos, il cibo. Tre pezzi di biglietto e mezzo rotolo di scotch.","disegno":"t_palermo","domande":[{"domanda":"Qual è stato il nostro primo viaggio insieme?","giusta":"Palermo","sbagliate":["Malta","Santorini","Praga"],"battuta":"Palermo: il mercato, il caos, il cibo. E il primo biglietto attaccato insieme."},{"domanda":"Perché a Palermo non ti hanno fatto entrare in una chiesa?","giusta":"Eri vestita troppo scollata","sbagliate":["Le dee come te vanno contro il monoteismo","I Falcocomeri non possono entrare","Tanto per"],"battuta":"Troppo scollata per la chiesa. Per me invece andavi benissimo."}]}]},{"luogo":{"titolo":"Argentario","frase":"Acqua trasparente e scogli. Il Crocco giura di aver visto un polpo. Il polpo smentisce.","disegno":"t_argentario","domande":[{"domanda":"Dove abbiamo mangiato la frittura più buona di sempre?","giusta":"All'Argentario","sbagliate":["In un ristorante stellato","Al kebabaro di Piazza delle Province","A Termini"],"battuta":"All'Argentario. Nessuno stellato ci batte. Nemmeno Piazza delle Province."},{"tipo":"cartolina"}]},"ricordi":[{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","domande":[{"tipo":"vf","domanda":"Di che colore era il quad a Ios?","giusta":"Nero","sbagliate":["Rosso","Giallo","Blu"],"battuta":"Nero come la notte di Ios. Tu davanti a guidare, io dietro a tenermi forte."},{"domanda":"Qual è il posto migliore del mondo per fare una torre di sassi?","giusta":"La tomba di Omero","sbagliate":["La tangenziale","L'aula 9B","Il portabagagli del Pandino"],"battuta":"La tomba di Omero. Un poeta immortale e la nostra torre di sassi: bella coppia."}]},{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi","domande":[{"domanda":"Quali sono le due parole più usate in Grecia?","giusta":"Pita e Mythos","sbagliate":["Kalimera ed efcharistó","Opa e yamas","Ouzo e sirtaki"],"battuta":"Pita e Mythos. Il resto del greco è facoltativo."},{"domanda":"Chi è il nuotatore migliore di Skopelos?","giusta":"Pirati","sbagliate":["Michael Phelps","Federica Pellegrini","Gregorio Paltrinieri"],"battuta":"Pirati. Phelps prende ancora appunti."}]}]},{"luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","domande":[{"domanda":"Quanto era «centralissimo» l'hotel di Berlino?","giusta":"A sei chilometri dal centro","sbagliate":["Il centro era nella hall","Dalla finestra toccavi la Porta di Brandeburgo","Il Muro passava in camera"],"battuta":"Sei chilometri. Centralissimo, se hai le gambe di El Falcon."},{"domanda":"Dove abbiamo passato una notte a Berlino?","giusta":"Al Tresor","sbagliate":["In un karaoke","Sul tetto dell'hotel","In hotel a dormire"],"battuta":"Al Tresor, fino a tardi. Il ritorno in hotel è un'altra domanda."}]},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga","domande":[{"domanda":"Che canzone abbiamo cantato nel punto più alto di Praga?","giusta":"«Damme 'na mano» di Tony Effe","sbagliate":["«Volare» di Domenico Modugno","«Bohemian Rhapsody» dei Queen","«Despacito» di Luis Fonsi"],"battuta":"«Damme 'na mano». Praga ai nostri piedi e noi a squarciagola."},{"domanda":"Cosa si può fare a Praga la sera?","giusta":"Restare a casa a guardare Sanremo","sbagliate":["Una crociera sulla Moldava","Un concerto di musica classica","Un giro nei pub storici"],"battuta":"Praga di sera è bellissima. Ma c'era Sanremo."}]},{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","domande":[{"domanda":"Dove abbiamo festeggiato Capodanno insieme?","giusta":"Sotto il Duomo di Vienna","sbagliate":["A Praga","A Berlino","A Roma"],"battuta":"Sotto il Duomo di Santo Stefano, dopo aver scavalcato le transenne. Come due professionisti."},{"domanda":"Chi dei due pesta i piedi quando balla?","giusta":"Il Crocco","sbagliate":["El Falcon","Tutti e due","Nessuno, siamo perfetti"],"battuta":"Al valzer di Vienna solo due volte. Per i miei standard è un record."}]}]},{"luogo":{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo","domande":[{"domanda":"Quale grande artista è nato a Salisburgo?","giusta":"Mozart","sbagliate":["Sfera Ebbasta","Geolier","Gianni Celeste"],"battuta":"Mozart. Anche se con Gianni Celeste se la giocava."},{"domanda":"Quanti gradi fanno in media a Salisburgo?","giusta":"−12 °C","sbagliate":["18 °C","23 °C","26 °C"],"battuta":"Meno dodici. Ci siamo scaldati a forza di abbracci."}]},"ricordi":[{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo","domande":[{"domanda":"Qual è il quartiere più bello di tutta la Francia?","giusta":"La Petite France","sbagliate":["Gli Champs-Élysées","Il Trocadéro","Montmartre"],"battuta":"La Petite France: canali, case a graticcio e fiori ovunque. Montmartre si metta in fila."},{"tipo":"vf","domanda":"Di che colore è la cattedrale di Strasburgo?","giusta":"Rosa","sbagliate":["Bianca","Grigia","Gialla"],"battuta":"Rosa, come la pietra dei Vosgi."}]},{"titolo":"Tenerife","frase":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","disegno":"t_tenerife","domande":[{"domanda":"Qual è il nostro prossimo viaggettino?","giusta":"Tenerife","sbagliate":["Lisbona","Mykonos","Parigi"],"battuta":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","ultima":true},{"tipo":"vf","domanda":"Di che colore è la sabbia che ci aspetta a Tenerife?","giusta":"Nera","sbagliate":["Bianca","Rosa","Dorata"],"battuta":"Nera, vulcanica. E il Teide che ci guarda da lassù."}]}]}],"antagonista":{"nome":"Il Consulente Grigio","motto":"Nemico giurato delle ferie altrui","ingresso":"Le ferie? Le ho spostate io a data da destinarsi.","aspetto":"grigio"},"lettera":{"testo":"Falconcino, qui è tardino\ne io sono un po' stanchino.\nPerò, quando penso a te,\npassa tutto, e sai perché?\nPerché il tuo visetto scemo\nmi fa correr come un treno,\ncorrer dal mio Falconcino,\nil mio bel batuffolino.","firma":"Sam"}};
-window.VERSIONE = "d9b87e8";
-window.SALVATAGGIO = "qou_prova-neutra_d9b87e8_";
+window.ORDINE = {"codice":"prova-neutra","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"Alex","soprannome":"","personaggio":{"v":2,"skin":"#C98B5A","hairStyle":"quiff","hairColor":"#2B1A12","body":"athletic","height":"normal","top":"stripes","outfit":"#22D3A6","legs":"shorts","pants":"#B08A5A","shoes":"#FFFFFF","facialHair":"beard","brows":"thick","accessories":{"face":"glasses"}}},"b":{"nome":"Sam","soprannome":"Sammy","personaggio":{"v":2,"skin":"#FFE0C7","hairStyle":"ponytail","hairColor":"#C2410C","body":"soft","height":"short","top":"dress","outfit":"#9B6BFF","shoes":"#FF3D7F","freckles":"on","eyeShape":"lashes","mouth":"smile","accessories":{"ears":"earrings"}}}},"capitoli":[{"luogo":{"titolo":"Roma · La Sapienza","frase":"Marketing, le quattro P e una penna a forma di fenicottero. Qui è cominciato tutto.","disegno":"t_sapienza","domande":[{"domanda":"Dove ci siamo conosciuti?","giusta":"A lezione di Marketing alla Sapienza","sbagliate":["In biblioteca","A una festa di amici","In treno"],"battuta":"Prodotto, Prezzo, Posto e Promozione. Le quattro P. Poi ti sei seduta vicino a me e ho perso il filo.","prima":true},{"domanda":"Qual è il primo esame che abbiamo preparato insieme?","giusta":"Strategic Management","sbagliate":["International Marketing","Pietro Vito","Ragioneria"],"battuta":"Strategic Management. Il primo di tanti esami preparati insieme."}]},"ricordi":[{"titolo":"Fallo Carico","frase":"Il tavolino giallo, i prezzi da amici di Salim e un «quattro bianchi e mango» che cura due cuori.","disegno":"t_fallocarico","domande":[{"domanda":"Qual è il cocktail distintivo del Fallo Carico?","giusta":"Il «quattro bianchi e mango»","sbagliate":["Lo spritz","Il Limoncello & Sprite","Il mojito"],"battuta":"Quattro bianchi e mango. Salim dice che cura due cuori. Per me cura i nostri due."},{"domanda":"Quale di questi NON è un soprannome che ti do?","giusta":"Falchetta","sbagliate":["Falconcino","Falcocomero","Falconciuffolo"],"battuta":"Falconcino, Falcocomero, Falconciuffolo, Falcotto. Falchetta mai: troppo normale per te."}]},{"titolo":"Palermo","frase":"Il mercato, il caos, il cibo. Tre pezzi di biglietto e mezzo rotolo di scotch.","disegno":"t_palermo","domande":[{"domanda":"Qual è stato il nostro primo viaggio insieme?","giusta":"Palermo","sbagliate":["Malta","Santorini","Praga"],"battuta":"Palermo: il mercato, il caos, il cibo. E il primo biglietto attaccato insieme."},{"domanda":"Perché a Palermo non ti hanno fatto entrare in una chiesa?","giusta":"Eri vestita troppo scollata","sbagliate":["Le dee come te vanno contro il monoteismo","I Falcocomeri non possono entrare","Tanto per"],"battuta":"Troppo scollata per la chiesa. Per me invece andavi benissimo."}]}]},{"luogo":{"titolo":"Argentario","frase":"Acqua trasparente e scogli. Il Crocco giura di aver visto un polpo. Il polpo smentisce.","disegno":"t_argentario","domande":[{"domanda":"Dove abbiamo mangiato la frittura più buona di sempre?","giusta":"All'Argentario","sbagliate":["In un ristorante stellato","Al kebabaro di Piazza delle Province","A Termini"],"battuta":"All'Argentario. Nessuno stellato ci batte. Nemmeno Piazza delle Province."},{"tipo":"cartolina"}]},"ricordi":[{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","domande":[{"tipo":"vf","domanda":"Di che colore era il quad a Ios?","giusta":"Nero","sbagliate":["Rosso","Giallo","Blu"],"battuta":"Nero come la notte di Ios. Tu davanti a guidare, io dietro a tenermi forte."},{"domanda":"Qual è il posto migliore del mondo per fare una torre di sassi?","giusta":"La tomba di Omero","sbagliate":["La tangenziale","L'aula 9B","Il portabagagli del Pandino"],"battuta":"La tomba di Omero. Un poeta immortale e la nostra torre di sassi: bella coppia."}]},{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi","domande":[{"domanda":"Quali sono le due parole più usate in Grecia?","giusta":"Pita e Mythos","sbagliate":["Kalimera ed efcharistó","Opa e yamas","Ouzo e sirtaki"],"battuta":"Pita e Mythos. Il resto del greco è facoltativo."},{"domanda":"Chi è il nuotatore migliore di Skopelos?","giusta":"Pirati","sbagliate":["Michael Phelps","Federica Pellegrini","Gregorio Paltrinieri"],"battuta":"Pirati. Phelps prende ancora appunti."}]}]},{"luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","domande":[{"domanda":"Quanto era «centralissimo» l'hotel di Berlino?","giusta":"A sei chilometri dal centro","sbagliate":["Il centro era nella hall","Dalla finestra toccavi la Porta di Brandeburgo","Il Muro passava in camera"],"battuta":"Sei chilometri. Centralissimo, se hai le gambe di El Falcon."},{"domanda":"Dove abbiamo passato una notte a Berlino?","giusta":"Al Tresor","sbagliate":["In un karaoke","Sul tetto dell'hotel","In hotel a dormire"],"battuta":"Al Tresor, fino a tardi. Il ritorno in hotel è un'altra domanda."}]},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga","domande":[{"domanda":"Che canzone abbiamo cantato nel punto più alto di Praga?","giusta":"«Damme 'na mano» di Tony Effe","sbagliate":["«Volare» di Domenico Modugno","«Bohemian Rhapsody» dei Queen","«Despacito» di Luis Fonsi"],"battuta":"«Damme 'na mano». Praga ai nostri piedi e noi a squarciagola."},{"domanda":"Cosa si può fare a Praga la sera?","giusta":"Restare a casa a guardare Sanremo","sbagliate":["Una crociera sulla Moldava","Un concerto di musica classica","Un giro nei pub storici"],"battuta":"Praga di sera è bellissima. Ma c'era Sanremo."}]},{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","domande":[{"domanda":"Dove abbiamo festeggiato Capodanno insieme?","giusta":"Sotto il Duomo di Vienna","sbagliate":["A Praga","A Berlino","A Roma"],"battuta":"Sotto il Duomo di Santo Stefano, dopo aver scavalcato le transenne. Come due professionisti."},{"domanda":"Chi dei due pesta i piedi quando balla?","giusta":"Il Crocco","sbagliate":["El Falcon","Tutti e due","Nessuno, siamo perfetti"],"battuta":"Al valzer di Vienna solo due volte. Per i miei standard è un record."}]}]},{"luogo":{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo","domande":[{"domanda":"Quale grande artista è nato a Salisburgo?","giusta":"Mozart","sbagliate":["Sfera Ebbasta","Geolier","Gianni Celeste"],"battuta":"Mozart. Anche se con Gianni Celeste se la giocava."},{"domanda":"Quanti gradi fanno in media a Salisburgo?","giusta":"−12 °C","sbagliate":["18 °C","23 °C","26 °C"],"battuta":"Meno dodici. Ci siamo scaldati a forza di abbracci."}]},"ricordi":[{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo","domande":[{"domanda":"Qual è il quartiere più bello di tutta la Francia?","giusta":"La Petite France","sbagliate":["Gli Champs-Élysées","Il Trocadéro","Montmartre"],"battuta":"La Petite France: canali, case a graticcio e fiori ovunque. Montmartre si metta in fila."},{"tipo":"vf","domanda":"Di che colore è la cattedrale di Strasburgo?","giusta":"Rosa","sbagliate":["Bianca","Grigia","Gialla"],"battuta":"Rosa, come la pietra dei Vosgi."}]},{"titolo":"Tenerife","frase":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","disegno":"t_tenerife","domande":[{"domanda":"Qual è il nostro prossimo viaggettino?","giusta":"Tenerife","sbagliate":["Lisbona","Mykonos","Parigi"],"battuta":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","ultima":true},{"tipo":"vf","domanda":"Di che colore è la sabbia che ci aspetta a Tenerife?","giusta":"Nera","sbagliate":["Bianca","Rosa","Dorata"],"battuta":"Nera, vulcanica. E il Teide che ci guarda da lassù."}]}]}],"antagonista":{"nome":"Il Conte Posponi","presentazione":"Puntuale come il traghetto d'agosto","ingresso":"Arrivo tra cinque minuti… facciamo dieci.","aspetto":"conte"},"lettera":{"testo":"Falconcino, qui è tardino\ne io sono un po' stanchino.\nPerò, quando penso a te,\npassa tutto, e sai perché?\nPerché il tuo visetto scemo\nmi fa correr come un treno,\ncorrer dal mio Falconcino,\nil mio bel batuffolino.","firma":"Sam"}};
+window.VERSIONE = "7be2ea6";
+window.SALVATAGGIO = "qou_prova-neutra_7be2ea6_";
 </script>
 <script>
 /* motore/testi.js */
@@ -929,7 +924,7 @@ window.SALVATAGGIO = "qou_prova-neutra_d9b87e8_";
      {a} {b}        soprannome (o il nome, se non c'è)
      {dest}         a chi è dedicata la lettera: «{a}» oppure «{a} e {b}» (regalo per tutti e due)
      {boss}         il nome dell'antagonista, con il suo articolo se ce l'ha («Il Consulente Grigio»)
-     {motto}        il suo motto con l'iniziale minuscola, senza punto finale; {ingresso} la sua battuta su misura
+     {motto}        la sua presentazione (il motto del nastro) con l'iniziale minuscola, senza punto finale; {ingresso} la sua battuta su misura
      {di boss} {a boss} {da boss} {su boss} {con boss}   preposizione + articolo giusti («del Consulente Grigio»)
      Con l'iniziale maiuscola ({Boss}) la prima lettera diventa maiuscola. */
 'use strict';
@@ -968,7 +963,7 @@ const TXT = (() => {
   const low = s => s ? s.charAt(0).toLowerCase() + s.slice(1) : s;
   const V = { A: P.a.nome, B: P.b.nome, a: sop(P.a), b: sop(P.b), dest: entrambi ? sop(P.a) + ' e ' + sop(P.b) : sop(P.a), boss: ant.nome || '',
     // the villain's motto after his name («Io sono Il Consulente Grigio, nemico giurato delle ferie altrui.») and his line made to measure
-    motto: low((ant.motto || '').trim().replace(/[.!]+$/, '')), ingresso: (ant.ingresso || '').trim() };
+    motto: low((ant.presentazione || '').trim().replace(/[.!]+$/, '')), ingresso: (ant.ingresso || '').trim() };
   function t(s) {
     if (typeof s !== 'string') return s;
     return s
@@ -1008,6 +1003,914 @@ const TXT = (() => {
   set();
   (q.addEventListener ? q.addEventListener.bind(q, 'change') : q.addListener.bind(q))(() => { set(); dispatchEvent(new Event('resize')); });
 })();
+</script>
+<script>
+/* motore/avatar.js */
+/*
+ * Copiato dal sito Playtale (repository playtale, assets/js/avatar.js, commit 7c84ced): non modificarlo qui, modificalo sul sito e ricopialo.
+ * Playtale — the character drawer (PTAvatar, format v2).
+ * A self-contained module: it needs nothing from the rest of the site, only a canvas. The same file is copied
+ * into the games, so the saved format of a character stays stable (see «Formato del personaggio (v2)» in the README).
+ *
+ *   PTAvatar.VERSION            2
+ *   PTAvatar.OPTIONS            every option: ids, Italian names, colour palettes, starting points (presets)
+ *   PTAvatar.normalize(ch)      a complete v2 character: missing fields get the defaults, older saves (v1, no version) are converted
+ *   PTAvatar.validate(ch)       the list of unknown or missing values ([] when the character is valid v2)
+ *   PTAvatar.sprite(ch, opts)   a canvas of 16×24 pixels (the 14×22 grid plus a 1 px outline);
+ *                               opts: { view: 'front' | 'side' | 'back', mood, frame: 'stand' | 'a' | 'b' | 'air', armsUp }
+ *                               the side view looks right (mirror it for left); mood and armsUp only change the front view
+ *                               Side view only, for the running games (not shown in the site): frame 'up' (taking off),
+ *                               'down' (coming down), 'land' (knees bent, one row lower), 'hurt' (hit: legs everywhere,
+ *                               head thrown back), 'sit' (sitting: thighs forward, shins down; the seat is 4 rows above
+ *                               the floor, 3 for short legs) and 'slide' (sitting back, legs out along the floor: a wider
+ *                               canvas, 24×15). Added 24 nov 2026 for Run to You.
+ *
+ * Works in the browser (window.PTAvatar) and in Node (require), where everything but sprite() is available.
+ */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.PTAvatar = api;
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const VERSION = 2;
+
+  /* ---------------- options: defined only here ---------------- */
+  const OPTIONS = {
+    skin: ['#FFE0C7', '#F6C9A2', '#E8AE7E', '#C98B5A', '#9A6440', '#6B4128'],
+    eyes: ['#24124A', '#6B3E1F', '#2F6FC0', '#2E8B57'],
+    eyeShape: [
+      { id: 'dots', name: 'Puntini' },
+      { id: 'lashes', name: 'Con ciglia' },
+      { id: 'smile', name: 'Sorridenti' }
+    ],
+    mouth: [
+      { id: 'closed', name: 'Chiusa' },
+      { id: 'smile', name: 'Sorriso' },
+      { id: 'teeth', name: 'Con i denti' },
+      { id: 'tongue', name: 'Linguaccia' }
+    ],
+    brows: [
+      { id: 'thin', name: 'Sottili' },
+      { id: 'thick', name: 'Folte' },
+      { id: 'none', name: 'Nessuna' }
+    ],
+    blush: [
+      { id: 'on', name: 'Sì' },
+      { id: 'off', name: 'No' }
+    ],
+    freckles: [
+      { id: 'off', name: 'No' },
+      { id: 'on', name: 'Sì' }
+    ],
+    hairStyle: [
+      { id: 'short', name: 'Corti' },
+      { id: 'side', name: 'Riga laterale' },
+      { id: 'middle', name: 'Riga in mezzo' },
+      { id: 'quiff', name: 'Ciuffo' },
+      { id: 'undercut', name: 'Undercut' },
+      { id: 'buzz', name: 'Rasati' },
+      { id: 'curly', name: 'Ricci' },
+      { id: 'afro', name: 'Afro' },
+      { id: 'bob', name: 'Caschetto' },
+      { id: 'long', name: 'Lunghi' },
+      { id: 'ponytail', name: 'Coda' },
+      { id: 'bun', name: 'Chignon' },
+      { id: 'bald', name: 'Pelato' }
+    ],
+    hairColor: ['#2B1A12', '#5A3520', '#A0652F', '#F2C94C', '#F3E9D2', '#C2410C', '#9CA3AF', '#FF3D7F', '#4D7CFE'],
+    facialHair: [
+      { id: 'none', name: 'Niente' },
+      { id: 'stubble', name: 'Barba corta' },
+      { id: 'beard', name: 'Barba' },
+      { id: 'mustache', name: 'Baffi' },
+      { id: 'goatee', name: 'Pizzetto' }
+    ],
+    /* the shape only: width, shoulders, belly. The height is the "height" field */
+    body: [
+      { id: 'soft', name: 'Morbida' },
+      { id: 'athletic', name: 'Spalle larghe' },
+      { id: 'round', name: 'Robusta' }
+    ],
+    height: [
+      { id: 'normal', name: 'Normale' },
+      { id: 'short', name: 'Bassa' },
+      { id: 'kid', name: 'Bambino' }
+    ],
+    top: [
+      { id: 'heart', name: 'Con cuore' },
+      { id: 'plain', name: 'Tinta unita' },
+      { id: 'stripes', name: 'A righe' },
+      { id: 'collar', name: 'Camicia' },
+      { id: 'plaid', name: 'A quadri' },
+      { id: 'sweater', name: 'Maglione' },
+      { id: 'hoodie', name: 'Felpa' },
+      { id: 'jacket', name: 'Giacca' },
+      { id: 'tank', name: 'Canottiera' },
+      { id: 'overalls', name: 'Salopette' },
+      { id: 'dress', name: 'Vestito' }
+    ],
+    outfit: ['#FF3D7F', '#4D7CFE', '#22D3A6', '#FFD23F', '#9B6BFF', '#24124A', '#FF7A59', '#FFFFFF', '#1F5C3A', '#6B4128', '#8E929E', '#26222E'],
+    legs: [
+      { id: 'pants', name: 'Pantaloni' },
+      { id: 'shorts', name: 'Pantaloncini' },
+      { id: 'skirt', name: 'Gonna' }
+    ],
+    pants: ['#3A3F55', '#2F5FB8', '#24124A', '#B08A5A', '#2E8B57', '#FFFFFF', '#1F5C3A', '#6B4128', '#8E929E', '#26222E'],
+    shoes: ['#24124A', '#FFFFFF', '#C2410C', '#FF3D7F', '#3A2A2A', '#8B5A2B', '#D9C29A', '#6B6F7A', '#C0392B', '#2F5FB8', '#2E7A38', '#F2C94C'], // the last 8 added on 22 November
+    /* frame of the glasses, lenses of the sunglasses */
+    glassesColor: ['#2A1A2E', '#8A5428', '#D64545', '#3D7BD9', '#C99A2E'],
+    /* one accessory per zone, «Nessuno» in every zone */
+    accessories: {
+      head: [
+        { id: 'none', name: 'Nessuno' },
+        { id: 'cap', name: 'Cappellino' },
+        { id: 'beanie', name: 'Berretto' },
+        { id: 'strawhat', name: 'Cappello di paglia' },
+        { id: 'bandana', name: 'Bandana' },
+        { id: 'veil', name: 'Velo' },
+        { id: 'crown', name: 'Corona' },
+        { id: 'bow', name: 'Fiocco' },
+        { id: 'flower', name: 'Fiore' },
+        { id: 'headphones', name: 'Cuffie' }
+      ],
+      face: [
+        { id: 'none', name: 'Nessuno' },
+        { id: 'glasses', name: 'Occhiali' },
+        { id: 'roundglasses', name: 'Occhiali tondi' },
+        { id: 'sunglasses', name: 'Occhiali da sole' }
+      ],
+      ears: [
+        { id: 'none', name: 'Nessuno' },
+        { id: 'earrings', name: 'Orecchini' }
+      ],
+      neck: [
+        { id: 'none', name: 'Nessuno' },
+        { id: 'necklace', name: 'Collana' },
+        { id: 'scarf', name: 'Sciarpa' },
+        { id: 'tie', name: 'Cravatta' }
+      ]
+    },
+    /* Quick starting points for the editor: they set shape, height, face, hair and legs; name, skin and colours stay. */
+    presets: [
+      { id: 'ragazzo', name: 'Ragazzo', set: { body: 'athletic', height: 'normal', brows: 'none', blush: 'off', hairStyle: 'side', facialHair: 'none', top: 'plain', legs: 'pants', hairColor: '#2B1A12' } },
+      { id: 'ragazza', name: 'Ragazza', set: { body: 'soft', height: 'normal', brows: 'none', blush: 'off', hairStyle: 'long', facialHair: 'none', top: 'heart', legs: 'pants', hairColor: '#5A3520' } },
+      { id: 'anziano', name: 'Anziano', set: { body: 'round', height: 'normal', brows: 'thick', blush: 'off', hairStyle: 'bald', hairColor: '#9CA3AF', facialHair: 'mustache', top: 'collar', legs: 'pants' } },
+      { id: 'anziana', name: 'Anziana', set: { body: 'soft', height: 'normal', brows: 'none', blush: 'off', hairStyle: 'bun', hairColor: '#9CA3AF', facialHair: 'none', top: 'plain', legs: 'pants' } },
+      { id: 'bambino', name: 'Bambino', set: { body: 'soft', height: 'kid', brows: 'none', blush: 'off', hairStyle: 'short', facialHair: 'none', top: 'stripes', legs: 'pants', hairColor: '#A0652F' } },
+      { id: 'bambina', name: 'Bambina', set: { body: 'soft', height: 'kid', brows: 'none', blush: 'off', hairStyle: 'ponytail', facialHair: 'none', top: 'dress', legs: 'pants', hairColor: '#F2C94C' } }
+    ]
+  };
+  const ZONES = ['head', 'face', 'ears', 'neck'];
+  const ID_FIELDS = ['eyeShape', 'mouth', 'brows', 'blush', 'freckles', 'hairStyle', 'facialHair', 'body', 'height', 'top', 'legs'];
+  const COLOR_FIELDS = ['skin', 'eyes', 'hairColor', 'outfit', 'pants', 'shoes', 'glassesColor'];
+  const FIELDS = ['v', 'name', 'skin', 'eyes', 'eyeShape', 'mouth', 'brows', 'blush', 'freckles', 'hairStyle', 'hairColor', 'facialHair', 'body', 'height', 'top', 'outfit', 'legs', 'pants', 'shoes', 'accessories', 'glassesColor'];
+  /* what a missing field becomes (the colours are the ones the drawer has always used when nothing was chosen) */
+  const DEFAULTS = {
+    v: VERSION, name: '', skin: '#F6C9A2', eyes: '#2A1A2E', eyeShape: 'dots', mouth: 'closed', brows: 'none', blush: 'off', freckles: 'off',
+    hairStyle: 'short', hairColor: '#2B1A12', facialHair: 'none', body: 'soft', height: 'normal', top: 'heart',
+    outfit: '#FF3D7F', legs: 'pants', pants: '#343A52', shoes: '#3A2A2A',
+    accessories: { head: 'none', face: 'none', ears: 'none', neck: 'none' }, glassesColor: '#2A1A2E'
+  };
+  const ZONE_OF = {};
+  ZONES.forEach(z => OPTIONS.accessories[z].forEach(o => { if (o.id !== 'none') ZONE_OF[o.id] = z; }));
+
+  const isHex = v => typeof v === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v.trim());
+  const hexOf = v => { let h = v.trim().slice(1).toUpperCase(); if (h.length === 3) h = h.split('').map(c => c + c).join(''); return '#' + h; };
+  const known = (field, v) => OPTIONS[field].some(o => o.id === v);
+  const knownAcc = (zone, v) => OPTIONS.accessories[zone].some(o => o.id === v);
+
+  /** Older saves: one "accessory" (a beard was once an accessory too) goes in its zone; body "kid" (v1) is now
+   * height "kid" with body "soft". Fills nothing else, so a partial look still draws with the drawer's fallbacks. */
+  function upgrade(ch) {
+    const c = Object.assign({}, ch || {});
+    const acc = Object.assign({}, c.accessories && typeof c.accessories === 'object' ? c.accessories : {});
+    if ('accessory' in c) {
+      const old = c.accessory;
+      if (old === 'beard') { if (!c.facialHair || c.facialHair === 'none') c.facialHair = 'beard'; }
+      else if (ZONE_OF[old] && !acc[ZONE_OF[old]]) acc[ZONE_OF[old]] = old;
+      delete c.accessory;
+    }
+    if (c.body === 'kid') { c.body = 'soft'; c.height = 'kid'; }
+    if (c.hairStyle === 'verylong') c.hairStyle = 'long'; // «Lunghissimi» was removed: it was almost the same as «Lunghi»
+    c.accessories = acc;
+    return c;
+  }
+
+  function normalize(ch) {
+    const c = upgrade(ch);
+    const out = { v: VERSION, name: typeof c.name === 'string' ? c.name.trim() : '' };
+    FIELDS.slice(2).forEach(f => {
+      if (f === 'accessories') {
+        out.accessories = {};
+        ZONES.forEach(z => { out.accessories[z] = knownAcc(z, c.accessories[z]) ? c.accessories[z] : 'none'; });
+      } else if (COLOR_FIELDS.includes(f)) out[f] = isHex(c[f]) ? hexOf(c[f]) : DEFAULTS[f];
+      else out[f] = known(f, c[f]) ? c[f] : DEFAULTS[f];
+    });
+    if (out.blush === 'on' && out.freckles === 'on') out.freckles = 'off'; // one detail at a time: rosy cheeks or freckles
+    return out;
+  }
+
+  function validate(ch) {
+    const bad = [];
+    if (!ch || typeof ch !== 'object') return ['personaggio: non è un oggetto'];
+    const show = v => (v === undefined ? '(mancante)' : JSON.stringify(v));
+    if (ch.v !== VERSION) bad.push('v: ' + show(ch.v));
+    if (typeof ch.name !== 'string') bad.push('name: ' + show(ch.name));
+    COLOR_FIELDS.forEach(f => { if (!isHex(ch[f])) bad.push(f + ': ' + show(ch[f])); });
+    ID_FIELDS.forEach(f => { if (!known(f, ch[f])) bad.push(f + ': ' + show(ch[f])); });
+    const acc = ch.accessories;
+    if (!acc || typeof acc !== 'object') bad.push('accessories: ' + show(acc));
+    else {
+      ZONES.forEach(z => { if (!knownAcc(z, acc[z])) bad.push('accessories.' + z + ': ' + show(acc[z])); });
+      Object.keys(acc).forEach(z => { if (!ZONES.includes(z)) bad.push('accessories.' + z + ': zona sconosciuta'); });
+    }
+    Object.keys(ch).forEach(f => { if (!FIELDS.includes(f)) bad.push(f + ': campo sconosciuto'); });
+    return bad;
+  }
+
+  /* ---------------- the drawer ----------------
+   * Drawn like El Falcon and Il Crocco in Operazione Viaggettino: a 14×22 grid, a big head with El Falcon's
+   * proportions (9 rows: hair, forehead, eyes, a small mouth, a round chin), a neck row, flat colours with one
+   * highlight or shade, a flat dark outline. "short" + "curly" is El Falcon; "athletic" + "hoodie" + "stubble" Il Crocco.
+   * The height decides how tall: 22 rows (normal), 20 (short), 17 (kid), whatever the shape; everyone stands on
+   * the same floor line, so shorter characters get empty rows on top. */
+  const SW = 14, SH = 22, OUTLINE = '#1a1024'; // 9 rows of head, 1 of neck, the body (up to 12 rows)
+  const hex = h => { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+  const mix = (a, b, t) => { const p = hex(a), q = hex(b); return '#' + p.map((v, i) => Math.round(v + (q[i] - v) * t).toString(16).padStart(2, '0')).join(''); };
+  const dark = (c, t) => mix(c, '#140c1c', t);
+  const lum = c => { const [r, g, b] = hex(c); return (0.299 * r + 0.587 * g + 0.114 * b) / 255; };
+  // Il Crocco's dark hair and El Falcon's blonde keep their exact highlight and shade from the game
+  const EXACT = { '#f2c94c': { H: '#fff0a8', o: '#c99a2e' }, '#2b2020': { H: '#55403a', o: '#1e1616' } };
+  const EXACT_SHADE = { '#f1c7a1': '#d9a07c', '#d64545': '#9e2f3a', '#3d7bd9': '#2a55a0' }; // skin and the two jackets
+  const C = { mouth: '#e0707a', mouthD: '#9e2f3a', blush: '#f2a3b0', white: '#ffffff', gold: '#f2c94c', goldD: '#c99a2e', red: '#d64545', blue: '#2f5fb8', pink: '#ff6b8a', pinkD: '#c2185b', ink: '#2a1a2e', shades: '#1f1f28', straw: '#e8c16b', strawD: '#c99a2e', veil: '#f3f0ff', veilD: '#c9c2d8' };
+
+  /* heads, rows 0-8: h hair, H highlight, o hair shade, b shaved hair, s skin, L skin light. Eyes and mouth go on top.
+   * back: hair behind the shoulders for that many rows; tail: a ponytail at the side. */
+  // the proportions of El Falcon (Operazione Viaggettino): hair down to row 3, the forehead on row 4, the eyes on row 5,
+  // the mouth on row 7, no neck (the body starts right under the chin). The face is round: three wide rows, then the
+  // chin one pixel in on each side (El Falcon's curls cover her cheeks, so hers can be narrower)
+  // the neck row under the head: long hair and El Falcon's curls fall beside it
+  const NECK_HAIR = { curly: { front: [1, 2, 3, 10, 11, 12], side: [1, 2, 3, 4, 5, 6], back: true }, long: { front: [1, 2, 3, 10, 11, 12], side: [1, 2, 3, 4, 5, 6], back: true } };
+  // from the side, the hair at the nape over the back of the neck (short cuts, the bob); bald heads have none
+  const NAPE = { bob: [5, 6], bald: [] };
+  const neckRow = (st, view, pal) => {
+    const row = Array(SW).fill(null), nh = NECK_HAIR[st];
+    if (view === 'back') { if (nh) for (let x = 1; x <= 12; x++) row[x] = x === 1 || x === 12 ? pal.o : pal.h; else for (let x = 4; x <= 9; x++) row[x] = st === 'bob' ? pal.o : pal.s; return row; }
+    const skin = view === 'side' ? [5, 6, 7, 8, 9, 10] : [4, 5, 6, 7, 8, 9]; // from the side it ends under the chin
+    skin.forEach(x => { row[x] = pal.s; });
+    if (nh) nh[view].forEach(x => { row[x] = x === nh[view][0] ? pal.o : pal.h; });
+    else if (view === 'side') (NAPE[st] || [5]).forEach(x => { row[x] = st === 'undercut' ? pal.b : pal.o; });
+    return row;
+  };
+  // the skirt starts at the waist: it covers the last two rows of a long body, the last one of a shorter one
+  const skirtUp = nT => (nT >= 7 ? 2 : 1);
+  const FACE = ['..ssssssssss..', '..ssssssssss..', '..ssssssssss..', '...ssssssss...'];
+  const HEADS = {
+    short: { e: 5, mouth: [7], rows: ['....hhhhhh....', '...hhHhhhhh...', '..hhhhhhhhhh..', '..hhhhhhhhhh..', '..hssssssssh..', ...FACE] },
+    side: { e: 5, mouth: [7], rows: ['....hhhhhh....', '...hhhhhHhh...', '..hhhhhhhhhh..', '..hhhhhhhhhh..', '..hhhhhssssh..', ...FACE] },
+    middle: { e: 5, mouth: [7], rows: ['....hhhhhh....', '...hHhoohHh...', '..hhhhoohhhh..', '..hhhhsshhhh..', '..hhsssssshh..', ...FACE] },
+    quiff: { e: 5, mouth: [7], rows: ['...hhhhhhh....', '..hhHHhhhhh...', '..hhhhhhhhhh..', '..hhhhhhhhhh..', '..hssssssssh..', ...FACE] },
+    undercut: { e: 5, mouth: [7], rows: ['...hhhhhhhh...', '..hhHHhhhhhh..', '..hhhhhhhhhh..', '..bbhhhhhhbb..', '..bssssssssb..', ...FACE] },
+    buzz: { e: 5, mouth: [7], buzz: true, rows: ['....hhhhhh....', '...hhhhhhhh...', '..hhhhhhhhhh..', '..hhhhhhhhhh..', '..ssssssssss..', ...FACE] },
+    curly: { e: 5, mouth: [7], shoulders: [[1, 'o'], [2, 'h'], [11, 'h'], [12, 'o']], rows: [ // El Falcon
+      '....ohhhho....', '..ohhHhhhhho..', '.ohHhhhhhhHho.', 'ohhhhhhhhhhhho', 'ohhhssssssshho',
+      'hhhssssssssshh', 'ohhsssssssssho', 'hhhsssssssshhh', 'ohhhhssssshhho'] },
+    afro: { e: 5, mouth: [7], rows: [
+      '...ohhhhhho...', '.ohhhHHhhhhho.', 'ohhHhhhhhhhhho', 'hhhhhhhhhhhhhh', 'hhhhsssssshhhh',
+      'hhsssssssssshh', 'ohssssssssssho', '.hssssssssssh.', '...ssssssss...'] },
+    bob: { e: 5, mouth: [7], rows: ['....hhhhhh....', '...hhHhhhhh...', '..hhhhhhhhhh..', '.hhhhhhhhhhhh.', '.hhsssssssshh.', '.hssssssssssh.', '.hssssssssssh.', '.hhsssssssshh.', '.ooossssssooo.'] },
+    long: { e: 5, mouth: [7], back: 3, rows: ['....hhhhhh....', '...hhHhhhhh...', '..hhhhhhhhhh..', '.hhhhhhhhhhhh.', '.hhsssssssshh.', '.hssssssssssh.', '.hssssssssssh.', '.hhsssssssshh.', '.hhhsssssshhh.'] },
+    ponytail: { e: 5, mouth: [7], tail: true, rows: ['....hhhhhh....', '...hhHhhhhh...', '..hhhhhhhhhh..', '..hhhhhhhhhh..', '..hssssssssh..', ...FACE] },
+    bun: { e: 5, mouth: [7], rows: ['.....hHhh.....', '...hhhhhhhh...', '..hhhhhhhhhh..', '..hhhhhhhhhh..', '..hssssssssh..', ...FACE] },
+    bald: { e: 5, mouth: [7], rows: ['....ssssss....', '...sLssssss...', '..ssssssssss..', '..ssssssssss..', '..hssssssssh..', ...FACE] }
+  };
+
+  /* bodies by height and shape, from row 9: [from, to] cloth per torso row; arms: [column, first row, last row, 'cloth' | 'skin'];
+   * pants: rows of hips; legs: rows of legs (with the shoes). Every shape has the same rows at the same height:
+   * normal 7 + 2 + 3, short 6 + 2 + 2, kid 4 + 1 + 2. Athletic normal is Il Crocco. */
+  const BODIES = {
+    normal: {
+      soft: { torso: [[3, 10], [3, 10], [3, 10], [3, 10], [3, 10], [3, 10], [3, 10]], arms: [[2, 1, 4, 'skin'], [11, 1, 4, 'skin']], pants: 2, legs: 3 },
+      athletic: { torso: [[2, 11], [1, 12], [1, 12], [2, 11], [2, 11], [3, 10], [3, 10]], arms: [[1, 3, 5, 'skin'], [12, 3, 5, 'skin']], pants: 2, legs: 3, wide: true }, // Il Crocco
+      round: { torso: [[2, 11], [1, 12], [1, 12], [1, 12], [1, 12], [2, 11], [3, 10]], arms: [[0, 1, 2, 'cloth'], [13, 1, 2, 'cloth'], [0, 3, 5, 'skin'], [13, 3, 5, 'skin']], pants: 2, legs: 3, wide: true }
+    },
+    short: {
+      soft: { torso: [[3, 10], [3, 10], [3, 10], [3, 10], [3, 10], [3, 10]], arms: [[2, 1, 3, 'skin'], [11, 1, 3, 'skin']], pants: 2, legs: 2 },
+      athletic: { torso: [[2, 11], [1, 12], [2, 11], [2, 11], [3, 10], [3, 10]], arms: [[1, 2, 4, 'skin'], [12, 2, 4, 'skin']], pants: 2, legs: 2, wide: true },
+      round: { torso: [[2, 11], [1, 12], [1, 12], [1, 12], [2, 11], [3, 10]], arms: [[0, 1, 2, 'cloth'], [13, 1, 2, 'cloth'], [0, 3, 4, 'skin'], [13, 3, 4, 'skin']], pants: 2, legs: 2, wide: true }
+    },
+    kid: {
+      soft: { torso: [[3, 10], [3, 10], [3, 10], [3, 10]], arms: [[2, 1, 2, 'skin'], [11, 1, 2, 'skin']], pants: 1, legs: 2 },
+      athletic: { torso: [[2, 11], [1, 12], [2, 11], [3, 10]], arms: [[1, 2, 3, 'skin'], [12, 2, 3, 'skin']], pants: 1, legs: 2, wide: true },
+      round: { torso: [[2, 11], [1, 12], [1, 12], [2, 11]], arms: [[0, 1, 1, 'cloth'], [13, 1, 1, 'cloth'], [0, 2, 3, 'skin'], [13, 2, 3, 'skin']], pants: 1, legs: 2, wide: true }
+    }
+  };
+  /* legs under the hips: L leg, n shoe; poses stand, a, b (walking) and air (jumping) */
+  const LEGS = {
+    3: { stand: ['...LLL..LLL...', '...LLL..LLL...', '...nnn..nnn...'], a: ['...LLL..LLL...', '...nnn..LLL...', '........nnn...'], b: ['...LLL..LLL...', '...LLL..nnn...', '...nnn........'], air: ['...LLL..LLL...', '...nnn..nnn...', '..............'] },
+    2: { stand: ['...LLL..LLL...', '...nnn..nnn...'], a: ['...nnn..LLL...', '........nnn...'], b: ['...LLL..nnn...', '...nnn........'], air: ['...nnn..nnn...', '..............'] }
+  };
+  const SLEEVES = ['sweater', 'plaid']; // long sleeves: bare arms become cloth, the hands stay
+
+  function build(ch, mood, frame, armsUp) {
+    const skin = ch.skin || '#f1c7a1', hairC = ch.hairColor || '#2b2020', cloth = ch.outfit || '#d64545';
+    const light = cloth.toUpperCase() === '#FFFFFF';
+    const head = HEADS[ch.hairStyle] || HEADS.short;
+    const B = (BODIES[ch.height] || BODIES.normal)[ch.body] || BODIES.normal.soft;
+    const hair = head.buzz ? mix(skin, hairC, 0.6) : hairC;
+    const known = EXACT[hair.toLowerCase()] || {};
+    const pal = { h: hair, H: head.buzz ? hair : known.H || mix(hair, '#ffe9c8', 0.3), o: head.buzz ? hair : known.o || mix(hair, '#5a3a10', 0.3), b: mix(skin, hairC, 0.6), s: skin, L: mix(skin, '#ffffff', 0.4), S: EXACT_SHADE[skin.toLowerCase()] || mix(skin, '#a5502a', 0.3) };
+    const clothD = light ? '#c9c2d8' : EXACT_SHADE[cloth.toLowerCase()] || dark(cloth, 0.3), clothL = light ? '#4D7CFE' : mix(cloth, '#ffffff', 0.45);
+    const legsC = ch.pants || '#343a52', shoe = ch.shoes || '#3a2a2a', eye = ch.eyes || C.ink;
+    const top = ch.top, dress = top === 'dress';
+    const kind = dress ? 'dress' : ch.legs === 'shorts' || ch.legs === 'skirt' ? ch.legs : 'pants'; // the dress keeps its own skirt
+    const legsD = legsC.toUpperCase() === '#FFFFFF' ? '#c9c2d8' : dark(legsC, 0.3);
+    const rows = [], hairAt = []; // hairAt: where hair was drawn (a veil covers it)
+    // head
+    head.rows.forEach((r, y) => rows.push([...r].map((c, x) => { if ('hHob'.includes(c)) hairAt.push([x, y]); return c === '.' ? null : pal[c]; })));
+    rows.push(neckRow(ch.hairStyle, 'front', pal)); const E = head.e, T = 10;
+    // torso
+    const nT = B.torso.length, legSet = LEGS[B.legs] || LEGS[3], nL = legSet.stand.length;
+    for (let i = 0; i < nT; i++) { const row = Array(SW).fill(null); for (let x = B.torso[i][0]; x <= B.torso[i][1]; x++) row[x] = cloth; rows.push(row); }
+    // hips: trousers, shorts, the skirt (a trapezoid: it widens down to a darker hem) or the dress
+    const skirtRows = kind === 'skirt' ? B.pants + (nL === 3 || B.pants === 1 ? 1 : 0) : 0;
+    const skirtWidth = k => [[1, 12], [2, 11], [3, 10]][skirtRows - 1 - k]; // k = 0 is the top row of the skirt
+    for (let i = 0; i < B.pants; i++) {
+      const row = Array(SW).fill(null);
+      if (kind === 'skirt') { const [a, b] = skirtWidth(i); for (let x = a; x <= b; x++) row[x] = i === skirtRows - 1 ? legsD : legsC; }
+      else {
+        for (let x = 3; x <= 10; x++) row[x] = dress ? cloth : legsC;
+        if (dress) { row[2] = cloth; row[11] = cloth; }
+      }
+      rows.push(row);
+    }
+    const legFrames = legSet[frame === 'air' ? 'air' : frame] || legSet.stand;
+    const legPixel = k => {
+      if (kind === 'dress') return k === 0 ? clothD : skin;
+      if (kind === 'skirt') return skin;
+      if (kind === 'shorts') return nL === 3 && k === 0 ? legsC : skin;
+      return legsC;
+    };
+    legFrames.forEach((r, k) => rows.push([...r].map(c => c === 'L' ? legPixel(k) : c === 'n' ? shoe : null)));
+    const firstLeg = T + nT + B.pants;
+    if (dress) { const hem = rows[firstLeg]; for (let x = 2; x <= 11; x++) hem[x] = clothD; }
+    else if (skirtRows > B.pants) { const hem = rows[firstLeg]; for (let x = 1; x <= 12; x++) hem[x] = legsD; } // the hem of the skirt over the top of the legs
+    const put = (x, y, c) => { if (c && rows[y] && x >= 0 && x < SW) rows[y][x] = c; };
+    const pts = (c, list) => list.forEach(([x, y]) => put(x, y, c));
+    const putHair = (x, y, c) => { put(x, y, c); hairAt.push([x, y]); };
+    // long hair falls behind the shoulders, a ponytail sticks out at the side
+    if (head.back) {
+      const last = Math.min(T + head.back - 1, T + nT - 1);
+      for (let y = T; y <= last; y++) { if (!rows[y][1]) putHair(1, y, hair); if (!rows[y][12]) putHair(12, y, hair); }
+    }
+    if (head.tail) { [[12, 3], [12, 4], [13, 5], [13, 6], [13, 7], [12, 8], [12, 9]].forEach(([x, y]) => putHair(x, y, hair)); put(12, 3, C.pink); }
+    // the new tops paint the torso itself: checks, bare shoulders, the bib of the overalls, the knit
+    const inTorso = (x, y) => y >= T && y < T + nT && x >= B.torso[y - T][0] && x <= B.torso[y - T][1];
+    if (top === 'plaid') for (let y = T; y < T + nT; y++) for (let x = 0; x < SW; x++) if (inTorso(x, y)) {
+      const v = x % 3 === 1, h = (y - T) % 3 === 2;
+      if (v && h) put(x, y, dark(cloth, 0.55)); else if (v || h) put(x, y, clothD);
+    }
+    if (top === 'tank') for (let y = T; y < T + nT; y++) for (let x = 0; x < SW; x++) if (inTorso(x, y) && (x < 3 || x > 10 || (y === T && x !== 4 && x !== 9))) put(x, y, skin);
+    if (top === 'overalls') {
+      pts(legsC, [[4, T], [9, T], [4, T + 1], [9, T + 1]]);
+      for (let y = T + 2; y < T + nT; y++) { const [a, b] = y === T + nT - 1 ? B.torso[y - T] : [4, 9]; for (let x = a; x <= b; x++) put(x, y, legsC); }
+      pts(C.gold, [[4, T + 2], [9, T + 2]]);
+    }
+    if (top === 'sweater') { const [a, b] = B.torso[nT - 1]; for (let x = a; x <= b; x++) put(x, T + nT - 1, clothD); }
+    // arms (a raised arm waves); long sleeves cover the arm, a tank top leaves the shoulders bare
+    const sleeves = SLEEVES.includes(top);
+    const armRows = (x, a, b, k) => { for (let r = a; r <= b; r++) put(x, T + r, k === 'cloth' && top !== 'tank' ? cloth : sleeves && k === 'skin' && r < b ? cloth : skin); };
+    B.arms.forEach(([x, a, b, k]) => {
+      const right = x > 6, up = armsUp && (right || mood === 'wow');
+      if (up && k === 'skin') { const dir = right ? 1 : -1, ax = Math.max(0, Math.min(SW - 1, x + dir)); put(x, T + a, sleeves ? cloth : skin); put(ax, T + a - 1, sleeves ? cloth : skin); put(ax, T + a - 2, skin); }
+      else armRows(x, a, b, k);
+    });
+    // the marks of the tops
+    const mid = B.wide ? T + 2 : T + 1;
+    const mark = light ? C.pink : C.white;
+    const inBody = y => y < T + nT;
+    if (top === 'heart') pts(mark, [[5, mid], [8, mid], [5, mid + 1], [6, mid + 1], [7, mid + 1], [8, mid + 1], [6, mid + 2], [7, mid + 2]]);
+    else if (top === 'plain' || dress) pts(skin, [[6, T], [7, T]]);
+    else if (top === 'stripes') [mid, mid + 2].forEach(y => { if (!B.torso[y - T]) return; const [a, b] = B.torso[y - T]; for (let x = a; x <= b; x++) put(x, y, clothL); });
+    else if (top === 'collar') { pts(skin, [[6, T], [7, T]]); pts(light ? '#c9d6ff' : C.white, [[4, T], [5, T], [8, T], [9, T]]); for (let y = T + 1; y < T + nT; y++) pts(clothD, [[6, y], [7, y]]); pts(C.white, [[6, T + 2], [7, T + 2]].concat(inBody(T + 4) ? [[6, T + 4], [7, T + 4]] : [])); } // the placket and buttons, in the middle
+    else if (top === 'plaid') { pts(skin, [[6, T], [7, T]]); pts(clothL, [[5, T], [8, T]]); }
+    else if (top === 'sweater') pts(clothD, [[5, T], [6, T], [7, T], [8, T]]); // the turtleneck
+    else if (top === 'hoodie') { pts(C.white, [[6, T + 1], [7, T + 1]]); const py = Math.min(B.wide ? T + 4 : T + 3, T + nT - 1); for (let x = 5; x <= 8; x++) put(x, py, clothD); } // Il Crocco
+    else if (top === 'jacket') { for (let y = T + 1; y <= T + 2; y++) pts(C.white, [[6, y], [7, y]]); pts(clothD, [[3, T + 3], [10, T + 3]]); } // El Falcon
+    if (kind === 'skirt') for (let y = T + nT - skirtUp(nT); y < T + nT; y++) { const [a, b] = B.torso[y - T]; for (let x = a; x <= b; x++) put(x, y, legsC); }
+    if (head.shoulders) head.shoulders.forEach(([x, c]) => put(x, T, pal[c]));
+    // face: brows, eyes (dots, with lashes, or closed and smiling), the mouth (closed, smiling, with teeth, tongue out);
+    // the mouth stays below the glasses row, so a smile never hides under the lenses
+    const sad = mood === 'sad', wow = mood === 'wow';
+    const browC = lum(hairC) > 0.55 ? dark(hairC, 0.55) : lum(hairC) > 0.3 ? dark(hairC, 0.4) : dark(hairC, 0.15);
+    if (ch.brows === 'thick') pts(browC, [[3, E - 1], [4, E - 1], [5, E - 1], [8, E - 1], [9, E - 1], [10, E - 1]]);
+    else if (ch.brows === 'thin') pts(mix(browC, skin, 0.2), [[4, E - 1], [5, E - 1], [8, E - 1], [9, E - 1]]);
+    // the eye row is always skin (the row above can be a fringe): lashes are a wing at the outer side, smiling eyes a ^ over two rows
+    const smile = ch.eyeShape === 'smile';
+    if (ch.blush === 'on') pts(C.blush, smile ? [[3, E + 2], [10, E + 2]] : [[3, E + 1], [10, E + 1]]);
+    if (ch.freckles === 'on' && ch.blush !== 'on') pts(dark(skin, 0.3), [[3, E + 1], [4, E + 2], [9, E + 2], [10, E + 1]]);
+    if (smile) pts(eye, [[3, E + 1], [4, E], [5, E + 1], [8, E + 1], [9, E], [10, E + 1]]);
+    else { pts(eye, [[4, E], [9, E]]); if (ch.eyeShape === 'lashes') pts(eye, [[3, E], [10, E]]); }
+    const fh = ch.facialHair || 'none', hairD = dark(hair, 0.25);
+    const mouth = ch.mouth || 'closed', mouthCols = mouth === 'smile' || mouth === 'teeth' ? [5, 6, 7, 8] : head.mouth; // a full beard leaves them free
+    if (fh === 'stubble') for (let x = 5; x <= 8; x++) put(x, E + 3, pal.S); // Il Crocco
+    else if (fh === 'beard') { pts(hair, [[2, E + 1], [11, E + 1]]); for (let x = 2; x <= 11; x++) if (!mouthCols.includes(x)) put(x, E + 2, hair); for (let x = 3; x <= 10; x++) put(x, E + 3, x === 3 || x === 10 ? hairD : hair); for (let x = 4; x <= 9; x++) put(x, T - 1, hairD); } // the beard covers the neck too
+    else if (fh === 'mustache') for (let x = 5; x <= 8; x++) put(x, E + 1, hair);
+    else if (fh === 'goatee') pts(hair, [[6, E + 3], [7, E + 3]]);
+    // the closed mouth is one pixel (column 7, a little to the side, as El Falcon's); the others are as before
+    if (wow) pts(C.mouthD, [[6, E + 2], [7, E + 2], [6, E + 3], [7, E + 3]]);
+    else if (sad) pts(C.mouthD, [[6, E + 2], [7, E + 2], [5, E + 3], [8, E + 3]]);
+    else if (mouth === 'smile') pts(C.mouth, [[5, E + 2], [8, E + 2], [6, E + 3], [7, E + 3]]);
+    else if (mouth === 'teeth') { pts(C.mouthD, [[5, E + 2], [8, E + 2], [6, E + 3], [7, E + 3]]); pts(C.white, [[6, E + 2], [7, E + 2]]); }
+    else if (mouth === 'tongue') { pts(C.mouthD, [[6, E + 2], [7, E + 2]]); put(7, E + 3, C.pink); }
+    else pts(C.mouth, head.mouth.map(x => [x, E + 2]));
+    // accessories, one per zone. A veil goes first (it covers the hair and frames the face), then from the body up:
+    // neck, ears, face, head (a brim or a band goes over the glasses)
+    const acc = ch.accessories || {};
+    const neck = acc.neck || 'none', ears = acc.ears || 'none', face = acc.face || 'none', hat = acc.head || 'none';
+    const gc = ch.glassesColor || C.ink, gcDefault = gc.toLowerCase() === C.ink;
+    if (hat === 'veil') {
+      hairAt.forEach(([x, y]) => { if (rows[y][x]) put(x, y, C.veil); });
+      for (let y = 0; y <= E - 2; y++) for (let x = 0; x < SW; x++) if (rows[y][x]) put(x, y, C.veil);
+      for (let y = E - 1; y < T; y++) { const xs = rows[y].map((c, x) => (c ? x : -1)).filter(x => x >= 0); if (!xs.length) continue; const x0 = Math.min(...xs), x1 = Math.max(...xs); pts(C.veil, [[x0, y], [x1, y], [x0 - 1, y], [x1 + 1, y]]); }
+      for (let y = T; y <= T + 1; y++) pts(C.veil, [[1, y], [2, y], [11, y], [12, y]]);
+      pts(C.veilD, [[1, T + 1], [12, T + 1], [4, 0], [9, 0]].filter(([x, y]) => rows[y] && rows[y][x]));
+    }
+    if (neck === 'necklace') { pts(C.gold, [[4, T], [9, T], [5, T + 1], [6, T + 1], [7, T + 1], [8, T + 1]]); pts(C.red, [[6, T + 2], [7, T + 2]]); }
+    else if (neck === 'scarf') { const sc = light ? C.pink : C.gold; for (let x = 3; x <= 10; x++) put(x, T, sc); for (let x = 4; x <= 9; x++) put(x, T + 1, dark(sc, 0.15)); pts(sc, [[8, T + 2], [8, T + 3]]); pts(dark(sc, 0.3), [[9, T + 2], [9, T + 3]]); }
+    else if (neck === 'tie') {
+      const [r, g, b] = hex(cloth), tc = r > 170 && g < 140 ? C.blue : C.red;
+      pts(C.white, [[5, T], [8, T]]); pts(dark(tc, 0.3), [[6, T], [7, T]]);
+      for (let y = T + 1; y <= T + Math.min(4, nT - 1); y++) pts(tc, [[6, y], [7, y]]);
+    }
+    if (ears === 'earrings') pts(C.gold, [[1, E + 1], [12, E + 1]]);
+    if (face === 'glasses') { const lensC = mix(skin, '#cfe9ff', 0.75); pts(lensC, [[3, E], [5, E], [3, E + 1], [4, E + 1], [5, E + 1], [8, E], [10, E], [8, E + 1], [9, E + 1], [10, E + 1]]); pts(mix(lensC, '#ffffff', 0.6), [[5, E], [10, E]]); pts(gc, [[2, E], [6, E], [7, E], [11, E]]); }
+    else if (face === 'roundglasses') pts(gc, [[3, E - 1], [4, E - 1], [5, E - 1], [2, E], [6, E], [3, E + 1], [4, E + 1], [5, E + 1], [8, E - 1], [9, E - 1], [10, E - 1], [7, E], [11, E], [8, E + 1], [9, E + 1], [10, E + 1], [1, E], [12, E]]);
+    else if (face === 'sunglasses') { const lens = gcDefault ? C.shades : gc, shine = gcDefault ? '#7a6ab0' : mix(gc, '#ffffff', 0.45); for (let x = 2; x <= 11; x++) put(x, E, lens); pts(lens, [[3, E + 1], [4, E + 1], [5, E + 1], [8, E + 1], [9, E + 1], [10, E + 1]]); pts(shine, [[3, E], [8, E]]); }
+    if (hat === 'cap') { const cc = light ? '#4D7CFE' : (cloth.toUpperCase() === '#24124A' ? C.red : clothD); for (let x = 4; x <= 9; x++) put(x, 0, cc); for (let x = 3; x <= 10; x++) put(x, 1, cc); for (let y = 2; y < E - 1; y++) for (let x = 2; x <= 11; x++) put(x, y, cc); for (let x = 1; x <= 12; x++) put(x, E - 1, dark(cc, 0.3)); put(5, 1, mix(cc, '#ffffff', 0.4)); }
+    else if (hat === 'beanie') { const bc = light ? C.pink : cloth; pts(C.white, [[6, 0], [7, 0]]); for (let x = 3; x <= 10; x++) put(x, 1, bc); for (let y = 2; y < E - 1; y++) for (let x = 2; x <= 11; x++) put(x, y, bc); for (let x = 2; x <= 11; x++) put(x, E - 1, dark(bc, 0.35)); put(4, 1, mix(bc, '#ffffff', 0.4)); }
+    else if (hat === 'strawhat') { // the crown on top, a red ribbon, a wide brim above the forehead
+      for (let x = 4; x <= 9; x++) put(x, 0, C.straw);
+      for (let y = 1; y <= E - 3; y++) for (let x = 3; x <= 10; x++) put(x, y, y === E - 3 ? C.red : C.straw);
+      for (let x = 0; x <= 13; x++) put(x, E - 2, x === 0 || x === 13 ? C.strawD : C.straw);
+      put(5, 0, mix(C.straw, '#ffffff', 0.5));
+    }
+    else if (hat === 'bandana') { // a scarf over the top of the head, dotted, knotted at the side
+      const bd = cloth.toUpperCase() === '#D64545' || cloth.toUpperCase() === '#FF3D7F' ? C.blue : C.red;
+      for (let y = 0; y <= E - 2; y++) for (let x = 2; x <= 11; x++) if (rows[y][x] || y === E - 2) put(x, y, (x + y) % 3 === 0 && y < E - 2 ? C.white : bd);
+      for (let x = 2; x <= 11; x++) put(x, E - 2, dark(bd, 0.25));
+      pts(bd, [[12, E - 2], [13, E - 1]]); put(12, E - 1, dark(bd, 0.25));
+    }
+    else if (hat === 'headphones') { for (let x = 4; x <= 9; x++) put(x, 0, C.ink); pts(C.ink, [[3, 1], [10, 1], [2, 2], [11, 2]]); for (let y = E - 1; y <= E + 1; y++) { pts(C.pink, [[0, y], [1, y]]); pts(C.pinkD, [[12, y], [13, y]]); } }
+    else if (hat === 'crown') { pts(C.gold, [[4, 0], [6, 0], [7, 0], [9, 0]]); for (let x = 4; x <= 9; x++) put(x, 1, C.gold); put(9, 1, C.goldD); pts(C.red, [[6, 1], [7, 1]]); }
+    else if (hat === 'bow') { pts(C.pink, [[9, 0], [9, 1], [9, 2], [10, 1], [12, 1], [13, 0], [13, 1], [13, 2]]); put(11, 1, C.pinkD); }
+    else if (hat === 'flower') { pts(C.pink, [[11, 0], [10, 1], [12, 1], [11, 2]]); put(11, 1, C.gold); }
+    { const sk = B.arms.filter(a => a[3] === 'skin').sort((p, q) => q[0] - p[0])[0]; // the bracelet: on the wrist of the right arm
+      gameExtras(rows, ch, 'front', { T, nT, E, cloth, clothD, shoe, skin, torso: B.torso, wrist: sk && !armsUp ? [sk[0], T + Math.max(sk[1], sk[2] - 1)] : null, hands: B.arms.filter(a => a[3] === 'skin').map(a => [a[0], T + a[2]]) }); }
+    // stand on the floor: shorter characters get empty rows on top
+    while (rows.length < SH) rows.unshift(Array(SW).fill(null));
+    // rasterise with the flat dark outline (as tall as the grid; a game hat can add a row on top: HH)
+    const HH = Math.max(SH, rows.length);
+    const c = document.createElement('canvas'); c.width = SW + 2; c.height = HH + 2;
+    const x = c.getContext('2d');
+    x.fillStyle = OUTLINE;
+    for (let y = 0; y < HH; y++) for (let i = 0; i < SW; i++) if (rows[y][i]) [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(([dx, dy]) => {
+      const nx = i + dx, ny = y + dy;
+      if (nx >= 0 && nx < SW && ny >= 0 && ny < HH && rows[ny][nx]) return;
+      x.fillRect(nx + 1, ny + 1, 1, 1);
+    });
+    for (let y = 0; y < HH; y++) for (let i = 0; i < SW; i++) if (rows[y][i]) { x.fillStyle = rows[y][i]; x.fillRect(i + 1, y + 1, 1, 1); }
+    return c;
+  }
+
+  /* ---------------- side and back views (added 21 nov 2026, see REGOLE-PERSONAGGI.md) ----------------
+   * The front view above is unchanged. The side view looks to the right (the left one is its mirror) and is drawn
+   * like El Falcon and Il Crocco from the side in Operazione Viaggettino: the back of the head on the left, one eye,
+   * the nose sticking out, a narrower body with one arm in front, the legs that step. The back view is the front one
+   * with the hair over the whole head and no face. Same grid (14×21), same outline, same floor line. */
+  function looks(ch) {
+    const skin = ch.skin || '#f1c7a1', hairC = ch.hairColor || '#2b2020', cloth = ch.outfit || '#d64545';
+    const light = cloth.toUpperCase() === '#FFFFFF';
+    const head = HEADS[ch.hairStyle] || HEADS.short;
+    const B = (BODIES[ch.height] || BODIES.normal)[ch.body] || BODIES.normal.soft;
+    const hair = head.buzz ? mix(skin, hairC, 0.6) : hairC;
+    const known = EXACT[hair.toLowerCase()] || {};
+    const pal = { h: hair, H: head.buzz ? hair : known.H || mix(hair, '#ffe9c8', 0.3), o: head.buzz ? hair : known.o || mix(hair, '#5a3a10', 0.3), b: mix(skin, hairC, 0.6), s: skin, L: mix(skin, '#ffffff', 0.4), S: EXACT_SHADE[skin.toLowerCase()] || mix(skin, '#a5502a', 0.3) };
+    const clothD = light ? '#c9c2d8' : EXACT_SHADE[cloth.toLowerCase()] || dark(cloth, 0.3), clothL = light ? '#4D7CFE' : mix(cloth, '#ffffff', 0.45);
+    const legsC = ch.pants || '#343a52', shoe = ch.shoes || '#3a2a2a', eye = ch.eyes || C.ink;
+    const top = ch.top, dress = top === 'dress';
+    const kind = dress ? 'dress' : ch.legs === 'shorts' || ch.legs === 'skirt' ? ch.legs : 'pants';
+    const legsD = legsC.toUpperCase() === '#FFFFFF' ? '#c9c2d8' : dark(legsC, 0.3);
+    const legSet = LEGS[B.legs] || LEGS[3];
+    const acc = ch.accessories || {};
+    return { skin, hairC, cloth, light, head, B, hair, pal, clothD, clothL, legsC, legsD, shoe, eye, top, dress, kind, nL: legSet.stand.length, acc,
+      gc: ch.glassesColor || C.ink, browC: lum(hairC) > 0.55 ? dark(hairC, 0.55) : lum(hairC) > 0.3 ? dark(hairC, 0.4) : dark(hairC, 0.15) };
+  }
+  const blank = () => Array.from({ length: 9 }, () => Array(SW).fill(null));
+  function raster(rows, W = SW, H = SH) { // the grid (W×H, the standard one unless a pose needs another) plus the outline
+    while (rows.length < H) rows.unshift(Array(W).fill(null));
+    const c = document.createElement('canvas'); c.width = W + 2; c.height = H + 2;
+    const x = c.getContext('2d');
+    x.fillStyle = OUTLINE;
+    for (let y = 0; y < H; y++) for (let i = 0; i < W; i++) if (rows[y][i]) [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(([dx, dy]) => {
+      const nx = i + dx, ny = y + dy;
+      if (nx >= 0 && nx < W && ny >= 0 && ny < H && rows[ny][nx]) return;
+      x.fillRect(nx + 1, ny + 1, 1, 1);
+    });
+    for (let y = 0; y < H; y++) for (let i = 0; i < W; i++) if (rows[y][i]) { x.fillStyle = rows[y][i]; x.fillRect(i + 1, y + 1, 1, 1); }
+    return c;
+  }
+
+  /* the head from the side, rows 0-8, looking right, with the proportions of El Falcon from the side:
+   * h hair, H highlight, o hair shade, s skin, r ear, '.' empty. The front of the face is straight, with no nose:
+   * the eye at (10, 5), the mouth on the edge at (12, 7), the chin one row lower and two pixels back, no neck.
+   * The ear is in the middle of the head; long hair covers it. */
+  const SIDE_SHORT = ['....hhhhhh....', '...hhHHhhhh...', '..hhhhhhhhhh..', '..ohhhhhhhhhh.', '..ohhhhhsssss.', '..ohhrhssssss.', '..ohhrsssssss.', '...ohhsssssss.', '....ohsssss...'];
+  const SIDE_HEADS = {
+    short: SIDE_SHORT, side: SIDE_SHORT, middle: SIDE_SHORT, buzz: SIDE_SHORT, undercut: SIDE_SHORT, ponytail: SIDE_SHORT, bun: SIDE_SHORT,
+    quiff: ['.....hhhhhh...', '...hhHHhhhhh..', '..hhhhhhhhhh..', '..ohhhhhhhhhh.', '..ohhhhhsssss.', '..ohhrhssssss.', '..ohhrsssssss.', '...ohhsssssss.', '....ohsssss...'],
+    curly: ['....ohhhho....', '..ohhhHhhho...', '.ohhhhhhhhho..', 'ohhhhhhhhhhho.', 'ohhhhhhhsssso.', 'hhhhhhhhsssss.', 'ohhhhhhhsssss.', 'hhhhhhhhsssss.', 'ohhhhhhhsss...'],
+    afro: ['...ohhhhhho...', '.ohhhHHhhhhho.', 'ohhHhhhhhhhhho', 'hhhhhhhhhhhhh.', 'hhhhhhhhsssss.', 'hhhhhhhhsssss.', 'hhhhhhhhsssss.', 'ohhhhhhhsssss.', '.ohhhhsssss...'],
+    bob: ['....hhhhhh....', '...hhHHhhhh...', '..hhhhhhhhhh..', '.hhhhhhhhhhhh.', '.hhhhhhhsssso.', '.hhhhhhhsssss.', '.hhhhhhhsssss.', '.hhhhhhhsssss.', '.ooooooosss...'],
+    long: ['....hhhhhh....', '...hhHHhhhh...', '..hhhhhhhhhh..', '.hhhhhhhhhhhh.', '.hhhhhhhsssso.', '.hhhhhhhsssss.', '.hhhhhhhsssss.', '.hhhhhhhsssss.', '.hhhhhhhsss...'],
+    bald: ['....ssssss....', '...sLssssss...', '..ssssssssss..', '..sssssssssss.', '..sssssssssss.', '..shhrsssssss.', '..sshrsssssss.', '...ssssssssss.', '....sssssss...']
+  };
+  const SIDE_LEGS = {
+    3: { stand: ['.....LLLLL....', '.....LLLLL....', '.....nnnnnn...'], a: ['....LLL.LLL...', '...LLL...LLL..', '...nn.....nnn.'], b: ['.....LLLLL....', '.....LLLLL....', '.....nnnnn....'], air: ['....LLL.LLL...', '....nnn.nnn...', '..............'],
+      // the poses of the running games (24 nov 2026): El Falcon's in Run to You, one pixel to the right as the body here
+      up: ['....LLLLLLL...', '...LL....Lnn..', '..nn..........'], down: ['.....LLLLL....', '......LLLLL...', '.......nnnnn..'],
+      land: ['....LLLLLLLL..', '...nnn...nnn..'], hurt: ['....LLL.LLL...', '..LLL.....LL..', '.nn........nn.'] },
+    2: { stand: ['.....LLLLL....', '.....nnnnnn...'], a: ['....LLL.LLL...', '...nn....nnn..'], b: ['.....LLLLL....', '.....nnnnn....'], air: ['....nnn.nnn...', '..............'],
+      up: ['....LLLLLLnn..', '..nn..........'], down: ['.....LLLLL....', '......nnnnnn..'], land: ['...nnLLLLLnn..'], hurt: ['..LLL.....LL..', '.nn........nn.'] }
+  };
+
+  function buildSide(ch, mood, frame) {
+    const L = looks(ch), { pal, B, cloth, clothD, skin, hair, top, kind } = L;
+    const st = ch.hairStyle || 'short', tpl = SIDE_HEADS[st] || SIDE_SHORT;
+    const rows = [], hairAt = [];
+    const put = (x, y, c) => { if (c && rows[y] && x >= 0 && x < SW) rows[y][x] = c; };
+    const pts = (c, list) => list.forEach(([x, y]) => put(x, y, c));
+    // the head
+    tpl.forEach((r, y) => rows.push([...r].map((c, x) => {
+      if (c === '.') return null;
+      if (c === 'r') return st === 'bald' ? pal.S : pal.s;
+      if ('hHo'.includes(c)) {
+        hairAt.push([x, y]);
+        if (st === 'undercut' && y >= 3 && x <= 7) return pal.b;
+        return L.head.buzz ? pal.h : pal[c];
+      }
+      return pal[c];
+    })));
+    if (st === 'ponytail') { [[1, 4], [0, 5], [0, 6], [0, 7], [1, 8]].forEach(([x, y]) => { put(x, y, hair); hairAt.push([x, y]); }); put(2, 4, C.pink); }
+    if (st === 'bun') { [[2, 0], [3, 0], [1, 1], [2, 1]].forEach(([x, y]) => { put(x, y, hair); hairAt.push([x, y]); }); put(2, 0, pal.H); }
+    rows.push(neckRow(st, 'side', pal)); const E = 5, T = 10;
+    if (st === 'ponytail') { put(1, 9, hair); hairAt.push([1, 9]); } // the end of the ponytail, on the neck row as from the front and behind
+    // the body: narrower than from the front, a round body has a belly in front
+    const nT = B.torso.length, wide = !!B.wide, round = ch.body === 'round';
+    const span = i => round ? (i === 0 || i === nT - 1 ? [4, 10] : i >= 2 && i < nT - 2 ? [4, 11] : [4, 10]) : wide ? (i >= 1 && i <= 3 ? [3, 10] : [4, 10]) : [4, 10];
+    for (let i = 0; i < nT; i++) { const row = Array(SW).fill(null); const [a, b] = span(i); for (let x = a; x <= b; x++) row[x] = cloth; rows.push(row); }
+    const skirtRows = kind === 'skirt' ? B.pants + (L.nL === 3 || B.pants === 1 ? 1 : 0) : 0;
+    for (let i = 0; i < B.pants; i++) {
+      const row = Array(SW).fill(null);
+      if (kind === 'skirt') { const w = [[3, 12], [4, 11], [4, 10]][skirtRows - 1 - i]; for (let x = w[0]; x <= w[1]; x++) row[x] = i === skirtRows - 1 ? L.legsD : L.legsC; }
+      else for (let x = L.dress ? 3 : 4; x <= (L.dress ? 11 : 10); x++) row[x] = L.dress ? cloth : L.legsC;
+      rows.push(row);
+    }
+    const legSet = SIDE_LEGS[L.nL] || SIDE_LEGS[3], legs = legSet[frame] || legSet.stand;
+    if (frame === 'hurt' && !mood) mood = 'wow';
+    const legPixel = k => kind === 'dress' ? (k === 0 ? clothD : skin) : kind === 'skirt' ? skin : kind === 'shorts' ? (L.nL === 3 && k === 0 ? L.legsC : skin) : L.legsC;
+    legs.forEach((r, k) => rows.push([...r].map(c => c === 'L' ? legPixel(k) : c === 'n' ? L.shoe : null)));
+    const firstLeg = T + nT + B.pants;
+    if (L.dress) for (let x = 3; x <= 11; x++) put(x, firstLeg, clothD);
+    else if (skirtRows > B.pants) for (let x = 3; x <= 12; x++) put(x, firstLeg, L.legsD);
+    if (L.head.shoulders) { pts(pal.o, [[1, T]]); pts(hair, [[2, T], [3, T], [4, T], [2, T + 1], [3, T + 1]]); } // curls on the shoulders
+    // long hair falls behind the shoulders
+    if (L.head.back) for (let y = T; y < T + Math.min(L.head.back, nT); y++) [2, 3].forEach(x => { if (!rows[y][x]) { put(x, y, y === T + Math.min(L.head.back, nT) - 1 ? pal.o : hair); hairAt.push([x, y]); } });
+    // the tops
+    const inTorso = (x, y) => y >= T && y < T + nT && rows[y][x] === cloth;
+    if (top === 'plaid') for (let y = T; y < T + nT; y++) for (let x = 0; x < SW; x++) if (inTorso(x, y)) { const v = x % 3 === 1, h = (y - T) % 3 === 2; if (v && h) put(x, y, dark(cloth, 0.55)); else if (v || h) put(x, y, clothD); }
+    if (top === 'stripes') { const mid = wide ? T + 2 : T + 1; [mid, mid + 2].forEach(y => { if (y < T + nT) for (let x = 0; x < SW; x++) if (inTorso(x, y)) put(x, y, L.clothL); }); }
+    if (top === 'overalls') { for (let y = T + 2; y < T + nT; y++) for (let x = 0; x < SW; x++) if (rows[y][x]) put(x, y, L.legsC); pts(L.legsC, [[9, T], [9, T + 1]]); put(10, T + 2, C.gold); }
+    if (top === 'sweater') { pts(clothD, [[7, T], [8, T], [9, T], [10, T]]); for (let x = 0; x < SW; x++) if (rows[T + nT - 1][x]) put(x, T + nT - 1, clothD); }
+    if (top === 'hoodie') pts(clothD, [[3, T], [3, T + 1], [4, T], [5, T]]);
+    if (top === 'collar') pts(L.light ? '#c9d6ff' : C.white, [[9, T], [10, T]]);
+    if (top === 'jacket') for (let y = T; y <= T + 2; y++) put(10, y, C.white);
+    if (kind === 'skirt') for (let y = T + nT - skirtUp(nT); y < T + nT; y++) { const [a, b] = span(y - T); for (let x = a; x <= b; x++) put(x, y, L.legsC); }
+    // the arm on the side of the body, two pixels wide (the back one darker): the sleeve, the bare arm, the hand.
+    // It stays still while walking (only the legs move, as El Falcon and Il Crocco in Operazione Viaggettino)
+    const handR = Math.max(...B.arms.filter(a => a[3] === 'skin').map(a => a[2])), longS = SLEEVES.includes(top) || top === 'hoodie' || top === 'jacket';
+    const sleeveBack = dark(cloth, 0.45);
+    for (let r = 0; r <= handR; r++) {
+      const x = 6, y = T + r;
+      const sleeve = r < handR && top !== 'tank' && (longS || r <= 1 || (round && r <= 2));
+      put(x, y, r === handR ? skin : sleeve ? sleeveBack : pal.S);
+      put(x + 1, y, r === handR ? skin : sleeve ? clothD : skin);
+    }
+    // the face: brows, the eye, cheeks, the mouth (one pixel, on the edge), beard
+    const sad = mood === 'sad', wow = mood === 'wow', mouth = ch.mouth || 'closed', line = mix(C.mouth, C.mouthD, 0.55);
+    if (ch.brows === 'thick') pts(L.browC, [[9, E - 1], [10, E - 1], [11, E - 1]]);
+    else if (ch.brows === 'thin') pts(mix(L.browC, skin, 0.2), [[10, E - 1], [11, E - 1]]);
+    if (ch.eyeShape === 'smile') pts(L.eye, [[9, E], [10, E - 1], [11, E]]);
+    else { put(10, E, L.eye); if (ch.eyeShape === 'lashes') put(11, E - 1, L.eye); }
+    if (ch.blush === 'on') put(10, E + 1, C.blush);
+    else if (ch.freckles === 'on') pts(dark(skin, 0.3), [[9, E + 1], [10, E + 2]]);
+    const fh = ch.facialHair || 'none', hairD = dark(hair, 0.25);
+    if (fh === 'stubble') pts(pal.S, [[7, E + 3], [8, E + 3], [9, E + 3], [10, E + 3]]);
+    else if (fh === 'beard') { pts(hair, [[7, E + 1], [7, E + 2], [8, E + 2], [9, E + 2], [10, E + 2], [11, E + 2], [7, E + 3], [8, E + 3], [9, E + 3], [10, E + 3]]); pts(hairD, [[8, T - 1], [9, T - 1], [10, T - 1]]); } // the front of the neck
+    else if (fh === 'mustache') pts(hair, [[11, E + 1], [12, E + 1]]);
+    else if (fh === 'goatee') pts(hair, [[9, E + 3], [10, E + 3]]);
+    if (wow || sad) pts(C.mouthD, [[11, E + 2], [12, E + 2]]);
+    else if (mouth === 'smile') pts(line, [[11, E + 2], [12, E + 2]]);
+    else if (mouth === 'teeth') { put(11, E + 2, line); put(12, E + 2, C.white); }
+    else if (mouth === 'tongue') { put(12, E + 2, line); put(13, E + 2, C.pink); }
+    else put(12, E + 2, line);
+    // accessories, in the same order as the front view
+    const acc = L.acc, neck = acc.neck || 'none', ears = acc.ears || 'none', face = acc.face || 'none', hat = acc.head || 'none';
+    const gc = L.gc, gcDefault = gc.toLowerCase() === C.ink;
+    if (hat === 'veil') {
+      hairAt.forEach(([x, y]) => put(x, y, C.veil));
+      for (let y = 0; y <= 3; y++) for (let x = 0; x < SW; x++) if (rows[y][x]) put(x, y, C.veil);
+      for (let y = 4; y < T; y++) { const xs = rows[y].map((c, x) => (c ? x : -1)).filter(x => x >= 0); if (xs.length) put(Math.min(...xs) - 1, y, C.veil); }
+      for (let y = 4; y <= T + 1; y++) pts(C.veil, [[1, y], [2, y]]); pts(C.veilD, [[1, T + 1], [2, T + 1]]);
+    }
+    if (neck === 'necklace') { pts(C.gold, [[8, T], [9, T]]); put(10, T + 1, C.red); }
+    else if (neck === 'scarf') { const sc = L.light ? C.pink : C.gold; for (let x = 4; x <= 10; x++) put(x, T, sc); for (let x = 5; x <= 10; x++) put(x, T + 1, dark(sc, 0.15)); pts(dark(sc, 0.3), [[3, T + 1], [3, T + 2]]); }
+    else if (neck === 'tie') { const [r, g] = hex(cloth), tc = r > 170 && g < 140 ? C.blue : C.red; put(9, T, C.white); for (let y = T; y <= T + Math.min(3, nT - 1); y++) put(10, y, tc); }
+    if (ears === 'earrings') put(5, E + 2, C.gold);
+    if (face === 'glasses') { pts(mix(skin, '#cfe9ff', 0.75), [[11, E], [11, E + 1]]); pts(gc, [[6, E], [7, E], [8, E], [9, E], [10, E - 1], [11, E - 1], [12, E - 1], [12, E], [12, E + 1], [10, E + 1]]); }
+    else if (face === 'roundglasses') pts(gc, [[6, E], [7, E], [8, E], [9, E], [10, E - 1], [11, E - 1], [12, E], [10, E + 1], [11, E + 1]]);
+    else if (face === 'sunglasses') { const lens = gcDefault ? C.shades : gc; pts(lens, [[6, E], [7, E], [8, E], [9, E], [10, E], [11, E], [12, E], [10, E + 1], [11, E + 1], [12, E + 1]]); put(11, E, gcDefault ? '#7a6ab0' : mix(gc, '#ffffff', 0.45)); }
+    const cover = c => { for (let y = 0; y <= 3; y++) for (let x = 0; x < SW; x++) if (rows[y][x]) put(x, y, c); };
+    if (hat === 'cap') { const cc = L.light ? '#4D7CFE' : (cloth.toUpperCase() === '#24124A' ? C.red : clothD); cover(cc); for (let x = 0; x <= 7; x++) if (rows[4][x]) put(x, 4, cc); for (let x = 8; x <= 13; x++) put(x, 4, dark(cc, 0.3)); put(5, 1, mix(cc, '#ffffff', 0.4)); }
+    else if (hat === 'beanie') { const bc = L.light ? C.pink : cloth; cover(bc); put(6, 0, C.white); for (let x = 0; x < SW; x++) if (rows[4][x]) put(x, 4, dark(bc, 0.35)); put(4, 1, mix(bc, '#ffffff', 0.4)); }
+    else if (hat === 'strawhat') { for (let x = 4; x <= 9; x++) put(x, 0, C.straw); for (let x = 3; x <= 10; x++) put(x, 1, C.straw); for (let x = 3; x <= 10; x++) put(x, 2, C.red); for (let x = 0; x <= 13; x++) put(x, 3, x === 0 || x === 13 ? C.strawD : C.straw); put(5, 0, mix(C.straw, '#ffffff', 0.5)); }
+    else if (hat === 'bandana') { const bd = cloth.toUpperCase() === '#D64545' || cloth.toUpperCase() === '#FF3D7F' ? C.blue : C.red; cover(bd); for (let y = 0; y <= 3; y++) for (let x = 0; x < SW; x++) if (rows[y][x] && (x + y) % 3 === 0) put(x, y, C.white); for (let x = 0; x <= 7; x++) if (rows[4][x]) put(x, 4, dark(bd, 0.25)); pts(bd, [[1, 4], [0, 5], [1, 5]]); }
+    else if (hat === 'headphones') { for (let x = 4; x <= 8; x++) put(x, 0, C.ink); pts(C.ink, [[5, 1], [5, 2], [5, 3]]); pts(C.pink, [[4, 4], [5, 4], [6, 4], [4, 5], [6, 5], [4, 6], [5, 6], [6, 6]]); put(5, 5, C.pinkD); }
+    else if (hat === 'crown') { pts(C.gold, [[4, 0], [6, 0], [8, 0]]); for (let x = 4; x <= 9; x++) put(x, 1, C.gold); put(7, 1, C.red); }
+    else if (hat === 'bow') { pts(C.pink, [[1, 0], [1, 1], [1, 2], [2, 1], [4, 1], [5, 0], [5, 1], [5, 2]]); put(3, 1, C.pinkD); }
+    else if (hat === 'flower') { pts(C.pink, [[9, 0], [8, 1], [10, 1], [9, 2]]); put(9, 1, C.gold); }
+    // hit: the top of the head a pixel further on, as El Falcon's in Run to You
+    if (frame === 'hurt') rows[0] = [null].concat(rows[0].slice(0, SW - 1));
+    const up = gameExtras(rows, ch, 'side', { T, nT, E, cloth, clothD, skin, shoe: L.shoe, wrist: [7, T + Math.max(0, handR - 1)], hands: [[6, T + handR], [7, T + handR]] });
+    if (frame === 'sit' || frame === 'slide') { const [r, w, h] = sideSeated(rows, L, ch, frame, T + up, nT); return raster(r, w || SW, Math.max(h || SH, r.length)); }
+    return raster(rows, SW, Math.max(SH, rows.length));
+  }
+  /* Pieces only the games put on (costumes and jewels: see wear() below), never chosen in the site, painted on the
+   * finished grid of each view:
+   *   gown       the long dress down to the floor (the legs become one skirt, a darker hem; from the side the toe of the
+   *              shoe peeks out)
+   *   wrist      'bracelet' on one wrist
+   *   flowers    a print of little flowers on the top (the Hawaiian shirt); open: the shirt open on the chest
+   *   sunscreen  a stripe of sun cream on the nose
+   *   goggles    ski goggles worn over the eyes (big, mirrored lenses, the strap round the head)
+   *   coat       'puffer': a heavy padded coat (from the front and behind a pixel wider each side), long sleeves,
+   *              the quilting, a high collar
+   *   hat        'tophat' (a tall top hat, with a coloured band: hatBand) or 'skihat' (a knitted hat as wide as the
+   *              hair, a darker turn-up, the pompon sticking out on top; hatColor). They add rows over the head
+   *              (the top hat one, the knitted hat three: the crown and the pompon).
+   *   monocle    a silver monocle on the right eye
+   * Returns how many rows it added on top. */
+  function gameExtras(rows, ch, view, ctx) {
+    const ex = ch.extra || {}, E = ctx.E, T = ctx.T, nT = ctx.nT, ink = OUTLINE;
+    const put = (x, y, c) => { if (c && rows[y] && x >= 0 && x < SW) rows[y][x] = c; };
+    if (ex.flowers) for (let y = T; y < T + nT; y++) for (let x = 0; x < SW; x++) {
+      if (rows[y][x] !== ctx.cloth) continue;
+      const k = (x + 2 * (y - T)) % 5; if (k === 0) put(x, y, '#FFF6E0'); else if (k === 3 && (x + y) % 2) put(x, y, '#FFD23F');
+    }
+    if (ex.open && view === 'front') for (let y = T; y < T + Math.min(3, nT); y++) { put(6, y, ctx.skin); put(7, y, ctx.skin); }
+    if (ex.sunscreen) { if (view === 'front') { put(6, E + 1, '#FFFFFF'); put(7, E + 1, '#FFFFFF'); } else if (view === 'side') { put(12, E + 1, '#FFFFFF'); put(11, E + 1, '#FFFFFF'); } }
+    // the coat: over the body and the arms, the hands stay out
+    if (ex.coat === 'puffer') {
+      const cD = ctx.clothD, hands = ctx.hands || [];
+      for (let y = T; y < T + nT; y++) {
+        let a, b;
+        if (view === 'side') { const xs = rows[y].map((c, x) => (c && x >= 3 && x <= 12 ? x : -1)).filter(x => x >= 0); if (!xs.length) continue; a = Math.min(...xs); b = Math.max(...xs); } // from the side as wide as the body
+        else { const t = ctx.torso[y - T]; if (!t) continue; a = t[0] - 1; b = t[1] + 1; }
+        for (let x = Math.max(0, a); x <= Math.min(SW - 1, b); x++) put(x, y, (y - T) % 2 === 1 ? cD : ctx.cloth);
+        if (view !== 'side') { put(Math.max(0, a), y, cD); put(Math.min(SW - 1, b), y, cD); }
+      }
+      hands.forEach(([x, y]) => put(x, y, ctx.skin));
+      // the high collar over the neck
+      if (view === 'front') for (let x = 4; x <= 9; x++) put(x, T - 1, x === 4 || x === 9 ? cD : ctx.cloth);
+      else if (view === 'side') for (let x = 6; x <= 9; x++) put(x, T - 1, ctx.cloth);
+      else for (let x = 3; x <= 10; x++) put(x, T - 1, ctx.cloth);
+    }
+    // the hats of the games go over the hair
+    const hairW = y => { const xs = rows[y] ? rows[y].map((c, x) => (c ? x : -1)).filter(x => x >= 0) : []; return xs.length ? [Math.min(...xs), Math.max(...xs)] : null; };
+    let top = null; // what goes on the new row over the head
+    if (ex.hat === 'skihat') {
+      const hc = ex.hatColor || ctx.cloth, hd = dark(hc, 0.3), hl = mix(hc, '#ffffff', 0.35), fold = E - 2;
+      // as wide as the hair at the turn-up all the way up (a little rounder at the top), so it is bigger than the hair
+      const wf = hairW(fold) || [1, 12], A = view === 'side' ? Math.max(wf[0], 1) : wf[0], Z = view === 'side' ? Math.min(wf[1], 12) : wf[1];
+      for (let y = 0; y <= fold; y++) { const k = y === 0 ? 1 : 0; for (let x = A + k; x <= Z - k; x++) put(x, y, y === fold ? hd : (x + y) % 3 === 0 ? hl : hc); }
+      // a taller crown on a new row, and the pompon on another row above it
+      const dome = []; for (let x = A + 2; x <= Z - 2; x++) dome.push([x, (x + 1) % 3 === 0 ? hl : hc]);
+      const px = view === 'side' ? 5 : 6;
+      dome.push([px, '#FFFFFF'], [px + 1, '#E9EEF5']);
+      top = [dome, [[px, '#FFFFFF'], [px + 1, '#FFFFFF']], [[px, '#FFFFFF'], [px + 1, '#E9EEF5']]]; // the pompon: two rows over the crown
+    }
+    // the goggles worn over the eyes: mirrored lenses on the eye row and the one above, the strap round the head
+    if (ex.goggles) {
+      const y1 = E - 1, y2 = E, lt = '#FFB347', lb = '#7CC6E8', hi = '#FFF6E0';
+      if (view === 'front') {
+        const w = hairW(y1) || [1, 12];
+        for (let x = w[0]; x <= w[1]; x++) put(x, y1, ink); // the strap
+        for (let x = 2; x <= 11; x++) { put(x, y1, lt); put(x, y2, lb); }
+        put(1, y1, ink); put(12, y1, ink); put(1, y2, ink); put(12, y2, ink); put(6, y2, ink); put(7, y2, ink); put(3, y1, hi); put(8, y1, hi);
+      } else if (view === 'side') {
+        for (let x = 2; x <= 8; x++) put(x, y1, ink);
+        for (let x = 9; x <= 12; x++) { put(x, y1, lt); put(x, y2, lb); }
+        put(13, y1, ink); put(13, y2, ink); put(10, y1, hi);
+      } else { const w = hairW(y1) || [1, 12]; for (let x = w[0]; x <= w[1]; x++) put(x, y1, x === 6 || x === 7 ? lt : ink); }
+    }
+    if (ex.hat === 'tophat') {
+      const hc = '#22212A', hl = '#3A3846', band = ex.hatBand || '#D64545';
+      const crown = view === 'side' ? [4, 10] : [4, 9], brim = view === 'side' ? [2, 12] : [2, 11];
+      for (let y = 0; y <= 1; y++) for (let x = crown[0]; x <= crown[1]; x++) put(x, y, x === crown[0] + 1 ? hl : hc);
+      for (let x = crown[0]; x <= crown[1]; x++) put(x, 2, band);
+      for (let x = brim[0]; x <= brim[1]; x++) put(x, 3, hc);
+      const row = []; for (let x = crown[0]; x <= crown[1]; x++) row.push([x, x === crown[0] + 1 ? hl : hc]); top = [row]; // a row taller
+    }
+    if (ex.monocle) {
+      const g = '#C9D1DC', w = '#FFFFFF'; // silver: it shows on any hair, blond included
+      if (view === 'front') { put(8, E, g); put(10, E, g); put(9, E - 1, w); put(9, E + 1, g); put(10, E + 1, g); }
+      else if (view === 'side') { put(10, E, g); put(12, E, g); put(11, E - 1, w); put(11, E + 1, g); }
+    }
+    // the new rows over the head, from the one nearest the head upwards
+    if (top) { top.forEach(list => { const r = Array(SW).fill(null); list.forEach(([x, c]) => { r[x] = c; }); rows.unshift(r); }); return top.length; }
+    return 0;
+    if (ex.gown) {
+      const from = ctx.T + ctx.nT, last = rows.length - 1;
+      for (let y = from; y <= last; y++) {
+        const xs = rows[y].map((c, x) => (c ? x : -1)).filter(x => x >= 0); if (!xs.length) continue;
+        let a = Math.min(...xs), b = Math.max(...xs); if (y === last) { a = Math.max(0, a - 1); if (view !== 'side') b = Math.min(SW - 1, b + 1); }
+        for (let x = a; x <= b; x++) rows[y][x] = y === last ? ctx.clothD : ctx.cloth;
+        if (y === last && view === 'side') rows[y][Math.min(SW - 1, b + 1)] = ctx.shoe;
+      }
+    }
+    if (ex.wrist === 'bracelet' && ctx.wrist) { const [x, y] = ctx.wrist; if (rows[y]) rows[y][x] = C.gold; }
+  }
+  /* sitting (side view): the head, the neck and the body as standing, then the thighs forward (the seat), the shins
+   * down and the shoes. Sliding: the head and the neck, then the body leaning back and the legs out along the floor,
+   * one hand on the ground behind (a wider canvas): the same rows as El Falcon's slide in Run to You. Legs, skirt and
+   * dress keep their colours. */
+  function sideSeated(rows, L, ch, frame, T, nT) {
+    const { cloth, clothD, skin } = L, kind = L.kind, legC = L.legsC, shoe = L.shoe;
+    // the colour of the leg at a distance d from the hips: trousers all the way, shorts and skirt only near the hips
+    const gown = !!(ch.extra || {}).gown;
+    const leg = d => gown ? cloth : kind === 'pants' ? legC : kind === 'dress' ? (d < 4 ? cloth : skin) : kind === 'shorts' ? (d < 3 ? legC : skin) : (d < 3 ? legC : skin);
+    if (frame === 'sit') {
+      const out = rows.slice(0, T + nT), row = () => Array(SW).fill(null);
+      const thigh = row(); for (let x = 4; x <= 12; x++) thigh[x] = leg(x - 4); out.push(thigh);
+      for (let i = 0; i < L.nL - 1; i++) { const r = row(); r[11] = r[12] = gown ? cloth : kind === 'pants' ? legC : skin; if (gown) r[10] = cloth; out.push(r); }
+      const sh = row(); for (let x = 11; x <= 13; x++) sh[x] = shoe; out.push(sh);
+      return [out];
+    }
+    const W = 22, H = 13, wide = r => r.concat(Array(W - SW).fill(null));
+    const out = rows.slice(0, T).map(wide), row = () => Array(W).fill(null);
+    const r0 = row(), r1 = row(), r2 = row();
+    for (let x = 2; x <= 9; x++) r0[x] = cloth;
+    r1[3] = clothD; for (let x = 4; x <= 8; x++) r1[x] = cloth;
+    r2[3] = skin; for (let x = 5; x <= 7; x++) r2[x] = cloth;
+    for (let x = 10; x <= 18; x++) r0[x] = leg(x - 9);
+    for (let x = 9; x <= 19; x++) { r1[x] = leg(x - 9); r2[x] = leg(x - 9); }
+    [r1, r2].forEach(r => { r[20] = r[21] = shoe; });
+    out.push(r0, r1, r2);
+    return [out, W, H];
+  }
+
+  function buildBack(ch, frame) {
+    const L = looks(ch), { pal, B, cloth, clothD, clothL, skin, hair, top, kind } = L;
+    const st = ch.hairStyle || 'short', full = ['curly', 'afro', 'bob', 'long'].includes(st);
+    const rows = [], hairAt = [];
+    // the back of the head: hair all over (down to the neck for short hair), no face
+    L.head.rows.forEach((r, y) => rows.push([...r].map((c, x) => {
+      if (c === '.') return null;
+      // from behind the hair has the same outline as from the front, down to the chin row; only the neck shows
+      if (st === 'bald') { if (c === 'h') { hairAt.push([x, y]); return pal.h; } return y === 1 && x === 5 ? pal.L : pal.s; } // the hair at the temples, as in front
+      hairAt.push([x, y]);
+      if (st === 'undercut' && y >= 5) return pal.b;
+      if (st === 'bob' && y === 8) return pal.o;
+      return (x === 0 || x === 13 || r[x - 1] === '.' || r[x + 1] === '.') && y > 1 ? pal.o : y === 1 && (x === 5 || x === 6) && !L.head.buzz ? pal.H : pal.h;
+    })));
+    const put = (x, y, c) => { if (c && rows[y] && x >= 0 && x < SW) rows[y][x] = c; };
+    const pts = (c, list) => list.forEach(([x, y]) => put(x, y, c));
+    if (!full && st !== 'bald') pts(pal.s, [[2, 6], [11, 6]].filter(([x, y]) => rows[y][x])); // the ears under short hair
+    if (st === 'bald') pts(pal.S, [[2, 5], [2, 6], [11, 5], [11, 6]]); // the ears
+    rows.push(neckRow(st, 'back', pal)); const T = 10, nT = B.torso.length;
+    for (let i = 0; i < nT; i++) { const row = Array(SW).fill(null); for (let x = B.torso[i][0]; x <= B.torso[i][1]; x++) row[x] = cloth; rows.push(row); }
+    const skirtRows = kind === 'skirt' ? B.pants + (L.nL === 3 || B.pants === 1 ? 1 : 0) : 0;
+    const skirtWidth = k => [[1, 12], [2, 11], [3, 10]][skirtRows - 1 - k];
+    for (let i = 0; i < B.pants; i++) {
+      const row = Array(SW).fill(null);
+      if (kind === 'skirt') { const [a, b] = skirtWidth(i); for (let x = a; x <= b; x++) row[x] = i === skirtRows - 1 ? L.legsD : L.legsC; }
+      else { for (let x = 3; x <= 10; x++) row[x] = L.dress ? cloth : L.legsC; if (L.dress) { row[2] = cloth; row[11] = cloth; } }
+      rows.push(row);
+    }
+    const legSet = LEGS[B.legs] || LEGS[3], legFrames = legSet[frame === 'air' ? 'air' : frame] || legSet.stand;
+    const legPixel = k => kind === 'dress' ? (k === 0 ? clothD : skin) : kind === 'skirt' ? skin : kind === 'shorts' ? (L.nL === 3 && k === 0 ? L.legsC : skin) : L.legsC;
+    legFrames.forEach((r, k) => rows.push([...r].map(c => c === 'L' ? legPixel(k) : c === 'n' ? L.shoe : null)));
+    const firstLeg = T + nT + B.pants;
+    if (L.dress) for (let x = 2; x <= 11; x++) put(x, firstLeg, clothD);
+    else if (skirtRows > B.pants) for (let x = 1; x <= 12; x++) put(x, firstLeg, L.legsD);
+    const inTorso = (x, y) => y >= T && y < T + nT && x >= B.torso[y - T][0] && x <= B.torso[y - T][1];
+    if (top === 'plaid') for (let y = T; y < T + nT; y++) for (let x = 0; x < SW; x++) if (inTorso(x, y)) { const v = x % 3 === 1, h = (y - T) % 3 === 2; if (v && h) put(x, y, dark(cloth, 0.55)); else if (v || h) put(x, y, clothD); }
+    if (top === 'tank') for (let y = T; y < T + nT; y++) for (let x = 0; x < SW; x++) if (inTorso(x, y) && (x < 3 || x > 10)) put(x, y, skin);
+    if (top === 'stripes') { const mid = B.wide ? T + 2 : T + 1; [mid, mid + 2].forEach(y => { if (!B.torso[y - T]) return; const [a, b] = B.torso[y - T]; for (let x = a; x <= b; x++) put(x, y, clothL); }); }
+    if (top === 'overalls') { pts(L.legsC, [[4, T], [9, T], [5, T + 1], [8, T + 1], [6, T + 2], [7, T + 2]]); for (let y = T + 3; y < T + nT; y++) { const [a, b] = y === T + nT - 1 ? B.torso[y - T] : [4, 9]; for (let x = a; x <= b; x++) put(x, y, L.legsC); } }
+    if (top === 'sweater') { const [a, b] = B.torso[nT - 1]; for (let x = a; x <= b; x++) put(x, T + nT - 1, clothD); pts(clothD, [[5, T], [6, T], [7, T], [8, T]]); }
+    if (top === 'hoodie') pts(clothD, [[4, T], [5, T], [6, T], [7, T], [8, T], [9, T], [5, T + 1], [6, T + 1], [7, T + 1], [8, T + 1]]);
+    if (top === 'collar') pts(L.light ? '#c9d6ff' : C.white, [[4, T], [5, T], [6, T], [7, T], [8, T], [9, T]]);
+    if (kind === 'skirt') for (let y = T + nT - skirtUp(nT); y < T + nT; y++) { const [a, b] = B.torso[y - T]; for (let x = a; x <= b; x++) put(x, y, L.legsC); }
+    if (L.head.shoulders) L.head.shoulders.forEach(([x, c]) => put(x, T, pal[c]));
+    const sleeves = SLEEVES.includes(top);
+    B.arms.forEach(([x, a, b, k]) => { for (let r = a; r <= b; r++) put(x, T + r, k === 'cloth' && top !== 'tank' ? cloth : sleeves && k === 'skin' && r < b ? cloth : skin); });
+    // long hair down the back and a ponytail in the middle, over the clothes (checks, stripes…)
+    if (L.head.back) for (let y = T; y < T + Math.min(L.head.back, nT); y++) for (let x = 1; x <= 12; x++) { put(x, y, y === T + Math.min(L.head.back, nT) - 1 || x === 1 || x === 12 ? pal.o : hair); hairAt.push([x, y]); }
+    if (L.head.tail) { pts(C.pink, [[6, 4], [7, 4]]); for (let y = 5; y <= 8; y++) pts(pal.o, [[5, y], [8, y]]); [[6, T - 1], [7, T - 1]].forEach(([x, y]) => { put(x, y, hair); hairAt.push([x, y]); }); put(6, T - 1, pal.o); }
+    // El Falcon's curls fall two rows down the back (as from the side), with a wavy edge
+    if (st === 'curly') for (let x = 1; x <= 12; x++) { put(x, T, x === 1 || x === 12 ? pal.o : pal.h); put(x, T + 1, x % 2 ? pal.h : pal.o); hairAt.push([x, T], [x, T + 1]); }
+    // accessories seen from behind
+    const acc = L.acc, neck = acc.neck || 'none', ears = acc.ears || 'none', hat = acc.head || 'none', E = L.head.e;
+    if (hat === 'veil') { for (let y = 0; y < 9; y++) for (let x = 0; x < SW; x++) if (rows[y][x]) put(x, y, C.veil); for (let y = T; y <= T + 1; y++) for (let x = 2; x <= 11; x++) put(x, y, y === T + 1 ? C.veilD : C.veil); }
+    if (neck === 'scarf') { const sc = L.light ? C.pink : C.gold; for (let x = 3; x <= 10; x++) put(x, T, sc); for (let x = 4; x <= 9; x++) put(x, T + 1, dark(sc, 0.15)); }
+    else if (neck === 'necklace') pts(C.gold, [[6, T], [7, T]]);
+    if (ears === 'earrings') pts(C.gold, [[1, E + 1], [12, E + 1]]);
+    if ((acc.face || 'none') !== 'none') pts(acc.face === 'sunglasses' && L.gc.toLowerCase() === C.ink ? C.shades : L.gc, [[1, E], [12, E]]);
+    const mirror = list => list.map(([x, y]) => [SW - 1 - x, y]);
+    if (hat === 'cap') { const cc = L.light ? '#4D7CFE' : (cloth.toUpperCase() === '#24124A' ? C.red : clothD); for (let x = 4; x <= 9; x++) put(x, 0, cc); for (let x = 3; x <= 10; x++) put(x, 1, cc); for (let y = 2; y < E - 1; y++) for (let x = 2; x <= 11; x++) put(x, y, cc); for (let x = 2; x <= 11; x++) put(x, E - 1, dark(cc, 0.3)); pts(C.white, [[6, E - 1], [7, E - 1]]); }
+    else if (hat === 'beanie') { const bc = L.light ? C.pink : cloth; pts(C.white, [[6, 0], [7, 0]]); for (let x = 3; x <= 10; x++) put(x, 1, bc); for (let y = 2; y < E - 1; y++) for (let x = 2; x <= 11; x++) put(x, y, bc); for (let x = 2; x <= 11; x++) put(x, E - 1, dark(bc, 0.35)); }
+    else if (hat === 'strawhat') { for (let x = 4; x <= 9; x++) put(x, 0, C.straw); for (let y = 1; y <= E - 3; y++) for (let x = 3; x <= 10; x++) put(x, y, y === E - 3 ? C.red : C.straw); for (let x = 0; x <= 13; x++) put(x, E - 2, x === 0 || x === 13 ? C.strawD : C.straw); }
+    else if (hat === 'bandana') { const bd = cloth.toUpperCase() === '#D64545' || cloth.toUpperCase() === '#FF3D7F' ? C.blue : C.red; for (let y = 0; y <= E - 2; y++) for (let x = 2; x <= 11; x++) if (rows[y][x] || y === E - 2) put(x, y, (x + y) % 3 === 0 && y < E - 2 ? C.white : bd); pts(dark(bd, 0.25), [[6, E - 1], [7, E - 1], [5, E], [8, E]]); }
+    else if (hat === 'headphones') { for (let x = 4; x <= 9; x++) put(x, 0, C.ink); pts(C.ink, [[3, 1], [10, 1], [2, 2], [11, 2]]); for (let y = E - 1; y <= E + 1; y++) { pts(C.pinkD, [[0, y], [1, y]]); pts(C.pink, [[12, y], [13, y]]); } }
+    else if (hat === 'crown') { pts(C.gold, [[4, 0], [6, 0], [7, 0], [9, 0]]); for (let x = 4; x <= 9; x++) put(x, 1, C.gold); put(4, 1, C.goldD); }
+    else if (hat === 'bow') { pts(C.pink, mirror([[9, 0], [9, 1], [9, 2], [10, 1], [12, 1], [13, 0], [13, 1], [13, 2]])); put(2, 1, C.pinkD); }
+    else if (hat === 'flower') { pts(C.pink, mirror([[11, 0], [10, 1], [12, 1], [11, 2]])); put(2, 1, C.gold); }
+    { const sk = B.arms.filter(a => a[3] === 'skin').sort((p, q) => p[0] - q[0])[0]; // from behind the right arm is on the left
+      gameExtras(rows, ch, 'back', { T, nT, E, cloth, clothD: L.clothD, skin: L.skin, shoe: L.shoe, torso: B.torso, wrist: sk ? [sk[0], T + Math.max(sk[1], sk[2] - 1)] : null, hands: B.arms.filter(a => a[3] === 'skin').map(a => [a[0], T + a[2]]) }); }
+    return raster(rows, SW, Math.max(SH, rows.length));
+  }
+
+  const cache = new Map();
+  /** The character as a 16×24 canvas. Missing values keep the drawer's own fallbacks, so a partial look still draws. */
+  function sprite(ch, opts) {
+    opts = opts || {};
+    const c = upgrade(ch), a = c.accessories;
+    const mood = opts.mood || '', frame = opts.frame || 'stand', armsUp = !!opts.armsUp, view = opts.view === 'side' || opts.view === 'back' ? opts.view : 'front';
+    const key = [c.skin, c.body, c.height || '', c.hairStyle, c.hairColor, c.facialHair, c.brows, c.blush, c.freckles, c.eyes, c.eyeShape || '', c.mouth || '', c.outfit, c.top, c.legs || '', c.pants, c.shoes,
+      a.head || '', a.face || '', a.ears || '', a.neck || '', c.glassesColor || '', mood, frame, armsUp ? 1 : 0, view, c.extra ? JSON.stringify(c.extra) : ''].join('|');
+    let s = cache.get(key);
+    if (!s) { s = view === 'side' ? buildSide(c, mood, frame) : view === 'back' ? buildBack(c, frame) : build(c, mood, frame, armsUp); cache.set(key, s); }
+    return s;
+  }
+
+  /* ---------- costumes and jewels (for the games: never shown or saved in the site) ----------
+   * A costume is a «look»: the fields of the character it changes ({ top: 'dress', outfit: '#1E2A5E', accessories:
+   * { neck: 'necklace' }, extra: { gown: true } }): any colour, the accessories one zone at a time, the game pieces in
+   * «extra». wear(ch, look1, look2…) puts them on in order and gives back the character dressed (its own hair, face and
+   * body stay); pass that to sprite(). The fixed costumes and the jewels are the same in every game; a game adds its
+   * own (e.g. one per world in Run to You) in the same format. Added 24 nov 2026. */
+  const COSTUMES = {
+    tintarella: { name: 'Tintarella', look: { top: 'collar', outfit: '#FF7A59', legs: 'shorts', pants: '#2F5FB8', shoes: '#F2C94C', accessories: { face: 'none' }, extra: { flowers: true, open: true, sunscreen: true } } },
+    settimana: { name: 'Settimana bianca', look: { top: 'jacket', outfit: '#E23B3B', legs: 'pants', pants: '#26222E', shoes: '#26222E', accessories: { head: 'none', face: 'none', neck: 'none' }, extra: { coat: 'puffer', hat: 'skihat', hatColor: '#2F5FB8', goggles: true } } }
+  };
+  // «In blu», «In giallo»…: the character's own clothes with the top in another colour. recolors(ch, n) picks the n
+  // colours of the site's palette farthest from the one it has (and from each other), so the change always shows.
+  const COLOR_NAMES = { '#FF3D7F': 'rosa', '#4D7CFE': 'blu', '#FFD23F': 'giallo', '#9B6BFF': 'viola', '#FF7A59': 'arancione', '#1F5C3A': 'verde', '#22D3A6': 'turchese' }; // the bright ones (short names: they fit the shop cards)
+  // the name of the top in the shop, and its gender (the colour agrees: «Maglietta gialla», «Maglione giallo»)
+  const TOP_NOUN = { heart: ['Maglietta', 'f'], plain: ['Maglietta', 'f'], stripes: ['Righe', 'fp'], collar: ['Polo', 'f'], plaid: ['Camicia', 'f'], sweater: ['Maglione', 'm'], hoodie: ['Felpa', 'f'], jacket: ['Giacca', 'f'], tank: ['Canottiera', 'f'], overalls: ['Salopette', 'f'], dress: ['Vestito', 'm'] };
+  const AGREE = { giallo: { f: 'gialla', fp: 'gialle' }, arancione: { fp: 'arancioni' }, verde: { fp: 'verdi' } };
+  const colourName = (c, g) => { const base = COLOR_NAMES[c]; return (AGREE[base] || {})[g] || base; };
+  function recolors(ch, n) {
+    const up = upgrade(ch), own = hex(up.outfit || '#d64545'), d = (p, q) => Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]), picked = [];
+    const [noun, g] = TOP_NOUN[up.top] || ['Maglietta', 'f'];
+    for (let i = 0; i < (n || 2); i++) {
+      const best = Object.keys(COLOR_NAMES).filter(c => !picked.includes(c)).map(c => [c, Math.min(d(hex(c), own), ...picked.map(p => d(hex(c), hex(p))))]).sort((p, q) => q[1] - p[1])[0];
+      if (best) picked.push(best[0]);
+    }
+    return picked.map((c, i) => ({ id: 'col' + (i + 1), name: noun + ' ' + colourName(c, g), look: { outfit: c } }));
+  }
+  const JEWELS = {
+    o: { name: 'Orecchini', look: { accessories: { ears: 'earrings' } } },
+    b: { name: 'Bracciale', look: { extra: { wrist: 'bracelet' } } },
+    c: { name: 'Collana', look: { accessories: { neck: 'necklace' } } }
+  };
+  function wear(ch, ...wearing) {
+    const out = upgrade(ch);
+    wearing.forEach(w => {
+      const l = w && w.look ? w.look : w; if (!l) return;
+      Object.keys(l).forEach(k => {
+        if (k === 'accessories') out.accessories = Object.assign({}, out.accessories, l.accessories);
+        else if (k === 'extra') out.extra = Object.assign({}, out.extra, l.extra);
+        else out[k] = l[k];
+      });
+    });
+    return out;
+  }
+
+  return { VERSION, OPTIONS, DEFAULTS, FIELDS, ZONES, GRID: { w: SW, h: SH }, normalize, validate, sprite, COSTUMES, JEWELS, wear, recolors };
+});
 </script>
 <script>
 /* motore/sprites.js */
@@ -1565,6 +2468,67 @@ const LOOKS = {
 
 </script>
 <script>
+/* catalogo/boss.js */
+/* Playtale (copiato da run-to-you-base) — i boss disegnati per gli ordini e i loro proiettili. Un boss per nome (antagonista.aspetto):
+ * { rows, walk, map }: 20 righe di fronte (decisione del 24 novembre: un disegno solo, 20 nelle scene, 40 nelle tappe),
+ * «walk» sono le ultime 3 righe nel passo. Se il boss è una persona si può anche usare uno dei personaggi di
+ * motore/sprites.js (LOOKS) con «alto». Proiettili: { frames: [righe, righe], pal } di 8 × 7, due fotogrammi che si
+ * alternano (il quaderno del Dott. Valore Aggiunto, «note», è nel motore). Ogni disegno nuovo resta qui. */
+'use strict';
+const BOSS_DISEGNI = {
+  // il Conte Posponi (dal ritardo): una sveglia con le campane, le tacche delle ore, gli occhi chiusi dal sonno e le lancette in ritardo, in
+  // pigiama a righe azzurro, guanti bianchi e pantofole rosse
+  conte: {
+    rows: [
+      '.BB........BB.',
+      'BBBB.kkkk.BBBB',
+      '.BbkkRRRRkkbB.',
+      '..kRRRRRRRRk..',
+      '.kRWWWttWWWRk.',
+      '.kRWeeWWeeWRk.',
+      '.kRtWWWWWWtRk.',
+      '.kRWWWWkWWWRk.',
+      '.kRWWWWkkkWRk.',
+      '.kRWWWWWWWWRk.',
+      '..kRWWttWWRk..',
+      '...kkRRRRkk...',
+      '..PPpPPPPpPP..',
+      '.wPPpPPPPpPPw.',
+      '.wPPpPPPPpPPw.',
+      '..PPpPPPPpPP..',
+      '..PPpP..PpPP..',
+      '..PPpP..PpPP..',
+      '.SSSSS..SSSSS.',
+      '.SSSSS..SSSSS.'
+    ],
+    walk: ['..PPpP..SSSSS.', '.SSSSS........', '.SSSSS........'],
+    map: { B: '#e9b52a', b: '#a8761a', R: '#d64545', W: '#fff6e0', e: '#2a1a2e', t: '#c9a46a', P: '#9cc8f0', p: '#5a8ac0', w: '#ffffff', S: '#c0392b' }
+  }
+};
+const PROIETTILI = {
+  // una sveglia che suona: le campane che tremano
+  sveglia: {
+    frames: [
+      ['.B....B.', 'BBkkkkBB', '.kRRRRk.', 'kRWWkWRk', 'kRWWkkRk', 'kRWWWWRk', '.kkkkkk.'],
+      ['B......B', '.BkkkkB.', '.kRRRRk.', 'kRWWkWRk', 'kRWWkkRk', 'kRWWWWRk', '.kkkkkk.']
+    ],
+    pal: { k: '#1a1024', B: '#e9b52a', R: '#d64545', W: '#fff6e0' }
+  }
+};
+// the drawn bosses become «looks» like the others: humanoidSprite draws them from their rows (with the steps)
+for (const id in BOSS_DISEGNI) LOOKS[id] = Object.assign({ disegnato: true }, BOSS_DISEGNI[id]);
+{
+  const hs = humanoidSprite;
+  humanoidSprite = function (id, o, scale = 1) {
+    if (!o || !o.disegnato) return hs(id, o, scale);
+    const key = 'hum_' + id + '_' + scale; if (SPRITE_CACHE[key]) return SPRITE_CACHE[key];
+    const base = outlineCanvas(rowsToCanvas(o.rows, o.map, scale));
+    const walk = o.rows.slice(0, o.rows.length - o.walk.length).concat(o.walk), walkC = outlineCanvas(rowsToCanvas(walk, o.map, scale));
+    return (SPRITE_CACHE[key] = { down_stand: base, down_a: walkC, right: base, left: flipCanvas(base), a: walkC, aL: flipCanvas(walkC) });
+  };
+}
+</script>
+<script>
 /* motore/audio.js */
 /* Copiato da Operazione Viaggettino (sola lettura) con tools/extract.js. Non modificare a mano. */
 // ===== Chiptune music & sound effects (WebAudio, generated) =====
@@ -2036,8 +3000,26 @@ const VG = (() => {
   }
 
   // ---------- sprites ----------
-  const falcon = (dir = 'right', f = 'stand') => falconFrames()[dir + '_' + f];
-  const crocco = (dir = 'left', f = 'stand') => charFrames('crocco')[dir + '_' + f];
+  // ---------- the two protagonists ----------
+  // Drawn from the order: the customer's choices from the Playtale site («v»: drawn by PTAvatar, avatar.js, as in Memory
+  // Lane and Run to You), or the two of the original drawn by hand («disegno»: only Sara's game). A is always the one who
+  // answers (testi.js has already swapped them when the gift is for B). The ids falcon / crocco stay: A and B.
+  const heroCh = k => { const p = ((window.ORDINE.protagonisti || {})[k] || {}).personaggio || {}; return p.v && window.PTAvatar ? PTAvatar.normalize(p) : null; };
+  const HERO = { a: heroCh('a'), b: heroCh('b') }, heroCache = {};
+  function avFrames(k) {
+    if (heroCache[k]) return heroCache[k];
+    const ch = HERO[k], out = {};
+    for (const f of ['stand', 'a', 'b']) {
+      const side = PTAvatar.sprite(ch, { view: 'side', frame: f });
+      out['down_' + f] = PTAvatar.sprite(ch, { frame: f }); out['up_' + f] = PTAvatar.sprite(ch, { view: 'back', frame: f });
+      out['right_' + f] = side; out['left_' + f] = flipCanvas(side);
+    }
+    return (heroCache[k] = out);
+  }
+  const falcon = (dir = 'right', f = 'stand') => (HERO.a ? avFrames('a') : falconFrames())[dir + '_' + f];
+  const crocco = (dir = 'left', f = 'stand') => (HERO.b ? avFrames('b') : charFrames('crocco'))[dir + '_' + f];
+  // the reactions of the customer's characters, front view: arms up (a right answer), sad (a wrong one); null when drawn by hand
+  const react = (k, how) => HERO[k] ? PTAvatar.sprite(HERO[k], how === 'up' ? { armsUp: true, mood: 'wow' } : { mood: 'sad' }) : null;
   const npc = (look, f = 'down_stand') => humanoidSprite(look, LOOKS[look])[f];
   const item = (name, scale = 1, outline = true) => customSprite(name, scale, outline);
   const fromRows = (key, rows, map, outline = true) => {
@@ -2499,7 +3481,7 @@ const VG = (() => {
   unlockOnce();
   const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready.catch(() => { }) : Promise.resolve();
 
-  return { byId, el, clamp, rnd, pick, shuffle, wait, REDUCED, TOUCH, store, falcon, crocco, npc, item, fromRows, recolor, white, draw, SPEAKERS, speakerImg, portrait, Dialog, say: l => Dialog.say(l), toast, muteChip, stage, R, bands, stars, confetti, drawConfetti, DEDICA, ending, postcardCard, developPhoto, sayCard, countUp, COSTUMES, JEWELS, look, saveLook, landscapeGuard, tryFullscreenLandscape, fontsReady };
+  return { byId, el, clamp, rnd, pick, shuffle, wait, REDUCED, TOUCH, store, falcon, crocco, react, npc, item, fromRows, recolor, white, draw, SPEAKERS, speakerImg, portrait, Dialog, say: l => Dialog.say(l), toast, muteChip, stage, R, bands, stars, confetti, drawConfetti, DEDICA, ending, postcardCard, developPhoto, sayCard, countUp, COSTUMES, JEWELS, look, saveLook, landscapeGuard, tryFullscreenLandscape, fontsReady };
 })();
 
 </script>
@@ -2665,7 +3647,7 @@ const VG = (() => {
 
   // ---------------- the Consulente Grigio (as in Memory Lane) and his challenges ----------------
   const ANT = window.ORDINE.antagonista;
-  const PEST = { look: ANT.aspetto, name: ANT.nome, title: ANT.motto, of: TXT.withPrep('di', ANT.nome), note: 'Questa la tengo io.',
+  const PEST = { look: ANT.aspetto, name: ANT.nome, title: ANT.presentazione, of: TXT.withPrep('di', ANT.nome), note: 'Questa la tengo io.',
     steal: ['Credevi fosse finita? L\'ultima foto dell\'Album ce l\'ho io.', 'Volete riaverla? Superate le mie sfide nella Sfida lampo. Forse ve la ridò.'],
     defeat: ['Va bene, va bene… avete vinto voi.', 'Tenetevela, la vostra foto. Ma non finisce qui!'] };
   // the missing photo: the two of them together (note: sample text, the real one comes from the order form)
@@ -2901,7 +3883,7 @@ const VG = (() => {
     const cj = scene.croccoJump > 0 ? Math.abs(Math.sin(scene.croccoJump * 10)) * 8 : 0;
     const bob = Math.floor(t * 2) % 2;
     // (in the close-up of the intro they stand nearer the table, to stay in the frame)
-    let fx = tx + (IN ? 28 : TM ? 40 : Math.min(46, w * 0.27)), kx = tx - (IN ? 28 : TM ? 40 : Math.min(46, w * 0.27));
+    let fx = tx + (IN ? 28 : TM ? 47 : Math.min(46, w * 0.27)), kx = tx - (IN ? 28 : TM ? 47 : Math.min(46, w * 0.27));
     // the intro: they walk in from the two sides (El Falcon from the right, Il Crocco from the left)
     let fWalk = false, kWalk = false;
     if (IN) {
@@ -2915,8 +3897,11 @@ const VG = (() => {
     c.fillStyle = 'rgba(0,0,0,.3)'; c.beginPath(); c.ellipse(fx, floorY + 6, 12, 3, 0, 0, 7); c.fill(); c.beginPath(); c.ellipse(kx, floorY + 6, 12, 3, 0, 0, 7); c.fill();
     const step = ['a', 'stand', 'b', 'stand'][Math.floor(t * 8) % 4];
     const lookF = IN && IN.look ? IN.look : 'left', lookK = IN && IN.look ? IN.look : 'right';
-    big(VG.falcon(fWalk ? 'left' : lookF, fWalk ? step : scene.falconJump > 0 ? 'a' : 'stand'), fx + fs, floorY + 6 - fj - (fj || fWalk ? 0 : bob));
-    big(VG.crocco(kWalk ? 'right' : lookK, kWalk ? step : scene.croccoTalk > 0 && Math.floor(t * 8) % 2 ? 'a' : 'stand'), kx, floorY + 6 - cj);
+    // the customer's characters react: arms up when A gets it right (B too, when it jumps), sad when A is wrong
+    const rA = !IN && (scene.falconJump > 0 ? VG.react('a', 'up') : scene.sad > 0 ? VG.react('a', 'sad') : null);
+    const rB = !IN && scene.croccoJump > 0 ? VG.react('b', 'up') : null;
+    big(rA || VG.falcon(fWalk ? 'left' : lookF, fWalk ? step : scene.falconJump > 0 ? 'a' : 'stand'), fx + fs, floorY + 6 - fj - (fj || fWalk ? 0 : bob));
+    if (rB) big(rB, kx, floorY + 6 - cj); else big(VG.crocco(kWalk ? 'right' : lookK, kWalk ? step : scene.croccoTalk > 0 && Math.floor(t * 8) % 2 ? 'a' : 'stand'), kx, floorY + 6 - cj);
     // the two podiums of the contestants (not in the intro, where they walk in): dark blue, a lit top and a light strip
     if (!IN) for (const [px, col] of [[fx, '#ffd84a'], [kx, '#7cc6e8']]) {
       const pw = TM ? 34 : 24, ph = TM ? 18 : 13, pxl = Math.round(px - pw / 2), pyt = floorY + 7 - ph;
@@ -2977,7 +3962,7 @@ const VG = (() => {
         c.globalAlpha = 1;
       }
     }
-    for (const k of ['falconJump', 'falconShake', 'croccoJump', 'croccoTalk', 'spot', 'flashBulbs', 'salim', 'bolt']) scene[k] = Math.max(0, (scene[k] || 0) - dt);
+    for (const k of ['sad', 'falconJump', 'falconShake', 'croccoJump', 'croccoTalk', 'spot', 'flashBulbs', 'salim', 'bolt']) scene[k] = Math.max(0, (scene[k] || 0) - dt);
   }
   const titleSign = document.querySelector('.t-sign');
   let last = performance.now();
@@ -3042,7 +4027,7 @@ const VG = (() => {
 
   // ---------------- game flow ----------------
   // the fields of S that make a game: saved at every question, so a call or a closed tab costs nothing
-  const KEEP = ['flash', 'free', 'list', 'i', 'score', 'right', 'streak', 'bestStreak', 'answers', 'tMax', 'gold', 'goldOk', 'goldShown', 'bolts', 'double', 'dqAsked', 'doubleOk', 'newCards', 'orderAt', 'orderShown', 'orderOk'];
+  const KEEP = ['wheelAt', 'wheelMul', 'flash', 'free', 'list', 'i', 'score', 'right', 'streak', 'bestStreak', 'answers', 'tMax', 'gold', 'goldOk', 'goldShown', 'bolts', 'double', 'dqAsked', 'doubleOk', 'newCards', 'orderAt', 'orderShown', 'orderOk'];
   // ---------------- the intro of the first game: a scene at the bar (same style as Memory Lane) ----------------
   // a close-up of the bar: they walk in, Il Crocco holds up the Album, it opens and the twelve postcards fly behind Salim's counter;
   // then the black circle with the title. The lines come from CONTENT.intro: ['scena','album'] puts the Album
@@ -3132,7 +4117,7 @@ const VG = (() => {
       S.goldShown = false; S.bolts = 0; S.double = false; S.dqAsked = false; S.doubleOk = false; S.newCards = [];
       // «Metti in ordine»: once per game (not in the Sfida lampo), halfway, never right before the golden question
       const half = Math.floor(S.list.length / 2);
-      S.orderAt = !flash && ((CONTENT.chrono || []).length >= 4 || ALBUM.length >= 12) ? (half === S.gold ? half + 1 : half) : -1; S.orderShown = false; S.orderOk = null;
+      S.orderAt = !flash ? (half === S.gold ? half + 1 : half) : -1; S.wheelAt = -1; S.wheelMul = 0; S.orderShown = false; S.orderOk = null;
       saveCur();
     }
     byId('end').hidden = true; byId('quiz').hidden = true; byId('b-exit').hidden = false;
@@ -3251,7 +4236,8 @@ const VG = (() => {
     }
     if (S.i === S.orderAt && !S.orderShown) {
       const run = S.run; S.orderShown = true; saveCur();
-      S.orderOk = await ((CONTENT.chrono || []).length >= 4 ? orderGame() : matchGame()); saveCur();
+      if ((CONTENT.chrono || []).length >= 4) S.orderOk = await orderGame(); else { S.wheelMul = await wheelGame(); S.wheelAt = S.i; S.orderOk = S.wheelMul; }
+      saveCur();
       if (run !== S.run || S.mode !== 'play') return;
     }
     if (S.i === S.gold && !S.goldShown) {
@@ -3323,66 +4309,45 @@ const VG = (() => {
     });
   }
   // the golden question gets its own entrance: rays, a medal, a ribbon and a fanfare (a tap skips it)
-  // «Abbina»: one memory of each chapter and the four places; tap a memory, then the place where it happened
-  // (built from the order by itself: in the Album every chapter is its place and two memories)
-  function matchGame() {
+  // the wheel of the show (halfway through a game): one spin, ×2 or ×3 on the next question, or nothing
+  const WHEEL = [2, 0, 3, 2, 0, 2, 3, 2];   // eight slices: ×2 half of the times, ×3 a quarter, nothing a quarter
+  function wheelGame() {
     return new Promise(res => {
       const run = S.run;
-      const places = [0, 1, 2, 3].map(c => ALBUM[c * 3]);
-      const mems = shuffle([0, 1, 2, 3].map(c => ({ e: ALBUM[c * 3 + 1 + (Math.random() < 0.5 ? 0 : 1)], want: c })));
       const box = byId('quiz'); box.hidden = false; box.innerHTML = '';
-      const card = el('div', 'q-card pop order match', `<div class="q-top"><span class="q-eyebrow">Abbina</span><span class="q-score"><span class="q-pts">${S.score}</span> punti</span></div><p class="q-text">Ogni ricordo al suo posto.</p><div class="ord-grid abb-grid"></div><div class="abb-pls"></div><p class="ord-note">Tocca un ricordo, poi il luogo dove è successo.</p>`);
-      const grid = card.querySelector('.abb-grid'), pls = card.querySelector('.abb-pls'), note = card.querySelector('.ord-note');
-      let sel = 0, done = false;
-      const got = mems.map(() => -1);
-      const cells = mems.map((m, i) => {
-        const b = el('button', 'ord abb', `<canvas width="96" height="64" aria-hidden="true"></canvas><span class="abb-txt"><span class="ord-name">${m.e.name}</span><span class="abb-to"></span></span>`);
-        b.type = 'button'; b.dataset.c = m.want; paintPc(b.querySelector('canvas'), m.e.i);
-        b.onclick = () => { if (done || run !== S.run) return; sel = i; Audio.sfx('tap'); paint(); };
-        grid.appendChild(b); return b;
-      });
-      const chips = places.map((p, c) => {
-        const b = el('button', 'abb-pl', p.name.split(' · ')[0]); b.type = 'button'; b.dataset.c = c;
-        b.onclick = () => {
-          if (done || run !== S.run) return;
-          got.forEach((g, i) => { if (g === c) got[i] = -1; });   // a place goes to one memory only
-          got[sel] = c; Audio.sfx('tap');
-          const next = got.findIndex(g => g < 0); if (next >= 0) sel = next;
-          paint();
-          if (got.every(g => g >= 0)) check();
-        };
-        pls.appendChild(b); return b;
-      });
-      const paint = () => {
-        cells.forEach((b, i) => { b.classList.toggle('on', i === sel && !done); b.querySelector('.abb-to').textContent = got[i] >= 0 ? '→ ' + places[got[i]].name.split(' · ')[0] : ''; });
-        chips.forEach((b, c) => b.classList.toggle('used', got.includes(c)));
-      };
-      const check = async () => {
-        done = true; paint(); await wait(350);
-        if (run !== S.run) { res(null); return; }
-        const ok = mems.every((m, i) => got[i] === m.want);
-        cells.forEach((b, i) => {
-          const good = got[i] === mems[i].want; b.classList.add(good ? 'good' : 'bad'); b.disabled = true;
-          if (!good) b.querySelector('.abb-to').textContent = '→ ' + places[mems[i].want].name.split(' · ')[0];   // where it belonged
-        });
-        chips.forEach(b => b.disabled = true);
-        if (ok) {
-          const before = S.score; S.score += CONTENT.orderPts;
-          countFrom(card.querySelector('.q-pts'), before, S.score, 700);
-          Audio.sfx('solve'); scene.falconJump = 1; scene.croccoJump = 0.8; scene.flashBulbs = 1.5;
-          scene.conf.push(...VG.confetti(50, st.VW, st.VH * 0.4));
-          popText('+' + CONTENT.orderPts, { col: '#ffd84a' });
-          note.textContent = 'Tutto giusto!';
+      const n = WHEEL.length, slice = 360 / n, COL = { 2: '#46b8ff', 3: '#ffd84a', 0: '#3a2f6a' };
+      const grad = WHEEL.map((v, i) => `${COL[v]} ${i * slice}deg ${(i + 1) * slice}deg`).join(', ');
+      const labels = WHEEL.map((v, i) => { const a = (i * slice + slice / 2) * Math.PI / 180; return `<span class="wh-l" style="left:${(50 + 34 * Math.sin(a)).toFixed(1)}%;top:${(50 - 34 * Math.cos(a)).toFixed(1)}%;transform:translate(-50%,-50%) rotate(${i * slice + slice / 2}deg)">${v ? '×' + v : '—'}</span>`; }).join('');
+      const card = el('div', 'q-card pop wheel-card', `<div class="q-top"><span class="q-eyebrow">La ruota</span><span class="q-score"><span class="q-pts">${S.score}</span> punti</span></div><p class="q-text">Gira la ruota!</p>
+        <div class="wh-wrap"><i class="wh-pin" aria-hidden="true"></i><div class="wh" style="background: conic-gradient(${grad})">${labels}<b class="wh-hub">?</b></div></div>
+        <p class="ord-note">Vale per la prossima domanda.</p>`);
+      const go = el('button', 'btn primary wide go-btn', 'Gira'); go.type = 'button'; card.appendChild(go);
+      const wh = card.querySelector('.wh'), note = card.querySelector('.ord-note');
+      go.onclick = async () => {
+        if (run !== S.run || go.disabled) return;
+        go.disabled = true; Audio.sfx('tap');
+        const k = Math.floor(Math.random() * n), v = WHEEL[k];
+        // the pin is on top: the chosen slice ends there, after a few full turns
+        const turn = 360 * 5 + (360 - (k * slice + slice / 2)) + rnd(-slice * 0.3, slice * 0.3);
+        wh.style.transition = VG.REDUCED ? 'none' : 'transform 3.2s cubic-bezier(.15,.75,.2,1)'; wh.style.transform = `rotate(${turn}deg)`;
+        const tick = VG.REDUCED ? 0 : setInterval(() => Audio.sfx('text'), 120);
+        await wait(VG.REDUCED ? 100 : 3300); clearInterval(tick);
+        if (run !== S.run) { res(0); return; }
+        go.remove();
+        if (v) {
+          Audio.sfx('solve'); scene.flashBulbs = 1.5; scene.spot = 1; scene.spotCol = '#ffd84a';
+          note.textContent = `×${v} sulla prossima domanda!`;
+          popText('×' + v, { col: '#ffd84a', x: st.VW / 2, y: layout().h * 0.32 });
         } else {
-          Audio.sfx('error'); scene.falconShake = 0.5;
-          note.textContent = 'Quasi: ecco dove andavano';
+          Audio.sfx('error'); note.textContent = 'Niente. Che peccato… per voi.';
         }
-        announce(ok ? `Tutto giusto! Più ${CONTENT.orderPts} punti.` : 'Quasi: ecco dove andavano.');
-        await wait(ok ? 1400 : 2600);
-        if (run !== S.run) { res(null); return; }
-        res(ok);
+        announce(note.textContent);
+        await wait(1600);
+        if (run !== S.run) { res(0); return; }
+        res(v);
       };
-      paint(); box.appendChild(card);
+      box.appendChild(card);
+      setTimeout(() => { if (go.isConnected) go.focus(); }, 400);
     });
   }
   // «Metti in ordine» (only Sara's game): four trips at random, tapped from the first to the last (the order is in CONTENT.chrono)
@@ -3530,7 +4495,8 @@ const VG = (() => {
       const speed = clamp(S.tLeft / (S.tMax + S.extra), 0, 1);
       const mul = S.streak >= 5 ? 2 : S.streak >= 3 ? 1.5 : 1;
       const isGold = S.i === S.gold; if (isGold) S.goldOk = true;
-      gained = Math.round((100 + speed * 100) * mul * (isGold ? 3 : 1) / 5) * 5;
+      const wheel = S.wheelAt === S.i && S.wheelMul > 1 ? S.wheelMul : 1;   // the wheel of the show, on this question
+      gained = Math.round((100 + speed * 100) * mul * (isGold ? 3 : 1) * wheel / 5) * 5;
       // Fulmine: right within the first seconds
       const elapsed = S.tMax + S.extra - S.tLeft; bolt = elapsed < (S.flash ? CONTENT.boltSecsFlash : CONTENT.boltSecs);
       if (bolt) {
@@ -3544,7 +4510,7 @@ const VG = (() => {
       Audio.sfx('solve'); scene.falconJump = 1; scene.croccoJump = 0.8; scene.spot = 1; scene.spotCol = '#ffd84a'; scene.flashBulbs = 1.5;
       scene.conf.push(...VG.confetti(40, st.VW, st.VH * 0.4));
       for (let i = 0; i < 4; i++) scene.hearts.push({ x: st.VW / 2 + rnd(-30, 30), y: layout().h * 0.6, life: 1.4 + i * 0.2 });
-      popText('+' + (gained - (bolt ? 50 : 0)) + (isGold ? ' ×3' : mul > 1 ? ' ×' + mul : ''), { col: isGold ? '#fff0a8' : mul > 1 ? '#ff8a73' : '#ffd84a', y: bolt ? (scene.falconTop || st.VH * 0.4) + 4 : undefined });
+      popText('+' + (gained - (bolt ? 50 : 0)) + (isGold ? ' ×3' : wheel > 1 ? ' ×' + wheel : mul > 1 ? ' ×' + mul : ''), { col: isGold ? '#fff0a8' : mul > 1 ? '#ff8a73' : '#ffd84a', y: bolt ? (scene.falconTop || st.VH * 0.4) + 4 : undefined });
       const sc = document.querySelector('.q-score'); if (sc) { const pts = sc.querySelector('.q-pts'); countFrom(pts, parseInt(pts.textContent, 10) || 0, S.score, 700); sc.querySelector('.streak') && sc.querySelector('.streak').remove(); sc.classList.remove('bump'); void sc.offsetWidth; sc.classList.add('bump'); }
       if (S.streak === 3 || S.streak === 5) setTimeout(() => Audio.tune([['C5', 0], ['E5', 1], ['G5', 2], ['C6', 3, 2]], 0.09), 380);
     } else {
@@ -3553,7 +4519,7 @@ const VG = (() => {
       if (btn) btn.classList.add('wrong');
       if (q.tf && S.flash) { right.classList.add('right'); buttons.forEach(b => { if (b !== btn && b !== right) b.classList.add('dim'); }); }
       else buttons.forEach(b => { if (b !== btn) b.classList.add('dim'); });   // no hint: the right answer stays a secret
-      Audio.sfx(btn ? 'error' : 'hurt'); scene.falconShake = 0.5; scene.spot = 0.8; scene.spotCol = '#ff6b57';
+      Audio.sfx(btn ? 'error' : 'hurt'); scene.falconShake = 0.5; scene.sad = 1.8; scene.spot = 0.8; scene.spotCol = '#ff6b57';
     }
     // the album: every answer counts for the letter, two right answers on the same place unlock its postcard
     let newCard = -1;
@@ -3658,7 +4624,7 @@ const VG = (() => {
     row('it', (S.flash ? 'SFIDA LAMPO' : S.free ? 'PARTITA LIBERA' : CONTENT.title.name.toUpperCase()));
     line(S.flash ? 'FRASI GIUSTE' : 'RISPOSTE GIUSTE', `${S.right}/${S.list.length}`);
     if (!S.flash && S.gold >= 0 && S.gold < S.list.length) line('DOMANDA D\'ORO X3', S.goldOk ? 'PRESA' : 'PERSA');
-    if (!S.flash && S.orderShown && S.orderOk != null) line((CONTENT.chrono || []).length >= 4 ? 'METTI IN ORDINE' : 'ABBINA', S.orderOk ? '+' + CONTENT.orderPts : 'MANCATO');
+    if (!S.flash && S.orderShown && S.orderOk != null) { if ((CONTENT.chrono || []).length >= 4) line('METTI IN ORDINE', S.orderOk ? '+' + CONTENT.orderPts : 'MANCATO'); else line('RUOTA', S.orderOk > 1 ? '×' + S.orderOk : 'NIENTE'); }
     // the lines that make every receipt its own: the fastest right answer, the only wrong one
     const place = q => ALBUM[q.ai].name.split(' · ')[0].toUpperCase();
     const fast = S.answers.map((a, i) => a && a.ok && a.t != null ? { t: a.t, q: S.list[i] } : null).filter(Boolean).sort((x, y) => x.t - y.t)[0];
