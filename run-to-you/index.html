@@ -1080,8 +1080,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia","punti":[{"disegno":"faro","at":0.3},{"disegno":"gatto","at":0.55}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"#8E929E","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"],"consegne":["Ecco il report del weekend. Sì, era sabato, ma il valore non va mica in vacanza.","Altre slide da rivedere! Le ferie? Le mettiamo in agenda dopo la prossima riunione.","Il piano ferie, approvato: zero giorni. Ottimizzato per creare valore."],"cappello":"tophat"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "eee583b";
-window.SALVATAGGIO = "rty_viaggettino_eee583b_";
+window.VERSIONE = "2d4e511";
+window.SALVATAGGIO = "rty_viaggettino_2d4e511_";
 window.MODALITA = "prova";
 </script>
 <script>
@@ -4627,7 +4627,7 @@ const CARTE = (() => {
       R(c, 49, 34, 1, 1, '#fff8c0'); R(c, 48, 36, 1, 1, '#fff8c0'); R(c, 49, 38, 1, 1, '#fff8c0');   // the smack
     },
     // ---------------------------------------------------------------- ordine «mauro-48» (Quiz of Us, 25 novembre 2026)
-    // Sperlonga: Lautaro, il topolino piccolo e innocuo (nello stile degli animali di Olly): seduto vicino alla sua tana
+    // Sperlonga: Lautaro, il topolino piccolo e innocuo (in motore/animali.js): seduto vicino alla sua tana
     // nello zoccolo della cucina, con una briciola di formaggio tra le zampe; le piastrelle, la luce dalla finestra
     lautaro(c) {
       R(c, 0, 0, 96, 40, '#f6e8cc'); for (let y = 0; y < 40; y += 8) for (let x = (y % 16) ? 4 : 0; x < 96; x += 8) R(c, x, y, 1, 8, '#e8d8b8');
@@ -4635,10 +4635,7 @@ const CARTE = (() => {
       R(c, 0, 36, 96, 6, '#a07a4a'); R(c, 0, 36, 96, 1, '#c89a64');                                                  // the skirting board
       R(c, 14, 30, 12, 12, '#2a1a1a'); R(c, 14, 29, 12, 2, '#a07a4a'); c.fillStyle = '#2a1a1a'; c.beginPath(); c.arc(20, 30, 6, Math.PI, 0); c.fill();   // the burrow
       R(c, 0, 42, 96, 22, '#d8c8a8'); for (let x = 0; x < 96; x += 12) R(c, x, 42, 1, 22, '#c8b898'); for (let y = 50; y < 64; y += 8) R(c, 0, y, 96, 1, '#c8b898');
-      const topo = pixelSprite([
-        '...pp......pp...', '..pPPp....pPPp..', '..pPPpGGGGpPPp..', '...ppGGGGGGpp...', '....GGeGGeGG....', '....GGGGGGGG....',
-        '.....GGnnGG.....', '......gGGg......', '.....gGGGGg.....', '....gGGWWGGg....', '...gGGWWWWGGg...', '...gGGWWWWGGg...', '...ggGGggGGgg...', '....hh....hh....'],
-        { p: '#8a8f9c', P: '#f2a3b0', G: '#b8bcc8', g: '#8a8f9c', e: '#1a1024', n: '#e86a7a', W: '#eef0f4', h: '#f2a3b0' });
+      const topo = PTAnimali.sprite('topolino_lautaro');   // in motore/animali.js
       c.globalAlpha = 0.25; R(c, 40, 59, 34, 3, '#3a2a1a'); c.globalAlpha = 1;
       bigS(c, topo, 56, 60, 2);
       for (const [dx, dy] of [[-1, 0], [-1, 2], [1, 0], [1, 2]]) for (let i = 1; i <= 6; i++) R(c, 56 + dx * (3 + i), 44 + dy + (dy ? Math.floor(i / 3) : -Math.floor(i / 4)), 1, 1, '#5a5f6c');   // whiskers
@@ -4705,18 +4702,14 @@ const CARTE = (() => {
       R(c, 82, 44, 12, 12, '#ffffff'); R(c, 82, 44, 12, 1, '#d64545');
       for (let i = 0; i < 2; i++) for (let y = 0; y < 6; y++) R(c, 40 + i * 14 + Math.round(Math.sin(y + i)), 35 - y, 1, 1, 'rgba(255,255,255,.5)');
     },
-    // Piazza Bologna: Dumfries, il cane di Theo (nello stile di Olly): seduto, la coda che scodinzola, il collare
+    // Piazza Bologna: Dumfries, il cane di Theo (in motore/animali.js): seduto, la coda che scodinzola, il collare
     // rossonero, il guinzaglio tenuto da una mano fuori dal disegno; dietro i lampioni e i tavolini della piazza
     dumfries(c) {
       VG.bands(c, 96, 40, ['#5a4a8a', '#8a6a9a', '#c88a9a', '#e8a88a']);
       R(c, 0, 26, 96, 14, '#c8bca0'); for (let x = 2; x < 96; x += 6) R(c, x, 28, 3, 8, '#ffd88a');                   // the lit front of the post office behind
       R(c, 0, 40, 96, 24, '#8a7a6a'); for (let y = 42; y < 64; y += 3) for (let x = (y % 2) * 3; x < 96; x += 6) R(c, x, y, 4, 2, '#9a8a7a');
       R(c, 14, 14, 1, 28, '#2a2a3a'); R(c, 13, 13, 3, 2, '#fff0b0'); c.globalAlpha = 0.25; R(c, 9, 14, 11, 8, '#fff0b0'); c.globalAlpha = 1;
-      const cane = pixelSprite([
-        '...dd......dd.......', '..dDDd....dDDd......', '..dDDDddddDDDd......', '...DDDDDDDDDDd......', '...DDeDDDDeDDd......', '...DDDDDDDDDDd......',
-        '....DDWWWWDDd.......', '....DDWNNWDDd.......', '.....DWWWWDd........', '.....RKRKRKR........', '....DDWWWWDDd.......', '...DDDWWWWDDDd...tt.',
-        '...DDDWWWWDDDDd.tDt.', '...DDDDWWDDDDDDdDt..', '...DDDDDDDDDDDDDd...', '...DdDDDDdDDDDDd....', '...WW.WW...DDDd.....'],
-        { D: '#b07a42', d: '#7a4a24', W: '#f6f0e4', e: '#1a1024', N: '#1a1024', R: '#d42a2a', K: '#1a1024', t: '#b07a42' });
+      const cane = PTAnimali.sprite('cane_dumfries');   // in motore/animali.js
       c.globalAlpha = 0.25; R(c, 32, 59, 40, 3, '#2a1a1a'); c.globalAlpha = 1;
       bigS(c, cane, 52, 61, 2);
       c.strokeStyle = '#d42a2a'; c.lineWidth = 1; c.beginPath(); c.moveTo(54, 46); c.quadraticCurveTo(70, 34, 86, 10); c.stroke();   // the leash, up to Theo's hand
