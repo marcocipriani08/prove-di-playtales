@@ -452,7 +452,7 @@ button.tk.got:active { transform: translateY(1px); }
       <div id="pk-items"></div>
       <div class="pk-section"><span>Album dei ricordi</span><span id="pk-album-count"></span></div>
       <div id="pk-album"></div>
-      <p class="pk-keys" style="opacity:.45;font-size:10px">Versione a61c788</p><p class="pk-keys">Da tastiera: frecce o WASD per muoversi, Spazio per A, Shift per B, I per lo zaino.</p>
+      <p class="pk-keys" style="opacity:.45;font-size:10px">Versione 8e7d721</p><p class="pk-keys">Da tastiera: frecce o WASD per muoversi, Spazio per A, Shift per B, I per lo zaino.</p>
       <div class="pk-foot"><button id="pk-reset" type="button">Ricomincia da capo</button><button id="pk-menu" type="button">Torna al menu</button><button id="pk-close" type="button">Torna al gioco</button></div>
     </div>
   </div>
@@ -558,7 +558,7 @@ button.tk.got:active { transform: translateY(1px); }
 <script>
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falconciuffolo","personaggio":{"disegno":"falcon"}},"b":{"nome":"Il Crocco","soprannome":"","personaggio":{"disegno":"crocco"}}},"capitoli":[{"luogo":{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"sporadi"},"ricordi":[{"tipo":"persona","titolo":"Il Capitano","frase":"Skopelos: barba bianca, una barca e un cane che si chiama Pirati.","disegno":"capitano"},{"tipo":"animale","titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"mappa":"sporadi"},{"luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"santorini"},"ricordi":[{"tipo":"persona","titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"tipo":"persona","titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}]},{"luogo":{"titolo":"Palermo","frase":"Il mercato, il caos, il cibo. Tre pezzi di biglietto e mezzo rotolo di scotch.","disegno":"palermo"},"ricordi":[{"tipo":"persona","titolo":"Nonna Lina","frase":"«Sara, figlia mia! Sei sciupata. Hai mangiato?» E tu, Crocco, mangia, che sei uno stecco.","disegno":"nonna-lina"},{"tipo":"persona","titolo":"Salim","frase":"«Per te, Sara, prezzi da amici». Il tavolino giallo qui fuori è sempre vostro.","disegno":"salim"}]},{"luogo":{"titolo":"Tenerife","frase":"Las Galletas, il Teide e la sabbia nera. Il prossimo viaggettino è già cominciato.","disegno":"tenerife"},"ricordi":[{"tipo":"persona","titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"},{"tipo":"luogo","titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"salisburgo"}]}],"antagonista":{"nome":"Il Consulente Grigio","presentazione":"Nemico giurato delle ferie altrui","ingresso":"Ferie? Non risultano approvate.","aspetto":{"hair":"short","hairC":"#2b1a12","glasses":true,"top":"#6e7380","accC":"#d64545","legs":"#3a3f4c"}},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
 window.MODALITA = "prova";
-window.VERSIONE = "a61c788";
+window.VERSIONE = "8e7d721";
 </script>
 <script>
 'use strict';
@@ -1034,7 +1034,9 @@ function wearJewels(rows, view, jk) {
   }
   return r.map(a => a.join(''));
 }
+// I due protagonisti: «falcon» è il posto di chi gioca, «crocco» quello di chi accompagna (motore/testi.js, SLOT)
 function charFrames(kind) {
+  kind = (typeof SLOT !== 'undefined' && SLOT[kind]) || kind;
   const jk = kind === 'falcon' ? jewelKey() : '';
   const key = 'char_' + kind + jk; if (SPRITE_CACHE[key]) return SPRITE_CACHE[key];
   const H = kind === 'falcon' ? { down: wearJewels(FALCON_HEAD_DOWN, 'down', jk), up: wearJewels(FALCON_HEAD_UP, 'up', jk), side: wearJewels(FALCON_HEAD_SIDE, 'side', jk) } : { down: CROCCO_HEAD_DOWN, up: CROCCO_HEAD_UP, side: CROCCO_HEAD_SIDE };
@@ -1122,6 +1124,139 @@ const TICKETS = [];
 // Nemici comuni: gli scagnozzi dell'antagonista
 const E_SCAGNOZZO = { type: 'enemy', kind: 'grigio' };
 const E_TIRATORE = { type: 'enemy', kind: 'scontrinista' };
+
+/* motore/testi.js */
+// ===== Testi standard (fase 2, approvati da Marco il 25 novembre 2026) =====
+// Neutri: niente maschile/femminile. G = chi gioca (chi riceve il regalo; se è per tutti e due, A), C = chi lo
+// accompagna. Segnaposto: {G} {C} nomi, {sG} {sC} soprannome o nome, {ANT} l'antagonista a inizio frase, {ant} dentro
+// una frase («il Consulente Grigio»), {luogo} il luogo del capitolo, {luogo4} quello del capitolo 4, {nome} il ricordo,
+// {regalante} chi regala (se è un'altra persona), {te} «te» o «voi» (regalo per tutti e due).
+const RUOLI = (() => {
+  const O = window.ORDINE, P = O.protagonisti, per = (O.regalo || {}).per || 'a';
+  const g = per === 'b' ? 'b' : 'a', c = g === 'a' ? 'b' : 'a';
+  return { g, c, G: P[g], C: P[c], entrambi: per === 'entrambi' };
+})();
+const dentro = n => n.replace(/^(Il|Lo|La|I|Gli|Le|Un|Uno|Una) /, m => m.toLowerCase()).replace(/^L'/, 'l\'').replace(/^Un'/, 'un\'');
+const VAR = (() => {
+  const O = window.ORDINE, A = O.antagonista || {}, caps = O.capitoli || [];
+  return {
+    G: RUOLI.G.nome, C: RUOLI.C.nome, sG: RUOLI.G.soprannome || RUOLI.G.nome, sC: RUOLI.C.soprannome || RUOLI.C.nome,
+    ANT: A.nome || '', ant: dentro(A.nome || ''), luogo4: caps[3] && caps[3].luogo ? caps[3].luogo.titolo : '',
+    regalante: (O.regalo || {}).da === 'altro' ? (O.regalo.nome || '') : (O.protagonisti[(O.regalo || {}).da] || {}).nome || '',
+    te: RUOLI.entrambi ? 'voi' : 'te', ingresso: A.ingresso || ''
+  };
+})();
+// fill('Eccoci, {luogo}!', { luogo: 'Sporadi' })
+const fill = (s, x) => s.replace(/\{(\w+)\}/g, (m, k) => (x && x[k] !== undefined ? x[k] : VAR[k] !== undefined ? VAR[k] : m));
+// una battuta: [voce, testo] con voce G, C, ANT, narr o il nome di un'altra voce
+const say = (lines, x) => Dialog.say(lines.map(([v, t]) => [{ G: 'falcon', C: 'crocco', ANT: 'ant' }[v] || v, fill(t, x)]));
+
+const TESTI = {
+  prologo: {
+    inizio: [['narr', 'Una giornata qualunque. Fuori piove, e sul tavolo c\'è l\'Album dei ricordi.'],
+      ['C', '{sG}, guarda cosa ho ritrovato in fondo al cassetto.'],
+      ['G', 'L\'Album dei ricordi! Dodici bigliettini, dodici storie nostre.']],
+    ingresso: [['ANT', 'Buongiorno. Disturbo?'], ['ANT', '{ingresso}']],
+    furto: [['ANT', 'Troppi ricordi felici, qui dentro. Li requisisco.']],
+    uscita: [['ANT', 'Li ho nascosti in quattro posti. Buona fortuna.']],
+    porta: [['C', 'Ha chiuso la porta! La chiave è sopra l\'armadio: ci penso io.']],
+    chiave: 'Presa! E adesso fuori di qui.',
+    scagnozzo: [['scagnozzo', 'Nessuno esce prima delle sei.']],
+    colpo: 'Tocca «Colpo» per farti strada.',
+    stazione: [['C', 'Il Tabellone! Quattro partenze: sono i nostri posti.'], ['G', 'Allora andiamo a riprenderci i nostri ricordi.']]
+  },
+  stazione: {
+    barista: [['barista', 'Le partenze sono tutte sul Tabellone. Per un panino o per salvare, il bancone è qui.']],
+    baristaSoli: [['barista', 'Partenza per {luogo4}. Buona fortuna.']],
+    cartello: 'STAZIONE. Le partenze sono sul Tabellone, in alto. Il bancone è a sinistra.'
+  },
+  arrivo: [
+    [['C', 'Eccoci, {luogo}! Il primo bigliettino non dev\'essere lontano.'], ['G', 'Occhi aperti: qui in giro ci sono i suoi scagnozzi.']],
+    [['C', '{luogo}. Me lo ricordavo proprio così.'], ['G', 'Due bigliettini nascosti, il terzo ce l\'ha {ant}. Andiamo.']],
+    [['C', '{luogo}! Qui gli scagnozzi sono ancora di più.'], ['G', 'Allora stiamo vicini.']],
+    [['G', '{luogo}. Senza {C} è tutto più silenzioso.'], ['G', 'Tieni duro, {sC}. Arrivo.']]
+  ],
+  ricordo: {
+    persona: [['ricordo', 'Ehi, {voi}! Qualcuno è passato di qui di corsa e ha perso questo.'], ['ricordo', 'C\'è scritto sopra il {vostro} nome. {Tenetelo} stretto.']],
+    personaDopo: [['ricordo', 'Buon viaggio. E occhio a chi l\'ha perso.']],
+    animaleScappa: '{nome} scappa con il bigliettino!',
+    animaleFermo: [['narr', '{nome} si ferma, ti guarda e lascia cadere il bigliettino ai tuoi piedi.']],
+    oggettoAlto: [['C', 'C\'è qualcosa lassù. Ci penso io.'], ['C', '{nome}! E attaccato sotto, un bigliettino.']],
+    oggettoAltoSoli: [['G', 'C\'è qualcosa lassù, ma è troppo in alto. Ci vorrebbe {C}.']],
+    oggettoBaule: [['narr', 'Nel baule c\'è {nome}, e sotto un bigliettino.']],
+    oggettoBanco: [['ricordo', 'Questo? È l\'ultimo. Qualcuno ci ha lasciato attaccato un bigliettino.']],
+    momento: [['narr', 'Per un attimo resta tutto fermo, proprio come quella volta.']],
+    momentoDopo: [['C', 'Questo me lo ricordo bene.']],
+    primo: [['C', 'Il primo! Ora il cancello con l\'enigma.']],
+    secondo: [['C', 'Due su tre. Il terzo ce l\'ha ancora {ant}.'], ['G', 'Allora andiamo a prenderlo.']],
+    primoSoli: [['G', 'Il primo! Ora il cancello con l\'enigma.']],
+    secondoSoli: [['G', 'Due su tre. Il terzo ce l\'ha ancora {ant}.']]
+  },
+  enigma: {
+    chiuso: [['G', 'Il cancello è chiuso, e sopra c\'è un enigma.'], ['C', 'Prima cerchiamo il primo ricordo: dev\'essere qui vicino.']],
+    chiusoSoli: [['G', 'Il cancello è chiuso, e sopra c\'è un enigma. Prima cerco il primo ricordo.']],
+    intro: {
+      cartolina: [['C', 'Guarda: la cartolina di {luogo}, tutta a pezzi. Rimettiamo dritte le tessere.']],
+      melodia: [['C', 'Un carillon. Se ripetiamo la sua melodia, il cancello si apre.']],
+      codice: [['C', 'Un lucchetto a tre cifre, e qualcuno ha lasciato degli indizi.']],
+      spie: [['G', 'Un quadro di spie tutte accese. Spegniamole.']]
+    },
+    gia: [['narr', 'L\'enigma è già risolto.']],
+    aperto: 'Il cancello si apre!'
+  },
+  incursione: [
+    [['ANT', 'Siete venuti fin qui per un bigliettino? Che tenerezza.'], ['G', 'Li rivogliamo. Tutti.']],
+    [['ANT', 'Ancora voi? Avevo detto chiaramente: niente ricordi.'], ['G', 'Non abbiamo sentito.']],
+    [['ANT', 'Basta. Questa volta vi fermo di persona.'], ['C', 'Lo diceva anche l\'altra volta.']],
+    [['ANT', 'Senza il tuo compagno di squadra non vai lontano.'], ['G', 'Vedremo.']]
+  ],
+  incursioneFine: [['C', 'Sparito! Ma ha lasciato qui i suoi scagnozzi.']],
+  incursioneFineSoli: [['G', 'Sparito! Ma ha lasciato qui i suoi scagnozzi.']],
+  cancelloAperto: [['narr', 'Il cancello più avanti si è aperto.']],
+  arena: {
+    intro: [['ANT', 'Siete arrivati fin qui? Il bigliettino di {luogo} resta a me.'], ['G', 'Questo lo vediamo.']],
+    introInDue: [['ANT', 'Di nuovo in due? Non è giusto.'], ['G', 'Prova a fermarci.']],
+    grido: 'Non finisce qui!', fase2: 'Adesso basta!', fase3: 'Non è ancora finita!',
+    fuga: [['C', 'Se l\'è data a gambe! Ma il bigliettino è rimasto lì.']],
+    fatto: [['C', 'I tre bigliettini di {luogo}: tutti nostri.'], ['G', 'Si torna in stazione.']],
+    rapimento: [['narr', '{ANT} afferra {C} e sparisce in una nuvola grigia.'], ['C', '{sG}! Il bigliettino è lì per terra, prendilo!']],
+    biglietto: 'Un biglietto da visita, per terra: «Se rivuoi {C}, vieni a {luogo4}.»',
+    rapitoFatto: [['G', '{sC}… Arrivo.']]
+  },
+  liberazione: [['C', 'Ce ne hai messo di tempo!'], ['G', 'C\'era traffico.'], ['C', 'Andiamo a chiudere questa storia. Insieme.']],
+  legato: 'Libera',
+  sconfitta: [['ANT', 'Va bene, va bene! Mi arrendo. I ricordi sono vostri.'], ['narr', 'Di {ant} resta solo una nuvoletta grigia, che il vento si porta via.'], ['C', 'È finita?'], ['G', 'È finita. E i bigliettini sono tutti nostri.']],
+  gazzetta: {
+    testata: 'La Gazzetta dei Ricordi', data: ['Edizione straordinaria', 'Prezzo: un sorriso'],
+    titolo: 'RICORDI SALVI!', sotto: '{G} e {C} ritrovano i dodici bigliettini tra {luoghi}.',
+    foto: 'La stazione stasera: il Tabellone di nuovo acceso.',
+    colonne: [['Dichiarazioni', '{ANT} non rilascia dichiarazioni.'], ['Partenze', 'Le partenze di oggi: tutte in orario.'], ['Meteo', 'Sereno, con possibilità di festa.']]
+  },
+  festa: {
+    chi: [['C', 'Guarda chi c\'è.']],
+    ospite: 'Non me lo sarei perso per niente al mondo.',
+    occasione: {
+      birthday: 'Buon compleanno, {sG}!', anniversary: 'Buon anniversario!', love: 'Buon San Valentino!',
+      christmas: 'Buon Natale!', graduation: 'Congratulazioni, {sG}!', other: 'Questa festa è per {te}.'
+    },
+    daParte: [['narr', 'Da parte di {regalante}.']],
+    album: [['C', 'Album completo! Dodici ricordi, tutti al loro posto.']],
+    busta: 'Per {sG} · tocca per aprire'
+  },
+  // titolo della lettera, dall'occasione (come Memory Lane)
+  lettera: { birthday: 'Buon compleanno!', anniversary: 'Buon anniversario!', love: 'Buon San Valentino!', christmas: 'Buon Natale!', graduation: 'Congratulazioni!', other: 'Un pensiero per {te}' },
+  sconfittaGioco: ['Gli scagnozzi hanno vinto questo giro. Il prossimo è vostro.', 'Respira, mangia qualcosa e riprova.', '{ANT} se la ride. Ancora per poco.'],
+  obiettivo: {
+    prologo: 'Prendi la chiave sopra l\'armadio ed esci.', prologoPorta: 'Esci dalla porta.',
+    stazione: 'Stazione: tocca il Tabellone e parti per {luogo}.', stazioneFine: 'Stazione: il viaggio è finito. Puoi rigiocare i capitoli dal Tabellone.',
+    r1: '{luogo}: qualcuno qui intorno ha un bigliettino.', cancello1: '{luogo}: c\'è un cancello con un enigma.',
+    inc: '{luogo}: avanti, qualcuno ti aspetta.', r2: '{luogo}: il secondo ricordo: {nome}.',
+    libera: '{luogo}: libera {C}, è qui da qualche parte.', boss: '{luogo}: l\'ultimo bigliettino ce l\'ha {ant}.',
+    luogo: '{luogo}: prendi il bigliettino.', fatto: '{luogo}: capitolo finito. Il Tabellone vi aspetta in stazione.'
+  }
+};
+// I disegni dei due protagonisti nei due posti del gioco (fino alla fase 3: falcon / crocco, disegnati a mano)
+const SLOT = { falcon: (RUOLI.G.personaggio || {}).disegno || 'falcon', crocco: (RUOLI.C.personaggio || {}).disegno || 'crocco' };
 
 /* catalogo/cartoline.js */
 /* Catalogo · cartoline dei luoghi (96×64), i disegni dell'originale. Si usano con il nome del luogo: «sporadi».
@@ -1377,6 +1512,33 @@ MAPS.stazione = {
   spawns: { ritorno: [10, 8] }
 };
 
+/* motore/prologo.js */
+// ===== Il prologo: una stanza grigia, uguale per tutti. L'antagonista entra, strappa i bigliettini e chiude a chiave;
+// C prende la chiave sopra l'armadio (si impara che le cose in alto le prende C), uno scagnozzo blocca la porta (si
+// impara il colpo), poi si esce in stazione. =====
+MAPS.prologo = {
+  name: '', theme: 'office', music: 'tension', floor: 'k',
+  rows: [
+    '######X#######',
+    '#BBBBB1BBBBBJ#',
+    '#kkkkkkkkkkkk#',
+    '#kkkkkkkkkkkk#',
+    '#kDDkkkkkkDDk#',
+    '#kDDkkkkkkDDk#',
+    '#kkkkkkkkkkkk#',
+    '#kkkkkDDkkkkk#',
+    '#kkkkkk@kkkkk#',
+    '#kkkkkkkkkkkk#',
+    '##############'
+  ],
+  legend: {
+    '@': { type: 'spawn', name: 'start', floor: 'k' },
+    'X': { type: 'exit', to: 'stazione', spawn: 'start', floor: 'k' },
+    '1': { type: 'gate', id: 'pro_porta', req: 'pro_libero', msg: 'La porta è chiusa a chiave.', floor: 'k' },
+    'J': { type: 'high', id: 'pro_chiave', item: 'chiave', qty: 1, floor: 'k' }
+  }
+};
+
 /* motore/audio.js */
 // ===== Chiptune music & sound effects (WebAudio, generated) =====
 const Audio = (() => {
@@ -1469,6 +1631,7 @@ const Audio = (() => {
     get on() { return on; },
     unlock() { if (ensure() && ac.state === 'suspended') ac.resume(); },
     play(name) {
+      if (name && !TRACKS[name]) name = 'festa';   // una musica che non c'è: quella della festa
       if (cur === name) return; cur = name; step = 0;
       if (!ensure()) return; nextT = ac.currentTime + 0.05; t0 = nextT;
       if (!timer) timer = setInterval(tick, 30);
@@ -1628,7 +1791,7 @@ const Puzzles = (() => {
       grid.appendChild(b); cells.push(b);
     }
     draw();
-    msg(NOMI.b + ': «Prova quella in alto a sinistra. No, l\'altra sinistra.»');
+    msg(croccoActive() ? VAR.C + ': «Prova quella in alto a sinistra. No, l\'altra sinistra.»' : 'Prova a partire da quella in alto a sinistra.');
     againFn = () => { if (done) return; st = start.slice(); draw(); Audio.sfx('tap'); msg('Da capo. Con calma.'); };
     return p;
   }
@@ -1661,7 +1824,9 @@ const Puzzles = (() => {
     msg('Tocca le frecce per cambiare le cifre, poi «Prova».');
     return p;
   }
-  return { mosaic, cartolina, melodia: melody, codice, spie };
+  // risolvi: solo per la partita automatica di tools/check.js (nella versione di consegna non fa niente)
+  const risolvi = () => { if (window.MODALITA !== 'consegna' && !el('puzzle').hidden) close(true); };
+  return { mosaic, cartolina, melodia: melody, codice, spie, risolvi };
 })();
 
 /* motore/mondo.js */
@@ -2438,7 +2603,7 @@ function bossShout(txt) { G.floats.push({ x: G.boss.x, y: G.boss.y - 52, txt, co
 function bossDeath() {
   const b = G.boss; if (!b || b.dead) return;
   b.dead = true; b.active = false; G.projs = [];
-  Audio.sfx('boss'); G.shake = 0.4; bossShout('Non finisce qui!');
+  Audio.sfx('boss'); G.shake = 0.4; const grido = Story.grido(b); if (grido) bossShout(grido);
   G.flags[b.id + '_dead'] = true;
   setTimeout(() => { burst(b.x, b.y - 16, '#8a8f9c', 20); Audio.sfx('explode'); G.boss = null; Audio.play(G.M.music); Story.bossGone(b); }, 1300);
 }
@@ -2622,7 +2787,7 @@ function touchEntities() {
       const n = [1, 2, 3, 4].filter(i => G.flags['sp_' + i]).length;
       toast('Spartito di Mozart ' + n + '/4' + (n === 4 ? ': torna da lui!' : '')); continue;
     }
-    if (e.type === 'boss' && !G.boss && !G.flags[e.id + '_dead']) { G.boss = makeBoss(e); }
+    if (e.type === 'boss' && (!e.req || G.flags[e.req]) && !G.boss && !G.flags[e.id + '_dead']) { G.boss = makeBoss(e); }
   }
 }
 // Move the player off a locked exit without ever pushing them into a wall or object
@@ -2660,6 +2825,7 @@ function findInteract() {
 }
 function itemName(k, n) { const c = CIBI.find(x => x.k === k); return c ? c.label : k; }
 async function interact(e) {
+  if (e.ricordo) { await Story.ricordo(e); return; }
   switch (e.type) {
     case 'npc': await Story.talk(e); break;
     case 'sign': await Dialog.say([['narr', e.text]]); break;
@@ -2714,6 +2880,12 @@ function charImg(kind, dir, moving, anim) {
 function drawEntity(e) {
   const t = G.t;
   switch (e.type) {
+    case 'trigger': {
+      // il punto di un ricordo «momento»: un luccichio a terra
+      if (e.brilla && !G.flags[e.id]) { const k = (Math.sin(t * 3 + e.x) + 1) / 2; ctx.fillStyle = 'rgba(255,216,74,' + (0.25 + 0.35 * k).toFixed(2) + ')'; ctx.beginPath(); ctx.ellipse(e.x, e.y + 4, 7, 3, 0, 0, 7); ctx.fill(); ctx.fillStyle = '#fff6e0'; ctx.fillRect(e.x - 1 + Math.round(Math.sin(t * 2) * 3), e.y - 4 - Math.round(k * 4), 2, 2); }
+      break;
+    }
+    case 'festa': drawFestaProp(e); break;
     case 'npc': {
       if (npcHidden(e)) return;
       let img;
@@ -3497,7 +3669,7 @@ function drawFesta(x0, y0, x1, y1) {
   for (const [ax, bx] of [[16, 240], [240, 464]]) { festoon(ax, 5 * 16 + 4, bx, 5 * 16 + 4, 10, 14); festoon(ax, 10 * 16 + 6, bx, 10 * 16 + 6, 9, 14); festoon(ax, 14 * 16 + 2, bx, 14 * 16 + 2, 12, 14); }
   festoon(16, 19 * 16 + 8, 464, 19 * 16 + 8, 6, 26);
   // banner across the passage
-  const txt = 'BUON COMPLEANNO, EL FALCON!', w = pixWidth(txt) + 12, bx = 15 * 16 - Math.round(w / 2), by = 12 * 16 + 3, wave = Math.round(Math.sin(t * 2) * 1);
+  const txt = festaScritta(), w = pixWidth(txt) + 12, bx = 10 * 16 + 8 - Math.round(w / 2), by = 10 * 16 + 3, wave = Math.round(Math.sin(t * 2) * 1);
   ctx.fillStyle = '#6b4a2e'; ctx.fillRect(bx - 3, by - 8, 2, 30); ctx.fillRect(bx + w + 1, by - 8, 2, 30);
   ctx.fillStyle = '#1a1024'; ctx.fillRect(bx - 1, by - 1 + wave, w + 2, 13);
   ctx.fillStyle = '#ff6b57'; ctx.fillRect(bx, by + wave, w, 11); ctx.fillStyle = '#ffd84a'; ctx.fillRect(bx, by + wave, w, 1); ctx.fillRect(bx, by + 10 + wave, w, 1);
@@ -3655,7 +3827,7 @@ function render() {
   }]);
   list.sort((a, b) => a[0] - b[0]).forEach(([, f]) => f());
   for (const p of G.projs) drawProj(p);
-  if (G.area === 'ippocrate' && G.flags.festa) drawFesta(x0, y0, x1, y1);
+  if (G.area === 'stazione' && G.flags.festa) drawFesta(x0, y0, x1, y1);
   drawPapers();
   for (const p of G.parts) { ctx.fillStyle = p.col; if (p.streak) ctx.fillRect(Math.round(p.x), Math.round(p.y), 6, 1); else ctx.fillRect(Math.round(p.x), Math.round(p.y), p.sz, p.sz); }
   // night lighting
@@ -3754,6 +3926,53 @@ function drawHUD() {
   }
   // wind indicator
   if (G.M && G.M.wind && G.wind.on > 0) hudText('vento ' + (G.wind.vx < 0 ? '←' : '→'), VW - pad, top + 30, 15, '#fff6e0', 'right');
+}
+
+/* motore/festa.js */
+// ===== La festa finale in stazione: gli oggetti dell'occasione (torta, albero) =====
+// drawCake e drawXmasTree vengono dall'originale (Tenerife, Vienna).
+function drawCake(x, y, lit, scale) {
+  // y = cake base; a row of candles
+  ctx.fillStyle = '#e9e2cf'; ctx.fillRect(x - 9, y, 18, 2);
+  ctx.fillStyle = '#fff6e0'; ctx.fillRect(x - 7, y - 7, 14, 7); ctx.fillStyle = '#f2a3b0'; ctx.fillRect(x - 7, y - 7, 14, 2);
+  for (let i = 0; i < 4; i++) ctx.fillRect(x - 6 + i * 4, y - 5, 2, 1 + (i % 2));
+  for (let i = 0; i < 13; i++) {
+    const cx = x - 6 + i, row = i % 2, cy = y - 9 - row;
+    ctx.fillStyle = ['#7cc6e8', '#ffd84a', '#ff6b57', '#7fd18a'][i % 4]; ctx.fillRect(cx, cy, 1, 2 + row);
+    if (lit) { ctx.fillStyle = Math.sin(G.t * 14 + i * 1.3) > 0 ? '#ffd84a' : '#ffb36b'; ctx.fillRect(cx, cy - 2, 1, 2); }
+  }
+  if (lit) { ctx.fillStyle = 'rgba(255,216,74,.18)'; ctx.beginPath(); ctx.ellipse(x, y - 11, 11, 4, 0, 0, 7); ctx.fill(); }
+}
+function drawXmasTree(e) {
+  const x = e.x, b = e.y + 8, t = G.t;
+  ctx.fillStyle = 'rgba(0,0,0,.22)'; ctx.beginPath(); ctx.ellipse(x, b, 11, 3, 0, 0, 7); ctx.fill();
+  ctx.fillStyle = '#8a4b2a'; ctx.fillRect(x - 3, b - 8, 6, 7); ctx.fillStyle = '#d64545'; ctx.fillRect(x - 6, b - 3, 12, 3);
+  const tiers = [[b - 8, 13, 12], [b - 17, 11, 11], [b - 25, 9, 10], [b - 32, 6, 9]];
+  for (const [base, hw, h] of tiers) {
+    ctx.fillStyle = '#1f5a2e'; ctx.beginPath(); ctx.moveTo(x - hw, base); ctx.lineTo(x, base - h); ctx.lineTo(x + hw, base); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#2f7a3a'; ctx.beginPath(); ctx.moveTo(x - hw + 3, base - 1); ctx.lineTo(x, base - h + 2); ctx.lineTo(x, base - 1); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(x - hw, base - 1, 3, 1); ctx.fillRect(x + hw - 3, base - 1, 3, 1);
+  }
+  const balls = [[-7, -11, '#d64545'], [5, -13, '#ffd84a'], [-3, -20, '#7cc6e8'], [4, -23, '#d64545'], [-4, -28, '#ffd84a'], [8, -10, '#b79cf0'], [0, -16, '#f2a3b0']];
+  for (const [dx, dy, c] of balls) { ctx.fillStyle = c; ctx.fillRect(x + dx, b + dy, 2, 2); ctx.fillStyle = '#ffffff'; ctx.fillRect(x + dx, b + dy, 1, 1); }
+  for (let i = 0; i < 14; i++) {
+    const row = i % 4, f = hash(i, 5) - 0.5, base = tiers[row][0], hw = tiers[row][1] * 0.8;
+    const lx = Math.round(x + f * 2 * hw * 0.9), ly = Math.round(base - 3 - hash(5, i) * (tiers[row][2] - 6));
+    const lit = Math.sin(t * 4 + i * 2.1) > -0.2;
+    ctx.fillStyle = lit ? ['#fff0a8', '#ff8a8a', '#a8e0ff', '#c8ffb0'][i % 4] : '#3a5a3a'; ctx.fillRect(lx, ly, 1, 1);
+  }
+  const g = 0.5 + Math.sin(t * 3) * 0.2;
+  ctx.fillStyle = 'rgba(255,216,74,' + (0.25 * g).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(x, b - 42, 6, 0, 7); ctx.fill();
+  ctx.fillStyle = '#ffd84a'; ctx.fillRect(x - 1, b - 45, 2, 6); ctx.fillRect(x - 3, b - 43, 6, 2); ctx.fillStyle = '#fff6e0'; ctx.fillRect(x, b - 43, 1, 1);
+}
+// Un oggetto della festa (type 'festa', kind: torta | albero | tocco | brindisi | cuore)
+function drawFestaProp(e) {
+  const t = G.t;
+  if (e.kind === 'torta') { ctx.fillStyle = '#8a5a3a'; ctx.fillRect(e.x - 12, e.y - 2, 24, 3); ctx.fillRect(e.x - 10, e.y + 1, 2, 6); ctx.fillRect(e.x + 8, e.y + 1, 2, 6); drawCake(e.x, e.y - 2, true, 1); }
+  else if (e.kind === 'albero') drawXmasTree(e);
+  else if (e.kind === 'tocco') { const y = e.y - 10 - Math.abs(Math.sin(t * 2)) * 14; ctx.fillStyle = '#1a1024'; ctx.fillRect(e.x - 6, y, 12, 3); ctx.fillRect(e.x - 3, y + 3, 6, 3); ctx.fillStyle = '#ffd84a'; ctx.fillRect(e.x + 5, y + 2, 1, 5); }
+  else if (e.kind === 'cuore') { const k = 1 + Math.sin(t * 4) * 0.08; ctx.save(); ctx.translate(e.x, e.y - 10); ctx.scale(k, k); ctx.fillStyle = '#ff6b8a'; ctx.beginPath(); ctx.arc(-3, -2, 4, 0, 7); ctx.arc(3, -2, 4, 0, 7); ctx.fill(); ctx.beginPath(); ctx.moveTo(-7, -1); ctx.lineTo(0, 7); ctx.lineTo(7, -1); ctx.fill(); ctx.restore(); }
+  else { ctx.fillStyle = '#8a5a3a'; ctx.fillRect(e.x - 10, e.y - 2, 20, 3); for (let i = 0; i < 3; i++) { const x = e.x - 6 + i * 6; ctx.fillStyle = 'rgba(255,246,224,.8)'; ctx.fillRect(x - 1, e.y - 9, 3, 7); ctx.fillStyle = '#ffd84a'; ctx.fillRect(x - 1, e.y - 7, 3, 4); } }
 }
 
 /* motore/ui.js */
@@ -4239,9 +4458,7 @@ const Gazzetta = (() => {
 })();
 
 /* motore/attori.js */
-// ===== Story: scenes, dialogues, objectives =====
-// Rule: Il Crocco calls her only Sara, Falconcino, Falconciuffolo, Falcocomero, El Falcon, Falcotto.
-//       She calls him Crocco, Los Crocos, crocchetta, croccolo, scroccolo, crocchetino, Marco, Il Crocco, crocket.
+// ===== Attori delle scene: personaggi che entrano, camminano ed escono; le scene bloccano i comandi (cut) =====
 
 function spawnActor(look, x, y, extra) {
   const e = newEnt(Object.assign({ type: 'npc', look, x, y, solid: false, interact: false, actor: true }, extra || {}));
@@ -4262,12 +4479,11 @@ function walkPlayer(x, y, speed = 70) { return new Promise(res => { G.autoWalk =
 async function cut(fn) { G.cut++; try { await fn(); } finally { G.cut = Math.max(0, G.cut - 1); Input.clear(); } }
 const T16 = n => n * TILE + 8;
 
-// Jewellery of Skiathos: no powers, El Falcon simply wears them for the rest of the game
-
 /* catalogo/ricordi.js */
 /* Catalogo · i ricordi: per ognuno il disegno della pagina dell'Album (96×64, come le cartoline) e come compare nella
-   mappa. tipo: persona (un personaggio: look di sprites.js, dalla fase 3 il disegnatore), animale (animale: cane…),
-   oggetto, momento (dalla fase 4). Tre inquadrature diverse e colori dominanti diversi da quelli della cartolina. */
+   mappa. tipo (gli id del sito): «persona» (look di sprites.js; dalla fase 3 il disegnatore), «animale» (animale: cane…),
+   «oggetto o cibo» (sprite: l'oggetto, quando sta su un banco o in alto), «momento o atmosfera».
+   Tre inquadrature diverse e colori dominanti diversi da quelli della cartolina. */
 const RICORDI = (() => {
   const { R, sky } = CARTOLINE;
   const big = (c, img, x, y, k = 2) => { c.imageSmoothingEnabled = false; c.drawImage(img, Math.round(x - img.width * k / 2), Math.round(y - img.height * k), img.width * k, img.height * k); };
@@ -4280,28 +4496,41 @@ const RICORDI = (() => {
     // animale · primo piano, sabbia al tramonto
     pirati: { tipo: 'animale', animale: 'cane', scena: c => {
       sky(c, ['#ff9a6b', '#ffb36b', '#ffd08a'], 40); R(c, 0, 40, 96, 6, '#e0805a'); R(c, 0, 46, 96, 18, '#e9c46a'); R(c, 0, 46, 96, 1, 'rgba(0,0,0,.15)');
-      big(c, customSprite('poodle'), 44, 60, 3); c.drawImage(customSprite('ticket'), 62, 40); } }
+      big(c, customSprite('poodle'), 44, 60, 3); c.drawImage(customSprite('ticket'), 62, 40); } },
+    // oggetto o cibo · primo piano su una superficie: il gyros sul tavolino
+    gyros: { tipo: 'oggetto o cibo', scena: c => {
+      R(c, 0, 0, 96, 64, '#3a8fb0'); for (let i = 0; i < 96; i += 8) R(c, i, 0, 4, 64, '#4aa0c0');
+      R(c, 0, 40, 96, 24, '#f4efe4'); R(c, 0, 40, 96, 2, '#d8d0c0');
+      R(c, 28, 30, 40, 14, '#f6f2ea'); R(c, 30, 28, 36, 4, '#e8c27a'); R(c, 34, 24, 28, 6, '#c9803a'); R(c, 36, 22, 4, 3, '#5aa04a'); R(c, 50, 22, 6, 3, '#e04a3a'); R(c, 44, 21, 4, 3, '#f6f2ea');
+      R(c, 72, 26, 6, 16, '#ffd84a'); R(c, 73, 24, 4, 3, '#e0c070'); } },
+    // momento o atmosfera · campo lungo nell'ora d'oro: il tramonto dallo scoglio
+    tramonto: { tipo: 'momento o atmosfera', scena: c => {
+      sky(c, ['#3a2a6a', '#9a4a8a', '#ff7a6a', '#ffb36b'], 40); R(c, 38, 30, 20, 10, '#ffd84a'); R(c, 34, 34, 28, 6, '#ffe58a');
+      R(c, 0, 40, 96, 24, '#5a3a7a'); for (let y = 42; y < 64; y += 4) R(c, 30 + (y % 8), y, 36 - (y - 40), 1, '#ffb36b');
+      R(c, 0, 50, 22, 14, '#2a1a3a'); R(c, 74, 46, 22, 18, '#2a1a3a'); R(c, 80, 38, 8, 8, '#f4f1ea'); R(c, 82, 34, 4, 4, '#2f6fc0'); } }
   };
 })();
 
 /* motore/storia.js */
-// ===== Storia: la traccia dei capitoli, uguale per tutti, riempita con l'ordine (window.ORDINE) =====
-// Frasi standard scritte neutre (niente maschile/femminile), con i nomi presi dall'ordine.
-// Ogni capitolo n (1–4) è l'area «cap<n>», costruita dalla sua mappa del catalogo; i flag del capitolo iniziano
-// con «c<n>_»: c<n>_r1, c<n>_r2, c<n>_luogo (i tre bigliettini), c<n>_inc_ok (incursione finita), c<n>_fatto.
+// ===== Storia: il prologo, la stazione, la traccia dei 4 capitoli e il finale, uguali per tutti, riempiti con
+// l'ordine (window.ORDINE). Le frasi stanno in motore/testi.js. Ogni capitolo n (1–4) è l'area «cap<n>», costruita
+// dalla sua mappa del catalogo; i flag del capitolo iniziano con «c<n>_»: c<n>_r1, c<n>_r2, c<n>_luogo (i tre
+// bigliettini), c<n>_inc_ok (incursione finita), c<n>_fatto. Capitolo 3: C viene rapito (crocco_captured); capitolo
+// 4: si gioca da soli finché non lo si libera (crocco_freed), poi l'antagonista è sconfitto per sempre (finale). =====
 const ORDINE = window.ORDINE;
 const NOMI = { a: ORDINE.protagonisti.a.nome, b: ORDINE.protagonisti.b.nome };
-// un nome dentro una frase: «Il Consulente Grigio» → «il Consulente Grigio»
-const dentro = n => n.replace(/^(Il|Lo|La|I|Gli|Le|Un|Uno|Una) /, m => m.toLowerCase()).replace(/^L'/, 'l\'').replace(/^Un'/, 'un\'');
 const ANT = ORDINE.antagonista;
 const CAPITOLI = ORDINE.capitoli.map((c, i) => Object.assign({}, c, { n: i + 1, area: c.mappa && MAPPE[c.mappa] ? 'cap' + (i + 1) : null }));
 const capDi = area => CAPITOLI.find(c => c.area === area) || null;
+const soli = () => !croccoActive();   // capitolo 4 prima della liberazione
+const T = TESTI;
 
 // ---------- Voci ----------
-SPEAKERS.falcon.name = NOMI.a; SPEAKERS.crocco.name = NOMI.b;
+SPEAKERS.falcon.name = RUOLI.G.nome; SPEAKERS.crocco.name = RUOLI.C.nome;
 LOOKS.antagonista = ANT.aspetto;
 SPEAKERS.ant = { name: ANT.nome, look: 'antagonista', col: '#ff6b57' };
 SPEAKERS.barista = { name: 'Barista della stazione', look: 'barista', col: '#ffb36b' };
+SPEAKERS.scagnozzo = { name: (ORDINE.scagnozzi || {}).singolare || 'Scagnozzo', look: 'grigio', col: '#a8acb8' };
 
 // ---------- Il boss: sempre più forte da un capitolo all'altro ----------
 // Incursione: pochi colpi, 1–2 schemi, se ne va dopo 30 secondi comunque. Arena: lo scontro vero.
@@ -4314,7 +4543,7 @@ const FORZA = [
 CAPITOLI.forEach(c => {
   const F = FORZA[c.n - 1];
   BOSSES['inc' + c.n] = { name: ANT.nome, hp: F.inc, look: 'antagonista', speed: 30, phases: [{ at: 1, pattern: ['aimed3', 'spread5', 'aimed3', 'charge'] }] };
-  BOSSES['boss' + c.n] = { name: ANT.nome, hp: F.hp, look: 'antagonista', speed: 30, phases: F.fasi.map((p, k) => ({ at: 1 - k / F.fasi.length, pattern: p, mul: k ? F.mul : 1, line: k === 1 ? 'Adesso basta!' : k === 2 ? 'Non è ancora finita!' : undefined })) };
+  BOSSES['boss' + c.n] = { name: ANT.nome, hp: F.hp, look: 'antagonista', speed: 30, phases: F.fasi.map((p, k) => ({ at: 1 - k / F.fasi.length, pattern: p, mul: k ? F.mul : 1, line: k === 1 ? T.arena.fase2 : k === 2 ? T.arena.fase3 : undefined })) };
 });
 // L'enigma di ogni capitolo (fisso, sempre più difficile)
 const ENIGMI = ['cartolina', 'melodia', 'codice', 'spie'];
@@ -4322,8 +4551,7 @@ const ENIGMI = ['cartolina', 'melodia', 'codice', 'spie'];
 // ---------- I 12 bigliettini: per ogni capitolo il ricordo 1, il ricordo 2 e il luogo ----------
 CAPITOLI.forEach(c => {
   const ch = 'CAPITOLO ' + c.n + ' · ' + c.luogo.titolo.toUpperCase();
-  const pezzi = [['r1', c.ricordi[0]], ['r2', c.ricordi[1]], ['luogo', c.luogo]];
-  for (const [k, x] of pezzi) {
+  for (const [k, x] of [['r1', c.ricordi[0]], ['r2', c.ricordi[1]], ['luogo', c.luogo]]) {
     const id = 'c' + c.n + '_' + k, dis = k === 'luogo' ? CARTOLINE.SCENES[x.disegno] : RICORDI[x.disegno] && RICORDI[x.disegno].scena;
     TICKETS.push({ id, name: x.titolo }); PC_ORDER.push(id);
     POSTCARDS[id] = { name: x.titolo, cap: x.frase, ch, scena: dis || (() => {}) };
@@ -4333,26 +4561,36 @@ CAPITOLI.forEach(c => {
 // ---------- Le mappe dei capitoli: i ruoli della traccia diventano oggetti del gioco ----------
 function costruisciCapitolo(c) {
   const M = MAPPE[c.mappa], n = c.n, legend = {};
-  const ricordo = k => {
-    const r = c.ricordi[k - 1], cat = RICORDI[r.disegno] || {};
-    const base = { type: 'npc', id: 'c' + n + '_ricordo' + k, name: r.titolo, talk: 'ricordo', k, tipo: r.tipo };
-    if (r.tipo === 'persona') return Object.assign(base, { look: cat.look });
-    if (r.tipo === 'animale') return Object.assign(base, { dog: cat.animale === 'cane', verb: 'Accarezza' });
-    throw new Error('Ricordo di tipo «' + r.tipo + '»: non ancora nel motore');
+  const ricordo = (k, def) => {
+    const r = c.ricordi[k - 1], cat = RICORDI[r.disegno] || {}, id = 'c' + n + '_ricordo' + k;
+    const base = { id, name: r.titolo, ricordo: true, k, tipo: r.tipo };
+    if (r.tipo === 'persona') return Object.assign(base, { type: 'npc', look: cat.look, verb: 'Parla' });
+    if (r.tipo === 'animale') return Object.assign(base, { type: 'npc', dog: cat.animale === 'cane', verb: 'Accarezza' });
+    if (r.tipo === 'oggetto o cibo') {
+      // dove sta lo decide la mappa: in alto (lo prende C), in un baule, su un banco; nel capitolo 4 C non c'è: niente «alto»
+      const dove = def.nascosto === 'alto' && n !== 4 ? 'alto' : def.nascosto === 'banco' ? 'banco' : 'baule';
+      if (dove === 'alto') return Object.assign(base, { type: 'high', dove, item: 'ricordo', qty: 1 });
+      if (dove === 'banco') return Object.assign(base, { type: 'npc', dove, look: def.venditore || 'barista', verb: 'Parla' });
+      return Object.assign(base, { type: 'chest', dove, item: 'ricordo', qty: 1 });
+    }
+    if (r.tipo === 'momento o atmosfera') return Object.assign(base, { type: 'trigger', r: 18, brilla: true });
+    throw new Error('Ricordo di tipo «' + r.tipo + '»: non previsto');
   };
   for (const [ch, def] of Object.entries(M.legend)) {
     const r = def.ruolo, fl = def.floor ? { floor: def.floor } : {};
     if (!r) { legend[ch] = def; continue; }
     if (r === 'arrivo') legend[ch] = Object.assign({ type: 'spawn', name: 'start' }, fl);
     else if (r === 'uscita') legend[ch] = Object.assign({ type: 'exit', to: 'stazione', spawn: 'ritorno', dest: 'STAZIONE', ferry: def.mezzo === 'traghetto' }, fl);
-    else if (r === 'ricordo1' || r === 'ricordo2') legend[ch] = Object.assign(ricordo(r === 'ricordo1' ? 1 : 2), fl);
+    else if (r === 'ricordo1' || r === 'ricordo2') legend[ch] = Object.assign(ricordo(r === 'ricordo1' ? 1 : 2, def), fl);
     else if (/^nascondiglio[123]$/.test(r)) legend[ch] = Object.assign({ type: 'spawn', name: 'nasc' + r.slice(-1) }, fl);
     else if (r === 'cancello1') legend[ch] = Object.assign({ type: 'gate', id: 'c' + n + '_cancello1', puzzle: ENIGMI[n - 1], req: 'c' + n + '_r1' }, fl);
     else if (r === 'cancello2') legend[ch] = Object.assign({ type: 'gate', id: 'c' + n + '_cancello2', req: 'c' + n + '_inc_ok', msg: 'Il cancello non si apre finché ci sono guai qui intorno.' }, fl);
     else if (r === 'cancello3') legend[ch] = Object.assign({ type: 'gate', id: 'c' + n + '_cancello3', req: 'c' + n + '_r2', msg: 'Il cancello è chiuso. Prima bisogna ritrovare il secondo ricordo.' }, fl);
     else if (r === 'incursione') legend[ch] = Object.assign({ type: 'trigger', id: 'c' + n + '_inc', r: 30, arena: def.arena }, fl);
-    else if (r === 'salvataggio') legend[ch] = Object.assign({ type: 'save', id: 'c' + n + '_save', label: def.label, sub: def.sub }, fl);
-    else if (r === 'boss') legend[ch] = Object.assign({ type: 'boss', id: 'boss' + n, arena: def.arena }, fl);
+    // nel capitolo 4 al posto del salvataggio c'è C, legato: liberarlo vale anche come salvataggio
+    else if (r === 'salvataggio') legend[ch] = Object.assign(n === 4 ? { type: 'npc', id: 'c4_legato', crocco: true, name: RUOLI.C.nome, talk: 'legato', verb: T.legato, hideIf: 'crocco_freed' } : { type: 'save', id: 'c' + n + '_save', label: def.label, sub: def.sub }, fl);
+    // nel capitolo 4 l'antagonista aspetta nell'arena solo dopo la liberazione di C
+    else if (r === 'boss') legend[ch] = Object.assign({ type: 'boss', id: 'boss' + n, arena: def.arena }, n === 4 ? { req: 'crocco_freed' } : {}, fl);
     else if (r === 'scagnozzo') legend[ch] = E_SCAGNOZZO;
     else if (r === 'tiratore') legend[ch] = E_TIRATORE;
     else throw new Error('Ruolo sconosciuto nella mappa ' + c.mappa + ': ' + r);
@@ -4360,6 +4598,7 @@ function costruisciCapitolo(c) {
   return Object.assign({}, M, { name: c.luogo.titolo, legend });
 }
 CAPITOLI.forEach(c => { if (c.area) MAPS[c.area] = costruisciCapitolo(c); });
+MAPS.stazione.legend.i.text = T.stazione.cartello;
 
 // ---------- Il Tabellone ----------
 const ORARI = ['09:15', '11:40', '15:05', '18:30'];
@@ -4373,160 +4612,182 @@ function boardRows() {
 }
 
 // ---------- Storia ----------
-const OBIETTIVI = {
-  r1: c => 'qualcuno qui intorno ha un bigliettino per voi.',
-  cancello1: c => 'il cancello con l\'enigma vi aspetta.',
-  inc: c => 'andate avanti: qualcuno vi aspetta.',
-  r2: c => 'ritrovate il secondo ricordo: ' + c.ricordi[1].titolo + '.',
-  boss: c => 'l\'ultimo bigliettino ce l\'ha ' + dentro(ANT.nome) + '.',
-  luogo: c => 'prendete il bigliettino.'
-};
+const V = c => ({ luogo: c ? c.luogo.titolo : '' });
 const S = {
   lines: {},
   objective() {
-    const f = G.flags, c = capDi(G.area);
+    const f = G.flags, c = capDi(G.area), O = T.obiettivo;
+    if (G.area === 'prologo') return fill(f.pro_libero ? O.prologoPorta : O.prologo);
     if (!c) {
       const next = CAPITOLI.find(x => x.area && !f['c' + x.n + '_fatto']);
-      return next ? 'Stazione: tocca il Tabellone e parti per ' + next.luogo.titolo + '.' : 'Stazione: gli altri capitoli arriveranno.';
+      return next ? fill(O.stazione, V(next)) : CAPITOLI.every(x => f['c' + x.n + '_fatto']) ? fill(O.stazioneFine) : 'Stazione: gli altri capitoli non sono ancora pronti.';
     }
-    const p = 'c' + c.n + '_', L = c.luogo.titolo + ': ';
-    if (f[p + 'fatto']) return L + 'capitolo finito. Il Tabellone vi aspetta in stazione.';
-    if (!f[p + 'r1']) return L + OBIETTIVI.r1(c);
-    if (!f[p + 'cancello1']) return L + OBIETTIVI.cancello1(c);
-    if (!f[p + 'inc_ok']) return L + OBIETTIVI.inc(c);
-    if (!f[p + 'r2']) return L + OBIETTIVI.r2(c);
-    if (!f['boss' + c.n + '_dead']) return L + OBIETTIVI.boss(c);
-    return L + OBIETTIVI.luogo(c);
+    const p = 'c' + c.n + '_', v = V(c);
+    if (f[p + 'fatto']) return fill(O.fatto, v);
+    if (!f[p + 'r1']) return fill(O.r1, v);
+    if (!f[p + 'cancello1']) return fill(O.cancello1, v);
+    if (!f[p + 'inc_ok']) return fill(O.inc, v);
+    if (!f[p + 'r2']) return fill(O.r2, Object.assign(v, { nome: c.ricordi[1].titolo }));
+    if (c.n === 4 && !f.crocco_freed) return fill(O.libera, v);
+    if (!f['boss' + c.n + '_dead']) return fill(O.boss, v);
+    return fill(O.luogo, v);
   },
-  highLine(item) { return 'Preso! Tieni: ' + itemName(item, 1).toLowerCase() + ', nascosto lassù.'; },
+  grido(b) { return b.id === 'boss4' ? null : T.arena.grido; },
+  highLine(item) { return item === 'chiave' ? T.prologo.chiave : 'Preso! Tieni: ' + itemName(item, 1).toLowerCase() + ', nascosto lassù.'; },
   areaSetup(id) {
     const c = capDi(id); if (!c) return;
     G.ents.forEach(e => {
       if (e.type === 'veliero') e.interact = false;
-      if (e.id === 'c' + c.n + '_cancello1') e.reqSay = [['falcon', 'Il cancello è chiuso, e sopra c\'è un enigma.'], ['crocco', 'Prima cerchiamo il primo ricordo: dev\'essere qui vicino.']];
-      if (e.talk === 'ricordo' && e.tipo === 'persona') SPEAKERS['ricordo' + c.n + e.k] = { name: e.name, look: e.look, col: '#7cc6e8' };
-      if (e.talk === 'ricordo' && e.tipo === 'animale') {
-        const st = G.flags['c' + c.n + '_ani'] || 0;
+      if (e.id === 'c' + c.n + '_cancello1') e.reqSay = (soli() ? T.enigma.chiusoSoli : T.enigma.chiuso).map(([v, t]) => [{ G: 'falcon', C: 'crocco' }[v] || v, fill(t)]);
+      if (e.ricordo && (e.tipo === 'persona' || e.dove === 'banco')) SPEAKERS['ricordo' + c.n + e.k] = { name: e.name, look: e.look, col: '#7cc6e8' };
+      if (e.ricordo && e.tipo === 'animale') {
+        const st = G.flags['c' + c.n + '_ani' + e.k] || 0;
         if (st > 0 && G.spawns['nasc' + st]) { const sp = G.spawns['nasc' + st]; e.x = sp[0] * TILE + 8; e.y = sp[1] * TILE + 8; }
       }
+      if (e.ricordo && G.flags['c' + c.n + '_r' + e.k] && (e.type === 'chest' || e.type === 'high')) G.flags['got_' + e.id] = true;
     });
   },
+  // ---- Prologo ----
+  async prologo() {
+    loadArea('prologo', 'start'); G.mode = 'play';
+    await cut(async () => {
+      await wait(600);
+      await say(T.prologo.inizio);
+      const door = G.ents.find(e => e.id === 'pro_porta'), tx = T16(6) + 8, ty = T16(7);
+      const ant = spawnActor('antagonista', door.x, door.y + 2, { name: ANT.nome });
+      Audio.sfx('door'); Audio.play('boss'); showBanner(ANT.nome); setTimeout(() => toast(ANT.presentazione), 700);
+      await wait(900);
+      await walkActor(ant, tx, ty - 18, 45);
+      await say(T.prologo.ingresso);
+      await say(T.prologo.furto);
+      scatterTickets(tx, ty - 6); Audio.sfx('ticket'); G.shake = 0.3;
+      await wait(1600);
+      await say(T.prologo.uscita);
+      await walkActor(ant, door.x, door.y + 2, 60); removeActor(ant); Audio.sfx('door'); Audio.play('tension');
+      await say(T.prologo.porta);
+    });
+  },
+  // ---- Arrivi ----
   async arrival(id) {
     const f = G.flags;
     if (id === 'stazione') {
-      if (!f.arr_stazione) {
-        f.arr_stazione = true;
-        await Dialog.say([
-          ['narr', 'Il prologo arriverà più avanti: ' + dentro(ANT.nome) + ' ha strappato i dodici bigliettini dall\'Album dei ricordi e li ha nascosti in quattro luoghi.'],
-          ['crocco', NOMI.a + ', guarda: il Tabellone si è acceso. Prima partenza: ' + CAPITOLI[0].luogo.titolo + '.'],
-          ['falcon', 'Allora andiamo a riprenderci i nostri ricordi.']]);
-        saveGame();
-      } else {
-        const c = CAPITOLI.find(x => f['c' + x.n + '_fatto'] && !f['c' + x.n + '_salutato']);
-        if (c) {
-          f['c' + c.n + '_salutato'] = true;
-          const next = CAPITOLI.find(x => x.n === c.n + 1);
-          await Dialog.say([['crocco', (c.n * 3) + ' bigliettini su 12. ' + (next && next.area ? 'Prossima partenza: ' + next.luogo.titolo + '.' : 'Il viaggio continua.')]]
-            .concat(next && !next.area ? [['narr', 'Gli altri capitoli, il prologo e il finale arriveranno nelle prossime fasi.']] : []));
-          saveGame();
-        }
-      }
-      return;
+      if (!f.arr_stazione) { f.arr_stazione = true; await say(T.prologo.stazione); saveGame(); return; }
+      if (f.finale && !f.festa) { await festa(); return; }
+      const next = CAPITOLI.find(x => x.area && !f['c' + x.n + '_fatto']);
+      if (next && next.n > 1 && !f['annuncio' + next.n]) { f['annuncio' + next.n] = true; toast('Prossima partenza: ' + next.luogo.titolo + '.'); }
+      if (!next && !f.finale && window.MODALITA === 'prova' && !f.prova_avviso) { f.prova_avviso = true; await say([['narr', '(Prova) Gli altri capitoli arriveranno con le loro mappe.']]); }
+      saveGame(); return;
     }
     const c = capDi(id);
-    if (c && !f['arr_' + id]) {
-      f['arr_' + id] = true; saveGame();
-      await Dialog.say([
-        ['crocco', 'Eccoci, ' + c.luogo.titolo + '! Il primo bigliettino non dev\'essere lontano.'],
-        ['falcon', 'Occhi aperti: qui in giro ci sono i suoi scagnozzi.']]);
-    }
+    if (c && !f['arr_' + id]) { f['arr_' + id] = true; saveGame(); await say(T.arrivo[c.n - 1], V(c)); }
   },
+  // ---- Personaggi ----
   async talk(e) {
-    const f = G.flags, c = capDi(G.area);
-    if (e.talk === 'barista') { await Dialog.say([['barista', 'Le partenze sono tutte sul Tabellone. Per un panino o per salvare, il bancone è qui.']]); return; }
-    if (e.talk !== 'ricordo' || !c) { await Dialog.say([['narr', '…']]); return; }
-    const id = 'c' + c.n + '_r' + e.k, voce = 'ricordo' + c.n + e.k;
+    if (e.talk === 'barista') { await say(G.flags.crocco_captured && !G.flags.crocco_freed ? T.stazione.baristaSoli : T.stazione.barista); return; }
+    if (e.talk === 'ospite') { await say([[e.voce, T.festa.ospite]]); return; }
+    if (e.talk === 'legato') { await libera(e); return; }
+    await say([['narr', '…']]);
+  },
+  // ---- I ricordi ----
+  async ricordo(e) {
+    const f = G.flags, c = capDi(G.area); if (!c) return;
+    const id = 'c' + c.n + '_r' + e.k, voce = 'ricordo' + c.n + e.k, v = Object.assign(V(c), { nome: e.name });
+    const tu = soli(), pers = { voi: tu ? 'tu' : 'voi due', vostro: tu ? 'tuo' : 'vostro', Tenetelo: tu ? 'Tienilo' : 'Tenetelo' };
+    const sayR = (L, x) => say(L.map(([vv, t]) => [vv === 'ricordo' ? voce : vv, t]), Object.assign({}, v, x));
     if (e.tipo === 'persona') {
-      if (f[id]) { await Dialog.say([[voce, 'Buon viaggio, voi due. E state lontani da quel tipo.']]); return; }
-      await Dialog.say([
-        [voce, 'Ehi, voi due! Un tipo strano è passato di qui di corsa e ha perso questo.'],
-        [voce, 'C\'è scritto sopra il vostro nome. Tenetelo stretto.']]);
-      await S.ticket(id); return;
+      if (f[id]) { await sayR(T.ricordo.personaDopo); return; }
+      await sayR(T.ricordo.persona, pers); await S.ticket(id); return;
     }
     if (e.tipo === 'animale') {
       if (f[id]) { verso(e); return; }
-      if ((f['c' + c.n + '_ani'] || 0) < 3) { animaleScappa(e); return; }
-      await Dialog.say([['narr', e.name + ' si ferma, ti guarda e lascia cadere qualcosa ai tuoi piedi.']]);
-      await S.ticket(id);
+      if ((f['c' + c.n + '_ani' + e.k] || 0) < 3) { animaleScappa(e); return; }
+      await sayR(T.ricordo.animaleFermo); await S.ticket(id); return;
     }
+    if (e.dove === 'alto') {
+      if (soli()) { await sayR(T.ricordo.oggettoAltoSoli); return; }
+      if (f[id]) return;
+      f['got_' + e.id] = true; Audio.sfx('pick'); await sayR(T.ricordo.oggettoAlto); await S.ticket(id); return;
+    }
+    if (e.dove === 'banco') { if (f[id]) { await sayR(T.ricordo.personaDopo); return; } await sayR(T.ricordo.oggettoBanco); await S.ticket(id); return; }
+    if (e.type === 'chest') { if (f[id]) return; f['got_' + e.id] = true; Audio.sfx('door'); await sayR(T.ricordo.oggettoBaule); await S.ticket(id); }
   },
   async ticket(id) {
     const f = G.flags, n = +id[1], c = CAPITOLI[n - 1];
     f[id] = true; Audio.sfx('ticket'); saveGame();
     await Postcard.show(id, true);
-    if (id.endsWith('_r1')) await Dialog.say([['crocco', 'Il primo! Ora il cancello con l\'enigma.']]);
-    if (id.endsWith('_r2')) await Dialog.say([['crocco', 'Due su tre. Il terzo ce l\'ha ancora ' + dentro(ANT.nome) + '.'], ['falcon', 'Allora andiamo a prenderlo.']]);
+    const tu = soli();
+    if (id.endsWith('_r1')) await say(tu ? T.ricordo.primoSoli : T.ricordo.primo, V(c));
+    if (id.endsWith('_r2')) await say(tu ? T.ricordo.secondoSoli : T.ricordo.secondo, V(c));
     if (id.endsWith('_luogo')) {
-      f['c' + n + '_fatto'] = true;
-      await Dialog.say([['crocco', 'I tre bigliettini di ' + c.luogo.titolo + ': tutti nostri.'], ['falcon', 'Si torna in stazione. Il Tabellone ci aspetta.']]);
+      f['c' + n + '_fatto'] = true; saveGame();
+      if (n === 4) { await finale(); return; }
+      await say(n === 3 ? T.arena.rapitoFatto : T.arena.fatto, V(c));
       await travel('stazione', 'ritorno');
     }
   },
-  puzzleIntro(e) {
-    const c = capDi(G.area), p = e.puzzle;
-    if (p === 'cartolina') return [['crocco', 'Guarda: la cartolina di ' + c.luogo.titolo + ', tutta a pezzi. Rimettiamo dritte le tessere.']];
-    if (p === 'melodia') return [['crocco', 'Un carillon. Se ripetiamo la sua melodia, forse il cancello si apre.']];
-    if (p === 'codice') return [['crocco', 'Un lucchetto a tre cifre, e qualcuno ha lasciato degli indizi.']];
-    return [['crocco', 'Un quadro di spie tutte accese. Spegniamole.']];
-  },
-  puzzleAgain() { return [['narr', 'L\'enigma è già risolto.']]; },
-  async gateOpened(id) { if (/_cancello1$/.test(id)) { toast('Il cancello si apre!'); saveGame(); } },
+  // ---- Enigmi ----
+  puzzleIntro(e) { const c = capDi(G.area); return T.enigma.intro[e.puzzle].map(([v, t]) => [v === 'C' && soli() ? 'falcon' : { G: 'falcon', C: 'crocco' }[v] || v, fill(t, V(c))]); },
+  puzzleAgain() { return T.enigma.gia; },
+  async gateOpened(id) { if (/_cancello1$/.test(id)) { toast(T.enigma.aperto); saveGame(); } },
+  // ---- Incursione, momento, prologo ----
   async trigger(id, e) {
-    const c = capDi(G.area); if (!c || id !== 'c' + c.n + '_inc') return;
+    const c = capDi(G.area);
+    if (e && e.ricordo && c) { await cut(() => momento(e, c)); return; }
+    if (!c || id !== 'c' + c.n + '_inc') return;
     const a = e && e.arena || [0, 0, G.W - 1, G.H - 1];
     await cut(async () => {
       const x = ((a[0] + a[2]) / 2) * TILE + 8, y = (a[1] + 1) * TILE + 8;
       Audio.play('boss'); G.shake = 0.4; burst(x, y - 10, '#8a8f9c', 18);
       G.boss = makeBoss({ id: 'inc' + c.n, x, y, arena: a });
       await wait(500);
-      await Dialog.say(c.n === 1 ? [
-        ['ant', 'Ma guarda chi si vede.'],
-        ['ant', ANT.ingresso],
-        ['ant', 'I vostri bigliettini? Ora sono miei.'],
-        ['falcon', 'Li rivogliamo. Tutti.']] : [
-        ['ant', 'Ancora voi?'],
-        ['ant', ANT.ingresso],
-        ['falcon', 'Ancora noi.']]);
+      await say(T.incursione[c.n - 1], V(c));
       G.incT = 0;
     });
   },
   bossIntro(id) {
     const c = capDi(G.area); if (!c || id !== 'boss' + c.n) return;
-    cut(() => Dialog.say([
-      ['ant', 'Siete arrivati fin qui? Il bigliettino di ' + c.luogo.titolo + ' resta a me.'],
-      ['falcon', 'Questo lo vediamo.']]));
+    cut(() => say(c.n === 4 ? T.arena.introInDue : T.arena.intro, V(c)));
   },
-  // Il boss se ne va (l'incursione e l'arena dei capitoli 1–3; il 4 arriverà con il finale)
+  // Il boss se ne va: l'incursione, l'arena (capitoli 1–2 scappa, 3 rapisce C, 4 è sconfitto per sempre)
   async bossGone(b) {
     const c = capDi(G.area); if (!c) return;
     if (b.id === 'inc' + c.n) {
       for (const [dx, dy] of [[-40, 10], [40, 10], [0, 40]]) spawnEnemy('grigio', b.x + dx, b.y + dy);
       G.flags['c' + c.n + '_inc_ok'] = true; saveGame();
-      await cut(() => Dialog.say([['crocco', 'Se n\'è andato, ma ha lasciato qui i suoi scagnozzi.'], ['narr', 'Il cancello più avanti si è aperto.']]));
-    } else if (b.id === 'boss' + c.n) {
-      G.enemies.forEach(e => { e.dead = true; burst(e.x, e.y, '#8a8f9c', 6); });
-      for (let i = 0; i < 6; i++) G.drops.push({ x: b.x + rnd(-20, 20), y: b.y + rnd(-10, 10), kind: 'coin', v: 3, t: 0 });
-      G.ents.push(newEnt({ type: 'ticket', id: 'c' + c.n + '_luogo', x: b.x, y: b.y }));
-      await cut(() => Dialog.say([['crocco', 'È scappato! Ma il bigliettino è rimasto lì.']]));
+      await cut(() => say((soli() ? T.incursioneFineSoli : T.incursioneFine).concat(T.cancelloAperto)));
+      return;
     }
+    if (b.id !== 'boss' + c.n) return;
+    G.enemies.forEach(e => { e.dead = true; burst(e.x, e.y, '#8a8f9c', 6); });
+    for (let i = 0; i < 6; i++) G.drops.push({ x: b.x + rnd(-20, 20), y: b.y + rnd(-10, 10), kind: 'coin', v: 3, t: 0 });
+    const lascia = () => G.ents.push(newEnt({ type: 'ticket', id: 'c' + c.n + '_luogo', x: b.x, y: b.y }));
+    if (c.n === 3) {
+      await cut(async () => {
+        await say(T.arena.rapimento.slice(0, 1));
+        burst(CR.x, CR.y - 8, '#8a8f9c', 24); Audio.sfx('explode'); G.flags.crocco_captured = true; G.shake = 0.5;
+        await wait(700);
+        await say(T.arena.rapimento.slice(1));
+        lascia(); G.ents.push(newEnt({ type: 'sign', id: 'biglietto_visita', text: fill(T.arena.biglietto), x: b.x + 16, y: b.y + 6 }));
+      });
+      return;
+    }
+    if (c.n === 4) { await cut(() => say(T.sconfitta)); lascia(); return; }
+    lascia(); await cut(() => say(T.arena.fuga));
   },
-  // Ogni fotogramma: l'incursione finisce comunque dopo 30 secondi; l'animale scappa quando ti avvicini
+  // Ogni fotogramma
   tick(dt) {
+    const f = G.flags;
+    if (G.area === 'prologo') {
+      if (f.got_pro_chiave && !f.pro_scagnozzo) {
+        f.pro_scagnozzo = true; const d = G.ents.find(e => e.id === 'pro_porta');
+        spawnEnemy('grigio', d.x, d.y + 26); cut(async () => { await say(T.prologo.scagnozzo); toast(T.prologo.colpo); });
+      }
+      if (f.pro_scagnozzo && !f.pro_libero && !G.enemies.some(e => !e.dead)) { f.pro_libero = true; Audio.sfx('door'); toast('La porta è aperta!'); }
+      return;
+    }
     const b = G.boss, c = capDi(G.area); if (!c) return;
     if (b && b.id === 'inc' + c.n && b.active && !b.dead) { G.incT = (G.incT || 0) + dt; if (G.incT > 30) bossDeath(); }
-    if (!G.flags['c' + c.n + '_r2'] || !G.flags['c' + c.n + '_r1']) {
-      for (const e of G.ents) if (e.talk === 'ricordo' && e.tipo === 'animale' && !G.flags['c' + c.n + '_r' + e.k] && (G.flags['c' + c.n + '_ani'] || 0) < 3 && !e._walk && Math.hypot(e.x - P.x, e.y - P.y) < 34) animaleScappa(e);
-    }
+    for (const e of G.ents) if (e.ricordo && e.tipo === 'animale' && !f['c' + c.n + '_r' + e.k] && (f['c' + c.n + '_ani' + e.k] || 0) < 3 && !e._walk && Math.hypot(e.x - P.x, e.y - P.y) < 34) animaleScappa(e);
   }
 };
 const Story = new Proxy(S, { get(t, k) { return k in t ? t[k] : () => undefined; } });
@@ -4534,11 +4795,77 @@ const Story = new Proxy(S, { get(t, k) { return k in t ? t[k] : () => undefined;
 function verso(e) { if (e.dog) Audio.sfx('bark'); G.floats.push({ x: e.x, y: e.y - 18, txt: e.dog ? 'Bau!' : '!', col: '#ffd84a', life: 1.2, big: true }); }
 // L'animale scappa al nascondiglio dopo (3 volte), poi si ferma e lascia il bigliettino
 function animaleScappa(e) {
-  const k = 'c' + capDi(G.area).n + '_ani', st = G.flags[k] || 0; if (st >= 3 || e._walk) return;
+  const k = 'c' + capDi(G.area).n + '_ani' + e.k, st = G.flags[k] || 0; if (st >= 3 || e._walk) return;
   const sp = G.spawns['nasc' + (st + 1)]; G.flags[k] = st + 1;
-  verso(e); if (st === 0) toast(e.name + ' scappa con qualcosa in bocca!');
+  verso(e); if (st === 0) toast(fill(T.ricordo.animaleScappa, { nome: e.name }));
   walkActor(e, sp[0] * TILE + 8, sp[1] * TILE + 8, 120);
 }
+// Un ricordo «momento o atmosfera»: per un attimo cambiano luce e musica, poi compare il bigliettino
+async function momento(e, c) {
+  Audio.play('ending'); G.sunset = true;
+  await say(T.ricordo.momento);
+  await wait(1200);
+  G.sunset = false; Audio.play(G.M.music);
+  await S.ticket('c' + c.n + '_r' + e.k);
+  if (!soli()) await say(T.ricordo.momentoDopo);
+}
+// Capitolo 4: liberare C (vale anche come salvataggio)
+async function libera(e) {
+  G.flags.crocco_freed = true; G.hp = G.maxHp;
+  CR.x = e.x; CR.y = e.y; CR.trail = []; e.hidden = true; burst(e.x, e.y - 8, '#ffd84a', 18); Audio.sfx('solve');
+  await say(T.liberazione); saveGame(); toast('Partita salvata, cuori al massimo.');
+}
+// ---------- Finale: la Gazzetta, la festa in stazione, l'Album completo, la lettera ----------
+const OCCASIONE = ORDINE.occasione || 'other';
+// lo striscione della festa in stazione
+function festaScritta() { return fill(T.festa.occasione[OCCASIONE] || T.festa.occasione.other).toUpperCase(); }
+async function finale() {
+  G.flags.finale = true; saveGame();
+  const gz = T.gazzetta, luoghi = CAPITOLI.map(c => c.luogo.titolo), elenco = luoghi.slice(0, -1).join(', ') + ' e ' + luoghi[luoghi.length - 1];
+  $('gazzetta').querySelector('.gz-mast').textContent = gz.testata;
+  $('gazzetta').querySelector('.gz-date').innerHTML = gz.data.map(x => '<span></span>').join('');
+  [...$('gazzetta').querySelectorAll('.gz-date span')].forEach((s, i) => { s.textContent = gz.data[i]; });
+  $('gazzetta').querySelector('.gz-head').textContent = fill(gz.titolo);
+  $('gazzetta').querySelector('.gz-sub').textContent = fill(gz.sotto, { luoghi: elenco });
+  $('gazzetta').querySelector('.gz-cap').textContent = fill(gz.foto);
+  const cols = $('gazzetta').querySelector('.gz-cols'); cols.innerHTML = '';
+  gz.colonne.forEach(([h, t]) => { const p = document.createElement('p'), b = document.createElement('b'); b.textContent = h; p.append(b, fill(t)); cols.appendChild(p); });
+  await Gazzetta.show();
+  await travel('stazione', 'ritorno');
+}
+async function festa() {
+  G.flags.festa = true;
+  await cut(async () => {
+    // le persone dei ricordi, e l'oggetto dell'occasione davanti al Tabellone
+    const ospiti = []; let k = 0;
+    CAPITOLI.forEach(c => c.ricordi.forEach(r => {
+      if (r.tipo !== 'persona') return;
+      const look = (RICORDI[r.disegno] || {}).look; if (!look) return;
+      const voce = 'ospite' + (k++); SPEAKERS[voce] = { name: r.titolo, look, col: '#7cc6e8' };
+      const x = T16(3 + (k * 4) % 15), y = T16(4 + (k % 2) * 3);
+      ospiti.push(voce); G.ents.push(newEnt({ type: 'npc', id: voce, look, name: r.titolo, talk: 'ospite', voce, x, y, verb: 'Parla' }));
+    }));
+    const prop = { birthday: 'torta', christmas: 'albero', graduation: 'tocco', anniversary: 'cuore', love: 'cuore' }[OCCASIONE] || 'brindisi';
+    G.ents.push(newEnt({ type: 'festa', kind: prop, x: T16(10), y: T16(5) }));
+    Audio.play(OCCASIONE === 'birthday' ? 'auguri' : 'festa'); firework(); firework();
+    await say(T.festa.chi);
+    for (const v of ospiti) await say([[v, T.festa.ospite]]);
+    await say([['crocco', T.festa.occasione[OCCASIONE] || T.festa.occasione.other]]);
+    if ((ORDINE.regalo || {}).da === 'altro' && VAR.regalante) await say(T.festa.daParte);
+    await say(T.festa.album);
+  });
+  saveGame();
+  showEnding();
+}
+// La lettera: titolo dall'occasione, testo e firma dall'ordine
+(() => {
+  const L = ORDINE.lettera || {}, card = $('ending').querySelector('.end-card');
+  card.querySelector('h2').textContent = fill(T.lettera[OCCASIONE] || T.lettera.other);
+  card.querySelector('p').textContent = L.testo || '';
+  card.querySelector('.sign').textContent = L.firma || '';
+  $('ending').querySelector('.env-letter b').textContent = L.firma || '';
+  $('ending').querySelector('.env-hint').textContent = fill(T.festa.busta);
+})();
 $('t-eyebrow').textContent = NOMI.a + ' & ' + NOMI.b;
 
 /* motore/avvio.js */
@@ -4585,8 +4912,7 @@ async function newGame() {
   G.flags = { prologo_done: true, album: true }; G.inv = Object.assign(INV0(), { panizzo: 1 }); G.money = 0; G.maxHp = 6; G.hp = 6;
   G.stats = { deaths: 0, start: Date.now() }; G.buffs = { arro: 0, lim: 0, warm: 0 }; G.cut = 0; G.ui = 0; P.dir = 'up';
   G.mode = 'play';
-  loadArea('stazione', 'start');
-  await Story.arrival('stazione');
+  await Story.prologo();
 }
 async function travel(area, spawn) {
   if (G.forceEnemies && G.forceEnemies !== area) G.forceEnemies = null;
@@ -4671,7 +4997,6 @@ function showEnding(opts) {
   const tk = TICKETS.filter(t => G.flags[t.id]).length + (G.flags.t_tenerife ? 1 : 0);
   $('end-stats').textContent = `Bigliettini: ${tk} su ${TICKETS.length} · Sconfitte: ${Deaths.count}`;
   const cv2 = $('end-cake'), c = cv2.getContext('2d'); c.imageSmoothingEnabled = false;
-  const sal = customSprite('salamino', 1, false);
   const confetti = Array.from({ length: 60 }, () => ({ x: Math.random() * cv2.width, y: Math.random() * cv2.height, v: 10 + Math.random() * 25, c: ['#ffd84a', '#ff6b57', '#7cc6e8', '#f2a3b0', '#7fd18a'][Math.floor(Math.random() * 5)] }));
   let last = performance.now();
   const draw = (now) => {
@@ -4684,20 +5009,17 @@ function showEnding(opts) {
     c.fillStyle = 'rgba(255,216,74,.5)'; for (let i = 0; i < 5; i++) c.fillRect(W / 2 - 30 + i * 3, H * 0.58 + i * 4, 60 - i * 6, 1);
     // table
     c.fillStyle = '#e9c46a'; c.fillRect(W / 2 - 70, H - 34, 140, 8); c.fillStyle = '#6b4a2e'; c.fillRect(W / 2 - 4, H - 26, 8, 26);
-    // cake
+    // la torta solo per il compleanno; per le altre occasioni un vassoio di dolcetti (le scene per occasione: fase 4–5)
     const cx = W / 2 - 26, cy = H - 60;
-    c.fillStyle = '#fff6e0'; c.fillRect(cx, cy + 10, 52, 16); c.fillStyle = '#f2a3b0'; c.fillRect(cx, cy + 10, 52, 4);
-    for (let i = 0; i < 6; i++) c.fillRect(cx + 2 + i * 9, cy + 14, 4, 3);
-    c.fillStyle = '#e9e2cf'; c.fillRect(cx - 4, cy + 26, 60, 2);
-    for (let i = 0; i < 26; i++) {
-      const row = i < 13 ? 0 : 1, col = i % 13;
-      const x = cx + 2 + col * 4, y = cy + 4 - row * 0 - (row ? 0 : 0) + (row ? 3 : 0);
-      c.fillStyle = ['#7cc6e8', '#ffd84a', '#ff6b57', '#7fd18a'][i % 4]; c.fillRect(x, y + (row ? 0 : -3), 1, 6);
-      const fl = Math.sin(t * 12 + i) > 0 ? '#ffd84a' : '#ffb36b'; c.fillStyle = fl; c.fillRect(x, y + (row ? -2 : -5), 1, 2);
+    if ((window.ORDINE.occasione || 'other') === 'birthday') {
+      c.fillStyle = '#fff6e0'; c.fillRect(cx, cy + 10, 52, 16); c.fillStyle = '#f2a3b0'; c.fillRect(cx, cy + 10, 52, 4);
+      for (let i = 0; i < 6; i++) c.fillRect(cx + 2 + i * 9, cy + 14, 4, 3);
+      c.fillStyle = '#e9e2cf'; c.fillRect(cx - 4, cy + 26, 60, 2);
+      for (let i = 0; i < 13; i++) { const x = cx + 2 + i * 4; c.fillStyle = ['#7cc6e8', '#ffd84a', '#ff6b57', '#7fd18a'][i % 4]; c.fillRect(x, cy + 4, 1, 6); c.fillStyle = Math.sin(t * 12 + i) > 0 ? '#ffd84a' : '#ffb36b'; c.fillRect(x, cy + 2, 1, 2); }
+    } else {
+      c.fillStyle = '#ffffff'; c.beginPath(); c.ellipse(W / 2, H - 36, 24, 5, 0, 0, 7); c.fill();
+      for (let i = 0; i < 5; i++) { c.fillStyle = ['#f2a3b0', '#ffd84a', '#7cc6e8', '#ff8a3d', '#7fd18a'][i]; c.fillRect(W / 2 - 18 + i * 8, H - 42 - (i % 2) * 2, 6, 5); }
     }
-    // salamini plate
-    c.fillStyle = '#ffffff'; c.beginPath(); c.ellipse(W / 2 + 50, H - 36, 18, 4, 0, 0, 7); c.fill();
-    for (let i = 0; i < 3; i++) c.drawImage(sal, W / 2 + 36 + i * 9, H - 46 - (i % 2) * 2);
     // glasses
     c.fillStyle = '#ffd84a'; c.fillRect(W / 2 - 58, H - 46, 5, 10); c.fillStyle = '#ff8a3d'; c.fillRect(W / 2 - 48, H - 46, 5, 10);
     // characters
