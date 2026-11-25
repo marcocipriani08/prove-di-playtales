@@ -1081,8 +1081,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: procida */
 window.ORDINE = {"codice":"procida","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"procida","luogo":{"titolo":"Procida","sottotitolo":"Casa, d'estate","frase":"Qui l'estate ha il cognome di famiglia.","disegno":"t_procida"},"ricordi":[{"titolo":"Corsa alla doccia","frase":"Dal mare alla terrazza di corsa: chi arriva secondo aspetta, gocciolando.","disegno":"doccia"},{"titolo":"Caccia alle meduse","frase":"Un gommoncino, una retina e il coraggio dei pirati: le meduse tremavano.","disegno":"meduse"}],"costume":"procida","punti":[{"disegno":"terramurata","at":0.1},{"disegno":"faro","at":0.24},{"disegno":"gommone","at":0.38},{"disegno":"terrazza","at":0.52},{"disegno":"vivara","at":0.64}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"parmigiana","plurale":"parmigiane","articolo":"le","disegno":"parmigiana"},"antagonista":{"nome":"Il Conte Posponi","presentazione":"Puntuale come il traghetto d'agosto","ingresso":"Arrivo tra cinque minuti… facciamo dieci.","sconfitta":"Ancora… cinque… minuti…","aspetto":"conte","proiettile":"sveglia"},"scagnozzi":{"nome":"i Ritardatari","singolare":"Ritardatario","divisa":"#8E929E","cappello":"skihat","cappelloColore":"#9CC8F0","grida":["Che fretta c'è?!","Cinque minuti e arriviamo!","Ci vediamo… più tardi!"]},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci una parmigiana e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "48f68bf";
-window.SALVATAGGIO = "rty_procida_48f68bf_";
+window.VERSIONE = "a2ae801";
+window.SALVATAGGIO = "rty_procida_a2ae801_";
 window.MODALITA = "consegna";
 </script>
 <script>
@@ -5539,7 +5539,7 @@ const HR_DATA = (() => {
     const sx = fromCp ? G.cp.x + 20 : 3 * TILE;
     Object.assign(P, { x: sx, y: surfaceBelow(sx, 0) || 160, vx: 0, vy: 0, ground: true, jumps: 0, coyote: 0, buffer: 0, cut: false, inv: fromCp ? 1.2 : 0, hp: 3, speedG: 0, shoes: 0, magnet: 0, shield: false, safeX: sx, finished: false, anim: 0, combo: 0, slide: 0, pound: false, bump: null, chain: 0, chainT: 0 });
     for (const tr of G.trigs) if (tr.x < sx) tr.t = -2; // already behind us
-    if (!fromCp) { G.runHurt = false; G.hurtLog = []; }
+    if (!fromCp) { G.runHurt = false; G.hurtLog = []; G.walletStart = save.wallet; } // the counter starts from the coins you have
     G.lamps = null; G.party = null; G.partyX = 0; G.partyAt = 0; G.lastMeters = null; G.vanFlee = null; G.happy = null;
     G.proj = []; G.cardFly = []; P.glow = 0; G.tug = 0; G.freeing = false; G.clockTxt = null; G.whiteT = 0; G.parts = []; G.floats = []; G.rain = []; G.coinFly = []; G.bubble = null; G.celebrate = 0; G.shake = 0; G.camY = 0; G.cpAnim = 0; G.finShift = false; G.kidnap = null; G.phoneUp = false; G.freed = false; G.monocle = null; G.vaLine = null; G.cheer = null; G.happy = null; G.countT = 0; G.t = 0; G.hitstop = 0; G.coinPop = 0; G.lastCoins = P.coins;
     G.waitTap = false; G.startRun = null;
@@ -6883,9 +6883,12 @@ const HR_DATA = (() => {
     // the coins just picked fly up to the counter
     if (G.coinFly && G.mode === 'run') { const tx = pad + ci.width * k / 2, ty = cy + ci.height * k / 2; for (const f of G.coinFly) { const u = Math.min(1, f.t / 0.45), e = u * u; const x = f.x + (tx - f.x) * e, y = f.y + (ty - f.y) * e - Math.sin(u * Math.PI) * 14; c.drawImage(ci, Math.round(x - ci.width / 2), Math.round(y - ci.height / 2)); } }
     c.drawImage(ci, pad, cy, ci.width * k, ci.height * k);
-    st.text(String(P.coins), pad + ci.width * k + 4, cy + ci.height * k / 2, { size: Math.max(12, 5 * st.SCALE) * (1 + (G.coinPop || 0) * 1.6), col: G.coinPop > 0.1 ? '#fff6e0' : '#ffd84a', font: 'num' });
+    // the coins you have: the ones you had when the run started plus the ones picked now (Marco, 25 Nov: a counter at 0
+    // after the four stages looked like coins lost); the coins of the stage are in the summary at the end
+    const monete = String((G.walletStart === undefined ? save.wallet : G.walletStart) + P.coins);
+    st.text(monete, pad + ci.width * k + 4, cy + ci.height * k / 2, { size: Math.max(12, 5 * st.SCALE) * (1 + (G.coinPop || 0) * 1.6), col: G.coinPop > 0.1 ? '#fff6e0' : '#ffd84a', font: 'num' });
     // coins in a row
-    if (P.chain >= 3) st.text('×' + P.chain, pad + ci.width * k + 4 + String(P.coins).length * 3.4 + 10, cy + ci.height * k / 2, { size: Math.max(10, 3.8 * st.SCALE), col: '#ff6b57', font: 'num', alpha: clamp(P.chainT * 3, 0.3, 1) });
+    if (P.chain >= 3) st.text('×' + P.chain, pad + ci.width * k + 4 + monete.length * 3.4 + 10, cy + ci.height * k / 2, { size: Math.max(10, 3.8 * st.SCALE), col: '#ff6b57', font: 'num', alpha: clamp(P.chainT * 3, 0.3, 1) });
     // tickets
     const tx0 = pad + nH * hw0 + (P.shield ? 6 * k + 6 : 0) + 8;
     if (G.endless) {
@@ -7805,7 +7808,7 @@ const HR_DATA = (() => {
     G.finish = 1e9; G.croccoX = -99999; G.croccoY = 0; // no finish line, nobody waiting
     const sx0 = 3 * TILE;
     Object.assign(P, { x: sx0, y: surfaceBelow(sx0, 0) || 160, vx: 0, vy: 0, ground: true, jumps: 0, coyote: 0, buffer: 0, cut: false, inv: 0, hp: 3, speedG: 0, shoes: 0, magnet: 0, shield: false, safeX: sx0, finished: false, anim: 0, combo: 0, slide: 0, pound: false, bump: null });
-    G.runHurt = false; G.hurtLog = [];
+    G.runHurt = false; G.hurtLog = []; G.walletStart = save.wallet;
     G.lamps = null; G.party = null; G.partyX = 0; G.partyAt = 0; G.lastMeters = null; G.vanFlee = null; G.happy = null;
     G.proj = []; G.cardFly = []; P.glow = 0; G.tug = 0; G.freeing = false; G.clockTxt = null; G.whiteT = 0; G.parts = []; G.floats = []; G.rain = []; G.coinFly = []; G.bubble = null; G.celebrate = 0; G.shake = 0; G.camY = 0; G.cpAnim = 0; G.finShift = false; G.kidnap = null; G.phoneUp = false; G.freed = false; G.monocle = null; G.vaLine = null; G.cheer = null; G.happy = null; G.countT = 0; G.t = 0; G.hitstop = 0; G.coinPop = 0; G.lastCoins = 0;
     G.flashT = 0; G.warnL = 0; G.banner = null; G.bossCardT = 0; G.bossPop = 0; G.bossDone = false; G.bossMode = false; G.swipeHint = null; G.lastHint = null; G.hpPop = 0; G.tkPop = 0;
@@ -8137,7 +8140,7 @@ const HR_DATA = (() => {
         label = `Compra · ${coinHtml()}<b class="num">${price}</b>`; cls = 'shop-c';
         if (save.wallet < price) { cls = ''; stEl.textContent = `Ti mancano ${price - save.wallet} monete`; stEl.classList.add('poor'); }
         else fn = () => {
-          save.wallet -= price; persist(); Audio.sfx('ticket');
+          save.wallet -= price; if (G.walletStart !== undefined) G.walletStart -= price; persist(); Audio.sfx('ticket'); // the counter of the run too
           if (isC) { L.owned[id] = true; L.costume = id; } else { L.ownedJ[id] = true; if (!L.jewels.includes(id)) L.jewels += id; }
           VG.saveLook(); tryC = L.costume; tryJ = L.jewels; walletChip(); paint(); bump();
         };
