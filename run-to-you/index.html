@@ -1080,8 +1080,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: viaggettino */
 window.ORDINE = {"codice":"viaggettino","occasione":"birthday","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"El Falcon","soprannome":"Falcotto","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"curly","hairColor":"#F2C94C","body":"soft","height":"short","top":"jacket","outfit":"#D64545","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","facialHair":"none","blush":"on","eyeShape":"dots","mouth":"closed","brows":"none"}},"b":{"nome":"Il Crocco","soprannome":"Crocchetta","personaggio":{"v":2,"skin":"#F1C7A1","hairStyle":"short","hairColor":"#2B2020","body":"athletic","height":"normal","top":"hoodie","outfit":"#4D7CFE","legs":"pants","pants":"#3A3F55","shoes":"#3A2A2A","facialHair":"stubble","brows":"thick","eyeShape":"dots","mouth":"closed","blush":"off"}}},"tappe":[{"ambiente":"santorini","luogo":{"titolo":"Santorini","frase":"Cupole blu, tramonti sulla caldera e un vento che ha spettinato anche le cupole.","disegno":"t_santorini","sottotitolo":"Il tramonto di Oia"},"ricordi":[{"titolo":"El Falcon","frase":"Ricci biondi, giacca rossa e un Album pieno di biglietti dei viaggi sognati.","disegno":"falcon"},{"titolo":"Il Crocco","frase":"Libero tutti i weekend. Compagno di viaggio a tempo pieno, ladro di penne a fenicottero.","disegno":"crocco"}],"costume":"oia","punti":[{"disegno":"faro","at":0.3},{"disegno":"gatto","at":0.55}]},{"ambiente":"ios","luogo":{"titolo":"Ios","frase":"Panorami infiniti, girati in quad prima del tramonto. Il custode non aveva mai visto guidare così. Il Crocco nemmeno, e si è tenuto forte.","disegno":"t_ios","sottotitolo":"In quad prima del tramonto"},"ricordi":[{"titolo":"Sporadi","frase":"Gyros a pranzo e a cena, tuffi con Pirati e il SUP fino ad Alonissos. Chi ha mangiato più gyros? Pirati. Quasi.","disegno":"t_sporadi"},{"titolo":"Pirati","frase":"Il cane del Capitano. Giudica tutti dal fondo del molo e mangia più gyros di voi. Quasi.","disegno":"pirati"}],"costume":"pilota","viaggio":"boat"},{"ambiente":"berlino","luogo":{"titolo":"Berlino","frase":"Il Muro, la Porta di Brandeburgo e una notte al Tresor. L'hotel «centralissimo» era a sei chilometri.","disegno":"t_berlino","sottotitolo":"Sei chilometri dal centro"},"ricordi":[{"titolo":"Praga","frase":"Il ponte Carlo, la torre dell'orologio e un trdelník alla cannella. Gli apostoli puntuali, il Crocco un po' meno.","disegno":"t_praga"},{"titolo":"Strasburgo","frase":"La cattedrale rosa, la Petite France e un éclair che ha fatto un viaggio difficile.","disegno":"t_strasburgo"}],"costume":"tresor","viaggio":"plane","punti":[{"disegno":"gatto","at":0.4}]},{"ambiente":"vienna","luogo":{"titolo":"Vienna","frase":"Capodanno sotto il Duomo, dopo aver scavalcato le transenne. Al valzer il Crocco ha pestato i piedi solo due volte.","disegno":"t_vienna","sottotitolo":"Capodanno sotto il Duomo"},"ricordi":[{"titolo":"Salisburgo","frase":"Neve, montagne e un fantasma molto educato. Il bus preso per un pelo, dopo il «penultimo» giro di pista.","disegno":"t_salisburgo"},{"titolo":"Il fantasma di Mozart","frase":"Salisburgo: neve, montagne e un fantasma molto educato che incanta chi lo ascolta.","disegno":"mozart"}],"costume":"valzer","viaggio":"train"}],"cibo":{"singolare":"salamino al tartufo","plurale":"salamini al tartufo","articolo":"i","disegno":"salamino"},"antagonista":{"nome":"Il Dott. Valore Aggiunto","presentazione":"Consulente di Valore Aggiunto","ingresso":"Il valore si crea alla scrivania, anche a Capodanno.","sconfitta":"Il valore… era… nei weekend…","aspetto":"vaBoss","proiettile":"note"},"scagnozzi":{"nome":"i Consulenti Grigi","singolare":"Consulente Grigio","divisa":"#8E929E","grida":["La call inizia tra cinque minuti!","Chi firma il report?!","Dobbiamo creare valore!"],"consegne":["Ecco il report del weekend. Sì, era sabato, ma il valore non va mica in vacanza.","Altre slide da rivedere! Le ferie? Le mettiamo in agenda dopo la prossima riunione.","Il piano ferie, approvato: zero giorni. Ottimizzato per creare valore."],"cappello":"tophat"},"lettera":{"testo":"Tanti auguri Falconcino. Affrontare questa avventura insieme a te mi ha fatto venire voglia di viverne altre mille, e di affrontarle insieme come se fossero un gioco. Ma nel frattempo mangiamoci un salamino e festeggiamo!","firma":"Il Crocco"}};
-window.VERSIONE = "681ac8b";
-window.SALVATAGGIO = "rty_viaggettino_681ac8b_";
+window.VERSIONE = "84dab90";
+window.SALVATAGGIO = "rty_viaggettino_84dab90_";
 window.MODALITA = "prova";
 </script>
 <script>
@@ -4031,7 +4031,12 @@ const VG = (() => {
   // each game has its own save (the build sets SALVATAGGIO: the order's code, plus the version in the test games), so
   // another game, the original or an older test version on the same phone never decide what this one has already shown
   const SAVE = window.SALVATAGGIO || 'rty_';
-  const store = {
+  // the site's preview (window.ANTEPRIMA) keeps nothing: every preview starts from zero and leaves no save behind
+  const MEM = {};
+  const store = window.ANTEPRIMA ? {
+    get(k, d) { return k in MEM ? JSON.parse(MEM[k]) : d; },
+    set(k, v) { MEM[k] = JSON.stringify(v); }
+  } : {
     get(k, d) { try { const v = localStorage.getItem(SAVE + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem(SAVE + k, JSON.stringify(v)); } catch (e) { } }
   };
@@ -6416,6 +6421,12 @@ const HR_DATA = (() => {
       intro: [['falcon', '{luogo4}. Ultima tappa.'], ['falcon', 'Laggiù c\'è {B}. Resisti: stavolta vengo a salvarti!']],
       outro: [['crocco', 'Lo sapevo che arrivavi.']] } // (the end of the last stage is written out in finishLevel: freeing B, the party, the Album)
   ];
+  // the site's preview («Vedi anteprima»): only a short first stage, about forty seconds, with the boss as in the game and
+  // B waiting at the finish line; then the site shows its own end card
+  if (window.ANTEPRIMA) Object.assign(LEVELS[0], {
+    seq: ['start', 'arc', 'gap3', 'powerM', 'enemy1', 'hop1', 'tk_high', 'low1', 'cp', 'egroup', 'arc2', 'boss', 'fin'],
+    outro: [['falcon', 'Eccomi, {b}!'], ['crocco', 'Giusto in tempo, {a}.']]
+  });
   // the place of each stage comes from the order: the environment from the catalogue, the name and the postcard from the order
   LEVELS.forEach((L, i) => {
     L.n = i + 1;
@@ -9684,12 +9695,12 @@ const HR_DATA = (() => {
     const col = el('div', 'col pause-grid');
     const back = mkBtn('Torna al gioco', 'primary wide', () => pause(false)); col.appendChild(back);
     col.appendChild(mkBtn('Ricomincia', '', () => G.endless ? startEndless() : go(G.li)));
-    col.appendChild(mkBtn('Tappe', '', openTappe));
-    col.appendChild(mkBtn('Negozio', 'shop-c', () => showWardrobe(showPauseMenu)));
+    if (!window.ANTEPRIMA) col.appendChild(mkBtn('Tappe', '', openTappe));
+    if (!window.ANTEPRIMA) col.appendChild(mkBtn('Negozio', 'shop-c', () => showWardrobe(showPauseMenu)));
     const au = mkBtn('', '', () => { Audio.toggle(); paintAu(); });
     const paintAu = () => { au.textContent = Audio.on ? '♪ Audio: sì' : '♪ Audio: no'; au.setAttribute('aria-pressed', Audio.on ? 'true' : 'false');  };
     paintAu(); col.appendChild(au);
-    col.appendChild(mkBtn('Esci', 'ghost', showTitle));
+    if (!window.ANTEPRIMA) col.appendChild(mkBtn('Esci', 'ghost', showTitle));
     p.appendChild(col); showOv(p);
     Audio.sfx('pick'); setTimeout(() => back.focus({ preventScroll: true }), 30);
   }
@@ -9711,7 +9722,7 @@ const HR_DATA = (() => {
       const r = el('div', 'row lose-row');
       r.appendChild(mkBtn(G.cpReached ? 'Riparti dal checkpoint ›' : 'Riparti ›', 'primary', () => go(G.li, G.cpReached)));
       if (G.cpReached) r.appendChild(mkBtn('Ricomincia la tappa', '', () => go(G.li)));
-      r.appendChild(mkBtn('Tappe', 'ghost', openTappe));
+      if (!window.ANTEPRIMA) r.appendChild(mkBtn('Tappe', 'ghost', openTappe));
       p.appendChild(r); showOv(p);
       const tst = byId('toast'); if (tst) tst.classList.remove('show');
       const first = p.querySelector('.btn.primary'); if (first) first.focus({ preventScroll: true });
@@ -9862,6 +9873,7 @@ const HR_DATA = (() => {
       byId('app').classList.add('at-finish');
       await VG.say(L.outro); if (runId !== G.runId) return;
     }
+    if (window.ANTEPRIMA) return anteprimaFine(runId);
     checkMissions();
     G.finShift = true;
     // the memories got for the first time (from the boss): each one develops in its big postcard, then goes into the Album
@@ -9870,6 +9882,19 @@ const HR_DATA = (() => {
     showStageDone(L, { coins: P.coins, time: G.time, recordCoins, recordTime, first, prevFlags, unveil: first && Object.keys(WORLD_COSTUME).some(id => WORLD_COSTUME[id] === L.id && !VG.look.owned[id]) });
     G.mode = 'done';
 
+  }
+
+  // ---------------------------------------------------------------- the site's preview («Vedi anteprima»)
+  // No home: after «Playtale presenta» the first stage starts by itself (short, see livelli.js). At the finish A and B
+  // stay there hopping, and the page tells the site (which shows its «Fine dell'anteprima»); opened on its own, the page
+  // shows a small end card with «Rigioca».
+  function anteprimaStart() { byId('title').hidden = true; setTimeout(() => go(0), 1500); }
+  async function anteprimaFine(runId) {
+    G.mode = 'done';
+    await wait(2200); if (runId !== G.runId) return;
+    if (window.parent !== window) { window.parent.postMessage({ playtale: 'anteprima', fine: true }, '*'); return; }
+    const p = el('div', 'panel'); p.innerHTML = '<h2>Fine dell\u2019anteprima</h2><p class="sub">Il gioco vero si costruisce sulla vostra storia.</p>';
+    const r = el('div', 'row'); r.appendChild(mkBtn('Rigioca ›', 'primary', () => { hideOv(); go(0); })); p.appendChild(r); showOv(p);
   }
 
   // ---------------------------------------------------------------- input
@@ -10528,7 +10553,7 @@ const HR_DATA = (() => {
   }
 
   paintTitle(); VG.fontsReady.then(paintTitle);
-  showTitle();
+  if (window.ANTEPRIMA) anteprimaStart(); else showTitle();
   requestAnimationFrame(frame);
 
   // hooks for automated tests / video recordings
