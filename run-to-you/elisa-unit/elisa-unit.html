@@ -1080,8 +1080,8 @@ button:focus-visible { outline: 2px solid var(--lemon); outline-offset: 2px; }
 <script>
 /* ordine: elisa-unit */
 window.ORDINE = {"codice":"elisa-unit","occasione":"christmas","regalo":{"per":"a","da":"b"},"protagonisti":{"a":{"nome":"Elisa","soprannome":"Ely","personaggio":{"v":2,"skin":"#F6C9A2","eyes":"#24124A","eyeShape":"dots","mouth":"tongue","brows":"none","blush":"off","freckles":"off","hairStyle":"long","hairColor":"#5A3520","facialHair":"none","body":"soft","height":"normal","top":"stripes","outfit":"#9B6BFF","legs":"pants","pants":"#343A52","shoes":"#3A2A2A","accessories":{"head":"none","face":"glasses","ears":"none","neck":"none"},"glassesColor":"#2A1A2E"}},"b":{"nome":"Daniele","soprannome":"Dani","personaggio":{"v":2,"skin":"#F6C9A2","eyes":"#24124A","eyeShape":"dots","mouth":"smile","brows":"none","blush":"off","freckles":"off","hairStyle":"quiff","hairColor":"#2B1A12","facialHair":"none","body":"athletic","height":"normal","top":"plain","outfit":"#1F5C3A","legs":"pants","pants":"#2F5FB8","shoes":"#3A2A2A","accessories":{"head":"none","face":"none","ears":"none","neck":"none"},"glassesColor":"#2A1A2E"}}},"tappe":[{"ambiente":"colosseo","luogo":{"titolo":"Colosseo","sottotitolo":"La prima uscita","frase":"Duemila anni di storia lì davanti, e noi a guardare da un'altra parte.","disegno":"t_colosseo"},"ricordi":[{"titolo":"Il maritozzo","frase":"Panna ovunque: sul maritozzo, sul naso, sul primo appuntamento.","disegno":"maritozzo"},{"titolo":"Il parcheggio","frase":"Quaranta minuti a chiedere a ogni passante: «Scusi, sta uscendo?»","disegno":"parcheggio"}],"costume":"colosseo","punti":[{"disegno":"colosseo","at":0.1},{"disegno":"maritozzi","at":0.22},{"disegno":"metro","at":0.32},{"disegno":"parcheggio","at":0.44},{"disegno":"centurione","at":0.58}]},{"ambiente":"fori","viaggio":"train","luogo":{"titolo":"Fori Romani","sottotitolo":"L'ultima uscita","frase":"Colonne, templi e una giornata da conservare meglio dei reperti.","disegno":"t_fori"},"ricordi":[{"titolo":"Il guardiano","frase":"Un fischio a chiunque si avvicinasse ai reperti. Noi, per sicurezza, a due metri.","disegno":"guardiano"},{"titolo":"La fila","frase":"In fila sotto il sole dell'impero: Roma non si è fatta in un giorno, l'ingresso quasi.","disegno":"fila"}],"costume":"fori","punti":[{"disegno":"vittoriano","at":0.08},{"disegno":"saturno","at":0.2},{"disegno":"fila","at":0.32},{"disegno":"castori","at":0.44},{"disegno":"guardiano","at":0.54},{"disegno":"gatto","at":0.62},{"disegno":"foro","at":0.68}]},{"ambiente":"pista","viaggio":"train","luogo":{"titolo":"Pista di pattinaggio","sottotitolo":"La prossima avventura","frase":"Luci, ghiaccio e qualcuno che si tiene forte al bordo.","disegno":"t_pattinaggio"},"ricordi":[{"titolo":"Pattini bianchi","frase":"I pattini di Ely contro quelli a noleggio: non c'è partita.","disegno":"pattini"},{"titolo":"Il capitombolo","frase":"Previsione per la pista: Dani cade. Probabilità: altissima.","disegno":"capitombolo"}],"costume":"pista","punti":[{"disegno":"cupolasanpietro","at":0.08},{"disegno":"alberonatale","at":0.2},{"disegno":"pista","at":0.34},{"disegno":"noleggio","at":0.48},{"disegno":"cioccolata","at":0.6}]},{"ambiente":"mostra","viaggio":"train","luogo":{"titolo":"La mostra","sottotitolo":"Arte a colori","frase":"Una mostra di colori e linee che ballano: ci è piaciuta da tornarci.","disegno":"t_mostra"},"ricordi":[{"titolo":"Il video","frase":"Il video sulla vita dell'artista: visto il finale. Cioè, i titoli di coda.","disegno":"video"},{"titolo":"La cena","frase":"Dopo tanta arte, la cena: a tavola si commenta, si ride e si ordina ancora.","disegno":"cena"}],"costume":"mostra","punti":[{"disegno":"museo","at":0.1},{"disegno":"manifesti","at":0.22},{"disegno":"schermo","at":0.34},{"disegno":"tram","at":0.46},{"disegno":"trattoria","at":0.6}]}],"cibo":{"singolare":"M&M's blu","plurale":"M&M's blu","articolo":"gli","disegno":"mmblu"},"antagonista":{"nome":"La Svuotarmadi","presentazione":"Il tuo armadio è anche il suo","ingresso":"Bel maglione. Da domani è mio.","sconfitta":"Va bene… te lo ridò… appena l'ho lavato.","aspetto":"svuotarmadi","proiettile":"gruccia"},"scagnozzi":{"nome":"gli Svuotacassetti","singolare":"Svuotacassetti","divisa":"#9B6BFF","cappello":"skihat","cappelloColore":"#FF3D7F","grida":["Prestito a tempo indeterminato!","Taglia giusta? Me lo prendo!","Te lo ridò domani. Forse!"],"consegne":["Ecco le pratiche. Le ho portate nella tua borsa: tanto ormai è mia.","Altri documenti da firmare. La penna usala pure, la giacca invece me la tengo.","Il rapporto del mese. L'ho scritto col tuo maglione addosso: porta fortuna."]},"lettera":{"testo":"Per tutti i ricordi che abbiamo raccolto insieme e per i prossimi che faremo.","firma":"Dani"}};
-window.VERSIONE = "242f210+modifiche";
-window.SALVATAGGIO = "rty_elisa-unit_242f210+modifiche_";
+window.VERSIONE = "6325c4a";
+window.SALVATAGGIO = "rty_elisa-unit_6325c4a_";
 window.MODALITA = "prova";
 </script>
 <script>
@@ -3450,6 +3450,40 @@ const LUOGHI = (() => {
   const sky = (c, cols, h = H) => { const bh = Math.ceil(h / cols.length); cols.forEach((col, i) => R(c, 0, i * bh, W, bh + 1, col)); };
   const disc = (c, x, y, r, col) => { c.fillStyle = col; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); };
   const sea = (c, y, a, b) => { R(c, 0, y, W, H - y, a); for (let yy = y + 2; yy < H; yy += 3) for (let x = (yy * 7) % 9; x < W; x += 9 + (yy % 4)) R(c, x, yy, 4, 1, b); };
+  // il Colosseo con la sua sagoma: l'ellisse (le arcate si stringono verso i bordi), a sinistra l'anello esterno intero
+  // con i tre ordini di arcate, le semicolonne e l'attico con le finestrelle; a destra il bordo crollato a gradoni e,
+  // dietro, l'anello interno più basso con le sue arcate e la cima rovinata. X, su: angolo in basso a sinistra; W × H
+  const colosseoSagoma = (c, X, su, W, H) => {
+    const P = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
+    const tv = '#dcc29c', lt = '#f0dec0', sh = '#bfa27c', sh2 = '#a88a66', dk = '#5e4232', dk2 = '#7a5a44', iv = '#b8966c', ish = '#9a7a56', idk = '#4a3226', cielo = '#b8cce4';
+    const T = [0, 0.25, 0.49, 0.72, 1].map(f => Math.round(f * H)), n = Math.max(16, Math.round(W / 5.5)), cx = X + W / 2, R = W / 2;
+    const bay = (x, r = R) => { const s = Math.max(-0.999, Math.min(0.999, (x + 0.5 - cx) / r)), th = Math.asin(s), f = (th + Math.PI / 2) / Math.PI * n; return { f: f - Math.floor(f), k: Math.cos(th) }; };
+    const arco = f => Math.max(0, Math.round(Math.max(1, H / 30) * (1 - Math.sqrt(Math.max(0, 1 - ((f - 0.5) / 0.3) ** 2)))));
+    const tiers = (x, h, b, col, colSh, open, openSh, lastTier, alto) => {   // one column of a ring: the wall, the arches of the three orders, the cornices
+      const top = su - h; P(x, top, 1, h, b.k < 0.35 ? colSh : col);
+      for (let t = 0; t < lastTier; t++) { const y0 = su - T[t + 1], y1 = su - T[t];
+        if (y0 + 2 >= y1) continue;
+        if (b.f > 0.24 && b.f < 0.76) { const yo = Math.max(top + 1, y0 + Math.max(2, Math.round(H / 26)) + arco(b.f)); if (yo < y1) P(x, yo, 1, y1 - yo - (t ? 1 : 0), t === 2 && alto ? alto : b.k < 0.35 ? openSh : open); }
+        else if (b.f > 0.86 && b.f < 0.94 && y0 + 1 > top) P(x, y0 + 1, 1, y1 - y0 - 2, b.k < 0.35 ? col : lt);   // the half-column in the light
+        if (y0 >= top) P(x, y0, 1, 1, b.k < 0.35 ? col : lt);   // the cornice of the order
+      }
+    };
+    // the inner ring, behind, visible where the outer one has fallen
+    for (let x = X + Math.round(W * 0.52); x < X + W - 1; x++) { const u = (x - X) / W, h = Math.round(H * 0.66 - (u - 0.52) * H * 0.18) - ((x * 7) % 5 === 0 ? 2 : 0) - ((x * 13) % 7 === 0 ? 1 : 0); tiers(x, h, bay(x, R * 0.97), iv, ish, idk, idk, 3, cielo); }
+    // the outer ring: whole on the left, broken in steps on the right
+    const steps = [[0.6, 0.9], [0.615, 0.8], [0.635, 0.74], [0.66, 0.7], [0.69, 0.6], [0.705, 0.53], [0.735, 0.49], [0.765, 0.42], [0.78, 0.34], [0.81, 0.27], [0.83, 0.19], [0.855, 0.1], [0.875, 0]];
+    for (let x = X; x < X + W; x++) {
+      const u = (x - X) / W; let hf = 1; for (const [a, v] of steps) if (u >= a) hf = v; const h = Math.round(hf * H); if (h <= 0) continue;
+      const b = bay(x); tiers(x, h, b, tv, sh, dk, dk2, 3, u > 0.56 ? cielo : null);
+      if (h > T[3]) { const a0 = su - h, a1 = su - T[3];   // the attic: pilasters, a small window every other bay, the corbels at the top
+        if (b.f < 0.08 || b.f > 0.92) P(x, a0 + 2, 1, a1 - a0 - 2, b.k < 0.35 ? tv : lt);
+        const bi = Math.floor((Math.asin(Math.max(-0.999, Math.min(0.999, (x + 0.5 - cx) / R))) + Math.PI / 2) / Math.PI * n);
+        if (bi % 2 === 0 && b.f > 0.3 && b.f < 0.7) P(x, a1 - Math.round((a1 - a0) * 0.62), 1, Math.max(1, Math.round((a1 - a0) * 0.22)), dk);
+        if (h === H) { P(x, a0, 1, 1, lt); if (b.f > 0.42 && b.f < 0.58) P(x, a0 + 2, 1, Math.max(1, Math.round(H / 40)), sh2); }
+      }
+      if (hf < 1) P(x, su - h, 1, 1, sh2);   // the broken top of the steps
+    }
+  };
   return {
     // Economia, Sapienza (Quiz of Us, prova del 25 novembre; ridisegnata più ricca lo stesso giorno): la facoltà nel
     // pomeriggio, con la facciata in luce e il fianco in ombra, le file di finestre con le tapparelle, il portico con le
@@ -3702,11 +3736,7 @@ const LUOGHI = (() => {
     t_colosseo: { name: 'Roma · Colosseo', cap: 'Duemila anni di storia lì davanti, e noi a guardare da un\'altra parte.', draw(c) {
       sky(c, ['#5a92dc', '#6e9ee0', '#86aee4', '#9ebee8', '#b8ceec', '#d2dcec'], 44);
       R(c, 52, 6, 14, 3, '#ffffff'); R(c, 55, 4, 8, 2, '#ffffff'); R(c, 76, 10, 12, 2, '#ffffff');
-      const top = x => x < 58 ? 34 : Math.max(22, 34 - Math.round((x - 58) * 0.45));
-      R(c, 56, 18, 34, 26, '#c8ae8a'); for (let k = 0; k < 4; k++) R(c, 60 + k * 8, 22, 4, 6, '#8a6a50');
-      for (let x = 8; x < 92; x++) { const t = top(x); R(c, x, 44 - t, 1, t, x < 10 || x > 89 ? '#bca07c' : '#dcc4a0'); R(c, x, 44 - t, 1, 1, '#ecd8b8'); }
-      [[0, 9], [9, 8], [17, 8]].forEach(([y0, hh]) => { for (let ax = 10; ax + 4 < 90; ax += 6) { if (top(ax) < y0 + hh + 1 || top(ax + 4) < y0 + hh + 1) continue; R(c, ax, 44 - y0 - hh + 3, 4, hh - 3, '#6a4a36'); R(c, ax + 1, 44 - y0 - hh + 2, 2, 1, '#6a4a36'); } R(c, 8, 44 - y0 - hh, 84, 1, '#ecd8b8'); });
-      for (let x = 12; x < 56; x += 8) R(c, x, 14, 2, 2, '#6a4a36');
+      colosseoSagoma(c, 8, 44, 86, 38);
       // the stone pine on the left
       R(c, 4, 22, 2, 22, '#6b4a2e'); for (let k = -11; k < 12; k++) { const hh = Math.round(4 * Math.sqrt(1 - (k / 12) ** 2)); R(c, 5 + k, 18 - hh, 1, hh + 3, '#3a6436'); R(c, 5 + k, 18 - hh, 1, 1, '#5a8a48'); }
       R(c, 0, 44, 96, 20, '#8a8278'); for (let y = 46; y < 64; y += 3) for (let x = (y % 2) * 3; x < 96; x += 6) R(c, x, y, 5, 2, '#9a9288');
@@ -3848,6 +3878,40 @@ const PUNTI = (() => {
   const scritta = (c, s, x, y, col) => { let cx = Math.round(x); for (const ch of s) { const g = GL[ch] || GL[' ']; g.forEach((r, yy) => [...r].forEach((p, xx) => { if (p === '#') R(c, cx + xx, y + yy, 1, 1, col); })); cx += g[0].length + 1; } return cx - x - 1; };
   // the people of the points (a centurion, the queue, the guard, the skaters): drawn with the character drawer
   // (motore/avatar.js), like everyone else in the game; cached
+  // il Colosseo con la sua sagoma: l'ellisse (le arcate si stringono verso i bordi), a sinistra l'anello esterno intero
+  // con i tre ordini di arcate, le semicolonne e l'attico con le finestrelle; a destra il bordo crollato a gradoni e,
+  // dietro, l'anello interno più basso con le sue arcate e la cima rovinata. X, su: angolo in basso a sinistra; W × H
+  const colosseoSagoma = (c, X, su, W, H) => {
+    const P = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
+    const tv = '#dcc29c', lt = '#f0dec0', sh = '#bfa27c', sh2 = '#a88a66', dk = '#5e4232', dk2 = '#7a5a44', iv = '#b8966c', ish = '#9a7a56', idk = '#4a3226', cielo = '#b8cce4';
+    const T = [0, 0.25, 0.49, 0.72, 1].map(f => Math.round(f * H)), n = Math.max(16, Math.round(W / 5.5)), cx = X + W / 2, R = W / 2;
+    const bay = (x, r = R) => { const s = Math.max(-0.999, Math.min(0.999, (x + 0.5 - cx) / r)), th = Math.asin(s), f = (th + Math.PI / 2) / Math.PI * n; return { f: f - Math.floor(f), k: Math.cos(th) }; };
+    const arco = f => Math.max(0, Math.round(Math.max(1, H / 30) * (1 - Math.sqrt(Math.max(0, 1 - ((f - 0.5) / 0.3) ** 2)))));
+    const tiers = (x, h, b, col, colSh, open, openSh, lastTier, alto) => {   // one column of a ring: the wall, the arches of the three orders, the cornices
+      const top = su - h; P(x, top, 1, h, b.k < 0.35 ? colSh : col);
+      for (let t = 0; t < lastTier; t++) { const y0 = su - T[t + 1], y1 = su - T[t];
+        if (y0 + 2 >= y1) continue;
+        if (b.f > 0.24 && b.f < 0.76) { const yo = Math.max(top + 1, y0 + Math.max(2, Math.round(H / 26)) + arco(b.f)); if (yo < y1) P(x, yo, 1, y1 - yo - (t ? 1 : 0), t === 2 && alto ? alto : b.k < 0.35 ? openSh : open); }
+        else if (b.f > 0.86 && b.f < 0.94 && y0 + 1 > top) P(x, y0 + 1, 1, y1 - y0 - 2, b.k < 0.35 ? col : lt);   // the half-column in the light
+        if (y0 >= top) P(x, y0, 1, 1, b.k < 0.35 ? col : lt);   // the cornice of the order
+      }
+    };
+    // the inner ring, behind, visible where the outer one has fallen
+    for (let x = X + Math.round(W * 0.52); x < X + W - 1; x++) { const u = (x - X) / W, h = Math.round(H * 0.66 - (u - 0.52) * H * 0.18) - ((x * 7) % 5 === 0 ? 2 : 0) - ((x * 13) % 7 === 0 ? 1 : 0); tiers(x, h, bay(x, R * 0.97), iv, ish, idk, idk, 3, cielo); }
+    // the outer ring: whole on the left, broken in steps on the right
+    const steps = [[0.6, 0.9], [0.615, 0.8], [0.635, 0.74], [0.66, 0.7], [0.69, 0.6], [0.705, 0.53], [0.735, 0.49], [0.765, 0.42], [0.78, 0.34], [0.81, 0.27], [0.83, 0.19], [0.855, 0.1], [0.875, 0]];
+    for (let x = X; x < X + W; x++) {
+      const u = (x - X) / W; let hf = 1; for (const [a, v] of steps) if (u >= a) hf = v; const h = Math.round(hf * H); if (h <= 0) continue;
+      const b = bay(x); tiers(x, h, b, tv, sh, dk, dk2, 3, u > 0.56 ? cielo : null);
+      if (h > T[3]) { const a0 = su - h, a1 = su - T[3];   // the attic: pilasters, a small window every other bay, the corbels at the top
+        if (b.f < 0.08 || b.f > 0.92) P(x, a0 + 2, 1, a1 - a0 - 2, b.k < 0.35 ? tv : lt);
+        const bi = Math.floor((Math.asin(Math.max(-0.999, Math.min(0.999, (x + 0.5 - cx) / R))) + Math.PI / 2) / Math.PI * n);
+        if (bi % 2 === 0 && b.f > 0.3 && b.f < 0.7) P(x, a1 - Math.round((a1 - a0) * 0.62), 1, Math.max(1, Math.round((a1 - a0) * 0.22)), dk);
+        if (h === H) { P(x, a0, 1, 1, lt); if (b.f > 0.42 && b.f < 0.58) P(x, a0 + 2, 1, Math.max(1, Math.round(H / 40)), sh2); }
+      }
+      if (hf < 1) P(x, su - h, 1, 1, sh2);   // the broken top of the steps
+    }
+  };
   const GENTE = {};
   const gente = (id, cfg, o = {}) => { const key = id + JSON.stringify(o); return GENTE[key] || (GENTE[key] = PTAvatar.sprite(PTAvatar.normalize(Object.assign({ v: 2, skin: '#F1C7A1', eyeShape: 'dots', mouth: 'smile', brows: 'none', blush: 'off', hairStyle: 'short', hairColor: '#2B1A12', facialHair: 'none', body: 'soft', height: 'normal', top: 'plain', outfit: '#4D7CFE', legs: 'pants', pants: '#3A3F55', shoes: '#3A2A2A' }, cfg)), o)); };
   return {
@@ -4140,30 +4204,11 @@ const PUNTI = (() => {
       }, { nome: 'bar' });
     } },
     // ---- ordine elisa-unit (28 novembre 2026): Roma. Tappa 1, il Colosseo
-    // il Colosseo, grande, che sale da terra dietro le case: i tre ordini di arcate e l'attico con le finestrelle; a
-    // sinistra il giro esterno intero, a destra il lato crollato che lascia vedere l'anello di dentro
-    colosseo: { strato: 'dietro', w: 160, draw(c, X, b) {
-      const S = PEZZI.scena(c, b), tv = '#dcc4a0', lt = '#ecd8b8', sh = '#bca07c', dk = '#6a4a36', inn = '#c8ae8a';
-      S.libero(X, 160, (c, x, su) => {
-        const top = k2 => k2 < 92 ? 84 : Math.max(56, 84 - Math.round((k2 - 92) * 0.55) - ((k2 * 7) % 5 === 0 ? 2 : 0));
-        // the inner ring, seen through the fallen side
-        R(c, x + 88, su - 64, 70, 64, inn); for (let k2 = 0; k2 < 6; k2++) { R(c, x + 92 + k2 * 11, su - 58, 5, 9, '#8a6a50'); R(c, x + 92 + k2 * 11, su - 40, 5, 9, '#8a6a50'); }
-        for (let k2 = 0; k2 < 160; k2++) { const t = top(k2), edge = k2 < 4 || k2 > 155 ? sh : tv; R(c, x + k2, su - t, 1, t, edge); }
-        for (let k2 = 0; k2 < 160; k2++) R(c, x + k2, su - top(k2), 1, 1, lt);
-        // the three orders of arches: openings with a round top, between pillars
-        [[0, 20], [20, 19], [39, 18]].forEach(([y0, hh], tier) => {
-          R(c, x, su - y0 - hh, 160, 2, lt);
-          for (let ax = x + 3; ax + 7 < x + 160; ax += 11) {
-            const k2 = ax - x; if (top(k2) < y0 + hh + 2 || top(k2 + 7) < y0 + hh + 2) continue;
-            R(c, ax, su - y0 - hh + 5, 7, hh - 5, dk); R(c, ax + 1, su - y0 - hh + 4, 5, 1, dk); R(c, ax + 2, su - y0 - hh + 3, 3, 1, dk);
-            if (tier === 0) R(c, ax + 1, su - y0 - 2, 5, 2, '#8a6a50');
-            R(c, ax + 8, su - y0 - hh + 2, 1, hh - 2, sh);
-          }
-        });
-        // the attic: a solid band with small square windows and the brackets for the awning
-        for (let wx = x + 6; wx < x + 90; wx += 14) { R(c, wx, su - 70, 4, 4, dk); R(c, wx + 7, su - 80, 1, 3, sh); }
-        R(c, x, su - 61, 92, 1, sh); R(c, x, su - 58, 160, 1, 'rgba(0,0,0,.06)');
-      }, { nome: 'Colosseo' });
+    // il Colosseo, grande e intero, davanti alle case (strato «mezzo»: niente lo copre), con la sua sagoma (vedi
+    // colosseoSagoma: l'anello esterno intero a sinistra, il bordo crollato a gradoni, l'anello interno a destra)
+    colosseo: { strato: 'mezzo', w: 160, draw(c, X, b) {
+      const S = PEZZI.scena(c, b);
+      S.libero(X, 160, (c, x, su) => colosseoSagoma(c, x, su, 160, 82), { nome: 'Colosseo' });
     } },
     // il bar dei maritozzi: muro rosa, la tenda rossa e bianca, l'insegna «MARITOZZI», la vetrina con i maritozzi pieni
     // di panna, due tavolini fuori
